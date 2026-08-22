@@ -1,0 +1,99 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  headerStyle?: "overlay" | "solid";
+}
+
+const {
+  title = "Bachata Explosion — By dancers, for dancers",
+  description = "Berlin bachata festivals, workshops, socials and a growing event archive — built by dancers, for dancers.",
+  headerStyle = "overlay",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL("/og.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#100609" />
+    <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Bachata Explosion — Berlin Bachata Festival, October 16–18, 2026" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
+      <a class="brand" href="/" aria-label="Bachata Explosion home">
+        <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/festival/">Festival</a>
+        <a href="/#experience">Experience</a>
+        <a href="/archive/">Archive</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <a class="button button-small button-gold" href="/festival/#tickets">Get tickets</a>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <section class="newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter-inner shell">
+        <div>
+          <p class="section-label">Explosion insider</p>
+          <h2 id="newsletter-title">Presales, artist drops<br />& dancer perks.</h2>
+        </div>
+        <form class="newsletter-form" data-preview-form>
+          <label><span>First name</span><input type="text" name="firstName" autocomplete="given-name" placeholder="Your first name" /></label>
+          <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label class="consent"><input type="checkbox" required /> <span>I accept the <a href="https://bachataexplosion.com/privacy/">privacy policy</a>.</span></label>
+          <button class="button button-gold" type="submit">Join the list</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
+        <nav aria-label="Legal navigation">
+          <a href="/imprint/">Imprint</a>
+          <a href="https://bachataexplosion.com/privacy/">Privacy</a>
+          <a href="https://bachataexplosion.com/terms-conditions/">Terms</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+        <address>
+          <strong>Elena & Dennis Events UG</strong><br />
+          C/O Dennis Boronowski · Berlin<br />
+          <a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a>
+        </address>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll("[data-preview-form]").forEach((form) => {
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const status = form.querySelector(".form-status");
+          if (status) status.textContent = "Preview ready — the final newsletter provider will be connected before launch.";
+        });
+      });
+    </script>
+  </body>
+</html>

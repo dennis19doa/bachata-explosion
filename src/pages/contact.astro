@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Contact | Bachata Explosion" description="Contact the Bachata Explosion team about tickets, group discounts, ambassadors or volunteering." headerStyle="solid">
+  <section class="contact-page page-hero">
+    <div class="shell contact-grid">
+      <div>
+        <p class="eyebrow"><span></span> Talk to the team</p>
+        <h1>Let’s make it<br /><em>explode.</em></h1>
+        <p class="hero-lead">Questions about tickets, group discounts, volunteering, ambassadors or the festival weekend? Send one clear message and we’ll route it to the right person.</p>
+        <a class="contact-email" href="mailto:info@bachataexplosion.com"><span>Email us</span><strong>info@bachataexplosion.com</strong></a>
+      </div>
+      <form class="contact-form" data-preview-form>
+        <label><span>Full name</span><input name="name" autocomplete="name" required /></label>
+        <label><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
+        <label><span>WhatsApp <small>optional</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
+        <label><span>Topic</span><select name="topic"><option>General question</option><option>Tickets</option><option>Group discount</option><option>Ambassadors</option><option>Volunteering</option></select></label>
+        <label class="full-field"><span>Message</span><textarea name="message" rows="6" required></textarea></label>
+        <label class="consent full-field"><input type="checkbox" required /> <span>I accept the current <a href="https://bachataexplosion.com/privacy/">privacy policy</a>.</span></label>
+        <button class="button button-gold" type="submit">Send message</button>
+        <p class="form-status full-field" role="status"></p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

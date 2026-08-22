@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { archiveEvents } from "../data/archive";
+const years = ["All", "2026", "2025", "2024", "2023", "2022"];
+---
+
+<BaseLayout title="Event Archive | Bachata Explosion" description="Browse Bachata Explosion event photos from Berlin and Hamburg, from 2022 to today." headerStyle="solid">
+  <section class="archive-hero page-hero">
+    <div class="shell">
+      <p class="eyebrow"><span></span> Since 2022</p>
+      <h1>Explosion<br /><em>Archive</em></h1>
+      <p class="hero-lead">The people, workshops and nights that built the Explosion community—organized by event, not buried in an endless media library.</p>
+      <div class="archive-stats"><div><b>16</b><span>Event collections</span></div><div><b>5</b><span>Years of memories</span></div><div><b>12k+</b><span>Media items to migrate</span></div></div>
+    </div>
+  </section>
+
+  <section class="archive-library section-pad">
+    <div class="shell">
+      <div class="archive-toolbar" aria-label="Filter archive by year">
+        {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
+      </div>
+      <p class="migration-note">Local build: the branded event pages now stay inside Bachata Explosion. Their full photo sets will load from the UGREEN NAS after the first album export and secure media connection are ready.</p>
+      <div class="archive-grid">
+        {archiveEvents.map((event) => (
+          <article class="library-card" data-event-year={event.year}>
+            <a href={`/archive/${event.slug}/`} aria-label={`Open ${event.title} ${event.year} photos`}>
+              <img src={event.cover} alt={`${event.title} ${event.year} dancers`} width="900" height="1100" loading="lazy" />
+              <div class="library-overlay"><span>{event.category}</span><b>View collection →</b></div>
+            </a>
+            <p>{event.year}</p><h2>{event.title}</h2>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script>
+    const buttons = document.querySelectorAll("[data-year]");
+    const cards = document.querySelectorAll("[data-event-year]");
+    buttons.forEach((button) => button.addEventListener("click", () => {
+      const year = button.getAttribute("data-year");
+      buttons.forEach((candidate) => candidate.classList.toggle("active", candidate === button));
+      cards.forEach((card) => { card.hidden = year !== "All" && card.getAttribute("data-event-year") !== year; });
+    }));
+  </script>
+</BaseLayout>

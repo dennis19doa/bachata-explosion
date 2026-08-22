@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { archiveEvents, type ArchiveEvent } from "../../data/archive";
+import { archiveMediaOrigin, getArchiveManifestUrl } from "../../lib/archiveMedia";
+
+export function getStaticPaths() {
+  return archiveEvents.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: ArchiveEvent;
+}
+
+const { event } = Astro.props;
+const manifestUrl = getArchiveManifestUrl(event.slug);
+---
+
+<BaseLayout
+  title={`${event.title} ${event.year} Photos | Bachata Explosion`}
+  description={`Browse the ${event.title} ${event.year} Bachata Explosion photo collection.`}
+  headerStyle="solid"
+>
+  <section class="archive-detail-hero page-hero">
+    <div class="shell archive-detail-grid">
+      <div>
+        <a class="archive-breadcrumb" href="/archive/">← All collections</a>
+        <p class="eyebrow"><span></span>{event.category} · {event.year}</p>
+        <h1>{event.title}<br /><em>{event.year}</em></h1>
+        <p class="hero-lead">A community photo collection from the Bachata Explosion archive. The gallery stays part of this website while its full-size photo library lives on our own server.</p>
+      </div>
+      <figure class="archive-cover">
+        <img src={event.cover} alt={`${event.title} ${event.year} collection cover`} width="900" height="1100" />
+        <figcaption>Collection cover · {event.category}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="archive-gallery-section section-pad">
+    <div class="shell">
+      <div class="split-heading archive-gallery-heading">
+        <div>
+          <p class="section-label">Event memories</p>
+          <h2>Photo<br /><em>gallery</em></h2>
+        </div>
+        <div>
+          <p>Photographs are loaded only when this collection is opened. That keeps the main festival website lightweight and avoids placing the image library in the website repository.</p>
+          <p class="gallery-source"><span aria-hidden="true"></span><strong>{archiveMediaOrigin ? "NAS media connection configured" : "Local archive shell"}</strong></p>
+        </div>
+      </div>
+
+      <div
+        class="nas-gallery"
+        data-nas-gallery
+        data-manifest-url={manifestUrl}
+        data-media-origin={archiveMediaOrigin}
+        aria-live="polite"
+      >
+        <div class="gallery-message" data-gallery-message>
+          {manifestUrl ? "Connecting to this collection…" : "The page is ready. Connect the UGREEN NAS and add this event’s manifest to populate the gallery."}
+        </div>
+        <div class="nas-gallery-grid" data-gallery-grid></div>
+      </div>
+
+      <div class="archive-fallback">
+        <div>
+          <p class="section-label">Migration safety net</p>
+          <h3>Old gallery still available</h3>
+          <p>Until this event is copied and verified on the NAS, its existing WordPress gallery remains the reference copy.</p>
+        </div>
+        <a class="button button-outline" href={event.legacyUrl}>Open current gallery ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    type GalleryVariant = { path: string; width: number };
+    type GalleryPhoto = {
+      path: string;
+      width?: number;
+      height?: number;
+      alt?: string;
+      credit?: string;
+      variants?: GalleryVariant[];
+    };
+    type GalleryManifest = { photos?: GalleryPhoto[] };
+
+    const gallery = document.querySelector<HTMLElement>("[data-nas-gallery]");
+    const message = gallery?.querySelector<HTMLElement>("[data-gallery-message]");
+    const grid = gallery?.querySelector<HTMLElement>("[data-gallery-grid]");
+    const manifestUrl = gallery?.dataset.manifestUrl ?? "";
+    const mediaOrigin = gallery?.dataset.mediaOrigin ?? "";
+
+    function mediaUrl(path: string) {
+      if (!mediaOrigin) throw new Error("Archive media origin is not configured");
+      const resolved = new URL(path.replace(/^\/+/, ""), `${mediaOrigin}/`);
+      if (resolved.origin !== new URL(mediaOrigin).origin) throw new Error("Invalid media path");
+      return resolved.href;
+    }
+
+    function renderPhoto(photo: GalleryPhoto, index: number) {
+      const figure = document.createElement("figure");
+      const image = document.createElement("img");
+      image.src = mediaUrl(photo.path);
+      image.alt = photo.alt || `Event photograph ${index + 1}`;
+      image.loading = "lazy";
+      image.decoding = "async";
+      if (photo.width) image.width = photo.width;
+      if (photo.height) image.height = photo.height;
+      if (photo.variants?.length) {
+        image.srcset = photo.variants.map((variant) => `${mediaUrl(variant.path)} ${variant.width}w`).join(", ");
+        image.sizes = "(max-width: 560px) 100vw, (max-width: 980px) 50vw, 33vw";
+      }
+      figure.append(image);
+      if (photo.credit) {
+        const caption = document.createElement("figcaption");
+        caption.textContent = `Photo: ${photo.credit}`;
+        figure.append(caption);
+      }
+      return figure;
+    }
+
+    async function loadGallery() {
+      if (!gallery || !message || !grid || !manifestUrl) return;
+      try {
+        const response = await fetch(manifestUrl, { mode: "cors" });
+        if (!response.ok) throw new Error(`Archive responded with ${response.status}`);
+        const manifest = await response.json() as GalleryManifest;
+        const photos = Array.isArray(manifest.photos) ? manifest.photos : [];
+        if (!photos.length) throw new Error("This collection has no published photos yet");
+        const fragment = document.createDocumentFragment();
+        photos.forEach((photo, index) => fragment.append(renderPhoto(photo, index)));
+        grid.append(fragment);
+        message.hidden = true;
+      } catch {
+        message.textContent = "This gallery is temporarily unavailable. The event page remains online, and the current gallery link below can be used during migration.";
+        message.classList.add("gallery-message-error");
+      }
+    }
+
+    loadGallery();
+  </script>
+</BaseLayout>

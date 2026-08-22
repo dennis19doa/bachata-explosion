@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { archiveEvents } from "../data/archive";
+import { ticketUrl } from "../data/festival";
+---
+
+<BaseLayout>
+  <section class="hero" id="festival" aria-labelledby="hero-title">
+    <div class="hero-image" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-content shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Berlin · October 16–18, 2026</p>
+        <h1 id="hero-title">Berlin Bachata<br /><em>Festival</em></h1>
+        <p class="hero-lead">
+          Three days of international artists, focused workshops and social dancing until late—all under one roof at MOA Berlin.
+        </p>
+        <ul class="hero-highlights" aria-label="Festival highlights">
+          <li>International lineup</li>
+          <li>Workshops & socials</li>
+          <li>Shows & competitions</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="button button-gold" href={ticketUrl}>Get BBF tickets</a>
+          <a class="text-link" href="/festival/">Explore the weekend <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt>Venue</dt><dd>MOA Berlin</dd></div>
+          <div><dt>Edition</dt><dd>BBF #4</dd></div>
+          <div><dt>Since</dt><dd>2022</dd></div>
+        </dl>
+      </div>
+      <a class="poster-card" href="/festival/" aria-label="Explore Berlin Bachata Festival 2026">
+        <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 artists and event poster" width="1080" height="1350" />
+        <span>Festival details <b aria-hidden="true">↗</b></span>
+      </a>
+    </div>
+    <p class="hero-stamp" aria-hidden="true">By dancers · For dancers</p>
+  </section>
+
+  <section class="intro-section section-pad" id="experience">
+    <div class="shell intro-grid">
+      <div>
+        <p class="section-label">Bachata Explosion events</p>
+        <h2>One clear next event.<br /><em>A lifetime of memories.</em></h2>
+      </div>
+      <div class="intro-copy">
+        <p class="large-copy">The homepage should answer the urgent question first: <strong>Where are we dancing next?</strong></p>
+        <p>Berlin Bachata Festival is the active destination. Earlier editions live in a dedicated archive, where photos remain easy to browse without competing with ticket sales.</p>
+        <a class="text-link" href="/archive/">Open the event archive <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience-section section-pad">
+    <div class="shell experience-grid">
+      <div class="experience-image">
+        <img src="/media/atmosphere/explosion-community.jpg" alt="Bachata Explosion dancers celebrating together" width="1200" height="800" loading="lazy" />
+        <p><strong>20+</strong><span>events since 2022</span></p>
+      </div>
+      <div class="experience-copy">
+        <p class="section-label">The Explosion feeling</p>
+        <h2>Built by dancers.<br />Felt on the floor.</h2>
+        <p>Focused workshops, strong social dancing and the family feeling that makes international dancers feel at home in Berlin.</p>
+        <ul class="check-list">
+          <li><b>01</b><span><strong>Growth</strong>Technique-driven workshops with ideas you can use immediately.</span></li>
+          <li><b>02</b><span><strong>Connection</strong>A welcoming community across roles, styles and countries.</span></li>
+          <li><b>03</b><span><strong>Energy</strong>Big floors, strong sound and socials that run late.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="weekend-section section-pad">
+    <div class="shell">
+      <div class="section-heading centered">
+        <p class="section-label">October 16–18 · MOA Berlin</p>
+        <h2>Your whole weekend.<br /><em>One festival home.</em></h2>
+        <p>Sleep, learn, compete and dance without crossing the city between sessions.</p>
+      </div>
+      <div class="feature-grid">
+        <article><span>01</span><h3>International artists</h3><p>Selected teachers and performers with a clear focus on dancer growth.</p></article>
+        <article><span>02</span><h3>Social dancing nights</h3><p>Generous floors, high-quality sound and late-night festival energy.</p></article>
+        <article><span>03</span><h3>Jack & Jill</h3><p>A social-dance competition built around connection, musicality and adaptability.</p></article>
+        <article><span>04</span><h3>Hotel & venue</h3><p>Rooms, workshops and parties connected at MOA Berlin.</p></article>
+      </div>
+      <div class="centered-action"><a class="button button-outline" href="/festival/">See the full festival</a></div>
+    </div>
+  </section>
+
+  <section class="archive-preview section-pad">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="section-label">Explosion archive</p><h2>We were there.<br /><em>Relive it.</em></h2></div>
+        <div><p>Photos from every edition stay part of the story—not buried in a WordPress menu.</p><a class="text-link" href="/archive/">Browse all events <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="archive-row">
+        {archiveEvents.slice(0, 4).map((event) => (
+          <a class="archive-card" href={event.legacyUrl}>
+            <img src={event.cover} alt={`${event.title} ${event.year} event cover`} width="900" height="1100" loading="lazy" />
+            <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View photos ↗</b></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ticket-banner section-pad" id="tickets">
+    <div class="shell ticket-banner-inner">
+      <div>
+        <p class="section-label">Official tickets</p>
+        <h2>Ready to be<br />part of it?</h2>
+      </div>
+      <div>
+        <p>Choose your pass through the official Bachata Explosion Ticket Tailor checkout.</p>
+        <ul class="ticket-pills"><li>Secure checkout</li><li>Official passes</li><li>Berlin events</li></ul>
+        <a class="button button-gold" href={ticketUrl}>Get festival tickets</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

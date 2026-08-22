@@ -1,0 +1,16 @@
+node_modules
+.astro
+dist
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Private migration material and future NAS media never belong in GitHub.
+migration/
+nas-media/
+uploads/
+*.sql
+*.zip
+*.tar
+*.tar.gz
