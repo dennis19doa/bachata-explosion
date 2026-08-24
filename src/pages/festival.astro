@@ -20,11 +20,23 @@ import { festivalFaqs, ticketUrl } from "../data/festival";
     </div>
   </section>
 
-  <section class="venue-strip" id="weekend">
+  <nav class="festival-planner" id="weekend" aria-label="Festival page">
+    <div class="shell festival-planner-inner">
+      <p><span>BBF #4</span> Plan the weekend</p>
+      <div>
+        <a href="#program">Program</a>
+        <a href="#tickets">Passes</a>
+        <a href="#venue">Venue</a>
+        <a href="#competition">Jack &amp; Jill</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="venue-strip" id="venue">
     <div class="shell venue-grid">
       <p class="section-label">Official festival hotel</p>
       <h2>MOA Berlin.<br /><em>Everything in one place.</em></h2>
-      <div><p>Mercure Hotel MOA Berlin<br />Stephanstraße 41<br />10559 Berlin</p><a class="text-link" href="https://maps.google.com/?q=Mercure+Hotel+MOA+Berlin">Open map ↗</a></div>
+      <div><p>Workshops, parties and your hotel under one roof.<br /><br />Mercure Hotel MOA Berlin<br />Stephanstraße 41 · 10559 Berlin</p><a class="text-link" href="https://maps.google.com/?q=Mercure+Hotel+MOA+Berlin">Open map ↗</a></div>
     </div>
   </section>
 
@@ -42,20 +54,20 @@ import { festivalFaqs, ticketUrl } from "../data/festival";
     </div>
   </section>
 
-  <section class="competition-section section-pad">
+  <section class="competition-section section-pad" id="competition">
     <div class="shell competition-grid">
       <div><p class="section-label">Saturday competition</p><h2>Your name.<br /><em>Your moment.</em></h2><p>The BBF Jack & Jill puts connection, musicality, technique and adaptability in the spotlight.</p><a class="button button-outline" href="https://bachataexplosion.com/jj/">Competition details</a></div>
       <ol class="competition-steps"><li><b>01</b><span>Register</span></li><li><b>02</b><span>Cypher</span></li><li><b>03</b><span>Semi-final</span></li><li><b>04</b><span>Center stage</span></li></ol>
     </div>
   </section>
 
-  <section class="schedule-section section-pad">
+  <section class="schedule-section section-pad" id="program">
     <div class="shell">
       <div class="section-heading split-heading"><div><p class="section-label">Friday to Sunday</p><h2>Festival<br /><em>rhythm.</em></h2></div><p>The detailed artist timetable will be added when it is final. This structure stays clear even when timings change.</p></div>
       <div class="schedule-grid">
-        <article><span>Friday</span><h3>Arrive & ignite</h3><ul><li>Workshops</li><li>Welcome social</li><li>Opening party</li></ul></article>
-        <article><span>Saturday</span><h3>Grow & compete</h3><ul><li>Full workshop day</li><li>Jack & Jill</li><li>Main party</li></ul></article>
-        <article><span>Sunday</span><h3>One last dance</h3><ul><li>Workshops</li><li>Social dancing</li><li>Closing party</li></ul></article>
+        <article><div class="schedule-day"><b>01</b><span>Friday</span></div><h3>Arrive & ignite</h3><ul><li>Workshops</li><li>Welcome social</li><li>Opening party</li></ul></article>
+        <article><div class="schedule-day"><b>02</b><span>Saturday</span></div><h3>Grow & compete</h3><ul><li>Full workshop day</li><li>Jack & Jill</li><li>Main party</li></ul></article>
+        <article><div class="schedule-day"><b>03</b><span>Sunday</span></div><h3>One last dance</h3><ul><li>Workshops</li><li>Social dancing</li><li>Closing party</li></ul></article>
       </div>
     </div>
   </section>

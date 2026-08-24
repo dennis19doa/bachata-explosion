@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { newsletterFormEndpoint } from "../lib/forms";
 
 interface Props {
   title?: string;
@@ -50,6 +51,15 @@ const socialImage = new URL("/og.png", Astro.site);
         <a href="/archive/">Archive</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
+        <nav aria-label="Mobile navigation">
+          <a href="/festival/">Festival <span>01</span></a>
+          <a href="/#experience">Experience <span>02</span></a>
+          <a href="/archive/">Archive <span>03</span></a>
+          <a href="/contact/">Contact <span>04</span></a>
+        </nav>
+      </details>
       <a class="button button-small button-gold" href="/festival/#tickets">Get tickets</a>
     </header>
     <main id="main">
@@ -61,9 +71,18 @@ const socialImage = new URL("/og.png", Astro.site);
           <p class="section-label">Explosion insider</p>
           <h2 id="newsletter-title">Presales, artist drops<br />& dancer perks.</h2>
         </div>
-        <form class="newsletter-form" data-preview-form>
+        <form
+          class="newsletter-form"
+          action={newsletterFormEndpoint || undefined}
+          method="post"
+          data-endpoint-form
+          data-preview-message="The newsletter form is designed and ready. We’ll connect double opt-in after the provider and subscriber migration are approved."
+          data-success-message="Almost there—please check your inbox to confirm your subscription."
+        >
+          <input type="hidden" name="formType" value="newsletter" />
           <label><span>First name</span><input type="text" name="firstName" autocomplete="given-name" placeholder="Your first name" /></label>
           <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label class="honeypot" aria-hidden="true"><span>Website</span><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           <label class="consent"><input type="checkbox" required /> <span>I accept the <a href="https://bachataexplosion.com/privacy/">privacy policy</a>.</span></label>
           <button class="button button-gold" type="submit">Join the list</button>
           <p class="form-status" role="status"></p>
@@ -86,12 +105,36 @@ const socialImage = new URL("/og.png", Astro.site);
         </address>
       </div>
     </footer>
+    <a class="mobile-ticket-dock" href="/festival/#tickets"><span>BBF 2026</span><strong>Get tickets →</strong></a>
     <script>
-      document.querySelectorAll("[data-preview-form]").forEach((form) => {
-        form.addEventListener("submit", (event) => {
+      document.querySelectorAll<HTMLFormElement>("[data-endpoint-form]").forEach((form) => {
+        form.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const status = form.querySelector(".form-status");
-          if (status) status.textContent = "Preview ready — the final newsletter provider will be connected before launch.";
+          const status = form.querySelector<HTMLElement>(".form-status");
+          const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+          const endpoint = form.getAttribute("action");
+
+          if (!endpoint) {
+            if (status) status.textContent = form.dataset.previewMessage ?? "This form is ready to connect before launch.";
+            return;
+          }
+
+          if (button) button.disabled = true;
+          if (status) status.textContent = "Sending…";
+          try {
+            const response = await fetch(endpoint, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            });
+            if (!response.ok) throw new Error("Submission failed");
+            form.reset();
+            if (status) status.textContent = form.dataset.successMessage ?? "Thank you—your message has been sent.";
+          } catch {
+            if (status) status.textContent = "That did not go through. Please email info@bachataexplosion.com instead.";
+          } finally {
+            if (button) button.disabled = false;
+          }
         });
       });
     </script>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactFormEndpoint } from "../lib/forms";
 ---
 
 <BaseLayout title="Contact | Bachata Explosion" description="Contact the Bachata Explosion team about tickets, group discounts, ambassadors or volunteering." headerStyle="solid">
@@ -10,13 +11,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <h1>Let’s make it<br /><em>explode.</em></h1>
         <p class="hero-lead">Questions about tickets, group discounts, volunteering, ambassadors or the festival weekend? Send one clear message and we’ll route it to the right person.</p>
         <a class="contact-email" href="mailto:info@bachataexplosion.com"><span>Email us</span><strong>info@bachataexplosion.com</strong></a>
+        <div class="contact-promises" aria-label="Contact expectations">
+          <span>Ticket support</span><span>Partnerships</span><span>Community questions</span>
+        </div>
       </div>
-      <form class="contact-form" data-preview-form>
+      <form
+        class="contact-form"
+        action={contactFormEndpoint || undefined}
+        method="post"
+        data-endpoint-form
+        data-preview-message="The contact experience is ready. No message was sent because the secure form endpoint has not been selected yet."
+        data-success-message="Thank you—your message is with the Bachata Explosion team."
+      >
+        <input type="hidden" name="formType" value="contact" />
         <label><span>Full name</span><input name="name" autocomplete="name" required /></label>
         <label><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
         <label><span>WhatsApp <small>optional</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
-        <label><span>Topic</span><select name="topic"><option>General question</option><option>Tickets</option><option>Group discount</option><option>Ambassadors</option><option>Volunteering</option></select></label>
+        <label><span>Topic</span><select name="topic"><option>General question</option><option>Tickets</option><option>Group discount</option><option>Ambassadors</option><option>Volunteering</option><option>Media & photographers</option><option>Partnerships</option></select></label>
         <label class="full-field"><span>Message</span><textarea name="message" rows="6" required></textarea></label>
+        <label class="honeypot" aria-hidden="true"><span>Website</span><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
         <label class="consent full-field"><input type="checkbox" required /> <span>I accept the current <a href="https://bachataexplosion.com/privacy/">privacy policy</a>.</span></label>
         <button class="button button-gold" type="submit">Send message</button>
         <p class="form-status full-field" role="status"></p>

@@ -16,6 +16,8 @@ The current build includes:
 - an internal detail route for every archived event
 - a gallery loader prepared for a UGREEN NAS media source
 - graceful gallery fallback when the NAS is offline or not connected
+- provider-ready contact and newsletter forms that remain non-sending in preview mode
+- a complete operating plan for domain email, forms, newsletter and NAS media
 - contact, imprint, sitemap, redirects, social metadata and a custom 404 page
 - preview-only form states until the final newsletter and form providers are selected
 
@@ -43,6 +45,8 @@ bachataexplosion.com/archive/{event}/
 ```
 
 Set `PUBLIC_ARCHIVE_MEDIA_ORIGIN` to the public, read-only media hostname when the NAS pilot is ready. See `.env.example`. Originals, uploads, private migration exports, database dumps, tunnel credentials, and NAS administration details must never be committed.
+
+The implementation and migration decisions are documented in [`docs/email-forms-media-plan.md`](docs/email-forms-media-plan.md). The current IONOS export state and cutover safeguards are tracked in [`docs/ionos-migration-status.md`](docs/ionos-migration-status.md). The NAS publishing workflow is defined in [`docs/ugreen-transition-runbook.md`](docs/ugreen-transition-runbook.md).
 
 ## Local development
 

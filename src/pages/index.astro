@@ -10,10 +10,10 @@ import { ticketUrl } from "../data/festival";
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content shell">
       <div class="hero-copy">
-        <p class="eyebrow"><span></span> Berlin · October 16–18, 2026</p>
+        <p class="eyebrow"><span></span> Next Explosion · October 16–18, 2026</p>
         <h1 id="hero-title">Berlin Bachata<br /><em>Festival</em></h1>
         <p class="hero-lead">
-          Three days of international artists, focused workshops and social dancing until late—all under one roof at MOA Berlin.
+          Three days of international artists, focused workshops and unforgettable social dancing—all under one roof at MOA Berlin.
         </p>
         <ul class="hero-highlights" aria-label="Festival highlights">
           <li>International lineup</li>
@@ -25,9 +25,9 @@ import { ticketUrl } from "../data/festival";
           <a class="text-link" href="/festival/">Explore the weekend <span aria-hidden="true">↗</span></a>
         </div>
         <dl class="hero-facts">
+          <div><dt>Dates</dt><dd>16–18 Oct</dd></div>
           <div><dt>Venue</dt><dd>MOA Berlin</dd></div>
           <div><dt>Edition</dt><dd>BBF #4</dd></div>
-          <div><dt>Since</dt><dd>2022</dd></div>
         </dl>
       </div>
       <a class="poster-card" href="/festival/" aria-label="Explore Berlin Bachata Festival 2026">
@@ -38,17 +38,37 @@ import { ticketUrl } from "../data/festival";
     <p class="hero-stamp" aria-hidden="true">By dancers · For dancers</p>
   </section>
 
+  <section class="signal-strip" aria-label="Festival essentials">
+    <div class="shell">
+      <span>Berlin</span><span>3 festival days</span><span>One hotel venue</span><span>Official Ticket Tailor checkout</span>
+    </div>
+  </section>
+
   <section class="intro-section section-pad" id="experience">
     <div class="shell intro-grid">
       <div>
         <p class="section-label">Bachata Explosion events</p>
-        <h2>One clear next event.<br /><em>A lifetime of memories.</em></h2>
+        <h2>Your next dance<br /><em>starts in Berlin.</em></h2>
       </div>
       <div class="intro-copy">
-        <p class="large-copy">The homepage should answer the urgent question first: <strong>Where are we dancing next?</strong></p>
-        <p>Berlin Bachata Festival is the active destination. Earlier editions live in a dedicated archive, where photos remain easy to browse without competing with ticket sales.</p>
-        <a class="text-link" href="/archive/">Open the event archive <span aria-hidden="true">↗</span></a>
+        <p class="large-copy">Come for the workshops. Stay for the people, the music and the moment when Berlin feels like one dance floor.</p>
+        <p>Bachata Explosion brings ambitious learning and warm community energy into one carefully produced weekend. New here? You will know where to go, what to book and how to feel part of it.</p>
+        <a class="text-link" href="/festival/">Meet the festival <span aria-hidden="true">↗</span></a>
       </div>
+    </div>
+  </section>
+
+  <section class="journey-section section-pad">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="section-label">Made easy for dancers</p><h2>Book. Arrive.<br /><em>Just dance.</em></h2></div>
+        <p>One official ticket route, one festival venue and one clear home for the information you need before the weekend.</p>
+      </div>
+      <ol class="journey-grid">
+        <li><span>01</span><div><h3>Choose your pass</h3><p>Compare the festival options, then book through the official checkout.</p></div></li>
+        <li><span>02</span><div><h3>Plan one destination</h3><p>Workshops, parties and the festival hotel come together at MOA Berlin.</p></div></li>
+        <li><span>03</span><div><h3>Find your people</h3><p>Lead, follow or switch—come solo or with friends and join the floor.</p></div></li>
+      </ol>
     </div>
   </section>
 
@@ -96,9 +116,9 @@ import { ticketUrl } from "../data/festival";
       </div>
       <div class="archive-row">
         {archiveEvents.slice(0, 4).map((event) => (
-          <a class="archive-card" href={event.legacyUrl}>
+          <a class="archive-card" href={`/archive/${event.slug}/`}>
             <img src={event.cover} alt={`${event.title} ${event.year} event cover`} width="900" height="1100" loading="lazy" />
-            <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View photos ↗</b></div>
+            <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View collection →</b></div>
           </a>
         ))}
       </div>
