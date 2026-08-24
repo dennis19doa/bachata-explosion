@@ -1,4 +1,4 @@
-import pageExport from "../../migration/wp-pages-public-export.json";
+import pageExport from "../data/wp-pages-public-export.json";
 
 export type WordPressPage = {
   id: number;
