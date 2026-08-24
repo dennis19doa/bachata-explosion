@@ -43,6 +43,28 @@ Aliases can initially arrive in one mailbox, so separate paid accounts are not r
 
 ## 2. Contact forms
 
+### Current implementation
+
+The new `/contact/` page is implemented as a topic router. It preserves the original name, email, WhatsApp and message fields while adding:
+
+- ticket, group, partnership, media, volunteer and general topics
+- an optional event selector
+- privacy consent and a honeypot field
+- accessible sending, success and failure states
+- a direct `info@bachataexplosion.com` fallback
+
+When `PUBLIC_CONTACT_FORM_ENDPOINT` is empty, the page remains in clearly labelled preview mode and transmits no personal data. GitHub Pages reads the endpoint from a repository variable with the same name.
+
+### Activation checklist
+
+1. Create one protected form endpoint and set its notification address to `info@bachataexplosion.com`.
+2. Verify the inbox with the provider.
+3. Add the endpoint URL as the GitHub repository variable `PUBLIC_CONTACT_FORM_ENDPOINT`.
+4. Trigger a new Pages deployment.
+5. Submit one test for every topic and confirm that the topic, event and reply email arrive correctly.
+6. Confirm the provider, retention period and data-processing agreement in the privacy policy before public launch.
+7. Add Turnstile only if the provider's normal spam filtering proves insufficient.
+
 ### Form types for launch
 
 - general contact

@@ -1,7 +1,195 @@
 ---
-import WordPressSourcePage from "../components/WordPressSourcePage.astro";
-import { getWordPressPage } from "../lib/wordpressContent";
-const page = getWordPressPage("contact");
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactFormEndpoint } from "../lib/forms";
+
+const routes = [
+  { value: "Ticket question", number: "01", label: "Tickets", detail: "Passes, payments, confirmations or name changes" },
+  { value: "Group discount", number: "02", label: "Groups", detail: "Promo codes and bringing your dance community" },
+  { value: "Partnership or ambassador", number: "03", label: "Partners", detail: "Ambassadors, studios, brands and collaborations" },
+  { value: "Media or photographer", number: "04", label: "Media", detail: "Press, photographers, video and content requests" },
+  { value: "Volunteer", number: "05", label: "Volunteer", detail: "Help the team before or during an event" },
+  { value: "General question", number: "06", label: "General", detail: "Anything that does not fit the other routes" },
+];
+
+const events = ["Berlin Bachata Festival 2026", "Role Rotation", "Elite Dance #3", "Jack & Jill", "Past event / photo archive", "Not event-specific"];
+const formConnected = Boolean(contactFormEndpoint);
 ---
 
-<WordPressSourcePage page={page} label="Contact the Explosion team" />
+<BaseLayout
+  title="Contact Bachata Explosion — tickets, groups, partners and media"
+  description="Send the Bachata Explosion team a ticket, group, partnership, media, volunteer or general question."
+  headerStyle="solid"
+>
+  <article class="contact-2026" data-wordpress-source="contact">
+    <section class="contact-hero" aria-labelledby="contact-title">
+      <div class="contact-hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="shell contact-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span>Talk to the Explosion team</p>
+          <h1 id="contact-title">Send the<br /><em>right signal.</em></h1>
+        </div>
+        <div class="contact-hero-copy">
+          <p>Choose what you need. We attach the right topic to your message so it reaches the team with context—not as another anonymous form submission.</p>
+          <a class="contact-direct" href="mailto:info@bachataexplosion.com">
+            <span>Prefer your email app?</span>
+            <strong>info@bachataexplosion.com ↗</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-routing section-pad" aria-labelledby="contact-routing-title">
+      <div class="shell">
+        <div class="contact-section-heading">
+          <div><p class="section-label">Step 01 · Route the message</p><h2 id="contact-routing-title">What can we<br /><em>help with?</em></h2></div>
+          <p>One public inbox for now. Clear topic labels keep tickets, partnerships and media questions easy to separate.</p>
+        </div>
+        <div class="contact-route-grid">
+          {routes.map((route, index) => (
+            <button type="button" class="contact-route" data-contact-topic={route.value} aria-pressed={index === 0 ? "true" : "false"}>
+              <span>{route.number}</span>
+              <strong>{route.label}</strong>
+              <small>{route.detail}</small>
+              <i aria-hidden="true">↘</i>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-workbench section-pad" id="message" aria-labelledby="contact-form-title">
+      <div class="shell contact-workbench-grid">
+        <div class="contact-workbench-intro">
+          <p class="section-label">Step 02 · Add the details</p>
+          <h2 id="contact-form-title">Make it easy<br /><em>to answer.</em></h2>
+          <p>Include the event and the most important detail. For ticket questions, use the same email address you used during checkout.</p>
+          <div class="contact-delivery-card">
+            <span>Message destination</span>
+            <strong>info@bachataexplosion.com</strong>
+            <p>Ticket, group, partnership and media topics are labelled inside the submission.</p>
+          </div>
+        </div>
+
+        <form
+          class="contact-form contact-form-2026"
+          id="contact-form"
+          method="POST"
+          action={contactFormEndpoint || undefined}
+          data-contact-endpoint={contactFormEndpoint}
+          data-contact-connected={String(formConnected)}
+        >
+          <label>
+            <span>Full name *</span>
+            <input type="text" name="name" autocomplete="name" required maxlength="100" placeholder="How should we call you?" />
+          </label>
+          <label>
+            <span>Email *</span>
+            <input type="email" name="email" autocomplete="email" required maxlength="180" placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>WhatsApp</span>
+            <input type="tel" name="whatsapp" autocomplete="tel" maxlength="40" placeholder="Optional, including country code" />
+          </label>
+          <label>
+            <span>Topic *</span>
+            <select name="topic" required data-contact-select>
+              {routes.map((route) => <option value={route.value}>{route.label}</option>)}
+            </select>
+          </label>
+          <label class="full-field">
+            <span>Event</span>
+            <select name="event">
+              <option value="">Choose if relevant</option>
+              {events.map((event) => <option value={event}>{event}</option>)}
+            </select>
+          </label>
+          <label class="full-field">
+            <span>Message *</span>
+            <textarea name="message" rows="7" required maxlength="2000" placeholder="What would you like us to know?"></textarea>
+          </label>
+          <label class="form-trap" aria-hidden="true">
+            <span>Leave this field empty</span>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </label>
+          <label class="consent full-field">
+            <input type="checkbox" name="privacy_consent" value="yes" required />
+            <span>I agree that my details may be used to answer this request. See the <a href="/privacy/">privacy policy</a>.</span>
+          </label>
+          <div class="contact-form-action full-field">
+            <button class="button button-gold" type="submit" data-submit-label>Send the signal</button>
+            <small>{formConnected ? "Secure form delivery is connected." : "Preview mode: no message is transmitted yet."}</small>
+          </div>
+          <p class="contact-form-status full-field" role="status" aria-live="polite" data-contact-status>
+            {formConnected ? "Ready when you are." : "The design is ready. Connect the protected form endpoint to activate delivery to info@bachataexplosion.com."}
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact-next section-pad">
+      <div class="shell contact-next-grid">
+        <div><p class="section-label">Other doors</p><h2>Join the<br /><em>team.</em></h2></div>
+        <a href="/volunteers/"><span>Volunteer applications</span><strong>Help make the weekend happen</strong><i>↗</i></a>
+        <a href="/ambassadors/"><span>Ambassador program</span><strong>Bring your community into the Explosion</strong><i>↗</i></a>
+      </div>
+    </section>
+  </article>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>("#contact-form");
+    const topicSelect = form?.querySelector<HTMLSelectElement>("[data-contact-select]");
+    const routeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-contact-topic]"));
+    const status = form?.querySelector<HTMLElement>("[data-contact-status]");
+    const submitButton = form?.querySelector<HTMLButtonElement>("[data-submit-label]");
+
+    routeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        routeButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
+        if (topicSelect) topicSelect.value = button.dataset.contactTopic ?? "General question";
+        document.querySelector("#message")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const endpoint = form.dataset.contactEndpoint?.trim();
+      if (!endpoint) {
+        if (status) status.textContent = "Preview mode is active, so nothing was sent. Add the protected form endpoint to deliver this message to info@bachataexplosion.com.";
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending…";
+      }
+      if (status) status.textContent = "Sending your message securely…";
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!response.ok) throw new Error(`Submission failed with ${response.status}`);
+        form.reset();
+        routeButtons.forEach((candidate, index) => candidate.setAttribute("aria-pressed", String(index === 0)));
+        if (status) {
+          status.classList.remove("is-error");
+          status.classList.add("is-success");
+          status.textContent = "Signal received. Thank you—your topic and event details were included with the message.";
+        }
+      } catch {
+        if (status) {
+          status.classList.remove("is-success");
+          status.classList.add("is-error");
+          status.textContent = "The message could not be delivered. Please try again or email info@bachataexplosion.com directly.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Send the signal";
+        }
+      }
+    });
+  </script>
+</BaseLayout>

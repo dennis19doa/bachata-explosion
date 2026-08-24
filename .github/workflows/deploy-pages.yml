@@ -36,6 +36,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build GitHub Pages preview
+        env:
+          PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.PUBLIC_CONTACT_FORM_ENDPOINT }}
+          PUBLIC_NEWSLETTER_FORM_ENDPOINT: ${{ vars.PUBLIC_NEWSLETTER_FORM_ENDPOINT }}
         run: pnpm build:pages
 
       - name: Configure GitHub Pages
