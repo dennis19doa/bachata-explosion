@@ -20,7 +20,7 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
       <div class="archive-toolbar" aria-label="Filter archive by year">
         {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
       </div>
-      <p class="migration-note">Local build: the branded event pages now stay inside Bachata Explosion. Their full photo sets will load from the UGREEN NAS after the first album export and secure media connection are ready.</p>
+      <p class="migration-note"><strong>The archive stays with Bachata Explosion.</strong> Every original event page remains available while the high-resolution galleries are reconnected to our independent media library.</p>
       <div class="archive-years">
         {archiveYears.map((group) => (
           <section class="archive-year" data-year-group={group.year}>
@@ -39,6 +39,10 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
             </div>
           </section>
         ))}
+      </div>
+      <div class="archive-original-index">
+        <div><p class="section-label">Nothing disappears</p><h2>Looking for the<br /><em>original index?</em></h2></div>
+        <div><p>The former Past Events page is preserved as part of the transition, including its original structure and links.</p><a class="button button-outline" href="/past-events/">Open preserved archive index</a></div>
       </div>
     </div>
   </section>

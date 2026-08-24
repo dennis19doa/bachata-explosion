@@ -56,8 +56,8 @@ const previewPhotos = [
           <h2>Photo<br /><em>gallery</em></h2>
         </div>
         <div>
-          <p>Photographs are loaded only when this collection is opened. That keeps the main festival website lightweight and avoids placing the image library in the website repository.</p>
-          <p class="gallery-source"><span aria-hidden="true"></span><strong>{archiveMediaOrigin ? "NAS media connection configured" : "Local archive shell"}</strong></p>
+          <p>Photographs are loaded only when this collection is opened. That keeps the festival pages fast while the complete high-resolution library stays independent from the website.</p>
+          <p class="gallery-source"><span aria-hidden="true"></span><strong>{archiveMediaOrigin ? "High-resolution collection connected" : "Collection page preserved"}</strong></p>
         </div>
       </div>
 
@@ -71,25 +71,25 @@ const previewPhotos = [
         {event.albumGroups && <nav class="album-tabs" aria-label="Album sections">{event.albumGroups.map((group, index) => <button class:list={[index === 0 && "active"]} type="button" data-album-group={group}>{group}</button>)}</nav>}
         {isAlbumPreview && (
           <div class="album-preview" data-album-preview>
-            <div class="album-preview-note"><span>Album layout preview</span><p>Representative images already verified in the local build. The complete event set will replace these automatically after the NAS publishing folder is connected.</p></div>
+            <div class="album-preview-note"><span>Album layout preview</span><p>A first look at how this event will be explored. The complete verified collection will appear here when its high-resolution library is published.</p></div>
             <div class="album-mosaic">
               {previewPhotos.map((photo, index) => <figure class={photo.className} data-album-item-group={photo.group}><button type="button" aria-label={`Open image ${index + 1}: ${photo.label}`}><img src={photo.src} alt={photo.alt} loading="lazy" /></button><figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.label}</figcaption></figure>)}
             </div>
           </div>
         )}
         <div class="gallery-message" data-gallery-message hidden={isAlbumPreview}>
-          {manifestUrl ? "Connecting to this collection…" : "The page is ready. Connect the UGREEN NAS and add this event’s manifest to populate the gallery."}
+          {manifestUrl ? "Opening this collection…" : "This event page is preserved while its complete high-resolution collection is being prepared."}
         </div>
         <div class="nas-gallery-grid" data-gallery-grid></div>
       </div>
 
       <div class="archive-fallback">
         <div>
-          <p class="section-label">Migration safety net</p>
-          <h3>Old gallery still available</h3>
-          <p>Until this event is copied and verified on the NAS, its existing WordPress gallery remains the reference copy.</p>
+          <p class="section-label">Original event page</p>
+          <h3>Nothing from the former website is lost</h3>
+          <p>The original event page remains available while this new collection is completed.</p>
         </div>
-        <a class="button button-outline" href={event.legacyUrl}>Open current gallery ↗</a>
+        <a class="button button-outline" href={event.legacyUrl}>Open original event page ↗</a>
       </div>
     </div>
   </section>
@@ -162,7 +162,7 @@ const previewPhotos = [
         grid.append(fragment);
         message.hidden = true;
       } catch {
-        message.textContent = "This gallery is temporarily unavailable. The event page remains online, and the current gallery link below can be used during migration.";
+        message.textContent = "This high-resolution collection is temporarily unavailable. The event page remains online, and the original event page below can still be opened.";
         message.classList.add("gallery-message-error");
       }
     }

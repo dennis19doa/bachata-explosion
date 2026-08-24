@@ -392,6 +392,11 @@ textarea { padding: 15px; resize: vertical; }
 .archive-toolbar button { min-width: 74px; padding: 10px 17px; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: var(--ink); cursor: pointer; font: inherit; font-size: .72rem; font-weight: 800; }
 .archive-toolbar button.active, .archive-toolbar button:hover { border-color: var(--gold); background: var(--gold); color: #18080b; }
 .migration-note { max-width: 780px; margin: 0 0 42px; padding: 13px 16px; border-left: 2px solid var(--gold); background: rgba(246,207,116,.07); color: #cbbcbf; font-size: .76rem; line-height: 1.55; }
+.migration-note strong { color: var(--ink); }
+.archive-original-index { display: grid; grid-template-columns: 1fr .72fr; gap: 70px; align-items: end; margin-top: clamp(88px, 11vw, 150px); padding-top: clamp(58px, 7vw, 92px); border-top: 1px solid var(--line); }
+.archive-original-index h2 { font-size: clamp(2.8rem, 5.2vw, 5.5rem); }
+.archive-original-index > div:last-child { max-width: 520px; }
+.archive-original-index > div:last-child p { margin: 0 0 28px; color: var(--muted); line-height: 1.7; }
 .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 46px 18px; }
 .archive-years { display: grid; gap: 88px; }
 .archive-year[hidden] { display: none; }
@@ -672,7 +677,8 @@ textarea { padding: 15px; resize: vertical; }
 }
 
 @media (max-width: 860px) {
-  .people-marquee, .story-hero-grid, .concept-hero-grid, .archive-callout-inner, .rules-grid, .ambassador-grid { grid-template-columns: 1fr; }
+  .people-marquee, .story-hero-grid, .concept-hero-grid, .archive-callout-inner, .archive-original-index, .rules-grid, .ambassador-grid { grid-template-columns: 1fr; }
+  .archive-original-index { gap: 30px; }
   .chapter-list article { grid-template-columns: 60px 1fr; gap: 18px; }
   .chapter-list article p { grid-column: 2; }
   .archive-year { grid-template-columns: 110px 1fr; }
