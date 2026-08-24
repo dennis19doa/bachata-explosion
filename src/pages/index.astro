@@ -1,7 +1,257 @@
 ---
-import WordPressSourcePage from "../components/WordPressSourcePage.astro";
-import { getWordPressPage } from "../lib/wordpressContent";
-const page = getWordPressPage("home");
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { archiveEvents } from "../data/archive";
+import { ticketUrl } from "../data/festival";
+
+const featuredEvents = [
+  {
+    id: "bbf",
+    number: "01",
+    eyebrow: "The flagship · October 16–18, 2026",
+    title: "Berlin Bachata Festival",
+    image: "/media/events/bbf-2026-poster.jpg",
+    href: "/bbf-2026/",
+    action: "Explore the festival",
+    facts: ["International lineup", "MOA Berlin", "Workshops, shows & socials"],
+  },
+  {
+    id: "rotation",
+    number: "02",
+    eyebrow: "Switch roles · deepen connection",
+    title: "Role Rotation",
+    image: "/media/events/role-rotation-2026.webp",
+    href: "/role-rotation-2026/",
+    action: "Enter Role Rotation",
+    facts: ["Lead, follow or switch", "Technique & musicality", "Community-first weekend"],
+  },
+  {
+    id: "elite",
+    number: "03",
+    eyebrow: "Small room · high level",
+    title: "Elite Dance #3",
+    image: "/media/events/elite-dance-3.webp",
+    href: "/elite-dance-3/",
+    action: "Discover Elite Dance",
+    facts: ["Curated experience", "Selected artists", "Premium social atmosphere"],
+  },
+];
+
+const team = [
+  { name: "Dennis", role: "Owner · Founder", since: "Since 2021", image: "/media/team/dennis.jpg", bio: "Event vision, community growth and the details that make every Explosion ambitious and personal." },
+  { name: "Elena", role: "Owner · Founder", since: "Since 2021", image: "/media/team/elena.jpg", bio: "Dancer experience, team culture and the warm atmosphere behind the Explosion community." },
+  { name: "Laura", role: "Explosion Team", since: "Since 2023", image: "/media/team/laura.jpg", bio: "Event flow and the welcoming community feeling on site." },
+  { name: "Lucy", role: "Physiotherapist", since: "Since 2023", image: "/media/team/lucy.jpg", bio: "Body awareness, care and dancer-friendly support." },
+  { name: "Mircea", role: "Chef", since: "Since 2023", image: "/media/team/mircea.jpg", bio: "Comfort, care and behind-the-scenes support throughout the weekend." },
+  { name: "Roberto", role: "Promoter", since: "Since 2023", image: "/media/team/roberto.jpg", bio: "Connecting dancers with the events and helping the community grow." },
+  { name: "Jenn", role: "Explosion Team", since: "Since 2023", image: "/media/team/jenn.jpg", bio: "Supporting the people-first atmosphere that makes dancers feel at home." },
+  { name: "Milo", role: "Driver", since: "Since 2023", image: "/media/team/milo.jpg", bio: "The logistics that help a festival weekend run smoothly." },
+  { name: "Blanca", role: "Research & Planning", since: "Since 2024", image: "/media/team/blanca.jpg", bio: "Planning, ideas and preparation that keep the brand moving forward." },
+];
 ---
 
-<WordPressSourcePage page={page} home />
+<BaseLayout
+  title="Bachata Explosion — Berlin Bachata events by dancers, for dancers"
+  description="Meet the next Bachata Explosion in Berlin: Berlin Bachata Festival, Role Rotation, Elite Dance and the complete event photo archive."
+>
+  <div data-wordpress-source="home">
+  <section class="home-hero" aria-labelledby="home-hero-title">
+    <video class="home-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-hidden="true">
+      <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+    </video>
+    <div class="home-hero-shade" aria-hidden="true"></div>
+    <div class="home-hero-content shell">
+      <div class="home-hero-copy">
+        <p class="home-hero-meta"><span>October 16–18, 2026</span><span>MOA Berlin</span></p>
+        <p class="eyebrow"><span></span>Next Explosion</p>
+        <h1 id="home-hero-title">Berlin<br />Bachata<br /><em>Festival</em></h1>
+        <p class="home-hero-lead">Three days. One roof. A thousand reasons to stay for one more song.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href={ticketUrl}>Secure your pass</a>
+          <a class="button button-glass" href="/bbf-2026/">Discover the festival</a>
+        </div>
+        <div class="home-countdown" data-countdown="2026-10-16T18:00:00+02:00" aria-label="Countdown to Berlin Bachata Festival 2026">
+          <div><strong data-days>—</strong><span>Days</span></div>
+          <div><strong data-hours>—</strong><span>Hours</span></div>
+          <div><strong data-minutes>—</strong><span>Minutes</span></div>
+        </div>
+      </div>
+      <a class="home-hero-poster" href="/bbf-2026/" aria-label="Explore Berlin Bachata Festival 2026">
+        <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" />
+        <span><b>BBF 2026</b> Festival dossier ↗</span>
+      </a>
+    </div>
+    <a class="home-scroll-cue" href="#choose-event"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
+  </section>
+
+  <section class="home-signal" aria-label="Bachata Explosion essentials">
+    <div class="shell">
+      <span>Berlin born</span>
+      <span>Since 2022</span>
+      <span>20+ editions</span>
+      <span>By dancers, for dancers</span>
+    </div>
+  </section>
+
+  <section class="home-manifesto section-pad">
+    <div class="shell home-manifesto-grid">
+      <p class="section-label">This is Bachata Explosion</p>
+      <h2>Come for the dancing.<br /><em>Stay for the people.</em></h2>
+      <p>Focused learning, unforgettable nights and a Berlin community that makes the room feel like home.</p>
+    </div>
+  </section>
+
+  <section class="event-switcher section-pad" id="choose-event" aria-labelledby="event-switcher-title">
+    <div class="shell">
+      <div class="event-switcher-heading">
+        <div>
+          <p class="section-label">Choose your experience</p>
+          <h2 id="event-switcher-title">Three ways<br /><em>to explode.</em></h2>
+        </div>
+        <p>Each edition has its own energy. Pick the room that feels right for you.</p>
+      </div>
+
+      <div class="event-tabs" role="tablist" aria-label="Bachata Explosion event formats">
+        {featuredEvents.map((event, index) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`event-${event.id}`}
+            id={`event-tab-${event.id}`}
+            data-event-tab={event.id}
+          ><span>{event.number}</span>{event.title}</button>
+        ))}
+      </div>
+
+      <div class="event-panels">
+        {featuredEvents.map((event, index) => (
+          <article
+            class="event-panel"
+            id={`event-${event.id}`}
+            role="tabpanel"
+            aria-labelledby={`event-tab-${event.id}`}
+            data-event-panel={event.id}
+            hidden={index !== 0}
+          >
+            <a class="event-panel-image" href={event.href}>
+              <img src={event.image} alt={`${event.title} event artwork`} width="1080" height="1350" loading={index === 0 ? "eager" : "lazy"} />
+              <span>{event.number} / Explosion format</span>
+            </a>
+            <div class="event-panel-copy">
+              <p>{event.eyebrow}</p>
+              <h3>{event.title}</h3>
+              <ul>{event.facts.map((fact) => <li>{fact}</li>)}</ul>
+              <a class="button button-gold" href={event.href}>{event.action}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-feeling section-pad">
+    <div class="shell home-feeling-grid">
+      <figure>
+        <img src="/media/atmosphere/party-friday-original.webp" alt="Bachata Explosion crowd dancing at a Berlin party" width="1200" height="800" loading="lazy" />
+        <figcaption>Real people. Real connection. Berlin.</figcaption>
+      </figure>
+      <div>
+        <p class="section-label">The Explosion feeling</p>
+        <h2>Not generic.<br /><em>Not anonymous.</em></h2>
+        <p>We build the kind of weekend we want to dance ourselves.</p>
+        <ol>
+          <li><span>01</span><strong>Learn something you can feel.</strong></li>
+          <li><span>02</span><strong>Meet people you want to see again.</strong></li>
+          <li><span>03</span><strong>Dance until the room becomes a memory.</strong></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-team section-pad" aria-labelledby="home-team-title">
+    <img class="home-team-graffiti" src="/media/brand/graffiti-layer.webp" alt="" aria-hidden="true" loading="lazy" />
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="section-label">The people behind the weekend</p><h2 id="home-team-title">Dancer-built.<br /><em>Human-led.</em></h2></div>
+        <p>A dancer-built team shaping the details that make every weekend feel personal, welcoming and unmistakably Explosion.</p>
+      </div>
+      <div class="team-rail" aria-label="Bachata Explosion team">
+        {team.map((member) => (
+          <article class="team-card">
+            <img src={member.image} alt={`${member.name}, ${member.role} at Bachata Explosion`} width="600" height="600" loading="lazy" />
+            <div>
+              <span>{member.since}</span>
+              <h3>{member.name}</h3>
+              <b>{member.role}</b>
+              <p>{member.bio}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="archive-preview home-archive section-pad">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="section-label">The living archive</p><h2>Every edition<br /><em>still matters.</em></h2></div>
+        <div><p>Open a year, choose a moment and relive the floor.</p><a class="text-link" href="/past-events/">Browse the complete archive <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="archive-row">
+        {archiveEvents.slice(0, 4).map((event) => (
+          <a class="archive-card" href={`/archive/${event.slug}/`}>
+            <img src={event.cover} alt={`${event.title} ${event.year} event cover`} width="900" height="1100" loading="lazy" />
+            <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View collection →</b></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-social section-pad">
+    <div class="shell home-social-card">
+      <div>
+        <p class="section-label">Between the editions</p>
+        <h2>The story continues<br /><em>on Instagram.</em></h2>
+      </div>
+      <div>
+        <p>Artist drops, timetable news, ticket phases and the moments that do not wait for the website.</p>
+        <a class="button button-dark" href="https://instagram.com/bachataexplosion_official">Follow @bachataexplosion_official ↗</a>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <script>
+    const countdown = document.querySelector<HTMLElement>("[data-countdown]");
+    const updateCountdown = () => {
+      if (!countdown) return;
+      const target = new Date(countdown.dataset.countdown ?? "").getTime();
+      const remaining = Math.max(0, target - Date.now());
+      const day = 86_400_000;
+      const hour = 3_600_000;
+      const minute = 60_000;
+      const values = {
+        days: Math.floor(remaining / day),
+        hours: Math.floor((remaining % day) / hour),
+        minutes: Math.floor((remaining % hour) / minute),
+      };
+      Object.entries(values).forEach(([key, value]) => {
+        const element = countdown.querySelector<HTMLElement>(`[data-${key}]`);
+        if (element) element.textContent = String(value).padStart(2, "0");
+      });
+    };
+    updateCountdown();
+    window.setInterval(updateCountdown, 60_000);
+
+    const eventTabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-event-tab]"));
+    const eventPanels = Array.from(document.querySelectorAll<HTMLElement>("[data-event-panel]"));
+    eventTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.eventTab;
+        eventTabs.forEach((candidate) => candidate.setAttribute("aria-selected", String(candidate === tab)));
+        eventPanels.forEach((panel) => { panel.hidden = panel.dataset.eventPanel !== target; });
+      });
+    });
+  </script>
+</BaseLayout>

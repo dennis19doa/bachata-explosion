@@ -42,6 +42,10 @@ export function getWordPressDescription(page: WordPressPage) {
 
 export function prepareWordPressHtml(html: string) {
   const prepared = html
+    .replaceAll(
+      "https://bachataexplosion.com/wp-content/uploads/2026/01/12251.mp4",
+      "/media/video/bbf-2026-recap.mp4",
+    )
     .replace(/href=(['"])https:\/\/bachataexplosion\.com\/(.*?)\1/gi, (match, quote, path) => (
       path.startsWith("wp-content/uploads/") ? match : `href=${quote}/${path}${quote}`
     ))

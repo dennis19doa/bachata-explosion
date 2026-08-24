@@ -93,19 +93,29 @@ const socialImage = new URL("/og.png", Astro.site);
           </div>
         </details>
       </nav>
-      <details class="mobile-nav">
+      <details class="mobile-nav" data-site-menu>
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
-        <nav aria-label="Mobile navigation">
-          <small>Explore Explosion</small>
-          <a href="/bbf-2026/">Berlin Bachata Festival <span>01</span></a>
-          <a href="/jj/">Jack &amp; Jill <span>02</span></a>
-          <a href="/role-rotation-2026/">Role Rotation <span>03</span></a>
-          <a href="/elite-dance-3/">Elite Dance #3 <span>04</span></a>
-          <a href="/explosion-history/">Explosion History <span>05</span></a>
-          <a href="/past-events/">Past Events & Photos <span>06</span></a>
-          <a href="/ambassadors/">Ambassadors <span>07</span></a>
-          <a href="/contact/">Contact & Volunteers <span>08</span></a>
-        </nav>
+        <div class="mobile-nav-panel">
+          <video class="mobile-nav-video" autoplay muted loop playsinline preload="metadata" poster="/media/motion/explosion-particles-poster.webp" aria-hidden="true">
+            <source src="/media/video/explosion-menu.mp4" type="video/mp4" />
+          </video>
+          <div class="mobile-nav-shade" aria-hidden="true"></div>
+          <nav aria-label="Mobile navigation">
+            <small>Choose your next Explosion</small>
+            <a href="/bbf-2026/">Berlin Bachata Festival <span>01</span></a>
+            <a href="/jj/">Jack &amp; Jill <span>02</span></a>
+            <a href="/role-rotation-2026/">Role Rotation <span>03</span></a>
+            <a href="/elite-dance-3/">Elite Dance #3 <span>04</span></a>
+            <a href="/explosion-history/">Explosion History <span>05</span></a>
+            <a href="/past-events/">Past Events & Photos <span>06</span></a>
+            <a href="/ambassadors/">Ambassadors <span>07</span></a>
+            <a href="/contact/">Contact & Volunteers <span>08</span></a>
+          </nav>
+          <div class="mobile-nav-meta">
+            <span>Berlin · by dancers, for dancers</span>
+            <a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a>
+          </div>
+        </div>
       </details>
       <a class="button button-small button-gold" href="/tickets/">Get tickets</a>
     </header>
@@ -129,5 +139,49 @@ const socialImage = new URL("/og.png", Astro.site);
       </div>
     </footer>
     <a class="mobile-ticket-dock" href="/tickets/"><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <script>
+      const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
+      const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
+      const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
+      const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
+
+      heroVideo?.play().catch(() => undefined);
+
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("toggle", () => {
+          if (!dropdown.open) return;
+          dropdowns.forEach((candidate) => {
+            if (candidate !== dropdown) candidate.open = false;
+          });
+        });
+        dropdown.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { dropdown.open = false; }));
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target as Node;
+        dropdowns.forEach((dropdown) => {
+          if (!dropdown.contains(target)) dropdown.open = false;
+        });
+      });
+
+      siteMenu?.addEventListener("toggle", () => {
+        document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open));
+        if (siteMenu.open) {
+          dropdowns.forEach((dropdown) => { dropdown.open = false; });
+          menuVideo?.play().catch(() => undefined);
+        } else {
+          menuVideo?.pause();
+        }
+      });
+      siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+        siteMenu.open = false;
+      }));
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        dropdowns.forEach((dropdown) => { dropdown.open = false; });
+        if (siteMenu) siteMenu.open = false;
+      });
+    </script>
   </body>
 </html>
