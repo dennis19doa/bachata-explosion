@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import { newsletterFormEndpoint } from "../lib/forms";
 
 interface Props {
   title?: string;
@@ -46,49 +45,73 @@ const socialImage = new URL("/og.png", Astro.site);
         <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="/festival/">Festival</a>
-        <a href="/#experience">Experience</a>
-        <a href="/archive/">Archive</a>
-        <a href="/contact/">Contact</a>
+        <a class="nav-home" href="/">Home</a>
+        <details class="nav-group">
+          <summary>Berlin Bachata Festival</summary>
+          <div class="nav-popover">
+            <span>BBF · October 16–18, 2026</span>
+            <a href="/bbf-2026/"><b>Festival overview</b><small>Venue, artists, program & passes</small></a>
+            <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules & registration</small></a>
+          </div>
+        </details>
+        <details class="nav-group">
+          <summary>Role Rotation</summary>
+          <div class="nav-popover">
+            <span>Switch roles · grow together</span>
+            <a href="/role-rotation-2026/"><b>Role Rotation overview</b><small>The concept, artists & next edition</small></a>
+            <a href="/role-rotation-2026-friday-ws/"><b>Friday workshop</b><small>2026 photo collection</small></a>
+            <a href="/role-rotation-2026-friday-party/"><b>Friday party</b><small>2026 photo collection</small></a>
+            <a href="/role-rotation-saturday-workshop/"><b>Saturday workshop</b><small>2026 photo collection</small></a>
+            <a href="/role-rotation-party-2026/"><b>Saturday party</b><small>2026 photo collection</small></a>
+            <a href="/role-rotation-sunday-2026/"><b>Sunday workshop &amp; social</b><small>2026 photo collection</small></a>
+          </div>
+        </details>
+        <details class="nav-group">
+          <summary>Elite Dance #3</summary>
+          <div class="nav-popover">
+            <span>Small room · high level</span>
+            <a href="/elite-dance-3/"><b>Elite Dance overview</b><small>Workshops, artists & party</small></a>
+            <a href="/elite-dance-workshop-photos/"><b>Workshop photos</b><small>Elite Dance #3 collection</small></a>
+            <a href="/elite/"><b>Party photos</b><small>Elite Dance #3 collection</small></a>
+          </div>
+        </details>
+        <details class="nav-group">
+          <summary>History</summary>
+          <div class="nav-popover">
+            <span>The Explosion since 2022</span>
+            <a href="/explosion-history/"><b>Explosion history</b><small>How the community was built</small></a>
+            <a href="/past-events/"><b>Past events</b><small>The complete original archive index</small></a>
+          </div>
+        </details>
+        <a href="/ambassadors/">Ambassadors</a>
+        <details class="nav-group">
+          <summary>Contact</summary>
+          <div class="nav-popover nav-popover-right">
+            <span>Talk to the team</span>
+            <a href="/contact/"><b>Contact</b><small>Questions, partnerships & support</small></a>
+            <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
+          </div>
+        </details>
       </nav>
       <details class="mobile-nav">
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <nav aria-label="Mobile navigation">
-          <a href="/festival/">Festival <span>01</span></a>
-          <a href="/#experience">Experience <span>02</span></a>
-          <a href="/archive/">Archive <span>03</span></a>
-          <a href="/contact/">Contact <span>04</span></a>
+          <small>Explore Explosion</small>
+          <a href="/bbf-2026/">Berlin Bachata Festival <span>01</span></a>
+          <a href="/jj/">Jack &amp; Jill <span>02</span></a>
+          <a href="/role-rotation-2026/">Role Rotation <span>03</span></a>
+          <a href="/elite-dance-3/">Elite Dance #3 <span>04</span></a>
+          <a href="/explosion-history/">Explosion History <span>05</span></a>
+          <a href="/past-events/">Past Events & Photos <span>06</span></a>
+          <a href="/ambassadors/">Ambassadors <span>07</span></a>
+          <a href="/contact/">Contact & Volunteers <span>08</span></a>
         </nav>
       </details>
-      <a class="button button-small button-gold" href="/festival/#tickets">Get tickets</a>
+      <a class="button button-small button-gold" href="/tickets/">Get tickets</a>
     </header>
     <main id="main">
       <slot />
     </main>
-    <section class="newsletter" aria-labelledby="newsletter-title">
-      <div class="newsletter-inner shell">
-        <div>
-          <p class="section-label">Explosion insider</p>
-          <h2 id="newsletter-title">Presales, artist drops<br />& dancer perks.</h2>
-        </div>
-        <form
-          class="newsletter-form"
-          action={newsletterFormEndpoint || undefined}
-          method="post"
-          data-endpoint-form
-          data-preview-message="The newsletter form is designed and ready. We’ll connect double opt-in after the provider and subscriber migration are approved."
-          data-success-message="Almost there—please check your inbox to confirm your subscription."
-        >
-          <input type="hidden" name="formType" value="newsletter" />
-          <label><span>First name</span><input type="text" name="firstName" autocomplete="given-name" placeholder="Your first name" /></label>
-          <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></label>
-          <label class="honeypot" aria-hidden="true"><span>Website</span><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-          <label class="consent"><input type="checkbox" required /> <span>I accept the <a href="https://bachataexplosion.com/privacy/">privacy policy</a>.</span></label>
-          <button class="button button-gold" type="submit">Join the list</button>
-          <p class="form-status" role="status"></p>
-        </form>
-      </div>
-    </section>
     <footer class="site-footer">
       <div class="shell footer-grid">
         <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
@@ -105,38 +128,6 @@ const socialImage = new URL("/og.png", Astro.site);
         </address>
       </div>
     </footer>
-    <a class="mobile-ticket-dock" href="/festival/#tickets"><span>BBF 2026</span><strong>Get tickets →</strong></a>
-    <script>
-      document.querySelectorAll<HTMLFormElement>("[data-endpoint-form]").forEach((form) => {
-        form.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const status = form.querySelector<HTMLElement>(".form-status");
-          const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
-          const endpoint = form.getAttribute("action");
-
-          if (!endpoint) {
-            if (status) status.textContent = form.dataset.previewMessage ?? "This form is ready to connect before launch.";
-            return;
-          }
-
-          if (button) button.disabled = true;
-          if (status) status.textContent = "Sending…";
-          try {
-            const response = await fetch(endpoint, {
-              method: "POST",
-              body: new FormData(form),
-              headers: { Accept: "application/json" },
-            });
-            if (!response.ok) throw new Error("Submission failed");
-            form.reset();
-            if (status) status.textContent = form.dataset.successMessage ?? "Thank you—your message has been sent.";
-          } catch {
-            if (status) status.textContent = "That did not go through. Please email info@bachataexplosion.com instead.";
-          } finally {
-            if (button) button.disabled = false;
-          }
-        });
-      });
-    </script>
+    <a class="mobile-ticket-dock" href="/tickets/"><span>BBF 2026</span><strong>Get tickets →</strong></a>
   </body>
 </html>

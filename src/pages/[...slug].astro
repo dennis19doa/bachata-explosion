@@ -1,0 +1,31 @@
+---
+import WordPressSourcePage from "../components/WordPressSourcePage.astro";
+import { wordpressPages, type WordPressPage } from "../lib/wordpressContent";
+
+export function getStaticPaths() {
+  const ownedRoutes = new Set([
+    "home",
+    "ambassadors",
+    "archive",
+    "contact",
+    "elite-dance-3",
+    "festival",
+    "history",
+    "imprint",
+    "jack-and-jill",
+    "role-rotation",
+    "volunteers",
+  ]);
+  return wordpressPages
+    .filter((page) => !ownedRoutes.has(page.slug))
+    .map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+interface Props {
+  page: WordPressPage;
+}
+
+const { page } = Astro.props;
+---
+
+<WordPressSourcePage page={page} label="Preserved original page" />

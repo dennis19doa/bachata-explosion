@@ -5,6 +5,9 @@ export type ArchiveEvent = {
   category: "Festival" | "Role Rotation" | "Special Edition";
   cover: string;
   legacyUrl: string;
+  summary?: string;
+  photographer?: string;
+  albumGroups?: string[];
 };
 
 export const archiveEvents: ArchiveEvent[] = [
@@ -15,6 +18,9 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Role Rotation",
     cover: "/media/archive/role-rotation-2026.jpg",
     legacyUrl: "https://bachataexplosion.com/role-rotation-2026/",
+    summary: "A weekend built around curiosity, empathy and the freedom to understand bachata from both sides of the connection.",
+    photographer: "Bachata Explosion media team",
+    albumGroups: ["All moments", "Friday workshop", "Friday party", "Saturday workshop", "Saturday party", "Sunday social"],
   },
   {
     slug: "elite-dance-3",

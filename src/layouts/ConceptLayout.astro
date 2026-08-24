@@ -1,0 +1,91 @@
+---
+import "../styles/concepts.css";
+
+interface Props {
+  title: string;
+  description: string;
+  concept: "after-dark" | "magazine";
+}
+
+const { title, description, concept } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL("/og.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-concept={concept}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content={concept === "after-dark" ? "#080405" : "#e9e2d4"} />
+    <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="concept-skip" href="#concept-main">Skip to content</a>
+    <aside class="concept-review" aria-label="Concept preview switcher">
+      <p><strong>Design review</strong><span>Baseline content remains unchanged</span></p>
+      <nav aria-label="Concept choices">
+        <a class:list={[concept === "after-dark" && "is-current"]} href="/concepts/explosion-after-dark/">A · After Dark</a>
+        <a class:list={[concept === "magazine" && "is-current"]} href="/concepts/berlin-festival-magazine/">B · Festival Magazine</a>
+        <a href="/">Original baseline</a>
+      </nav>
+    </aside>
+    <header class="concept-header">
+      <a class="concept-brand" href="/" aria-label="Bachata Explosion home">
+        <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion — by dancers, for dancers" width="2407" height="1274" />
+      </a>
+      <nav class="concept-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/bbf-2026/">Berlin Bachata Festival</a>
+        <a href="/role-rotation-2026/">Role Rotation</a>
+        <a href="/elite-dance-3/">Elite Dance #3</a>
+        <a href="/past-events/">History</a>
+        <a href="/ambassadors/">Ambassadors</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <details class="concept-mobile-nav">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="/bbf-2026/">Berlin Bachata Festival</a>
+          <a href="/role-rotation-2026/">Role Rotation</a>
+          <a href="/elite-dance-3/">Elite Dance #3</a>
+          <a href="/explosion-history/">Explosion History</a>
+          <a href="/past-events/">Past Events &amp; Photos</a>
+          <a href="/ambassadors/">Ambassadors</a>
+          <a href="/contact/">Contact &amp; Volunteers</a>
+        </nav>
+      </details>
+      <a class="concept-ticket" href="/tickets/">Get tickets</a>
+    </header>
+    <main id="concept-main"><slot /></main>
+    <footer class="concept-footer">
+      <div>
+        <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="2407" height="1274" />
+        <p>Berlin · Since 2022<br />By dancers, for dancers.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/explosion-history/">Explosion History</a>
+        <a href="/past-events/">Past Events</a>
+        <a href="/volunteers/">Volunteers</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <address>
+        Elena &amp; Dennis Events UG<br />
+        <a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a>
+      </address>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  decodeWordPressText,
+  getWordPressDescription,
+  prepareWordPressHtml,
+  type WordPressPage,
+} from "../lib/wordpressContent";
+
+interface Props {
+  page: WordPressPage;
+  home?: boolean;
+  label?: string;
+}
+
+const { page, home = false, label = "Original Bachata Explosion page" } = Astro.props;
+const title = decodeWordPressText(page.title.rendered);
+const content = prepareWordPressHtml(page.content.rendered);
+const sourceHasHeading = /<h1\b/i.test(page.content.rendered);
+---
+
+<BaseLayout
+  title={home ? "Bachata Explosion — By dancers, for dancers" : `${title} | Bachata Explosion`}
+  description={getWordPressDescription(page)}
+  headerStyle="solid"
+>
+  <article class:list={["wp-preserved-page", home && "wp-preserved-home"]} data-wordpress-source={page.slug}>
+    {home ? (
+      <h1 class="visually-hidden">Bachata Explosion</h1>
+    ) : (
+      <header class="wp-source-header">
+        <div class="shell">
+          <p class="eyebrow"><span></span>{label}</p>
+          {sourceHasHeading ? <p class="wp-source-display-title" set:html={page.title.rendered}></p> : <h1 set:html={page.title.rendered}></h1>}
+          <p>Content preserved from the current website · Updated {new Date(page.modified).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</p>
+        </div>
+      </header>
+    )}
+    <div class="wp-source-content" set:html={content}></div>
+  </article>
+  <script>
+    document.querySelectorAll<HTMLFormElement>(".wp-preserved-page form").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let status = form.querySelector<HTMLElement>(".migration-form-status");
+        if (!status) {
+          status = document.createElement("p");
+          status.className = "migration-form-status";
+          form.append(status);
+        }
+        status.textContent = "This is the preserved preview form. It will be connected to the new form provider before launch.";
+      });
+    });
+  </script>
+</BaseLayout>

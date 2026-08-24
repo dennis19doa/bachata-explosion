@@ -1,22 +1,7 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import WordPressSourcePage from "../components/WordPressSourcePage.astro";
+import { getWordPressPage } from "../lib/wordpressContent";
+const page = getWordPressPage("imprint");
 ---
 
-<BaseLayout title="Imprint | Bachata Explosion" description="Legal notice for bachataexplosion.com." headerStyle="solid">
-  <section class="legal-page page-hero">
-    <div class="shell legal-copy">
-      <p class="eyebrow"><span></span> Legal notice</p>
-      <h1>Imprint</h1>
-      <h2>Elena & Dennis Events UG (haftungsbeschränkt)</h2>
-      <dl>
-        <div><dt>Authorized representative</dt><dd>Dennis Boronowski (Geschäftsführer)</dd></div>
-        <div><dt>Address</dt><dd>C/O Dennis Boronowski<br />Holsteinische Straße 10<br />10717 Berlin, Germany</dd></div>
-        <div><dt>Email</dt><dd><a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a></dd></div>
-        <div><dt>Registration court</dt><dd>Berlin Charlottenburg · HRB 249808</dd></div>
-        <div><dt>VAT ID</dt><dd>DE359773974</dd></div>
-        <div><dt>Content responsibility</dt><dd>Responsible under § 55 Abs. 2 RStV: Dennis Boronowski</dd></div>
-      </dl>
-      <p class="legal-note">This information was preserved from the current public imprint. It should be checked once more before production launch.</p>
-    </div>
-  </section>
-</BaseLayout>
+<WordPressSourcePage page={page} label="Legal information" />

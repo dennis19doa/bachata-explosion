@@ -16,6 +16,15 @@ interface Props {
 
 const { event } = Astro.props;
 const manifestUrl = getArchiveManifestUrl(event.slug);
+const isAlbumPreview = event.slug === "role-rotation-2026";
+const previewPhotos = [
+  { src: "/media/archive/role-rotation-2026.jpg", alt: "Role Rotation 2026 group photo", className: "album-wide", label: "The whole room", group: "Sunday social" },
+  { src: "/media/atmosphere/party-crowd.webp", alt: "Dancers at a Bachata Explosion party", className: "album-tall", label: "Party energy", group: "Saturday party" },
+  { src: "/media/events/role-rotation-2026.webp", alt: "Role Rotation 2026 edition artwork", className: "album-poster", label: "Edition poster", group: "Friday workshop" },
+  { src: "/media/archive/role-rotation-2025.jpg", alt: "Role Rotation community memory", className: "album-square", label: "Across editions", group: "Saturday workshop" },
+  { src: "/media/atmosphere/explosion-community.jpg", alt: "Bachata Explosion community together", className: "album-square", label: "We are Explosion", group: "Friday party" },
+  { src: "/media/archive/role-rotation-2024.jpg", alt: "Earlier Role Rotation event memory", className: "album-wide", label: "Where it grew", group: "Sunday social" },
+];
 ---
 
 <BaseLayout
@@ -29,7 +38,8 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
         <a class="archive-breadcrumb" href="/archive/">← All collections</a>
         <p class="eyebrow"><span></span>{event.category} · {event.year}</p>
         <h1>{event.title}<br /><em>{event.year}</em></h1>
-        <p class="hero-lead">A community photo collection from the Bachata Explosion archive. The gallery stays part of this website while its full-size photo library lives on our own server.</p>
+        <p class="hero-lead">{event.summary ?? "A community photo collection from the Bachata Explosion archive. The gallery stays part of this website while its full-size photo library lives on our own server."}</p>
+        {event.albumGroups && <p class="album-credit">Photographs · {event.photographer}</p>}
       </div>
       <figure class="archive-cover">
         <img src={event.cover} alt={`${event.title} ${event.year} collection cover`} width="900" height="1100" />
@@ -58,7 +68,16 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
         data-media-origin={archiveMediaOrigin}
         aria-live="polite"
       >
-        <div class="gallery-message" data-gallery-message>
+        {event.albumGroups && <nav class="album-tabs" aria-label="Album sections">{event.albumGroups.map((group, index) => <button class:list={[index === 0 && "active"]} type="button" data-album-group={group}>{group}</button>)}</nav>}
+        {isAlbumPreview && (
+          <div class="album-preview" data-album-preview>
+            <div class="album-preview-note"><span>Album layout preview</span><p>Representative images already verified in the local build. The complete event set will replace these automatically after the NAS publishing folder is connected.</p></div>
+            <div class="album-mosaic">
+              {previewPhotos.map((photo, index) => <figure class={photo.className} data-album-item-group={photo.group}><button type="button" aria-label={`Open image ${index + 1}: ${photo.label}`}><img src={photo.src} alt={photo.alt} loading="lazy" /></button><figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.label}</figcaption></figure>)}
+            </div>
+          </div>
+        )}
+        <div class="gallery-message" data-gallery-message hidden={isAlbumPreview}>
           {manifestUrl ? "Connecting to this collection…" : "The page is ready. Connect the UGREEN NAS and add this event’s manifest to populate the gallery."}
         </div>
         <div class="nas-gallery-grid" data-gallery-grid></div>
@@ -92,6 +111,14 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
     const grid = gallery?.querySelector<HTMLElement>("[data-gallery-grid]");
     const manifestUrl = gallery?.dataset.manifestUrl ?? "";
     const mediaOrigin = gallery?.dataset.mediaOrigin ?? "";
+
+    const albumButtons = document.querySelectorAll<HTMLButtonElement>("[data-album-group]");
+    const previewItems = document.querySelectorAll<HTMLElement>("[data-album-item-group]");
+    albumButtons.forEach((button) => button.addEventListener("click", () => {
+      const group = button.dataset.albumGroup ?? "All moments";
+      albumButtons.forEach((candidate) => candidate.classList.toggle("active", candidate === button));
+      previewItems.forEach((item) => { item.hidden = group !== "All moments" && item.dataset.albumItemGroup !== group; });
+    }));
 
     function mediaUrl(path: string) {
       if (!mediaOrigin) throw new Error("Archive media origin is not configured");

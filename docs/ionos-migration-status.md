@@ -62,4 +62,4 @@ The public website will keep lightweight archive pages and event covers. Full ga
 
 This keeps normal pages and ticket links fast even when the NAS is unavailable. An album page will show a clear temporary-unavailable state rather than breaking the rest of the website.
 
-The static replacement site currently builds 22 pages, including 16 event archive routes, and its automated site audit passes. Internet-facing NAS gallery serving is deliberately not enabled yet; the verified files are private migration/recovery data, not a public web root.
+The static replacement now preserves all 85 exported public WordPress pages and builds 108 static routes. Its automated site audit and WordPress content-parity audit pass, including preservation of 12,061 public-page media references. Internet-facing NAS gallery serving is deliberately not enabled yet; the verified files are private migration/recovery data, not a public web root.

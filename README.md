@@ -10,9 +10,11 @@ This repository contains the working preview—not the current production websit
 
 The current build includes:
 
-- a redesigned homepage focused on Berlin Bachata Festival 2026
+- a preservation-first homepage focused on Berlin Bachata Festival 2026 and the three Explosion event families
+- a detailed menu modeled on the original WordPress structure
 - festival information, passes, schedule structure, FAQ, venue and competition sections
-- a filterable archive covering 16 event collections from 2022–2026
+- dedicated Jack & Jill, Role Rotation, Elite Dance, history, ambassador and volunteer pages
+- a chronological, filterable archive covering 16 event collections from 2022–2026
 - an internal detail route for every archived event
 - a gallery loader prepared for a UGREEN NAS media source
 - graceful gallery fallback when the NAS is offline or not connected
@@ -25,6 +27,12 @@ The current build includes:
 
 - `/` — homepage
 - `/festival/` — Berlin Bachata Festival 2026
+- `/jack-and-jill/` — competition format, flow and registration information
+- `/role-rotation/` — Role Rotation concept and current-edition gateway
+- `/elite-dance-3/` — focused edition overview and photo chapters
+- `/history/` — the ten-chapter Explosion story and event timeline
+- `/ambassadors/` — ambassador program overview
+- `/volunteers/` — volunteer roles and contact route
 - `/archive/` — complete event archive index
 - `/archive/{event}/` — individual collection pages
 - `/contact/` — contact form preview

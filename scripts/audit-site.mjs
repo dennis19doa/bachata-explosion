@@ -21,11 +21,14 @@ function routeFile(pathname) {
 
 for (const file of walk(rootPath).filter((path) => path.endsWith(".html"))) {
   const html = readFileSync(file, "utf8");
+  const visibleHtml = html
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "");
   const label = relative(rootPath, file);
   if (!/<title>[^<]+<\/title>/.test(html)) errors.push(`${label}: missing title`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
   if (!/<meta property="og:image" content="[^"]+"/.test(html)) errors.push(`${label}: missing social image`);
-  if ((html.match(/<h1\b/g) ?? []).length !== 1) errors.push(`${label}: expected exactly one h1`);
+  if ((visibleHtml.match(/<h1\b/g) ?? []).length !== 1) errors.push(`${label}: expected exactly one h1`);
 
   for (const [, src] of html.matchAll(/\b(?:src|href)="(\/[^"]+)"/g)) {
     if (src.startsWith("//")) continue;

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { archiveEvents } from "../data/archive";
 const years = ["All", "2026", "2025", "2024", "2023", "2022"];
+const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, events: archiveEvents.filter((event) => event.year === year) }));
 ---
 
 <BaseLayout title="Event Archive | Bachata Explosion" description="Browse Bachata Explosion event photos from Berlin and Hamburg, from 2022 to today." headerStyle="solid">
@@ -20,26 +21,34 @@ const years = ["All", "2026", "2025", "2024", "2023", "2022"];
         {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
       </div>
       <p class="migration-note">Local build: the branded event pages now stay inside Bachata Explosion. Their full photo sets will load from the UGREEN NAS after the first album export and secure media connection are ready.</p>
-      <div class="archive-grid">
-        {archiveEvents.map((event) => (
-          <article class="library-card" data-event-year={event.year}>
-            <a href={`/archive/${event.slug}/`} aria-label={`Open ${event.title} ${event.year} photos`}>
-              <img src={event.cover} alt={`${event.title} ${event.year} dancers`} width="900" height="1100" loading="lazy" />
-              <div class="library-overlay"><span>{event.category}</span><b>View collection →</b></div>
-            </a>
-            <p>{event.year}</p><h2>{event.title}</h2>
-          </article>
+      <div class="archive-years">
+        {archiveYears.map((group) => (
+          <section class="archive-year" data-year-group={group.year}>
+            <header><span>{group.year}</span><p>{group.events.length} {group.events.length === 1 ? "collection" : "collections"}</p></header>
+            <div class="archive-year-events">
+              {group.events.map((event, index) => (
+                <article class="library-card" data-event-year={event.year}>
+                  <a href={`/archive/${event.slug}/`} aria-label={`Open ${event.title} ${event.year} photos`}>
+                    <img src={event.cover} alt={`${event.title} ${event.year} dancers`} width="900" height="1100" loading="lazy" />
+                    <span class="album-number">Album {String(index + 1).padStart(2, "0")}</span>
+                    <div class="library-overlay"><span>{event.category}</span><b>View collection →</b></div>
+                  </a>
+                  <p>{event.year}</p><h2>{event.title}</h2>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>
   </section>
   <script>
     const buttons = document.querySelectorAll("[data-year]");
-    const cards = document.querySelectorAll("[data-event-year]");
+    const groups = document.querySelectorAll("[data-year-group]");
     buttons.forEach((button) => button.addEventListener("click", () => {
       const year = button.getAttribute("data-year");
       buttons.forEach((candidate) => candidate.classList.toggle("active", candidate === button));
-      cards.forEach((card) => { card.hidden = year !== "All" && card.getAttribute("data-event-year") !== year; });
+      groups.forEach((group) => { group.hidden = year !== "All" && group.getAttribute("data-year-group") !== year; });
     }));
   </script>
 </BaseLayout>

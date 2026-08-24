@@ -1,0 +1,111 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+---
+
+<ConceptLayout
+  concept="after-dark"
+  title="Concept A — Explosion After Dark | Bachata Explosion"
+  description="A motion-led editorial concept for Bachata Explosion using the recovered original brand assets and preserved event content."
+>
+  <section class="dark-hero">
+    <video
+      class="dark-hero-motion"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/media/motion/explosion-particles-poster.webp"
+      aria-hidden="true"
+    >
+      <source src="/media/motion/explosion-particles.mp4" type="video/mp4" />
+    </video>
+    <div class="dark-hero-shade"></div>
+    <div class="dark-hero-grid concept-shell">
+      <div class="dark-hero-copy">
+        <p class="concept-kicker"><span>Next Explosion</span> 04th edition · Berlin</p>
+        <h1>Berlin<br /><em>Bachata</em><br />Festival</h1>
+        <p class="dark-hero-lead">Three days of international artists, workshops, shows, competitions and late-night social dancing—built by dancers, for dancers.</p>
+        <div class="dark-hero-actions">
+          <a class="dark-primary" href="/tickets/">Get BBF tickets <span>→</span></a>
+          <a class="dark-link" href="/bbf-2026/">Explore the full festival</a>
+        </div>
+        <dl class="dark-facts">
+          <div><dt>Date</dt><dd>16–18 October 2026</dd></div>
+          <div><dt>Place</dt><dd>MOA Berlin</dd></div>
+          <div><dt>Floor</dt><dd>1,200 m²</dd></div>
+        </dl>
+      </div>
+      <a class="dark-poster" href="/bbf-2026/" aria-label="Open Berlin Bachata Festival 2026">
+        <span>Official 2026 artwork</span>
+        <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 poster" width="2048" height="2560" />
+        <b>Festival file 04 / 2026</b>
+      </a>
+    </div>
+    <p class="dark-scroll">Scroll into the Explosion <span>↓</span></p>
+  </section>
+
+  <section class="dark-signal" aria-label="Festival highlights">
+    <p>International lineup</p><p>Workshops &amp; socials</p><p>Shows &amp; competitions</p><p>Berlin destination weekend</p>
+  </section>
+
+  <section class="dark-events concept-pad">
+    <div class="concept-shell">
+      <header class="dark-heading">
+        <div><p class="concept-kicker">Choose your Explosion</p><h2>Three formats.<br /><em>One family.</em></h2></div>
+        <p>Bachata Explosion is not one generic weekend. Each edition has its own energy, while the standards for teaching, connection and social dancing stay unmistakably ours.</p>
+      </header>
+      <div class="dark-event-grid">
+        <a class="dark-event dark-event-bbf" href="/bbf-2026/">
+          <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026" width="2048" height="2560" />
+          <span>01 · The flagship</span>
+          <div><p>16–18 October 2026 · MOA Berlin</p><h3>Berlin Bachata Festival</h3><b>International artists · Big-floor nights →</b></div>
+        </a>
+        <a class="dark-event dark-event-role" href="/role-rotation-2026/">
+          <img src="/media/events/role-rotation-2026.webp" alt="Role Rotation 2026" width="1200" height="1500" />
+          <span>02 · Switch perspective</span>
+          <div><p>Lead · Follow · Switch</p><h3>Role Rotation</h3><b>Connection from both sides →</b></div>
+        </a>
+        <a class="dark-event dark-event-elite" href="/elite-dance-3/">
+          <img src="/media/events/elite-dance-3.webp" alt="Elite Dance #3" width="1080" height="1350" />
+          <span>03 · Small room, high level</span>
+          <div><p>Focused Berlin edition</p><h3>Elite Dance #3</h3><b>Intimate · Premium · Community-first →</b></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-proof concept-pad">
+    <div class="concept-shell dark-proof-grid">
+      <div class="dark-proof-image">
+        <img src="/media/atmosphere/party-crowd.webp" alt="Bachata Explosion dancers on the social floor" width="1600" height="1067" />
+        <p><strong>Since 2022</strong><span>Berlin-built community</span></p>
+      </div>
+      <div class="dark-proof-copy">
+        <p class="concept-kicker">Why dancers return</p>
+        <h2>The feeling<br />after the <em>last song.</em></h2>
+        <p>From the first workshop to the final social, Explosion focuses on clear teaching, generous floors and the family feeling that makes international dancers feel at home in Berlin.</p>
+        <ol>
+          <li><b>01</b><span><strong>Real growth</strong>Technique-driven workshops with tools dancers can use.</span></li>
+          <li><b>02</b><span><strong>Real connection</strong>A community built around people, not only promotion.</span></li>
+          <li><b>03</b><span><strong>Real memories</strong>Every edition remains available in the Explosion archive.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-archive concept-pad">
+    <div class="concept-shell">
+      <header class="dark-heading dark-heading-archive">
+        <div><p class="concept-kicker">The Explosion archive</p><h2>Run it <em>back.</em></h2></div>
+        <p>Every edition stays part of the story. Browse workshops, parties and community moments by year, weekend and session.</p>
+      </header>
+      <div class="dark-archive-row">
+        <a href="/berlin-bachata-festival-2023/"><img src="/media/archive/bbf-2023.jpg" alt="Berlin Bachata Festival 2023" /><span>2023</span><h3>BBF · First chapter</h3></a>
+        <a href="/role-rotation-2025/"><img src="/media/archive/role-rotation-2025.jpg" alt="Role Rotation 2025" /><span>2025</span><h3>Role Rotation · Edition 02</h3></a>
+        <a href="/berlin-bachata-festival-2024/"><img src="/media/archive/bbf-2024.jpg" alt="Berlin Bachata Festival 2024" /><span>2024</span><h3>BBF · Growing bigger</h3></a>
+      </div>
+      <a class="dark-primary dark-archive-button" href="/past-events/">Open all past events <span>→</span></a>
+    </div>
+  </section>
+</ConceptLayout>
