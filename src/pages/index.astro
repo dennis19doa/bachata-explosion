@@ -6,7 +6,6 @@ import { ticketUrl } from "../data/festival";
 const featuredEvents = [
   {
     id: "bbf",
-    number: "01",
     eyebrow: "The flagship · October 16–18, 2026",
     title: "Berlin Bachata Festival",
     image: "/media/events/bbf-2026-poster.jpg",
@@ -16,7 +15,6 @@ const featuredEvents = [
   },
   {
     id: "rotation",
-    number: "02",
     eyebrow: "Switch roles · deepen connection",
     title: "Role Rotation",
     image: "/media/events/role-rotation-2026.webp",
@@ -26,7 +24,6 @@ const featuredEvents = [
   },
   {
     id: "elite",
-    number: "03",
     eyebrow: "Small room · high level",
     title: "Elite Dance #3",
     image: "/media/events/elite-dance-3.webp",
@@ -119,7 +116,7 @@ const team = [
             aria-controls={`event-${event.id}`}
             id={`event-tab-${event.id}`}
             data-event-tab={event.id}
-          ><span>{event.number}</span>{event.title}</button>
+          >{event.title}</button>
         ))}
       </div>
 
@@ -135,7 +132,7 @@ const team = [
           >
             <a class="event-panel-image" href={event.href}>
               <img src={event.image} alt={`${event.title} event artwork`} width="1080" height="1350" loading={index === 0 ? "eager" : "lazy"} />
-              <span>{event.number} / Explosion format</span>
+              <span>Explosion format</span>
             </a>
             <div class="event-panel-copy">
               <p>{event.eyebrow}</p>
@@ -152,7 +149,7 @@ const team = [
   <section class="home-feeling section-pad">
     <div class="shell home-feeling-grid">
       <figure>
-        <img src="/media/atmosphere/party-friday-original.webp" alt="Bachata Explosion crowd dancing at a Berlin party" width="1200" height="800" loading="lazy" />
+        <img src="/media/bbf/atmosphere/party-141.jpg" alt="Bachata Explosion crowd dancing at a Berlin party" width="1200" height="800" loading="lazy" />
         <figcaption>Real people. Real connection. Berlin.</figcaption>
       </figure>
       <div>

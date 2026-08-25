@@ -1,0 +1,330 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { festivalFaqs, ticketUrl } from "../data/festival";
+
+const artists = [
+  ["Victor & Alba", "/media/bbf/artists/victor-alba.jpg"],
+  ["David & Laura", "/media/bbf/artists/david-laura.jpg"],
+  ["Diego & Ola", "/media/bbf/artists/diego-ola.jpg"],
+  ["Elena & Dennis", "/media/bbf/artists/elena-dennis.jpg"],
+  ["Emilien & Tehina", "/media/bbf/artists/emilien-tehina.jpg"],
+  ["Felipe & Tiago", "/media/bbf/artists/felipe-taigo.jpg"],
+  ["Liza & Chicho", "/media/bbf/artists/liza-chicho.jpg"],
+  ["Nick & Daniela", "/media/bbf/artists/nick-daniela.jpg"],
+  ["Ofir & Ofri", "/media/bbf/artists/ofir-ofri.jpg"],
+  ["Azu Records", "/media/bbf/artists/azu-records.jpg"],
+  ["Cesc", "/media/bbf/artists/cesc.jpg"],
+  ["Diego", "/media/bbf/artists/diego.jpg"],
+  ["DNA", "/media/bbf/artists/dna.jpg"],
+  ["Don Diego", "/media/bbf/artists/don-diego.jpg"],
+  ["Lee", "/media/bbf/artists/lee.jpg"],
+  ["Mahir", "/media/bbf/artists/mahir.jpg"],
+  ["Pakulat", "/media/bbf/artists/pakulat.jpg"],
+  ["Sebas", "/media/bbf/artists/sebas.jpg"],
+  ["DJ DennisS", "/media/bbf/artists/dj-denniss.jpg"],
+  ["DJ Molando", "/media/bbf/artists/dj-molando.jpg"],
+] as const;
+
+const venueStories = [
+  { kicker: "The room", title: "Modern architecture", text: "A 1,200 m² main floor with the scale for shows and the intimacy for connection.", image: "/media/bbf/venue/architecture.png" },
+  { kicker: "The arrival", title: "Easy to reach", text: "Central Berlin connections make arriving from the airport, station or city straightforward.", image: "/media/bbf/venue/arrival.png" },
+  { kicker: "The weekend", title: "Everything under one roof", text: "Workshops, parties, hotel rooms, food and recovery without losing time between locations.", image: "/media/bbf/venue/location.png" },
+  { kicker: "The comfort", title: "Premium facilities", text: "Purpose-built event spaces, lounges and hotel comfort designed for a full festival weekend.", image: "/media/bbf/venue/facilities.png" },
+] as const;
+
+const schedule = [
+  {
+    day: "Friday",
+    date: "16 October",
+    promise: "Arrive. Connect. Begin.",
+    items: [
+      ["Afternoon", "Festival check-in", "Collect your wristband, settle into the hotel and meet the community."],
+      ["Evening", "Opening workshops", "The first focused sessions set the tone for the weekend."],
+      ["Night", "Welcome party & competition", "Social dancing, opening rounds and the first night on the main floor."],
+    ],
+  },
+  {
+    day: "Saturday",
+    date: "17 October",
+    promise: "Learn. Perform. Explode.",
+    items: [
+      ["Daytime", "Full workshop programme", "International artists across levels, styles and musical approaches."],
+      ["Evening", "Shows & finals", "Festival performances and the decisive competition rounds."],
+      ["Late night", "The main Explosion party", "The biggest social night of the weekend, all under one roof."],
+    ],
+  },
+  {
+    day: "Sunday",
+    date: "18 October",
+    promise: "Deepen. Celebrate. Stay.",
+    items: [
+      ["Daytime", "Closing workshops", "Take the weekend's final ideas into your own dancing."],
+      ["Evening", "Social dancing", "A relaxed bridge from workshops into the final celebration."],
+      ["Night", "Closing party", "One last room, one last song, and the goodbye nobody wants to make."],
+    ],
+  },
+] as const;
+
+const expandedFaqs = [
+  ...festivalFaqs,
+  { question: "Is there a dress code?", answer: "There is no strict dress code. Choose something that feels expressive, comfortable and suitable for a long night of dancing. Theme details will be announced on Instagram." },
+  { question: "Are drinks and cloakroom facilities available?", answer: "Yes. The venue has bar service, cloakroom and changing facilities. The optional hotel drink flatrate is planned at €10 per day and is booked separately." },
+  { question: "How does Jack & Jill work?", answer: "Preliminary rounds are planned for Friday and finals for Saturday. Registration, divisions and final rules are published on the dedicated Jack & Jill page." },
+] as const;
+---
+
+<BaseLayout
+  title="Berlin Bachata Festival 2026 — Bachata Explosion"
+  description="Berlin Bachata Festival returns October 16–18, 2026 at MOA Berlin: international artists, workshops, shows, competitions and social dancing under one roof."
+>
+  <div class="bbf-premium" data-pointer-glow>
+    <section class="bbf-hero" aria-labelledby="bbf-title">
+      <video class="bbf-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" data-autoplay-video aria-hidden="true">
+        <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+      </video>
+      <div class="bbf-hero-wash" aria-hidden="true"></div>
+      <div class="bbf-orbit bbf-orbit-one" aria-hidden="true"></div>
+      <div class="bbf-orbit bbf-orbit-two" aria-hidden="true"></div>
+      <div class="shell bbf-hero-grid">
+        <div class="bbf-hero-copy" data-reveal>
+          <p class="bbf-meta"><span>16–18 October 2026</span><span>MOA Berlin</span></p>
+          <p class="eyebrow"><span></span>The flagship Explosion</p>
+          <h1 id="bbf-title">Berlin<br />Bachata<br /><em>Festival</em></h1>
+          <p class="bbf-hero-lead">Three days of world-class learning, electric nights and the warmth of a community built by dancers.</p>
+          <div class="hero-actions">
+            <a class="button button-gold" href={ticketUrl}>Secure your pass</a>
+            <a class="button button-glass" href="#artists">Meet the lineup</a>
+          </div>
+        </div>
+        <figure class="bbf-hero-poster" data-reveal>
+          <div class="bbf-poster-halo" aria-hidden="true"></div>
+          <img src="/media/events/bbf-2026-poster.jpg" alt="Complete Berlin Bachata Festival 2026 poster" width="1080" height="1350" />
+          <figcaption><span>Official artwork</span><b>Nothing cropped. Everything announced.</b></figcaption>
+        </figure>
+      </div>
+      <a class="bbf-scroll" href="#festival-at-a-glance">Enter the experience <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="bbf-stats" id="festival-at-a-glance" aria-label="Festival at a glance">
+      <div class="shell bbf-stats-grid">
+        <div data-reveal><strong data-count-to="3">0</strong><span>Festival days</span></div>
+        <div data-reveal><strong data-count-to="20" data-count-suffix="+">0</strong><span>International artists</span></div>
+        <div data-reveal><strong data-count-to="1200" data-count-suffix=" m²">0</strong><span>Main dance floor</span></div>
+        <div data-reveal><strong data-count-to="1">0</strong><span>Home for the weekend</span></div>
+      </div>
+    </section>
+
+    <section class="bbf-intro bbf-pad">
+      <div class="shell bbf-intro-grid">
+        <p class="section-label" data-reveal>Berlin · by dancers, for dancers</p>
+        <div data-reveal>
+          <h2>This is not just<br /><em>another festival.</em></h2>
+          <p>Explosion combines ambitious training and spectacular nights with the feeling of walking into a room where you already belong.</p>
+        </div>
+        <figure class="bbf-intro-image" data-reveal>
+          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="Dancers sharing a close moment at Bachata Explosion" width="1200" height="800" loading="lazy" />
+          <figcaption>Connection is the headline.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="bbf-venue bbf-pad" id="venue" aria-labelledby="venue-title">
+      <div class="shell">
+        <div class="bbf-heading" data-reveal>
+          <div><p class="section-label">Hotel, venue & experience</p><h2 id="venue-title">One roof.<br /><em>A whole world.</em></h2></div>
+          <p>MOA Berlin keeps the entire weekend connected: dance, rest, eat, meet and return to the floor without crossing the city.</p>
+        </div>
+
+        <div class="bbf-cinema" data-reveal>
+          <video autoplay muted loop playsinline controls preload="metadata" poster="/media/bbf/venue/hero.png" data-autoplay-video>
+            <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+            Your browser cannot play the festival video.
+          </video>
+          <div class="bbf-cinema-label"><span>Inside the Explosion</span><strong>Festival film · Berlin</strong></div>
+        </div>
+
+        <div class="bbf-venue-stories">
+          {venueStories.map((story, index) => (
+            <article class:list={["bbf-venue-card", index === 0 && "bbf-venue-card-wide"]} data-reveal>
+              <img src={story.image} alt={`${story.title} at MOA Berlin`} width="900" height="650" loading="lazy" />
+              <div><span>{story.kicker}</span><h3>{story.title}</h3><p>{story.text}</p></div>
+            </article>
+          ))}
+        </div>
+
+        <div class="bbf-hotel-strip" data-reveal>
+          <img src="/media/bbf/venue/hotel.png" alt="Mercure Hotel MOA Berlin room" width="900" height="650" loading="lazy" />
+          <div>
+            <p class="section-label">Sleep where you dance</p>
+            <h3>Festival hotel deal</h3>
+            <p><strong>Single room from €141 per night</strong>, including breakfast. An optional €10 per day drink flatrate keeps the practical details as easy as the dancing.</p>
+            <a class="text-link" href="/contact/">Ask about hotel booking <span>↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-artists bbf-pad" id="artists" aria-labelledby="artists-title">
+      <div class="bbf-artist-marquee" aria-hidden="true"><span>Artists · DJs · Teachers · Performers · Berlin Bachata Festival · </span><span>Artists · DJs · Teachers · Performers · Berlin Bachata Festival · </span></div>
+      <div class="shell">
+        <div class="bbf-heading" data-reveal>
+          <div><p class="section-label">The 2026 lineup</p><h2 id="artists-title">Learn from voices<br /><em>with something to say.</em></h2></div>
+          <p>A broad international lineup, presented through the original artwork instead of one repeated stock image.</p>
+        </div>
+        <div class="bbf-artist-rail" aria-label="Berlin Bachata Festival 2026 artists">
+          {artists.map(([name, image], index) => (
+            <article class="bbf-artist-card" data-reveal>
+              <img src={image} alt={`${name}, Berlin Bachata Festival 2026 artist`} width="800" height="1000" loading={index < 4 ? "eager" : "lazy"} />
+              <div><span>BBF 2026</span><h3>{name}</h3></div>
+            </article>
+          ))}
+        </div>
+        <p class="bbf-rail-note">Drag or swipe to explore the complete lineup →</p>
+      </div>
+    </section>
+
+    <section class="bbf-why bbf-pad">
+      <div class="shell bbf-why-grid">
+        <div class="bbf-why-copy" data-reveal>
+          <p class="section-label">Why dancers choose Explosion</p>
+          <h2>Big production.<br /><em>Human energy.</em></h2>
+          <p>We care about the details that dancers actually feel: progressive workshops, musical nights, fair competitions and a room where newcomers are welcomed.</p>
+          <a class="button button-gold" href={ticketUrl}>Join the weekend</a>
+        </div>
+        <div class="bbf-why-mosaic" data-reveal>
+          <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata performance at Bachata Explosion" width="900" height="1200" loading="lazy" />
+          <img src="/media/bbf/atmosphere/party-141.jpg" alt="Crowd enjoying Bachata Explosion" width="1200" height="800" loading="lazy" />
+          <blockquote>“A festival should feel spectacular on stage and personal on the floor.”<cite>Elena & Dennis</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-schedule bbf-pad" id="schedule" aria-labelledby="schedule-title">
+      <div class="shell">
+        <div class="bbf-heading" data-reveal>
+          <div><p class="section-label">Festival schedule</p><h2 id="schedule-title">Three distinct days.<br /><em>One flowing story.</em></h2></div>
+          <p>The final artist-by-artist timetable follows after room planning. This is the rhythm of the weekend.</p>
+        </div>
+        <div class="bbf-schedule-tabs" role="tablist" aria-label="Festival days">
+          {schedule.map((day, index) => (
+            <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} aria-controls={`schedule-${day.day.toLowerCase()}`} data-schedule-tab={day.day.toLowerCase()}>
+              <span>{day.date}</span><strong>{day.day}</strong>
+            </button>
+          ))}
+        </div>
+        <div class="bbf-schedule-panels">
+          {schedule.map((day, index) => (
+            <article class="bbf-schedule-panel" id={`schedule-${day.day.toLowerCase()}`} data-schedule-panel={day.day.toLowerCase()} hidden={index !== 0}>
+              <header><span>{day.date}</span><h3>{day.promise}</h3></header>
+              <ol>
+                {day.items.map(([time, title, text]) => (
+                  <li><span>{time}</span><div><h4>{title}</h4><p>{text}</p></div></li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-jj bbf-pad">
+      <div class="shell bbf-jj-card" data-reveal>
+        <div><p class="section-label">Saturday spotlight</p><h2>Jack & Jill.<br /><em>Unscripted chemistry.</em></h2></div>
+        <div><p>New partner. New song. One chance to show connection, musicality and presence. Preliminary rounds Friday, finals Saturday.</p><a class="button button-glass" href="/jj/">Competition details</a></div>
+      </div>
+    </section>
+
+    <section class="bbf-passes bbf-pad" id="passes" aria-labelledby="passes-title">
+      <div class="shell">
+        <div class="bbf-heading" data-reveal>
+          <div><p class="section-label">Choose your pass</p><h2 id="passes-title">Build your<br /><em>Explosion.</em></h2></div>
+          <p>Start with how you want to experience the weekend. Current phases and exact inclusions are always confirmed at checkout.</p>
+        </div>
+        <div class="bbf-pass-grid">
+          <article data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><a href={ticketUrl}>See current price ↗</a></article>
+          <article class="bbf-pass-featured" data-reveal><span>Maximum experience</span><h3>Gold Pass</h3><p>The premium route for dancers who want the most complete available festival package.</p><a href={ticketUrl}>Explore Gold ↗</a></article>
+          <article data-reveal><span>Nights only</span><h3>Party Pass</h3><p>Come for the social floors, shows and late-night Explosion atmosphere.</p><a href={ticketUrl}>See current price ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-faq bbf-pad" id="faq" aria-labelledby="faq-title">
+      <div class="shell bbf-faq-grid">
+        <div class="bbf-faq-intro" data-reveal><p class="section-label">Before you arrive</p><h2 id="faq-title">Questions,<br /><em>answered clearly.</em></h2><p>Still unsure? The team is one message away.</p><a class="text-link" href="/contact/">Contact the team <span>↗</span></a></div>
+        <div class="bbf-faq-list">
+          {expandedFaqs.map((faq, index) => (
+            <details data-reveal open={index === 0}>
+              <summary>{faq.question}<span aria-hidden="true"></span></summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-final">
+      <img src="/media/bbf/atmosphere/saturday-60.jpg" alt="Berlin Bachata Festival social dance floor" width="1800" height="1200" loading="lazy" />
+      <div class="bbf-final-shade" aria-hidden="true"></div>
+      <div class="shell" data-reveal><p class="section-label">16–18 October 2026 · Berlin</p><h2>The floor is waiting.</h2><p>Come for the dancing. Stay for the people.</p><a class="button button-gold" href={ticketUrl}>Secure your pass</a></div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll<HTMLVideoElement>("[data-autoplay-video]").forEach((video) => {
+      video.muted = true;
+      video.play().catch(() => undefined);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => revealObserver.observe(element));
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const element = entry.target as HTMLElement;
+        const target = Number(element.dataset.countTo ?? 0);
+        const suffix = element.dataset.countSuffix ?? "";
+        const start = performance.now();
+        const duration = 1500;
+        const tick = (now: number) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          element.textContent = `${Math.round(target * eased).toLocaleString("en-US")}${suffix}`;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        statObserver.unobserve(element);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll<HTMLElement>("[data-count-to]").forEach((element) => statObserver.observe(element));
+
+    const scheduleTabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-schedule-tab]"));
+    const schedulePanels = Array.from(document.querySelectorAll<HTMLElement>("[data-schedule-panel]"));
+    scheduleTabs.forEach((tab) => tab.addEventListener("click", () => {
+      const selected = tab.dataset.scheduleTab;
+      scheduleTabs.forEach((candidate) => candidate.setAttribute("aria-selected", String(candidate === tab)));
+      schedulePanels.forEach((panel) => { panel.hidden = panel.dataset.schedulePanel !== selected; });
+    }));
+
+    document.querySelectorAll<HTMLDetailsElement>(".bbf-faq-list details").forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        document.querySelectorAll<HTMLDetailsElement>(".bbf-faq-list details").forEach((candidate) => {
+          if (candidate !== item) candidate.open = false;
+        });
+      });
+    });
+
+    const glowSurface = document.querySelector<HTMLElement>("[data-pointer-glow]");
+    glowSurface?.addEventListener("pointermove", (event) => {
+      glowSurface.style.setProperty("--mx", `${event.clientX}px`);
+      glowSurface.style.setProperty("--my", `${event.clientY}px`);
+    });
+  </script>
+</BaseLayout>
