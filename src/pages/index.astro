@@ -3,36 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { archiveEvents } from "../data/archive";
 import { ticketUrl } from "../data/festival";
 
-const featuredEvents = [
-  {
-    id: "bbf",
-    eyebrow: "The flagship · October 16–18, 2026",
-    title: "Berlin Bachata Festival",
-    image: "/media/events/bbf-2026-poster.jpg",
-    href: "/bbf-2026/",
-    action: "Explore the festival",
-    facts: ["International lineup", "MOA Berlin", "Workshops, shows & socials"],
-  },
-  {
-    id: "rotation",
-    eyebrow: "Switch roles · deepen connection",
-    title: "Role Rotation",
-    image: "/media/events/role-rotation-2026.webp",
-    href: "/role-rotation-2026/",
-    action: "Enter Role Rotation",
-    facts: ["Lead, follow or switch", "Technique & musicality", "Community-first weekend"],
-  },
-  {
-    id: "elite",
-    eyebrow: "Small room · high level",
-    title: "Elite Dance #3",
-    image: "/media/events/elite-dance-3.webp",
-    href: "/elite-dance-3/",
-    action: "Discover Elite Dance",
-    facts: ["Curated experience", "Selected artists", "Premium social atmosphere"],
-  },
-];
-
 const team = [
   { name: "Dennis", role: "Owner · Founder", since: "Since 2021", image: "/media/team/dennis.jpg", bio: "Event vision, community growth and the details that make every Explosion ambitious and personal." },
   { name: "Elena", role: "Owner · Founder", since: "Since 2021", image: "/media/team/elena.jpg", bio: "Dancer experience, team culture and the warm atmosphere behind the Explosion community." },
@@ -48,10 +18,12 @@ const team = [
 
 <BaseLayout
   title="Bachata Explosion — Berlin Bachata events by dancers, for dancers"
-  description="Meet the next Bachata Explosion in Berlin: Berlin Bachata Festival, Role Rotation, Elite Dance and the complete event photo archive."
+  description="Meet the next Bachata Explosion in Berlin: Berlin Bachata Festival 2026 at Hotel MOA Berlin, plus the complete event history and photo archive."
 >
   <div data-wordpress-source="home">
   <section class="home-hero" aria-labelledby="home-hero-title">
+    <div class="home-hero-live-texture" aria-hidden="true"></div>
+    <div class="home-hero-word" aria-hidden="true">EXPLOSION</div>
     <video class="home-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-hidden="true">
       <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
     </video>
@@ -61,7 +33,7 @@ const team = [
         <p class="home-hero-meta"><span>October 16–18, 2026</span><span>MOA Berlin</span></p>
         <p class="eyebrow"><span></span>Next Explosion</p>
         <h1 id="home-hero-title">Berlin<br />Bachata<br /><em>Festival</em></h1>
-        <p class="home-hero-lead">Three days. One roof. A thousand reasons to stay for one more song.</p>
+        <p class="home-hero-lead">Berlin’s flagship bachata weekend: international artists, focused workshops, competitions and parties until sunrise.</p>
         <div class="hero-actions">
           <a class="button button-gold" href={ticketUrl}>Secure your pass</a>
           <a class="button button-glass" href="/bbf-2026/">Discover the festival</a>
@@ -85,21 +57,21 @@ const team = [
     <div class="shell home-stat-grid">
       <div><strong>Berlin</strong><span>Born here</span></div>
       <div><strong data-home-count="2020">0</strong><span>Since</span></div>
-      <div><strong data-home-count="20" data-home-suffix="+">0</strong><span>Editions</span></div>
-      <div><strong>Dancers</strong><span>For dancers</span></div>
+      <div><strong data-home-count="21">0</strong><span>Events created</span></div>
+      <div><strong>By dancers</strong><span>For dancers</span></div>
     </div>
   </section>
 
   <div class="home-impact-marquee" aria-hidden="true">
-    <span>Connection · Music · Berlin · One more song · </span>
-    <span>Connection · Music · Berlin · One more song · </span>
+    <span>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin · </span>
+    <span>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin · </span>
   </div>
 
   <section class="home-manifesto section-pad">
     <div class="shell home-manifesto-grid">
-      <p class="section-label">This is Bachata Explosion</p>
-      <h2>Come for the dancing.<br /><em>Stay for the people.</em></h2>
-      <p>Focused learning, unforgettable nights and a Berlin community that makes the room feel like home.</p>
+      <p class="section-label">21 events · one Berlin community</p>
+      <h2>Built in Berlin.<br /><em>Made to move you.</em></h2>
+      <p>We create dancer-led weekends with clear teaching, ambitious production and enough warmth to make every guest feel part of the room.</p>
     </div>
   </section>
 
@@ -107,48 +79,29 @@ const team = [
     <div class="shell">
       <div class="event-switcher-heading">
         <div>
-          <p class="section-label">Choose your experience</p>
-          <h2 id="event-switcher-title">Three ways<br /><em>to explode.</em></h2>
+          <p class="section-label">The next Explosion</p>
+          <h2 id="event-switcher-title">One weekend.<br /><em>The full experience.</em></h2>
         </div>
-        <p>Each edition has its own energy. Pick the room that feels right for you.</p>
+        <p>Role Rotation 2026 and Elite Dance #3 have moved into Past Events. The Berlin Bachata Festival is now the clear focus.</p>
       </div>
-
-      <div class="event-tabs" role="tablist" aria-label="Bachata Explosion event formats">
-        {featuredEvents.map((event, index) => (
-          <button
-            type="button"
-            role="tab"
-            aria-selected={index === 0 ? "true" : "false"}
-            aria-controls={`event-${event.id}`}
-            id={`event-tab-${event.id}`}
-            data-event-tab={event.id}
-          >{event.title}</button>
-        ))}
-      </div>
-
-      <div class="event-panels">
-        {featuredEvents.map((event, index) => (
-          <article
-            class="event-panel"
-            id={`event-${event.id}`}
-            role="tabpanel"
-            aria-labelledby={`event-tab-${event.id}`}
-            data-event-panel={event.id}
-            hidden={index !== 0}
-          >
-            <a class="event-panel-image" href={event.href}>
-              <img src={event.image} alt={`${event.title} event artwork`} width="1080" height="1350" loading={index === 0 ? "eager" : "lazy"} />
-              <span>Explosion format</span>
-            </a>
-            <div class="event-panel-copy">
-              <p>{event.eyebrow}</p>
-              <h3>{event.title}</h3>
-              <ul>{event.facts.map((fact) => <li>{fact}</li>)}</ul>
-              <a class="button button-gold" href={event.href}>{event.action}</a>
-            </div>
-          </article>
-        ))}
-      </div>
+      <article class="home-next-event">
+        <a class="home-next-poster" href="/bbf-2026/">
+          <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 event artwork" width="1080" height="1350" loading="lazy" />
+          <span>Official BBF 2026 artwork</span>
+        </a>
+        <div class="home-next-copy">
+          <p>October 16–18, 2026 · Hotel MOA Berlin</p>
+          <h3>Berlin<br />Bachata<br />Festival</h3>
+          <ul><li>International artist lineup</li><li>Workshops, parties & shows</li><li>Hotel and venue under one roof</li></ul>
+          <div class="home-next-actions"><a class="button button-gold" href="/bbf-2026/">Explore the festival</a><a class="button button-outline" href={ticketUrl}>Get tickets</a></div>
+        </div>
+        <div class="home-next-history">
+          <span>The latest chapters</span>
+          <a href="/archive/role-rotation-2026/"><b>Role Rotation 2026</b><small>Past event · photos & memories ↗</small></a>
+          <a href="/archive/elite-dance-3/"><b>Elite Dance #3</b><small>Past event · photos & memories ↗</small></a>
+          <div><a href="/archive/">Past events</a><a href="/explosion-history/">History</a></div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -246,16 +199,6 @@ const team = [
     };
     updateCountdown();
     window.setInterval(updateCountdown, 60_000);
-
-    const eventTabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-event-tab]"));
-    const eventPanels = Array.from(document.querySelectorAll<HTMLElement>("[data-event-panel]"));
-    eventTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const target = tab.dataset.eventTab;
-        eventTabs.forEach((candidate) => candidate.setAttribute("aria-selected", String(candidate === tab)));
-        eventPanels.forEach((panel) => { panel.hidden = panel.dataset.eventPanel !== target; });
-      });
-    });
 
     const homeStatObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

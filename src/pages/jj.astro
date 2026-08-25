@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ticketUrl } from "../data/festival";
+import { contactFormEndpoint } from "../lib/forms";
+
+const registrationConnected = Boolean(contactFormEndpoint);
+const competitionSteps = [
+  ["01", "Register", "Submit your details and a valid BBF 2026 Full Pass reference."],
+  ["02", "Enter the cypher", "Meet new partners, adapt quickly and show genuine social-dance quality."],
+  ["03", "Reach the rounds", "Timing, connection, technique and musicality decide who advances."],
+  ["04", "Own the final", "The last challenge is revealed on stage and the champions take the centre."],
+] as const;
+---
+
+<BaseLayout title="BBF 2026 Jack & Jill Competition | Bachata Explosion" description="Register for the Berlin Bachata Festival 2026 Jack & Jill: Saturday competition, cash prize, trophies, partner passes and a BBF 2027 teaching opportunity.">
+  <article class="jj-arena" data-wordpress-source="jj">
+    <section class="jj-hero" aria-labelledby="jj-title">
+      <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata dancers performing under the lights at Bachata Explosion" width="1800" height="1200" />
+      <div class="jj-hero-shade" aria-hidden="true"></div>
+      <div class="jj-hero-type" aria-hidden="true">J&J</div>
+      <div class="shell jj-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span>Berlin Bachata Festival 2026</p>
+          <h1 id="jj-title">Jack <em>&</em><br />Jill.</h1>
+          <p>Unknown partner. Unknown song. One Saturday stage built for connection, musicality and real social-dance quality.</p>
+          <div class="hero-actions"><a class="button button-gold" href="#registration">Register now</a><a class="button button-glass" href="#rulebook">Read the rules</a></div>
+        </div>
+        <aside class="jj-hero-prize">
+          <span>Champion package</span>
+          <strong>€100</strong>
+          <p>Cash prize · trophy · five partner-event Full Passes · BBF 2027 teaching opportunity</p>
+        </aside>
+      </div>
+      <div class="jj-fact-bar"><div><b>Saturday</b><span>Competition day</span></div><div><b>Social dance</b><span>Competition format</span></div><div><b>Full Pass</b><span>Required to enter</span></div><div><b>Registration</b><span>Open</span></div></div>
+    </section>
+
+    <section class="jj-flow section-pad" aria-labelledby="jj-flow-title">
+      <div class="shell">
+        <div class="jj-section-head"><div><p class="section-label">Your route to the final</p><h2 id="jj-flow-title">Enter the arena.<br /><em>Earn the centre.</em></h2></div><p>The competition story is simple and visible: register, survive the cypher, advance through the rounds and make the final yours.</p></div>
+        <ol class="jj-flow-grid">{competitionSteps.map(([number, title, text]) => <li><span>{number}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>
+      </div>
+    </section>
+
+    <section class="jj-prizes section-pad" aria-labelledby="jj-prizes-title">
+      <div class="shell">
+        <div class="jj-section-head"><div><p class="section-label">Official winner rewards</p><h2 id="jj-prizes-title">The podium<br /><em>has real weight.</em></h2></div><p>Every confirmed competitor receives a medal. The podium adds partner passes, and first place unlocks the complete champion package.</p></div>
+        <div class="jj-podium">
+          <article class="jj-place-second"><span>02</span><h3>Finalists</h3><strong>3 Full Passes</strong><p>Choose three passes from the final partner-event list.</p></article>
+          <article class="jj-place-first"><span>01 · Champions</span><h3>€100 + trophy</h3><strong>5 Full Passes</strong><p>€50 per winner, a trophy, five partner-event Full Passes and a BBF 2027 teaching opportunity.</p></article>
+          <article class="jj-place-third"><span>03</span><h3>Podium</h3><strong>2 Full Passes</strong><p>Choose two passes from the final partner-event list.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="jj-bracket section-pad" aria-labelledby="jj-bracket-title">
+      <div class="shell">
+        <div class="jj-section-head"><div><p class="section-label">Public competition board</p><h2 id="jj-bracket-title">Two sides.<br /><em>One final.</em></h2></div><p>Dancer names and results will replace the open slots when registration is confirmed.</p></div>
+        <div class="jj-bracket-board">
+          <div class="jj-bracket-side"><span>Cypher A</span><div>Heat 01 · dancers TBA</div><div>Heat 02 · dancers TBA</div><strong>First round A</strong></div>
+          <div class="jj-bracket-final"><span>Saturday final</span><strong>Champion</strong><p>Winner TBA</p></div>
+          <div class="jj-bracket-side"><span>Cypher B</span><div>Heat 03 · dancers TBA</div><div>Heat 04 · dancers TBA</div><strong>First round B</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jj-rules section-pad" id="rulebook" aria-labelledby="jj-rules-title">
+      <div class="shell jj-rules-grid">
+        <div><p class="section-label">Rulebook overview</p><h2 id="jj-rules-title">Clear rules.<br /><em>Real dancing.</em></h2><p>The official detailed rulebook remains the final authority. These are the essentials every competitor should understand before registering.</p></div>
+        <div class="jj-rule-list">
+          <details open><summary>Core rules <span>+</span></summary><ul><li>This is a social-dance competition.</li><li>A valid BBF 2026 Full Pass is required.</li><li>No acrobatics—solo or with a partner.</li><li>Show control, respect for the music and real partner connection.</li></ul></details>
+          <details><summary>Judging focus <span>+</span></summary><ol><li>Basic step, timing and hip movement</li><li>Posture, connection and technique</li><li>Musicality, creativity and entertainment</li></ol></details>
+          <details><summary>Music & rounds <span>+</span></summary><ul><li>A playlist of 100 possible songs is planned one week before the event.</li><li>Decisions are announced directly after each round.</li><li>The final includes a surprise challenge announced at the event.</li></ul></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="jj-register section-pad" id="registration" aria-labelledby="jj-register-title">
+      <div class="shell jj-register-grid">
+        <aside><p class="section-label">Competition sign-up</p><h2 id="jj-register-title">Put your name<br /><em>in the bracket.</em></h2><p>Your place is confirmed only after the team verifies your BBF 2026 Full Pass.</p><a class="text-link" href={ticketUrl}>Need a Full Pass? Get tickets <span>↗</span></a></aside>
+        <form class="jj-register-form" method="POST" action={contactFormEndpoint || undefined} enctype="multipart/form-data" data-jj-form data-jj-endpoint={contactFormEndpoint}>
+          <input type="hidden" name="topic" value="BBF 2026 Jack & Jill registration" />
+          <label><span>Full name *</span><input type="text" name="full_name" autocomplete="name" required maxlength="140" /></label>
+          <label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label>
+          <label><span>WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="50" placeholder="Including country code" /></label>
+          <label><span>Full Pass code or purchase email *</span><input type="text" name="full_pass_reference" required maxlength="180" /></label>
+          <label class="jj-photo-field"><span>Competition photo *</span><input type="file" name="competition_photo" accept="image/jpeg,image/png,image/webp" required /></label>
+          <label class="jj-consent"><input type="checkbox" name="competition_rules" value="agreed" required /><span>I have read the rules and understand that a verified Full Pass is required.</span></label>
+          <button class="button button-dark" type="submit" data-jj-submit>Submit registration</button>
+          <p class="jj-form-status" role="status" aria-live="polite" data-jj-status>{registrationConnected ? "Ready when you are." : "Preview mode: registration delivery will be activated with the protected email endpoint."}</p>
+        </form>
+      </div>
+    </section>
+  </article>
+
+  <script>
+    const jjForm = document.querySelector<HTMLFormElement>("[data-jj-form]");
+    const jjStatus = jjForm?.querySelector<HTMLElement>("[data-jj-status]");
+    const jjSubmit = jjForm?.querySelector<HTMLButtonElement>("[data-jj-submit]");
+    jjForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const endpoint = jjForm.dataset.jjEndpoint?.trim();
+      if (!endpoint) { if (jjStatus) jjStatus.textContent = "Registration is designed and ready, but delivery is still in preview mode until the protected email endpoint is connected."; return; }
+      if (jjSubmit) { jjSubmit.disabled = true; jjSubmit.textContent = "Sending…"; }
+      try {
+        const response = await fetch(endpoint, { method: "POST", body: new FormData(jjForm), headers: { Accept: "application/json" } });
+        if (!response.ok) throw new Error("Registration failed");
+        jjForm.reset();
+        if (jjStatus) jjStatus.textContent = "Registration received. The team will verify your Full Pass and contact you.";
+      } catch { if (jjStatus) jjStatus.textContent = "Registration could not be delivered. Please try again or email info@bachataexplosion.com."; }
+      finally { if (jjSubmit) { jjSubmit.disabled = false; jjSubmit.textContent = "Submit registration"; } }
+    });
+  </script>
+</BaseLayout>

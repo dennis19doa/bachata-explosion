@@ -10,7 +10,7 @@ const sourceMedia = new Set();
 const builtMedia = new Set();
 const builtOutput = [];
 const mediaReplacements = new Map([
-  ["https://bachataexplosion.com/wp-content/uploads/2026/03/November-Event-2.webp", "/media/events/elite-dance-3.webp"],
+  ["https://bachataexplosion.com/wp-content/uploads/2026/03/November-Event-2.webp", "/media/archive/elite-dance-3.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/08/2022.07.21-22-16-IMG_1671-Rating_-2-scaled-1.jpg", "/media/team/dennis.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/08/DSC_3803-scaled-1.jpg", "/media/team/elena.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/08/IMG_9272-scaled-1.jpg", "/media/team/laura.jpg"],
@@ -26,13 +26,13 @@ const mediaReplacements = new Map([
   ["https://bachataexplosion.com/wp-content/uploads/2025/08/DSC_0143b-scaled.jpg", "/media/bbf/atmosphere/saturday-62.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/08/DSC_2849a.jpg", "/media/bbf/atmosphere/party-143.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-172057.png", "/media/bbf/venue/architecture.png"],
-  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171752.png", "/media/bbf/venue/arrival.png"],
+  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171752.png", "/media/bbf/venue/location.png"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171539.png", "/media/bbf/venue/location.png"],
-  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171413.png", "/media/bbf/venue/facilities.png"],
+  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171413.png", "/media/bbf/venue/architecture.png"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171926.png", "/media/bbf/venue/hotel.png"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171858.png", "/media/bbf/venue/hero.png"],
-  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-165417.png", "/media/bbf/venue/connectivity.png"],
-  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171955.png", "/media/bbf/venue/lounge.png"],
+  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-165417.png", "/media/bbf/venue/location.png"],
+  ["https://bachataexplosion.com/wp-content/uploads/2025/12/Screenshot-2025-12-25-171955.png", "/media/bbf/venue/hotel.png"],
   ["https://bachataexplosion.com/wp-content/uploads/2026/04/Party-143.jpg", "/media/bbf/atmosphere/party-143.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/4-5-BBF-2026-Instagram-Victor-Alba-scaled.jpg", "/media/bbf/artists/victor-alba.jpg"],
   ["https://bachataexplosion.com/wp-content/uploads/2025/12/4-5-BBF-2026-Instagram-Azu-Records-scaled.jpg", "/media/bbf/artists/azu-records.jpg"],
