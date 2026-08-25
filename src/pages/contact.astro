@@ -17,7 +17,7 @@ const formConnected = Boolean(contactFormEndpoint);
 
 <BaseLayout
   title="Contact Bachata Explosion — tickets, groups, partners and media"
-  description="Send the Bachata Explosion team a ticket, group, partnership, media, volunteer or general question."
+  description="Contact the Bachata Explosion team about tickets, groups, partnerships, media, volunteering or a general question."
   headerStyle="solid"
 >
   <article class="contact-2026" data-wordpress-source="contact">
@@ -26,10 +26,10 @@ const formConnected = Boolean(contactFormEndpoint);
       <div class="shell contact-hero-grid">
         <div>
           <p class="eyebrow"><span></span>Talk to the Explosion team</p>
-          <h1 id="contact-title">Send the<br /><em>right signal.</em></h1>
+          <h1 id="contact-title">Tell us<br /><em>what you need.</em></h1>
         </div>
         <div class="contact-hero-copy">
-          <p>Choose what you need. We attach the right topic to your message so it reaches the team with context—not as another anonymous form submission.</p>
+          <p>Choose a topic and tell us what happened. Your message will arrive with the event and details we need to answer you properly.</p>
           <a class="contact-direct" href="mailto:info@bachataexplosion.com">
             <span>Prefer your email app?</span>
             <strong>info@bachataexplosion.com ↗</strong>
@@ -41,7 +41,7 @@ const formConnected = Boolean(contactFormEndpoint);
     <section class="contact-routing section-pad" aria-labelledby="contact-routing-title">
       <div class="shell">
         <div class="contact-section-heading">
-          <div><p class="section-label">Step 01 · Route the message</p><h2 id="contact-routing-title">What can we<br /><em>help with?</em></h2></div>
+          <div><p class="section-label">Step 01 · Choose a topic</p><h2 id="contact-routing-title">What can we<br /><em>help with?</em></h2></div>
           <p>One public inbox for now. Clear topic labels keep tickets, partnerships and media questions easy to separate.</p>
         </div>
         <div class="contact-route-grid">
@@ -116,7 +116,7 @@ const formConnected = Boolean(contactFormEndpoint);
             <span>I agree that my details may be used to answer this request. See the <a href="/privacy/">privacy policy</a>.</span>
           </label>
           <div class="contact-form-action full-field">
-            <button class="button button-gold" type="submit" data-submit-label>Send the signal</button>
+            <button class="button button-gold" type="submit" data-submit-label>Send message</button>
             <small>{formConnected ? "Secure form delivery is connected." : "Preview mode: no message is transmitted yet."}</small>
           </div>
           <p class="contact-form-status full-field" role="status" aria-live="polite" data-contact-status>
@@ -176,7 +176,7 @@ const formConnected = Boolean(contactFormEndpoint);
         if (status) {
           status.classList.remove("is-error");
           status.classList.add("is-success");
-          status.textContent = "Signal received. Thank you—your topic and event details were included with the message.";
+          status.textContent = "Message received. Thank you—your topic and event details were included.";
         }
       } catch {
         if (status) {
@@ -187,7 +187,7 @@ const formConnected = Boolean(contactFormEndpoint);
       } finally {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = "Send the signal";
+          submitButton.textContent = "Send message";
         }
       }
     });

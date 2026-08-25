@@ -81,13 +81,19 @@ const team = [
   </section>
 
   <section class="home-signal" aria-label="Bachata Explosion essentials">
-    <div class="shell">
-      <span>Berlin born</span>
-      <span>Since 2022</span>
-      <span>20+ editions</span>
-      <span>By dancers, for dancers</span>
+    <div class="home-signal-beam" aria-hidden="true"></div>
+    <div class="shell home-stat-grid">
+      <div><strong>Berlin</strong><span>Born here</span></div>
+      <div><strong data-home-count="2020">0</strong><span>Since</span></div>
+      <div><strong data-home-count="20" data-home-suffix="+">0</strong><span>Editions</span></div>
+      <div><strong>Dancers</strong><span>For dancers</span></div>
     </div>
   </section>
+
+  <div class="home-impact-marquee" aria-hidden="true">
+    <span>Connection · Music · Berlin · One more song · </span>
+    <span>Connection · Music · Berlin · One more song · </span>
+  </div>
 
   <section class="home-manifesto section-pad">
     <div class="shell home-manifesto-grid">
@@ -250,5 +256,24 @@ const team = [
         eventPanels.forEach((panel) => { panel.hidden = panel.dataset.eventPanel !== target; });
       });
     });
+
+    const homeStatObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const element = entry.target as HTMLElement;
+        const target = Number(element.dataset.homeCount ?? 0);
+        const suffix = element.dataset.homeSuffix ?? "";
+        const started = performance.now();
+        const animate = (now: number) => {
+          const progress = Math.min(1, (now - started) / 1650);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          element.textContent = `${Math.round(target * eased).toLocaleString("en-US")}${suffix}`;
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+        homeStatObserver.unobserve(element);
+      });
+    }, { threshold: 0.45 });
+    document.querySelectorAll<HTMLElement>("[data-home-count]").forEach((element) => homeStatObserver.observe(element));
   </script>
 </BaseLayout>

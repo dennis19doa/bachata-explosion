@@ -9,6 +9,7 @@ const artists = [
   ["Elena & Dennis", "/media/bbf/artists/elena-dennis.jpg"],
   ["Emilien & Tehina", "/media/bbf/artists/emilien-tehina.jpg"],
   ["Felipe & Tiago", "/media/bbf/artists/felipe-taigo.jpg"],
+  ["Masa & Polina", "/media/bbf/artists/solo-poster.jpg"],
   ["Liza & Chicho", "/media/bbf/artists/liza-chicho.jpg"],
   ["Nick & Daniela", "/media/bbf/artists/nick-daniela.jpg"],
   ["Ofir & Ofri", "/media/bbf/artists/ofir-ofri.jpg"],
@@ -30,6 +31,8 @@ const venueStories = [
   { kicker: "The arrival", title: "Easy to reach", text: "Central Berlin connections make arriving from the airport, station or city straightforward.", image: "/media/bbf/venue/arrival.png" },
   { kicker: "The weekend", title: "Everything under one roof", text: "Workshops, parties, hotel rooms, food and recovery without losing time between locations.", image: "/media/bbf/venue/location.png" },
   { kicker: "The comfort", title: "Premium facilities", text: "Purpose-built event spaces, lounges and hotel comfort designed for a full festival weekend.", image: "/media/bbf/venue/facilities.png" },
+  { kicker: "The flow", title: "Stay connected", text: "Workshop rooms, social spaces and the main floor remain close enough to keep the weekend moving naturally.", image: "/media/bbf/venue/connectivity.png" },
+  { kicker: "The pause", title: "Space to recharge", text: "Comfortable lounge areas create room to recover, reconnect and be ready for the next dance.", image: "/media/bbf/venue/lounge.png" },
 ] as const;
 
 const schedule = [
@@ -38,9 +41,8 @@ const schedule = [
     date: "16 October",
     promise: "Arrive. Connect. Begin.",
     items: [
-      ["Afternoon", "Festival check-in", "Collect your wristband, settle into the hotel and meet the community."],
-      ["Evening", "Opening workshops", "The first focused sessions set the tone for the weekend."],
-      ["Night", "Welcome party & competition", "Social dancing, opening rounds and the first night on the main floor."],
+      ["16:00–20:00", "Friday workshops", "Opening sessions with the international lineup across the festival rooms."],
+      ["20:00–05:00", "Welcome party & competition", "Social dancing, opening competition rounds and the first full night on the main floor."],
     ],
   },
   {
@@ -48,9 +50,8 @@ const schedule = [
     date: "17 October",
     promise: "Learn. Perform. Explode.",
     items: [
-      ["Daytime", "Full workshop programme", "International artists across levels, styles and musical approaches."],
-      ["Evening", "Shows & finals", "Festival performances and the decisive competition rounds."],
-      ["Late night", "The main Explosion party", "The biggest social night of the weekend, all under one roof."],
+      ["11:00–20:00", "Saturday workshops", "A full day of international artists, multiple levels and musical approaches."],
+      ["20:00–05:00", "Shows, finals & main party", "The decisive competition rounds followed by the biggest social night of the weekend."],
     ],
   },
   {
@@ -58,9 +59,8 @@ const schedule = [
     date: "18 October",
     promise: "Deepen. Celebrate. Stay.",
     items: [
-      ["Daytime", "Closing workshops", "Take the weekend's final ideas into your own dancing."],
-      ["Evening", "Social dancing", "A relaxed bridge from workshops into the final celebration."],
-      ["Night", "Closing party", "One last room, one last song, and the goodbye nobody wants to make."],
+      ["12:00–20:00", "Sunday workshops", "Take the weekend's final ideas, techniques and connections into your own dancing."],
+      ["20:00–05:00", "Closing party", "One last night, one last song and the goodbye nobody wants to make."],
     ],
   },
 ] as const;
@@ -77,7 +77,7 @@ const expandedFaqs = [
   title="Berlin Bachata Festival 2026 — Bachata Explosion"
   description="Berlin Bachata Festival returns October 16–18, 2026 at MOA Berlin: international artists, workshops, shows, competitions and social dancing under one roof."
 >
-  <div class="bbf-premium" data-pointer-glow>
+  <div class="bbf-premium" data-pointer-glow data-wordpress-source="bbf-2026">
     <section class="bbf-hero" aria-labelledby="bbf-title">
       <video class="bbf-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" data-autoplay-video aria-hidden="true">
         <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
@@ -187,14 +187,15 @@ const expandedFaqs = [
       <div class="shell bbf-why-grid">
         <div class="bbf-why-copy" data-reveal>
           <p class="section-label">Why dancers choose Explosion</p>
-          <h2>Big production.<br /><em>Human energy.</em></h2>
-          <p>We care about the details that dancers actually feel: progressive workshops, musical nights, fair competitions and a room where newcomers are welcomed.</p>
+          <h2>World-class learning.<br /><em>A room that feels like home.</em></h2>
+          <p>The promise is simple: respected international artists, workshops with a clear purpose, parties until sunrise and a community that welcomes new faces.</p>
+          <ul class="bbf-why-points"><li>International artists</li><li>Progressive workshops</li><li>All under one roof</li><li>Community-first atmosphere</li></ul>
           <a class="button button-gold" href={ticketUrl}>Join the weekend</a>
         </div>
         <div class="bbf-why-mosaic" data-reveal>
-          <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata performance at Bachata Explosion" width="900" height="1200" loading="lazy" />
-          <img src="/media/bbf/atmosphere/party-141.jpg" alt="Crowd enjoying Bachata Explosion" width="1200" height="800" loading="lazy" />
-          <blockquote>“A festival should feel spectacular on stage and personal on the floor.”<cite>Elena & Dennis</cite></blockquote>
+          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="The Bachata Explosion community together" width="900" height="1200" loading="lazy" />
+          <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata performance at Bachata Explosion" width="1200" height="800" loading="lazy" />
+          <blockquote>Come for the workshops.<br />Stay for the people.<cite>The Explosion promise</cite></blockquote>
         </div>
       </div>
     </section>
@@ -227,10 +228,11 @@ const expandedFaqs = [
       </div>
     </section>
 
-    <section class="bbf-jj bbf-pad">
+    <section class="bbf-jj bbf-pad" aria-labelledby="bbf-jj-title">
+      <div class="bbf-jj-impact" aria-hidden="true"><span>Jack & Jill · No rehearsal · Unknown song · </span><span>Jack & Jill · No rehearsal · Unknown song · </span></div>
       <div class="shell bbf-jj-card" data-reveal>
-        <div><p class="section-label">Saturday spotlight</p><h2>Jack & Jill.<br /><em>Unscripted chemistry.</em></h2></div>
-        <div><p>New partner. New song. One chance to show connection, musicality and presence. Preliminary rounds Friday, finals Saturday.</p><a class="button button-glass" href="/jj/">Competition details</a></div>
+        <div class="bbf-jj-burst"><span>Competition</span><strong>LIVE</strong><small>Friday rounds · Saturday finals</small></div>
+        <div class="bbf-jj-copy"><p class="section-label">The festival showdown</p><h2 id="bbf-jj-title">Jack <i>&</i> Jill.</h2><p class="bbf-jj-lead">New partner. Unknown song. No rehearsal. Just connection, musicality and the nerve to own the room.</p><div class="bbf-jj-facts"><span><b>€100</b> Champion cash prize</span><span><b>Trophy</b> + winner package</span><span><b>Full Pass</b> Required to enter</span></div><a class="button button-gold" href="/jj/">Enter the competition</a></div>
       </div>
     </section>
 
@@ -241,9 +243,9 @@ const expandedFaqs = [
           <p>Start with how you want to experience the weekend. Current phases and exact inclusions are always confirmed at checkout.</p>
         </div>
         <div class="bbf-pass-grid">
-          <article data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><a href={ticketUrl}>See current price ↗</a></article>
-          <article class="bbf-pass-featured" data-reveal><span>Maximum experience</span><h3>Gold Pass</h3><p>The premium route for dancers who want the most complete available festival package.</p><a href={ticketUrl}>Explore Gold ↗</a></article>
-          <article data-reveal><span>Nights only</span><h3>Party Pass</h3><p>Come for the social floors, shows and late-night Explosion atmosphere.</p><a href={ticketUrl}>See current price ↗</a></article>
+          <article class="bbf-pass-full" data-pass-word="FULL" data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><ul><li>Friday–Sunday workshops</li><li>All three festival parties</li><li>Jack & Jill eligibility</li></ul><a href={ticketUrl}>See current price ↗</a></article>
+          <article class="bbf-pass-featured" data-pass-word="GOLD" data-reveal><span>Maximum experience</span><h3>Gold Pass</h3><p>The premium route for dancers who want the most complete available festival package.</p><ul><li>Complete Full Pass access</li><li>Premium package additions</li><li>The fullest Explosion experience</li></ul><a href={ticketUrl}>Explore Gold ↗</a></article>
+          <article class="bbf-pass-party" data-pass-word="PARTY" data-reveal><span>Nights only</span><h3>Party Pass</h3><p>Come for the social floors, shows and late-night Explosion atmosphere.</p><ul><li>Friday welcome party</li><li>Saturday main party</li><li>Sunday closing party</li></ul><a href={ticketUrl}>See current price ↗</a></article>
         </div>
       </div>
     </section>
