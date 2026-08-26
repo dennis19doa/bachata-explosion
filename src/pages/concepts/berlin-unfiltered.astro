@@ -1,0 +1,76 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { ticketUrl } from "../../data/festival";
+---
+
+<ConceptLayout
+  concept="berlin"
+  title="Concept C — Berlin Unfiltered | Bachata Explosion"
+  description="A Berlin-first Bachata Explosion concept: multicultural, strange, open-minded and finished with a premium festival edge."
+>
+  <section class="berlin-hero" aria-labelledby="berlin-concept-title">
+    <img class="berlin-hero-city" src="/media/brand/berlin-brandenburg-gold.png" alt="Brandenburg Gate in the Bachata Explosion gold and black visual style" width="1680" height="945" />
+    <video class="berlin-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" aria-hidden="true">
+      <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+    </video>
+    <div class="berlin-hero-shade" aria-hidden="true"></div>
+    <img class="berlin-hero-graffiti" src="/media/brand/graffiti-layer.webp" alt="" aria-hidden="true" />
+    <div class="berlin-hero-word" aria-hidden="true">BERLIN</div>
+    <div class="concept-shell berlin-hero-grid">
+      <div class="berlin-hero-copy">
+        <p class="berlin-sticker">16–18 Oct 2026 · MOA Berlin</p>
+        <p class="concept-kicker">A festival with a city inside it</p>
+        <h1 id="berlin-concept-title">Berlin<br /><em>after dark.</em><br />Explosion<br />at heart.</h1>
+        <p>Multicultural. Open-minded. A little strange. Bachata Explosion brings Berlin’s restless energy into one premium weekend.</p>
+        <div class="berlin-actions"><a class="berlin-button" href={ticketUrl}>Enter the Explosion</a><a href="/bbf-2026/">Open the festival guide ↗</a></div>
+      </div>
+      <aside class="berlin-poster-wall" aria-label="Berlin Bachata Festival artwork and city signals">
+        <figure><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" /><figcaption>Official festival artwork</figcaption></figure>
+        <p>NO GENERIC<br />FESTIVAL<br /><strong>BERLIN ONLY</strong></p>
+        <span>52.5200° N<br />13.4050° E</span>
+      </aside>
+    </div>
+    <div class="berlin-ticker" aria-hidden="true"><span>BERLIN · BACHATA · PEOPLE FROM EVERYWHERE · PARTIES UNTIL 05:00 · </span><span>BERLIN · BACHATA · PEOPLE FROM EVERYWHERE · PARTIES UNTIL 05:00 · </span></div>
+  </section>
+
+  <section class="berlin-code concept-pad">
+    <div class="concept-shell berlin-code-grid">
+      <div><p class="concept-kicker">The Berlin code</p><h2>Polished<br />without losing<br /><em>the edge.</em></h2></div>
+      <div class="berlin-code-notes">
+        <article><span>01</span><h3>Multicultural</h3><p>Different languages, styles and stories sharing one floor.</p></article>
+        <article><span>02</span><h3>Unfiltered</h3><p>Real dancers and real nights—not anonymous festival polish.</p></article>
+        <article><span>03</span><h3>Open-minded</h3><p>Express yourself, switch perspective and arrive as you are.</p></article>
+        <article><span>04</span><h3>Premium</h3><p>Strong production, serious teaching and everything at MOA.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="berlin-weekend concept-pad">
+    <div class="concept-shell">
+      <header class="berlin-section-head"><p class="concept-kicker">One city · one weekend</p><h2>Come for the dance.<br /><em>Meet the Berlin in it.</em></h2></header>
+      <div class="berlin-weekend-grid">
+        <figure class="berlin-weekend-lead"><img src="/media/bbf/atmosphere/saturday-62.jpg" alt="The international Bachata Explosion community in Berlin" width="1800" height="1200" /><figcaption><span>People</span><strong>A room from everywhere</strong></figcaption></figure>
+        <figure><img src="/media/bbf/atmosphere/party-141.jpg" alt="Bachata Explosion dancers celebrating together" width="1800" height="1200" /><figcaption><span>Feeling</span><strong>Warm, weird, unforgettable</strong></figcaption></figure>
+        <figure><img src="/media/bbf/venue/location.png" alt="A bedroom at Hotel MOA Berlin" width="900" height="650" /><figcaption><span>Base</span><strong>Sleep above the festival</strong></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="berlin-roots concept-pad">
+    <div class="concept-shell berlin-roots-grid">
+      <figure><img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata Explosion competition winners in Berlin" width="1200" height="1800" /><figcaption>Berlin-built since 2022</figcaption></figure>
+      <div>
+        <p class="concept-kicker">The roots stay visible</p>
+        <h2>Street roots.<br /><em>Festival finish.</em></h2>
+        <p>Explosion grew from dancers creating the event they wanted to attend. The scale changed. The human feeling did not.</p>
+        <dl><div><dt>21</dt><dd>Events created</dd></div><div><dt>6,010</dt><dd>Attendees</dd></div><div><dt>500+</dt><dd>Artists</dd></div></dl>
+        <a class="berlin-button" href="/explosion-history/">Read the real history</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="berlin-final">
+    <img src="/media/bbf/atmosphere/saturday-60.jpg" alt="Bachata Explosion dancers on the social floor" width="1800" height="1200" />
+    <div class="concept-shell"><p class="concept-kicker">Your Berlin weekend starts here</p><h2>Dance the city.<br /><em>Take the feeling home.</em></h2><a class="berlin-button" href={ticketUrl}>Get BBF 2026 tickets</a></div>
+  </section>
+</ConceptLayout>

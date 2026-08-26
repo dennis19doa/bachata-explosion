@@ -41,6 +41,24 @@ Suggested address structure:
 
 Aliases can initially arrive in one mailbox, so separate paid accounts are not required.
 
+### Two-domain Zoho structure selected for launch
+
+Use one paid Zoho Mail organization with both business domains and two Mail Lite users:
+
+```text
+Mailbox 1 — Bachata Explosion
+  info@bachataexplosion.com
+  aliases: tickets@, partners@, ambassadors@, news@, privacy@
+
+Mailbox 2 — Elite Dance Studio
+  info@elitedancestudio.de
+  aliases: studio@, members@, news@, privacy@
+```
+
+This creates two genuinely separate inboxes while avoiding a paid account for every public address. Zoho currently allows multiple domains in one paid organization and up to 30 addresses per mailbox, including the primary address. A third project can later be added as another domain and either use aliases or receive its own paid mailbox when it needs a separate login.
+
+Mail Lite is the appropriate level because paid Zoho plans include IMAP, which is required for desktop clients such as Spark. Use annual billing; Zoho describes the annual reduction as approximately 20%. No current official Zoho Mail coupon code was verified, so do not use codes from coupon sites or old Zoho PDFs.
+
 ## 2. Contact forms
 
 ### Current implementation
@@ -57,13 +75,33 @@ When `PUBLIC_CONTACT_FORM_ENDPOINT` is empty, the page remains in clearly labell
 
 ### Activation checklist
 
-1. Create one protected form endpoint and set its notification address to `info@bachataexplosion.com`.
+1. Create a Formspark workspace and one endpoint for each live form. Set Bachata Explosion notifications to `info@bachataexplosion.com`.
 2. Verify the inbox with the provider.
 3. Add the endpoint URL as the GitHub repository variable `PUBLIC_CONTACT_FORM_ENDPOINT`.
 4. Trigger a new Pages deployment.
 5. Submit one test for every topic and confirm that the topic, event and reply email arrive correctly.
 6. Confirm the provider, retention period and data-processing agreement in the privacy policy before public launch.
 7. Add Turnstile only if the provider's normal spam filtering proves insufficient.
+
+### Recommended form service
+
+Use Formspark for the static websites. The current official offer starts with 250 free submissions across up to 10 forms. Its upgrade is a one-time submission bundle rather than a recurring subscription, and the form designs stay on the websites.
+
+Create separate endpoints for:
+
+- Bachata Explosion contact
+- volunteer application
+- ambassador application
+- Elite Dance Studio contact
+
+Separate endpoints make notification subjects, spam rules and exports easier to manage. The website stores only the public endpoint URL; the Zoho password and API credentials never enter GitHub or browser code.
+
+The Jack & Jill registration is the one exception because it currently includes a direct photo upload. Formspark does not accept multipart file inputs by itself. Leave `PUBLIC_JJ_FORM_ENDPOINT` empty until one of these routes is configured:
+
+1. Recommended: upload the photo to Cloudinary with file-size and file-type restrictions, then submit only its resulting URL to Formspark.
+2. Simpler but less visually integrated: use Zoho Forms for this registration only.
+
+Until then, the Jack & Jill form remains clearly marked as a preview and cannot accidentally send an incompatible submission to the general contact endpoint.
 
 ### Form types for launch
 

@@ -4,7 +4,7 @@ import "../styles/concepts.css";
 interface Props {
   title: string;
   description: string;
-  concept: "after-dark" | "magazine";
+  concept: "after-dark" | "magazine" | "berlin";
 }
 
 const { title, description, concept } = Astro.props;
@@ -19,7 +19,7 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex,nofollow" />
-    <meta name="theme-color" content={concept === "after-dark" ? "#080405" : "#e9e2d4"} />
+    <meta name="theme-color" content={concept === "magazine" ? "#e9e2d4" : "#080405"} />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -40,6 +40,7 @@ const socialImage = new URL("/og.png", Astro.site);
       <nav aria-label="Concept choices">
         <a class:list={[concept === "after-dark" && "is-current"]} href="/concepts/explosion-after-dark/">A · After Dark</a>
         <a class:list={[concept === "magazine" && "is-current"]} href="/concepts/berlin-festival-magazine/">B · Festival Magazine</a>
+        <a class:list={[concept === "berlin" && "is-current"]} href="/concepts/berlin-unfiltered/">C · Berlin Unfiltered</a>
         <a href="/">Original baseline</a>
       </nav>
     </aside>

@@ -27,9 +27,9 @@ const artists = [
 ] as const;
 
 const venueStories = [
-  { kicker: "Sleep", title: "Stay at Hotel MOA Berlin", text: "Wake up where the festival happens. Rooms, breakfast, workshops and parties stay connected without a commute across Berlin.", image: "/media/bbf/venue/location.png" },
-  { kicker: "Dance", title: "1,200 m² main floor", text: "The large event spaces give workshops, shows, competitions and social dancing the scale they deserve.", image: "/media/bbf/venue/architecture.png" },
-  { kicker: "Everything nearby", title: "MOA Bogen & EDEKA", text: "The venue sits inside the MOA Bogen complex. EDEKA is on the ground floor and opens Monday–Saturday from 07:00–22:00, making drinks, snacks and forgotten essentials easy.", image: "/media/bbf/venue/connectivity.png" },
+  { kicker: "Sleep", title: "Stay at Hotel MOA Berlin", text: "Rooms, breakfast, workshops and parties—all without crossing the city.", image: "/media/bbf/venue/location.png" },
+  { kicker: "Dance", title: "1,200 m² main floor", text: "Space for focused workshops, shows, competitions and long social nights.", image: "/media/bbf/venue/architecture.png" },
+  { kicker: "Everything nearby", title: "MOA Bogen & EDEKA", text: "EDEKA is downstairs and open Monday–Saturday, 07:00–22:00.", image: "/media/bbf/venue/connectivity.png" },
 ] as const;
 
 const hotelBookingUrl = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/1902213";
@@ -132,7 +132,7 @@ const expandedFaqs = [
         <div class="bbf-city-copy" data-reveal>
           <p class="section-label">Berlin · by dancers, for dancers</p>
           <h2>Berlin is not<br />the backdrop.<br /><em>It is part of the festival.</em></h2>
-          <p>The city gives Explosion its character: direct, international, creative and still moving long after midnight. BBF brings that Berlin rhythm into every workshop, social and competition.</p>
+          <p>Direct, international and still moving after midnight. Berlin runs through every workshop, social and competition.</p>
           <div class="bbf-city-notes"><span>Direct energy</span><span>International room</span><span>After-dark rhythm</span></div>
         </div>
         <figure class="bbf-city-portrait" data-reveal>
@@ -215,7 +215,7 @@ const expandedFaqs = [
         <div class="bbf-why-copy" data-reveal>
           <p class="section-label">The weekend, without filler</p>
           <h2>Train with intent.<br /><em>Dance without distance.</em></h2>
-          <p>Artists, hotel rooms, workshop spaces and the social floor all meet at MOA. Less commuting means more learning, more people and more time on the floor.</p>
+          <p>Hotel, workshops and parties meet at MOA. Less commuting means more time on the floor.</p>
           <div class="bbf-why-beats"><span><b>Day</b>Focused workshops</span><span><b>Night</b>Socials until 05:00</span><span><b>Place</b>Everything at MOA</span><span><b>Feeling</b>Berlin, not anonymous</span></div>
           <a class="button button-gold" href={ticketUrl}>Join the weekend</a>
         </div>
@@ -226,7 +226,7 @@ const expandedFaqs = [
       <div class="shell">
         <div class="bbf-heading" data-reveal>
           <div><p class="section-label">Festival schedule</p><h2 id="schedule-title">Three distinct days.<br /><em>One flowing story.</em></h2></div>
-          <p>The full workshop timetable now has a dedicated structure. Add each artist, workshop title, level and room as soon as the programme is confirmed.</p>
+          <p>Artist, workshop, level and room details will appear here as they are confirmed.</p>
         </div>
         <div class="bbf-schedule-tabs" role="tablist" aria-label="Festival days">
           {schedule.map((day, index) => (
@@ -271,7 +271,7 @@ const expandedFaqs = [
       <div class="shell">
         <div class="bbf-heading" data-reveal>
           <div><p class="section-label">Choose your pass</p><h2 id="passes-title">Build your<br /><em>Explosion.</em></h2></div>
-          <p>Start with how you want to experience the weekend. Current phases and exact inclusions are always confirmed at checkout.</p>
+          <p>Choose your weekend. Current prices and inclusions are confirmed at checkout.</p>
         </div>
         <div class="bbf-pass-grid">
           <article class="bbf-pass-full" data-pass-word="FULL" data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><ul><li>Friday–Sunday workshops</li><li>All three festival parties</li><li>Jack & Jill eligibility</li></ul><a href={ticketUrl}>See current price ↗</a></article>

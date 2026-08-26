@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { contactFormEndpoint } from "../lib/forms";
+import { volunteerFormEndpoint } from "../lib/forms";
 
-const formConnected = Boolean(contactFormEndpoint);
+const formConnected = Boolean(volunteerFormEndpoint);
 const roles = [
   { value: "Door and check-in", title: "Door & check-in", text: "Scan tickets, distribute wristbands and welcome dancers into the event." },
   { value: "Pickup driver", title: "Pickup driver", text: "Pick up and drop off artists using your own car and keep the team informed." },
@@ -60,7 +60,7 @@ const languages = ["German", "English", "Spanish", "Other"];
           <div class="volunteer-form-note"><span>What happens next</span><p>We review your preferred role, event, languages and availability, then contact you directly.</p></div>
         </aside>
 
-        <form class="volunteer-form" method="POST" action={contactFormEndpoint || undefined} data-volunteer-form data-volunteer-endpoint={contactFormEndpoint}>
+        <form class="volunteer-form" method="POST" action={volunteerFormEndpoint || undefined} data-volunteer-form data-volunteer-endpoint={volunteerFormEndpoint}>
           <input type="hidden" name="topic" value="Volunteer application" />
 
           <fieldset class="volunteer-form-section">

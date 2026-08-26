@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { contactFormEndpoint } from "../lib/forms";
+import { ambassadorFormEndpoint } from "../lib/forms";
 
-const formConnected = Boolean(contactFormEndpoint);
+const formConnected = Boolean(ambassadorFormEndpoint);
 const benefits = [
   { label: "Your community", title: "A personal promo code", text: "Give your dancers a clear reason to join and track the community you bring into each Explosion." },
   { label: "Your access", title: "Festival benefits", text: "Unlock selected access, discounts and ambassador-only opportunities as your community impact grows." },
@@ -89,7 +89,7 @@ const benefits = [
           <p>We review your community, communication style and motivation. The strongest applications are specific, personal and honest.</p>
           <div class="ambassador-application-note"><span>What happens next</span><p>We contact selected applicants with their promo code, media kit and onboarding details.</p></div>
         </aside>
-        <form class="ambassador-form" method="POST" action={contactFormEndpoint || undefined} data-ambassador-form data-ambassador-endpoint={contactFormEndpoint}>
+        <form class="ambassador-form" method="POST" action={ambassadorFormEndpoint || undefined} data-ambassador-form data-ambassador-endpoint={ambassadorFormEndpoint}>
           <input type="hidden" name="topic" value="Ambassador application" />
           <label><span>Full name *</span><input type="text" name="name" autocomplete="name" maxlength="100" required /></label>
           <label><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="180" required /></label>
