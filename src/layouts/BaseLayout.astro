@@ -37,11 +37,19 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const concept = new URLSearchParams(window.location.search).get("concept");
+        if (concept === "explosion-underground") document.documentElement.dataset.siteConcept = concept;
+      })();
+    </script>
   </head>
-  <body class="urban-site">
+  <body>
+    <script is:inline>
+      if (document.documentElement.dataset.siteConcept === "explosion-underground") document.body.classList.add("urban-site");
+    </script>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
-      <span class="site-city-code" aria-hidden="true">52.5200° N · 13.4050° E</span>
       <a class="brand" href="/" aria-label="Bachata Explosion home">
         <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
       </a>
@@ -95,8 +103,12 @@ const socialImage = new URL("/og.png", Astro.site);
     <main id="main">
       <slot />
     </main>
+    <aside class="site-concept-toolbar" aria-label="Active design concept">
+      <span>Full-site concept</span>
+      <strong>Explosion Underground</strong>
+      <a href="/">Exit concept</a>
+    </aside>
     <footer class="site-footer">
-      <div class="footer-city-line" aria-hidden="true">BERLIN · BACHATA · PEOPLE FROM EVERYWHERE · BY DANCERS FOR DANCERS ·</div>
       <div class="shell footer-grid">
         <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
         <nav aria-label="Legal navigation">
@@ -120,8 +132,18 @@ const socialImage = new URL("/og.png", Astro.site);
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
       const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
+      const activeConcept = document.documentElement.dataset.siteConcept;
 
       heroVideo?.play().catch(() => undefined);
+
+      if (activeConcept) {
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((link) => {
+          if (link.closest(".site-concept-toolbar")) return;
+          const url = new URL(link.href, window.location.origin);
+          url.searchParams.set("concept", activeConcept);
+          link.href = `${url.pathname}${url.search}${url.hash}`;
+        });
+      }
 
       dropdowns.forEach((dropdown) => {
         dropdown.addEventListener("toggle", () => {

@@ -18,8 +18,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--night); }
 body { margin: 0; min-width: 320px; background: var(--night); color: var(--ink); }
-.urban-site { position: relative; isolation: isolate; }
-.urban-site::before {
+html[data-site-concept="explosion-underground"] body { position: relative; isolation: isolate; }
+html[data-site-concept="explosion-underground"] body::before {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -61,8 +61,6 @@ img { display: block; max-width: 100%; }
   padding: 22px 0;
   border-bottom: 1px solid rgba(255,255,255,.12);
 }
-.site-header::after { position: absolute; right: 0; bottom: -2px; width: min(180px, 20vw); height: 3px; background: #b52d19; content: ""; transform: rotate(-1deg); }
-.site-city-code { position: absolute; top: calc(100% + 8px); left: 0; color: rgba(246,207,116,.62); font-size: .5rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .brand { width: 158px; }
 .brand img { width: 100%; height: auto; }
 .desktop-nav { display: flex; min-width: 0; gap: clamp(13px, 1.35vw, 23px); align-items: center; justify-content: center; }
@@ -93,7 +91,7 @@ img { display: block; max-width: 100%; }
   justify-content: center;
   padding: 0 24px;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: 999px;
   font-size: .78rem;
   font-weight: 800;
   letter-spacing: .09em;
@@ -103,7 +101,7 @@ img { display: block; max-width: 100%; }
 }
 .button:hover { transform: translateY(-2px); }
 .button-small { min-height: 42px; padding-inline: 20px; }
-.button-gold { color: #1a0c0f; background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 7px 7px 0 rgba(139,31,20,.78), 0 12px 36px rgba(246, 207, 116, .15); }
+.button-gold { color: #1a0c0f; background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 12px 36px rgba(246, 207, 116, .15); }
 
 .hero {
   position: relative;
@@ -334,8 +332,7 @@ textarea { padding: 15px; resize: vertical; }
 .honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
 .button:disabled { cursor: wait; opacity: .62; transform: none; }
 
-.site-footer { position: relative; overflow: hidden; padding: 0 0 48px; background: #090305; }
-.footer-city-line { width: max-content; min-width: 100%; margin-bottom: 48px; padding: 12px 20px; background: var(--gold); color: #1c0907; font-family: "Oswald", sans-serif; font-size: clamp(1rem,2vw,1.7rem); font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; transform: rotate(-.35deg) scale(1.01); }
+.site-footer { padding: 48px 0; background: #090305; }
 .footer-grid { display: grid; grid-template-columns: .7fr 1fr 1.15fr; gap: 44px; align-items: center; }
 .footer-brand { width: 140px; }
 .footer-brand img { width: 100%; }
@@ -771,7 +768,7 @@ textarea { padding: 15px; resize: vertical; }
   .contact-route { min-height: 190px; }
   .contact-route > span { top: -105px; }
   .contact-form-action { align-items: flex-start; flex-direction: column; }
-  .mobile-ticket-dock { position: fixed; inset: auto 12px 12px; z-index: 40; display: flex; justify-content: space-between; align-items: center; min-height: 54px; padding: 0 18px; border: 1px solid rgba(255,240,184,.5); border-radius: 0; background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 7px 7px 0 rgba(139,31,20,.82), 0 18px 55px rgba(0,0,0,.5); color: #18080b; text-decoration: none; }
+  .mobile-ticket-dock { position: fixed; inset: auto 12px 12px; z-index: 40; display: flex; justify-content: space-between; align-items: center; min-height: 54px; padding: 0 18px; border: 1px solid rgba(255,240,184,.5); border-radius: 99px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 18px 55px rgba(0,0,0,.5); color: #18080b; text-decoration: none; }
   .mobile-ticket-dock span { font-size: .63rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
   .mobile-ticket-dock strong { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; }
   .site-footer { padding-bottom: 118px; }
@@ -821,13 +818,13 @@ textarea { padding: 15px; resize: vertical; }
 .button-glass { border-color: rgba(255,255,255,.34); background: rgba(8,3,5,.28); color: #fff; backdrop-filter: blur(14px); }
 .button-dark { background: #16080b; color: var(--gold); }
 .home-hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; background: #090305 url("/media/atmosphere/party-crowd.webp") center / cover no-repeat; }
-.home-hero-graffiti { position: absolute; right: -10vw; bottom: -8%; z-index: -1; width: min(820px, 64vw); opacity: .13; filter: grayscale(1) contrast(1.45); transform: rotate(-8deg); pointer-events: none; }
+.home-hero-graffiti { display: none; position: absolute; right: -10vw; bottom: -8%; z-index: -1; width: min(820px, 64vw); opacity: .13; filter: grayscale(1) contrast(1.45); transform: rotate(-8deg); pointer-events: none; }
 .home-hero::before { position: absolute; inset: -30%; z-index: -2; opacity: .34; background: conic-gradient(from 210deg at 72% 38%, transparent 0 18%, rgba(231,54,18,.46) 24%, transparent 31% 58%, rgba(246,207,116,.26) 66%, transparent 73%); content: ""; filter: blur(30px); animation: home-aurora 13s ease-in-out infinite alternate; pointer-events: none; }
 .home-hero-video { position: absolute; inset: 0; z-index: -4; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.84) contrast(1.12); }
 .home-hero-shade { position: absolute; inset: 0; z-index: -3; background: linear-gradient(90deg, rgba(7,2,4,.92) 0%, rgba(7,2,4,.78) 43%, rgba(7,2,4,.2) 77%, rgba(7,2,4,.46)), linear-gradient(0deg, #100609 0%, transparent 32%), radial-gradient(circle at 76% 42%, transparent 0, rgba(0,0,0,.28) 70%); }
 .home-hero-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 350px); gap: clamp(58px, 8vw, 120px); align-items: start; min-height: 100svh; padding: 176px 0 98px; }
 .home-hero-copy { max-width: 760px; animation: home-rise .8s cubic-bezier(.2,.75,.2,1) both; }
-.home-urban-sticker { display: inline-flex; margin: 0 0 24px; padding: 9px 12px; background: #b72d19; color: #fff1d5; font-size: .61rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; box-shadow: 6px 6px 0 rgba(0,0,0,.35); transform: rotate(-1deg); }
+.home-urban-sticker { display: none; margin: 0 0 24px; padding: 9px 12px; background: #b72d19; color: #fff1d5; font-size: .61rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; box-shadow: 6px 6px 0 rgba(0,0,0,.35); transform: rotate(-1deg); }
 .home-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 32px; }
 .home-hero-meta span { padding: 8px 12px; border: 1px solid rgba(246,207,116,.38); border-radius: 999px; background: rgba(11,4,6,.42); color: #f7dfaa; font-size: .64rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; backdrop-filter: blur(10px); }
 .home-hero h1 { font-size: clamp(5.2rem, 9.4vw, 9.8rem); line-height: .78; }
@@ -1789,7 +1786,31 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .team-marquee, .archive-marquee { overflow-x: auto; }
 }
 
-/* Berlin Unfiltered — site-wide street/premium system */
+/* Explosion Underground — optional full-site concept using the real content */
+.site-concept-toolbar { display: none; }
+.urban-site .site-concept-toolbar {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 11px;
+  align-items: center;
+  padding: 11px 13px;
+  border: 1px solid rgba(246,207,116,.48);
+  background: rgba(8,2,3,.94);
+  color: #fff2da;
+  box-shadow: 8px 8px 0 rgba(155,36,20,.72);
+  backdrop-filter: blur(14px);
+}
+.site-concept-toolbar span { color: #a99493; font-size: .5rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.site-concept-toolbar strong { color: var(--gold); font-family: "Oswald"; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+.site-concept-toolbar a { padding-left: 11px; border-left: 1px solid rgba(255,255,255,.18); font-size: .56rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.urban-site .site-header::after { position: absolute; right: 0; bottom: -2px; width: min(180px,20vw); height: 3px; background: #b52d19; content: ""; transform: rotate(-1deg); }
+.urban-site .button-gold { box-shadow: 7px 7px 0 rgba(139,31,20,.78), 0 12px 36px rgba(246,207,116,.15); }
+.urban-site .home-hero-graffiti { display: block; }
+.urban-site .home-urban-sticker { display: inline-flex; }
 .urban-site main { overflow: clip; }
 .urban-site :is(.bbf-premium,.jj-arena,.ambassador-2026,.volunteer-2026,.contact-2026,.archive-library,.wp-preserved-page) {
   --urban-red: #b6311c;
@@ -1809,6 +1830,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
   pointer-events: none;
 }
 .urban-hero-word {
+  display: none;
   position: absolute;
   right: -2vw;
   bottom: 2%;
@@ -1824,6 +1846,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
   transform: rotate(-3deg);
   pointer-events: none;
 }
+.urban-site .urban-hero-word { display: block; }
 .urban-site .section-label {
   display: inline-flex;
   width: fit-content;
@@ -1876,7 +1899,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 .urban-site :is(.contact-form,.volunteer-form,.ambassador-form,.jj-register-form) :is(input,select,textarea) { border-radius: 0; }
 .urban-site :is(.contact-form,.volunteer-form,.ambassador-form,.jj-register-form) :is(input,select,textarea):focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-.urban-site .contact-workbench { background: linear-gradient(115deg, rgba(7,2,3,.96), rgba(74,14,8,.8)), url("/media/brand/berlin-brandenburg-gold.png") center / cover fixed; }
+.urban-site .contact-workbench { background: linear-gradient(115deg, rgba(7,2,3,.96), rgba(74,14,8,.8)), url("/media/brand/live-explosion-background.png") center / cover fixed; }
 .urban-site .contact-routing { background-color: #efe4d2; color: #1a0d0a; }
 .urban-site .contact-routing h2 { color: #1a0d0a; text-shadow: none; }
 .urban-site .contact-routing .contact-section-heading > p { color: #6b594f; }
@@ -1884,20 +1907,21 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .urban-site .contact-route small { color: #6f5d55; }
 .urban-site .contact-route[aria-pressed="true"] { background: var(--gold); color: #1a0d0a; }
 
-.urban-site .archive-hero { position: relative; background: linear-gradient(90deg, rgba(7,2,3,.98), rgba(51,9,5,.76)), url("/media/brand/berlin-brandenburg-gold.png") center / cover; }
+.urban-site .archive-hero { position: relative; background: linear-gradient(90deg, rgba(7,2,3,.98), rgba(51,9,5,.76)), url("/media/motion/explosion-particles-poster.webp") center / cover; }
 .urban-site .archive-library { background-color: #0a0305; }
 .urban-site .archive-year > header span { color: var(--gold); text-shadow: 4px 4px 0 rgba(166,42,24,.54); }
 .urban-site .album-number { background: var(--urban-red); color: #fff1d8; transform: rotate(-2deg); }
 
-.urban-site .wp-source-header { position: relative; background: linear-gradient(90deg, rgba(7,2,3,.98), rgba(58,10,6,.74)), url("/media/brand/berlin-brandenburg-gold.png") center / cover; }
+.urban-site .wp-source-header { position: relative; background: linear-gradient(90deg, rgba(7,2,3,.98), rgba(58,10,6,.74)), url("/media/brand/live-explosion-background.png") center / cover; }
 .urban-site .wp-source-content { border-top: 6px solid var(--gold); background: #0a0305; }
 .urban-site .wp-source-content :is(.elementor-button,button[type="submit"]) { border-radius: 0; box-shadow: 6px 6px 0 rgba(152,35,21,.65); }
+.urban-site .ambassador-benefits { background-image: linear-gradient(rgba(8,2,3,.88),rgba(8,2,3,.88)), url("/media/brand/live-explosion-background.png"); }
 
 @media (max-width: 760px) {
-  .site-city-code { display: none; }
   .urban-hero-word { right: -5vw; bottom: 4%; font-size: clamp(7rem,31vw,12rem); opacity: .2; }
   .home-hero-graffiti { width: 110vw; opacity: .1; }
   .home-urban-sticker { margin-bottom: 20px; font-size: .54rem; }
-  .footer-city-line { overflow: hidden; white-space: nowrap; text-align: left; }
   .urban-site :is(.contact-form,.volunteer-form,.ambassador-form,.jj-register-form) { box-shadow: 7px 7px 0 rgba(143,32,19,.52); }
+  .urban-site .site-concept-toolbar { right: 12px; bottom: 78px; left: 12px; grid-template-columns: 1fr auto; }
+  .site-concept-toolbar span { display: none; }
 }
