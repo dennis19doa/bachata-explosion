@@ -1527,7 +1527,7 @@ textarea { padding: 15px; resize: vertical; }
 }
 
 /* 2026 editorial consistency pass — Berlin identity, moving people and complete archive */
-body { overflow-x: clip; }
+html, body { max-width: 100%; overflow-x: hidden; }
 
 .home-hero-content { max-width: 100%; }
 .home-stat-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
