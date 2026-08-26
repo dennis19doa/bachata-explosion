@@ -29,6 +29,7 @@ const sourceHasHeading = /<h1\b/i.test(page.content.rendered);
       <h1 class="visually-hidden">Bachata Explosion</h1>
     ) : (
       <header class="wp-source-header">
+        <div class="urban-hero-word" aria-hidden="true">BERLIN</div>
         <div class="shell">
           <p class="eyebrow"><span></span>{label}</p>
           {sourceHasHeading ? <p class="wp-source-display-title" set:html={page.title.rendered}></p> : <h1 set:html={page.title.rendered}></h1>}
