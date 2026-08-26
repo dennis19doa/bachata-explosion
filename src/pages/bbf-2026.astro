@@ -27,9 +27,9 @@ const artists = [
 ] as const;
 
 const venueStories = [
-  { kicker: "Sleep", title: "Stay at Hotel MOA Berlin", text: "Wake up where the festival happens. Rooms, breakfast, workshops and parties stay connected without a commute across Berlin.", image: "/media/bbf/venue/hotel.png" },
+  { kicker: "Sleep", title: "Stay at Hotel MOA Berlin", text: "Wake up where the festival happens. Rooms, breakfast, workshops and parties stay connected without a commute across Berlin.", image: "/media/bbf/venue/location.png" },
   { kicker: "Dance", title: "1,200 m² main floor", text: "The large event spaces give workshops, shows, competitions and social dancing the scale they deserve.", image: "/media/bbf/venue/architecture.png" },
-  { kicker: "Everything nearby", title: "MOA Bogen & EDEKA", text: "The venue sits inside the MOA Bogen complex. EDEKA is on the ground floor and opens Monday–Saturday from 07:00–22:00, making drinks, snacks and forgotten essentials easy.", image: "/media/bbf/venue/location.png" },
+  { kicker: "Everything nearby", title: "MOA Bogen & EDEKA", text: "The venue sits inside the MOA Bogen complex. EDEKA is on the ground floor and opens Monday–Saturday from 07:00–22:00, making drinks, snacks and forgotten essentials easy.", image: "/media/bbf/venue/connectivity.png" },
 ] as const;
 
 const hotelBookingUrl = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/1902213";
@@ -44,8 +44,6 @@ const workshopSlots = {
   saturday: ["11:00–12:00", "12:00–13:00", "13:00–14:00", "14:00–15:00", "15:00–16:00", "16:00–17:00", "17:00–18:00", "18:00–19:00", "19:00–20:00"],
   sunday: ["12:00–13:00", "13:00–14:00", "14:00–15:00", "15:00–16:00", "16:00–17:00", "17:00–18:00", "18:00–19:00", "19:00–20:00"],
 } as const;
-
-const artistLabel = (name: string) => name.startsWith("DJ ") ? "Festival DJ" : name.includes("&") ? "International artists" : "Artist & instructor";
 
 const schedule = [
   {
@@ -130,15 +128,17 @@ const expandedFaqs = [
     </section>
 
     <section class="bbf-intro bbf-pad">
-      <div class="shell bbf-intro-grid">
-        <p class="section-label" data-reveal>Berlin · by dancers, for dancers</p>
-        <div data-reveal>
-          <h2>This is not just<br /><em>another festival.</em></h2>
-          <p>Explosion combines ambitious training and spectacular nights with the feeling of walking into a room where you already belong.</p>
+      <div class="shell bbf-city-editorial">
+        <div class="bbf-city-copy" data-reveal>
+          <p class="section-label">Berlin · by dancers, for dancers</p>
+          <h2>Berlin is not<br />the backdrop.<br /><em>It is part of the festival.</em></h2>
+          <p>The city gives Explosion its character: direct, international, creative and still moving long after midnight. BBF brings that Berlin rhythm into every workshop, social and competition.</p>
+          <div class="bbf-city-notes"><span>Direct energy</span><span>International room</span><span>After-dark rhythm</span></div>
         </div>
-        <figure class="bbf-intro-image" data-reveal>
-          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="Dancers sharing a close moment at Bachata Explosion" width="1200" height="800" loading="lazy" />
-          <figcaption>Connection is the headline.</figcaption>
+        <figure class="bbf-city-portrait" data-reveal>
+          <img src="/media/brand/berlin-brandenburg-gold.png" alt="Brandenburg Gate in the gold and black Berlin Bachata Festival visual style" width="1680" height="945" loading="eager" />
+          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="Bachata Explosion dancers celebrating together in Berlin" width="1200" height="800" loading="lazy" />
+          <figcaption>Born in Berlin · shared with the world</figcaption>
         </figure>
       </div>
     </section>
@@ -179,7 +179,7 @@ const expandedFaqs = [
             {hotelRooms.map((room, index) => (
               <article id={`hotel-${room.id}`} class="bbf-hotel-panel" data-hotel-panel={room.id} hidden={index !== 0}>
                 <div><span>Hotel MOA Berlin</span><strong>{room.price}</strong><h4>{room.title}</h4><p>{room.text}</p><ul>{room.points.map((point) => <li>{point}</li>)}</ul><a class="button button-gold" href={hotelBookingUrl}>{room.action}</a></div>
-                <img src="/media/bbf/venue/hotel.png" alt={`${room.tab} at Hotel MOA Berlin`} width="900" height="650" loading="lazy" />
+                <img src="/media/bbf/venue/location.png" alt={`${room.tab} at Hotel MOA Berlin`} width="900" height="650" loading="lazy" />
               </article>
             ))}
           </div>
@@ -190,16 +190,15 @@ const expandedFaqs = [
 
     <section class="bbf-artists bbf-pad" id="artists" aria-labelledby="artists-title">
       <div class="shell">
-        <div class="bbf-artist-backdrop" aria-hidden="true">LINEUP</div>
+        <div class="bbf-artist-backdrop" aria-hidden="true">BERLIN 2026</div>
         <div class="bbf-heading" data-reveal>
-          <div><p class="section-label">The 2026 lineup</p><h2 id="artists-title">Learn from voices<br /><em>with something to say.</em></h2></div>
-          <p>A broad international lineup, presented through the original artwork instead of one repeated stock image.</p>
+          <div><p class="section-label">The complete 2026 lineup</p><h2 id="artists-title">The world comes<br /><em>to one Berlin floor.</em></h2></div>
+          <p>Every artist receives the same visual weight. The original posters carry the names, so the gallery stays clean, consistent and easy to scan.</p>
         </div>
         <div class="bbf-artist-rail" aria-label="Berlin Bachata Festival 2026 artists">
           {artists.map(([name, image], index) => (
-            <article class:list={["bbf-artist-card", index < 3 && "bbf-artist-featured"]} data-reveal>
+            <article class="bbf-artist-card" data-reveal aria-label={`${name}, Berlin Bachata Festival 2026`}>
               <img src={image} alt={`${name}, Berlin Bachata Festival 2026 artist`} width="800" height="1000" loading={index < 4 ? "eager" : "lazy"} />
-              <div><span>{artistLabel(name)}</span><h3>{name}</h3></div>
             </article>
           ))}
         </div>
@@ -208,18 +207,17 @@ const expandedFaqs = [
     </section>
 
     <section class="bbf-why bbf-pad">
-      <div class="shell bbf-why-grid">
+      <div class="shell bbf-why-story">
+        <figure class="bbf-why-image" data-reveal>
+          <img src="/media/bbf/atmosphere/party-143.jpg" alt="A packed Bachata Explosion party floor in Berlin" width="1200" height="800" loading="lazy" />
+          <figcaption>Workshops by day · Berlin after dark</figcaption>
+        </figure>
         <div class="bbf-why-copy" data-reveal>
-          <p class="section-label">Why dancers choose Explosion</p>
-          <h2>World-class learning.<br /><em>A room that feels like home.</em></h2>
-          <p>The promise is simple: respected international artists, workshops with a clear purpose, parties until sunrise and a community that welcomes new faces.</p>
-          <ul class="bbf-why-points"><li>International artists</li><li>Progressive workshops</li><li>All under one roof</li><li>Community-first atmosphere</li></ul>
+          <p class="section-label">The weekend, without filler</p>
+          <h2>Train with intent.<br /><em>Dance without distance.</em></h2>
+          <p>Artists, hotel rooms, workshop spaces and the social floor all meet at MOA. Less commuting means more learning, more people and more time on the floor.</p>
+          <div class="bbf-why-beats"><span><b>Day</b>Focused workshops</span><span><b>Night</b>Socials until 05:00</span><span><b>Place</b>Everything at MOA</span><span><b>Feeling</b>Berlin, not anonymous</span></div>
           <a class="button button-gold" href={ticketUrl}>Join the weekend</a>
-        </div>
-        <div class="bbf-why-mosaic" data-reveal>
-          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="The Bachata Explosion community together" width="900" height="1200" loading="lazy" />
-          <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata performance at Bachata Explosion" width="1200" height="800" loading="lazy" />
-          <blockquote>International quality.<br />Berlin warmth.<cite>The Explosion standard</cite></blockquote>
         </div>
       </div>
     </section>

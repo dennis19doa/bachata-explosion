@@ -55,10 +55,12 @@ const team = [
   <section class="home-signal" aria-label="Bachata Explosion essentials">
     <div class="home-signal-beam" aria-hidden="true"></div>
     <div class="shell home-stat-grid">
-      <div><strong>Berlin</strong><span>Born here</span></div>
-      <div><strong data-home-count="2020">0</strong><span>Since</span></div>
+      <div><strong>Made in Berlin</strong><span>Born here</span></div>
+      <div><strong data-home-count="2022">0</strong><span>Events since</span></div>
       <div><strong data-home-count="21">0</strong><span>Events created</span></div>
       <div><strong>By dancers</strong><span>For dancers</span></div>
+      <div><strong data-home-count="6010">0</strong><span>Attendees in total</span></div>
+      <div><strong data-home-count="500" data-home-suffix="+">0</strong><span>Artists worked with</span></div>
     </div>
   </section>
 
@@ -115,11 +117,11 @@ const team = [
         <p class="section-label">The Explosion feeling</p>
         <h2>Not generic.<br /><em>Not anonymous.</em></h2>
         <p>We build the kind of weekend we want to dance ourselves.</p>
-        <ol>
-          <li><span>01</span><strong>Learn something you can feel.</strong></li>
-          <li><span>02</span><strong>Meet people you want to see again.</strong></li>
-          <li><span>03</span><strong>Dance until the room becomes a memory.</strong></li>
-        </ol>
+        <div class="home-editorial-notes">
+          <p>Learn something you can feel.</p>
+          <p>Meet people you want to see again.</p>
+          <p>Dance until the room becomes a memory.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -131,18 +133,25 @@ const team = [
         <div><p class="section-label">The people behind the weekend</p><h2 id="home-team-title">Dancer-built.<br /><em>Human-led.</em></h2></div>
         <p>A dancer-built team shaping the details that make every weekend feel personal, welcoming and unmistakably Explosion.</p>
       </div>
-      <div class="team-rail" aria-label="Bachata Explosion team">
-        {team.map((member) => (
-          <article class="team-card">
-            <img src={member.image} alt={`${member.name}, ${member.role} at Bachata Explosion`} width="600" height="600" loading="lazy" />
-            <div>
-              <span>{member.since}</span>
-              <h3>{member.name}</h3>
-              <b>{member.role}</b>
-              <p>{member.bio}</p>
+      <p class="team-rail-instruction">Move across a portrait to pause the team story.</p>
+      <div class="team-marquee" aria-label="Bachata Explosion team">
+        <div class="team-track">
+          {[0, 1].map((loop) => (
+            <div class="team-group" aria-hidden={loop === 1 ? "true" : undefined}>
+              {team.map((member) => (
+                <article class="team-card" tabindex={loop === 0 ? "0" : "-1"}>
+                  <img src={member.image} alt={loop === 0 ? `${member.name}, ${member.role} at Bachata Explosion` : ""} width="600" height="600" loading="lazy" />
+                  <div>
+                    <span>{member.since}</span>
+                    <h3>{member.name}</h3>
+                    <b>{member.role}</b>
+                    <p>{member.bio}</p>
+                  </div>
+                </article>
+              ))}
             </div>
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -153,13 +162,20 @@ const team = [
         <div><p class="section-label">The living archive</p><h2>Every edition<br /><em>still matters.</em></h2></div>
         <div><p>Open a year, choose a moment and relive the floor. The original event pages remain available behind the new visual archive.</p><a class="text-link" href="/archive/">Browse the complete archive <span aria-hidden="true">↗</span></a></div>
       </div>
-      <div class="archive-row">
-        {archiveEvents.slice(0, 4).map((event) => (
-          <a class="archive-card" href={`/archive/${event.slug}/`}>
-            <img src={event.cover} alt={`${event.title} ${event.year} event cover`} width="900" height="1100" loading="lazy" />
-            <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View collection →</b></div>
-          </a>
-        ))}
+      <div class="home-archive-label"><span>Complete archive rotation</span><b>{archiveEvents.length} editions · 2022–2026</b></div>
+      <div class="archive-marquee" aria-label="Every Bachata Explosion edition">
+        <div class="archive-track">
+          {[0, 1].map((loop) => (
+            <div class="archive-group" aria-hidden={loop === 1 ? "true" : undefined}>
+              {archiveEvents.map((event) => (
+                <a class="archive-card" href={`/archive/${event.slug}/`} tabindex={loop === 0 ? undefined : "-1"}>
+                  <img src={event.cover} alt={loop === 0 ? `${event.title} ${event.year} event cover` : ""} width="900" height="1100" loading="lazy" />
+                  <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View collection →</b></div>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
