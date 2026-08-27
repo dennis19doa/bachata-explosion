@@ -852,8 +852,11 @@ textarea { padding: 15px; resize: vertical; }
 .home-stat-grid span { margin-top: 10px; color: #d8c9c5; font-size: .59rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .home-impact-marquee { display: flex; overflow: hidden; border-bottom: 1px solid rgba(246,207,116,.14); background: #090304; transform: rotate(-1deg) scale(1.02); }
 .home-impact-marquee span { flex: 0 0 auto; padding: 13px 0; color: rgba(246,207,116,.4); font-family: "Oswald"; font-size: clamp(1.3rem, 2.5vw, 2.5rem); letter-spacing: .07em; text-transform: uppercase; animation: home-marquee 24s linear infinite; }
-.home-manifesto { background: radial-gradient(circle at 86% 18%, rgba(228,37,132,.12), transparent 25%), #14080b; }
+.home-manifesto { position: relative; overflow: hidden; background: radial-gradient(circle at 86% 18%, rgba(228,37,132,.12), transparent 25%), #14080b; }
+.home-manifesto::after { position: absolute; right: -4%; bottom: -44%; width: min(620px,48vw); aspect-ratio: 16 / 9; opacity: .13; background: url("/media/brand/berlin-brandenburg-gold.png") center / cover; content: ""; filter: grayscale(.35) contrast(1.15); pointer-events: none; }
+.home-manifesto-city { position: absolute; top: 34px; right: max(22px,calc((100vw - 1180px) / 2)); color: rgba(246,207,116,.38); font-size: .56rem; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
 .home-manifesto-grid { display: grid; grid-template-columns: .26fr 1.1fr .46fr; gap: clamp(30px, 5vw, 76px); align-items: end; }
+.home-manifesto-grid > * { position: relative; z-index: 1; }
 .home-manifesto-grid h2 { font-size: clamp(3.8rem, 7vw, 7.5rem); }
 .home-manifesto-grid > p:last-child { margin: 0 0 7px; color: var(--muted); font-size: 1.04rem; line-height: 1.75; }
 .event-switcher { overflow: hidden; background: #090405; }
@@ -900,6 +903,27 @@ textarea { padding: 15px; resize: vertical; }
 .team-card b { color: #e3d5d7; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
 .team-card p { max-width: 300px; margin: 13px 0 0; color: #bbaeb0; font-size: .75rem; line-height: 1.55; }
 .home-archive { background: #080305; }
+.home-berlin { position: relative; min-height: 820px; overflow: hidden; isolation: isolate; background: #090304 url("/media/brand/berlin-brandenburg-gold.png") center / cover no-repeat; }
+.home-berlin::before { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(7,2,3,.34) 0%, rgba(7,2,3,.69) 44%, rgba(7,2,3,.98) 72%), linear-gradient(0deg, rgba(7,2,3,.94), transparent 42%, rgba(7,2,3,.25)); content: ""; }
+.home-berlin::after { position: absolute; inset: 0; z-index: -1; opacity: .1; background: url("/media/brand/explosion-texture.png") center / cover; content: ""; mix-blend-mode: screen; }
+.home-berlin-name { position: absolute; bottom: 7%; left: -1vw; z-index: -1; color: transparent; font-family: "Oswald"; font-size: clamp(9rem,22vw,22rem); font-weight: 700; letter-spacing: -.07em; line-height: .72; opacity: .24; -webkit-text-stroke: 1px rgba(255,222,150,.7); transform: rotate(-3deg); }
+.home-berlin-grid { display: grid; grid-template-columns: minmax(0,.9fr) minmax(440px,1.1fr); gap: clamp(55px,8vw,120px); align-items: center; }
+.home-berlin-intro { align-self: stretch; display: flex; flex-direction: column; justify-content: center; min-height: 620px; }
+.home-berlin-intro > p:not(.section-label) { max-width: 590px; margin: 30px 0 0; color: #d2c3c0; font-size: 1.05rem; line-height: 1.78; }
+.home-berlin-stamp { display: grid; width: 168px; height: 168px; margin-top: 46px; place-content: center; border: 1px solid rgba(246,207,116,.5); border-radius: 50%; background: rgba(10,3,4,.63); color: var(--gold); text-align: center; text-transform: uppercase; box-shadow: 0 20px 70px rgba(0,0,0,.38); backdrop-filter: blur(9px); transform: rotate(-7deg); }
+.home-berlin-stamp span,.home-berlin-stamp small { font-size: .5rem; font-weight: 900; letter-spacing: .14em; }
+.home-berlin-stamp strong { margin: 4px 0; font-family: "Oswald"; font-size: 2.35rem; line-height: 1; }
+.home-berlin-reasons { padding: clamp(32px,5vw,60px); border: 1px solid rgba(246,207,116,.22); background: rgba(11,4,5,.8); box-shadow: 0 38px 100px rgba(0,0,0,.44); backdrop-filter: blur(16px); }
+.home-berlin-reasons article { position: relative; display: grid; grid-template-columns: 82px 1fr; gap: 9px 24px; padding: 27px 0; border-top: 1px solid rgba(246,207,116,.18); }
+.home-berlin-reasons article:first-child { padding-top: 0; border-top: 0; }
+.home-berlin-reasons article > span { grid-row: 1 / span 2; padding-top: 7px; color: var(--gold); font-size: .58rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.home-berlin-reasons h3 { margin: 0; font-size: clamp(1.45rem,2.3vw,2rem); line-height: 1.1; }
+.home-berlin-reasons p { margin: 0; color: #bbaead; font-size: .84rem; line-height: 1.67; }
+.home-berlin-actions { display: flex; gap: 22px; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid rgba(246,207,116,.18); }
+.home-berlin-actions .button { flex: 0 0 auto; }
+.home-berlin-actions .text-link { color: var(--gold); font-size: .69rem; }
+.home-berlin-kiez { position: absolute; right: 0; bottom: 0; left: 0; display: flex; justify-content: center; overflow: hidden; border-top: 1px solid rgba(246,207,116,.2); background: rgba(7,2,3,.82); }
+.home-berlin-kiez span { flex: 0 0 auto; padding: 14px clamp(18px,3vw,48px); border-right: 1px solid rgba(246,207,116,.14); color: rgba(246,207,116,.56); font-family: "Oswald"; font-size: clamp(.8rem,1.4vw,1.15rem); letter-spacing: .09em; text-transform: uppercase; }
 .home-social { background: var(--gold); color: #16080b; }
 .home-social-card { display: grid; grid-template-columns: 1fr .7fr; gap: clamp(44px, 8vw, 110px); align-items: end; }
 .home-social .section-label { color: #783324; }
@@ -1675,6 +1699,11 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 1120px) {
   .home-stat-grid { grid-template-columns: repeat(3,1fr); }
   .home-stat-grid > div { border-bottom: 1px solid rgba(246,207,116,.18); }
+  .home-berlin { background-position: 35% center; }
+  .home-berlin::before { background: linear-gradient(180deg, rgba(7,2,3,.38), rgba(7,2,3,.86) 46%, rgba(7,2,3,.98) 72%); }
+  .home-berlin-grid { grid-template-columns: 1fr; }
+  .home-berlin-intro { min-height: 530px; }
+  .home-berlin-reasons { max-width: 850px; margin-left: auto; }
   .bbf-city-editorial, .bbf-why-story { grid-template-columns: 1fr; }
   .bbf-city-copy { max-width: 850px; }
   .bbf-city-portrait { max-width: 900px; }
@@ -1755,6 +1784,21 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .home-editorial-notes p::before { top: 26px; }
   .home-stat-grid strong { font-size: 1.72rem; line-height: 1; }
   .home-stat-grid span { font-size: .53rem; }
+  .home-manifesto::after { right: -18%; bottom: -18%; width: 92vw; opacity: .09; }
+  .home-manifesto-city { top: 24px; right: 20px; }
+  .home-berlin { min-height: 0; padding-bottom: 124px; background-position: 42% center; }
+  .home-berlin-intro { min-height: 470px; justify-content: flex-end; }
+  .home-berlin-intro > p:not(.section-label) { margin-top: 25px; font-size: .92rem; line-height: 1.62; }
+  .home-berlin-stamp { width: 132px; height: 132px; margin-top: 32px; }
+  .home-berlin-stamp strong { font-size: 1.85rem; }
+  .home-berlin-reasons { padding: 30px 22px; }
+  .home-berlin-reasons article { grid-template-columns: 1fr; gap: 10px; padding-block: 24px; }
+  .home-berlin-reasons article > span { grid-row: auto; padding-top: 0; }
+  .home-berlin-reasons h3 { font-size: 1.55rem; }
+  .home-berlin-actions { align-items: flex-start; flex-direction: column; }
+  .home-berlin-actions .button { width: 100%; }
+  .home-berlin-kiez { justify-content: flex-start; overflow-x: hidden; }
+  .home-berlin-kiez span { padding-inline: 22px; }
 
   .bbf-hero-grid { padding: 128px 0 82px; }
   .bbf-hero h1 { font-size: clamp(3.95rem,17.5vw,5.4rem); line-height: .9; }
