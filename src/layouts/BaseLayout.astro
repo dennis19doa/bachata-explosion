@@ -96,20 +96,33 @@ const socialImage = new URL("/og.png", Astro.site);
           </video>
           <div class="mobile-nav-shade" aria-hidden="true"></div>
           <nav aria-label="Mobile navigation">
-            <small>Festival</small>
-            <a href="/bbf-2026/">Berlin Bachata Festival</a>
-            <a href="/bbf-2026/#schedule">Schedule</a>
-            <a href="/jj/">Jack &amp; Jill</a>
-            <small>Travel & community</small>
-            <a href="/bbf-2026/#venue">Hotel & venue</a>
-            <a href="/bbf-2026/#travel">Getting to MOA</a>
-            <a href={whatsappUrl}>Festival WhatsApp ↗</a>
-            <small>About Explosion</small>
-            <a href="/archive/">Past events</a>
-            <a href="/explosion-history/">History</a>
-            <a href="/ambassadors/">Ambassadors</a>
-            <a href="/volunteers/">Volunteers</a>
-            <a href="/contact/">Contact</a>
+            <a class="mobile-nav-home" href="/">Home</a>
+            <details class="mobile-nav-group">
+              <summary><span>Festival</span><i aria-hidden="true"></i></summary>
+              <div>
+                <a href="/bbf-2026/">Berlin Bachata Festival</a>
+                <a href="/bbf-2026/#schedule">Schedule</a>
+                <a href="/jj/">Jack &amp; Jill</a>
+              </div>
+            </details>
+            <details class="mobile-nav-group">
+              <summary><span>Travel &amp; community</span><i aria-hidden="true"></i></summary>
+              <div>
+                <a href="/bbf-2026/#venue">Hotel &amp; venue</a>
+                <a href="/bbf-2026/#travel">Getting to MOA</a>
+                <a href={whatsappUrl}>Festival WhatsApp ↗</a>
+              </div>
+            </details>
+            <details class="mobile-nav-group">
+              <summary><span>About Explosion</span><i aria-hidden="true"></i></summary>
+              <div>
+                <a href="/archive/">Past events</a>
+                <a href="/explosion-history/">History</a>
+                <a href="/ambassadors/">Ambassadors</a>
+                <a href="/volunteers/">Volunteers</a>
+                <a href="/contact/">Contact</a>
+              </div>
+            </details>
           </nav>
           <div class="mobile-nav-meta">
             <span>Berlin · by dancers, for dancers</span>
@@ -150,6 +163,7 @@ const socialImage = new URL("/og.png", Astro.site);
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
+      const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
       const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
       const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
       const activeConcept = document.documentElement.dataset.siteConcept;
@@ -189,8 +203,15 @@ const socialImage = new URL("/og.png", Astro.site);
           menuVideo?.play().catch(() => undefined);
         } else {
           menuVideo?.pause();
+          mobileGroups.forEach((group) => { group.open = false; });
         }
       });
+      mobileGroups.forEach((group) => group.addEventListener("toggle", () => {
+        if (!group.open) return;
+        mobileGroups.forEach((candidate) => {
+          if (candidate !== group) candidate.open = false;
+        });
+      }));
       siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
         siteMenu.open = false;
       }));
