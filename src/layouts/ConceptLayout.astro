@@ -1,5 +1,6 @@
 ---
 import "../styles/concepts.css";
+import { ticketUrl } from "../data/festival";
 
 interface Props {
   title: string;
@@ -70,7 +71,7 @@ const socialImage = new URL("/og.png", Astro.site);
           <a href="/contact/">Contact &amp; Volunteers</a>
         </nav>
       </details>
-      <a class="concept-ticket" href="/tickets/">Get tickets</a>
+      <a class="concept-ticket" href={ticketUrl}>Get tickets</a>
     </header>
     <main id="concept-main"><slot /></main>
     <footer class="concept-footer">

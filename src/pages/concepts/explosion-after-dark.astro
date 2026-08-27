@@ -1,5 +1,6 @@
 ---
 import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { ticketUrl } from "../../data/festival";
 ---
 
 <ConceptLayout
@@ -27,7 +28,7 @@ import ConceptLayout from "../../layouts/ConceptLayout.astro";
         <h1>Berlin<br /><em>Bachata</em><br />Festival</h1>
         <p class="dark-hero-lead">Three days of international artists, workshops, shows, competitions and late-night social dancing—built by dancers, for dancers.</p>
         <div class="dark-hero-actions">
-          <a class="dark-primary" href="/tickets/">Get BBF tickets <span>→</span></a>
+          <a class="dark-primary" href={ticketUrl}>Get BBF tickets <span>→</span></a>
           <a class="dark-link" href="/bbf-2026/">Explore the full festival</a>
         </div>
         <dl class="dark-facts">

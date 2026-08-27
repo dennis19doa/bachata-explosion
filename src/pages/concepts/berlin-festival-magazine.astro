@@ -1,5 +1,6 @@
 ---
 import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { ticketUrl } from "../../data/festival";
 ---
 
 <ConceptLayout
@@ -26,7 +27,7 @@ import ConceptLayout from "../../layouts/ConceptLayout.astro";
           <div><dt>Where</dt><dd>MOA Berlin</dd></div>
           <div><dt>Main floor</dt><dd>1,200 m²</dd></div>
         </dl>
-        <a class="mag-button" href="/tickets/">Secure your pass <span>↗</span></a>
+        <a class="mag-button" href={ticketUrl}>Secure your pass <span>↗</span></a>
         <a class="mag-text-link" href="/bbf-2026/">Read the complete festival guide</a>
       </div>
     </div>
@@ -57,7 +58,7 @@ import ConceptLayout from "../../layouts/ConceptLayout.astro";
         <article><span>02 / Program</span><h3>Friday</h3><p>Opening workshops, social dancing and the first big party night.</p><b>Workshops · Social · Party</b></article>
         <article><span>03 / Program</span><h3>Saturday</h3><p>Main festival day, competition spotlight, shows and the biggest social.</p><b>Workshops · Finals · Main party</b></article>
         <article><span>04 / Program</span><h3>Sunday</h3><p>Final workshops, community social and the closing night together.</p><b>Workshops · Social · Closing</b></article>
-        <article class="mag-dossier-gold"><span>05 / Passes</span><h3>Choose your experience</h3><p>Full Pass, Party Pass and Gold Pass information stays clear and close to the program.</p><a href="/tickets/">Compare official passes ↗</a></article>
+        <article class="mag-dossier-gold"><span>05 / Passes</span><h3>Choose your experience</h3><p>Full Pass, Party Pass and Gold Pass information stays clear and close to the program.</p><a href={ticketUrl}>Compare official passes ↗</a></article>
       </div>
     </div>
   </section>

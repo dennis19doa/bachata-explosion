@@ -24,7 +24,7 @@ html[data-site-concept="explosion-underground"] body::before {
   inset: 0;
   z-index: 1000;
   opacity: .026;
-  background: url("/media/brand/graffiti-layer.webp") center / min(980px, 90vw) auto repeat;
+  background: url("/media/brand/live-explosion-background.png") center / cover;
   content: "";
   filter: grayscale(1) contrast(1.4);
   mix-blend-mode: screen;
@@ -949,6 +949,7 @@ textarea { padding: 15px; resize: vertical; }
   .mobile-nav-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(7,2,4,.92), rgba(7,2,4,.62) 58%, rgba(7,2,4,.26)), linear-gradient(0deg, rgba(7,2,4,.9), transparent 60%); }
   .mobile-nav nav { position: relative; inset: auto; z-index: 2; display: grid; width: auto; max-height: none; overflow: visible; padding: 0; border: 0; background: transparent; box-shadow: none; transform: none; }
   .mobile-nav nav > small { padding: 0 4px 14px; color: var(--gold); }
+  .mobile-nav nav > small:not(:first-child) { margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(246,207,116,.18); }
   .mobile-nav nav a { padding: clamp(7px, 1.1vh, 11px) 4px; font-size: clamp(1.35rem, 2.5vw, 2rem); }
   .mobile-nav-meta { position: relative; z-index: 2; display: grid; gap: 10px; align-self: end; justify-self: end; padding-bottom: 8px; color: #d5c8ca; font-size: .64rem; font-weight: 800; letter-spacing: .12em; text-align: right; text-transform: uppercase; }
   .mobile-nav-meta a { color: var(--gold); text-decoration: none; }
@@ -1601,21 +1602,50 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @keyframes archive-story { to { transform: translateX(-50%); } }
 
 /* Berlin Bachata Festival — the city runs through the whole page */
+.event-switcher,
+.home-team,
+.home-archive {
+  position: relative;
+  isolation: isolate;
+  background: #090304 url("/media/brand/live-explosion-background.png") center / cover no-repeat;
+}
+.event-switcher::before,
+.home-team::before,
+.home-archive::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, rgba(6,2,3,.97), rgba(33,5,6,.81) 52%, rgba(8,2,3,.94));
+  content: "";
+}
+.home-team { background-position: right center; }
+.home-team::before { background: linear-gradient(90deg, rgba(7,2,3,.94), rgba(31,5,5,.76), rgba(7,2,3,.91)); }
+.home-archive { background-position: 35% center; }
+.home-archive::before { background: linear-gradient(180deg, rgba(6,2,3,.96), rgba(28,5,5,.78), rgba(6,2,3,.95)); }
+.event-switcher > .shell,
+.home-team > .shell,
+.home-archive > .shell { position: relative; z-index: 1; }
+
 .bbf-premium { background: #070203 url("/media/brand/berlin-brandenburg-gold.png") center top / cover fixed no-repeat; }
 .bbf-intro { background: linear-gradient(90deg, rgba(7,2,3,.97), rgba(44,8,4,.82)), url("/media/brand/berlin-brandenburg-gold.png") center / cover; }
+.bbf-intro::after { display: none; }
 .bbf-venue { background: linear-gradient(180deg, rgba(7,2,3,.96), rgba(22,4,3,.91)), url("/media/brand/berlin-brandenburg-gold.png") center / cover fixed; }
 .bbf-artists { background: linear-gradient(180deg, rgba(28,6,4,.94), rgba(6,2,3,.97)), url("/media/brand/berlin-brandenburg-gold.png") center / cover fixed; }
-.bbf-why { background: linear-gradient(90deg, rgba(7,2,3,.97), rgba(51,8,3,.76)), url("/media/brand/berlin-brandenburg-gold.png") center / cover; }
 .bbf-schedule { background: linear-gradient(180deg, rgba(7,2,3,.96), rgba(12,3,3,.96)), url("/media/brand/berlin-brandenburg-gold.png") center / cover fixed; }
-.bbf-passes, .bbf-faq { background-color: rgba(8,2,3,.96); }
+.bbf-passes { background: linear-gradient(180deg, rgba(8,2,3,.96), rgba(35,6,4,.88)), url("/media/brand/live-explosion-background.png") center / cover; }
+.bbf-faq { background: linear-gradient(135deg, rgba(6,2,3,.98), rgba(31,5,4,.86)), url("/media/brand/berlin-brandenburg-gold.png") center / cover; }
 .bbf-city-editorial { display: grid; grid-template-columns: minmax(0,.82fr) minmax(420px,1.18fr); gap: clamp(55px,8vw,120px); align-items: center; }
 .bbf-city-copy > p:not(.section-label) { max-width: 670px; margin: 30px 0; color: #c7b5b2; font-size: 1.05rem; line-height: 1.78; }
-.bbf-city-notes { display: flex; flex-wrap: wrap; gap: 8px; }
-.bbf-city-notes span { padding: 9px 12px; border: 1px solid rgba(247,207,115,.24); color: #e1cfad; font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-.bbf-city-portrait { position: relative; min-height: 680px; margin: 0; }
-.bbf-city-portrait > img:first-child { width: 100%; height: 540px; object-fit: cover; border: 1px solid rgba(247,207,115,.28); box-shadow: 0 35px 90px rgba(0,0,0,.5); }
-.bbf-city-portrait > img:nth-child(2) { position: absolute; right: -3%; bottom: 0; width: 48%; height: 360px; object-fit: cover; border: 9px solid #150503; box-shadow: 0 28px 65px rgba(0,0,0,.5); }
-.bbf-city-portrait figcaption { position: absolute; bottom: 25px; left: -22px; padding: 16px 19px; background: var(--bbf-gold); color: #240703; font-size: .58rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.bbf-city-proof { display: grid; border: solid rgba(247,207,115,.2); border-width: 1px 0 0 1px; background: rgba(8,2,3,.73); box-shadow: 0 35px 100px rgba(0,0,0,.38); backdrop-filter: blur(12px); }
+.bbf-city-proof article { position: relative; display: grid; grid-template-columns: 54px 1fr; gap: 9px 20px; min-height: 168px; padding: 28px; border: solid rgba(247,207,115,.2); border-width: 0 1px 1px 0; }
+.bbf-city-proof span { grid-row: 1 / span 2; color: var(--bbf-gold); font-family: "Oswald"; font-size: 1.4rem; }
+.bbf-city-proof h3 { margin: 0; font-size: clamp(1.35rem,2.3vw,2rem); line-height: 1.05; }
+.bbf-city-proof p { margin: 0; color: #bba9a7; font-size: .78rem; line-height: 1.65; }
+.bbf-film { display: grid; grid-template-columns: minmax(230px,.42fr) minmax(0,1fr); gap: clamp(35px,6vw,80px); align-items: center; margin-bottom: 18px; }
+.bbf-film-heading h3 { margin: 12px 0 20px; font-size: clamp(2.2rem,4vw,4.3rem); line-height: .98; }
+.bbf-film-heading > p:last-child { color: #b8a6a4; font-size: .82rem; line-height: 1.7; }
+.bbf-cinema { width: 100%; max-width: 940px; margin-inline: auto; }
+.bbf-cinema video { width: 100%; height: auto; max-height: none; aspect-ratio: 16 / 9; object-fit: contain; }
 .bbf-venue-card img, .bbf-hotel-panel img { filter: saturate(.9) contrast(1.05); }
 .bbf-hotel-panel img { object-position: center; }
 
@@ -1626,14 +1656,22 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .bbf-artist-card img { object-fit: cover; filter: grayscale(1) saturate(.2) contrast(1.1); }
 .bbf-artist-card:hover img, .bbf-artist-card:focus-within img { filter: grayscale(0) saturate(1.05) contrast(1.02); }
 
-.bbf-why-story { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(55px,8vw,110px); align-items: center; }
-.bbf-why-image { position: relative; min-height: 720px; margin: 0; }
-.bbf-why-image img { width: 100%; height: 720px; object-fit: cover; filter: saturate(.82) contrast(1.1); }
-.bbf-why-image::after { position: absolute; inset: 0; border: 1px solid rgba(247,207,115,.2); background: linear-gradient(0deg, rgba(6,2,2,.72), transparent 48%); content: ""; }
-.bbf-why-image figcaption { position: absolute; right: 24px; bottom: 22px; z-index: 1; color: var(--bbf-gold); font-size: .62rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
-.bbf-why-beats { display: grid; grid-template-columns: 1fr 1fr; margin: 30px 0 36px; border: solid rgba(247,207,115,.18); border-width: 1px 0 0 1px; }
-.bbf-why-beats span { display: grid; gap: 7px; padding: 18px; border: solid rgba(247,207,115,.18); border-width: 0 1px 1px 0; color: #c1b0ae; font-size: .72rem; }
-.bbf-why-beats b { color: var(--bbf-gold); font-family: "Oswald"; font-size: 1.15rem; text-transform: uppercase; }
+.bbf-travel { background: linear-gradient(120deg, rgba(7,2,3,.97), rgba(44,7,4,.8)), url("/media/brand/berlin-brandenburg-gold.png") center / cover fixed; }
+.bbf-travel-grid { display: grid; grid-template-columns: repeat(2,1fr); border: solid rgba(247,207,115,.2); border-width: 1px 0 0 1px; background: rgba(7,2,3,.7); }
+.bbf-travel-grid article { min-height: 285px; padding: clamp(26px,4vw,44px); border: solid rgba(247,207,115,.2); border-width: 0 1px 1px 0; }
+.bbf-travel-grid span { color: var(--bbf-gold); font-size: .58rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+.bbf-travel-grid h3 { margin: 18px 0 15px; font-size: clamp(1.7rem,3vw,2.8rem); line-height: 1.05; }
+.bbf-travel-grid p { color: #c2afac; font-size: .8rem; line-height: 1.7; }
+.bbf-travel-grid b { display: block; margin-top: 24px; color: #f4d68f; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+.bbf-travel-actions { display: flex; gap: 12px; align-items: center; margin-top: 18px; padding: 18px 0; }
+.bbf-travel-actions p { flex: 1; margin: 0; color: #a99694; font-size: .72rem; line-height: 1.6; }
+.bbf-whatsapp { display: grid; grid-template-columns: 160px minmax(0,1fr) auto; gap: clamp(24px,5vw,62px); align-items: center; margin-top: clamp(50px,7vw,90px); padding: clamp(28px,4vw,48px); border: 1px solid rgba(247,207,115,.3); background: linear-gradient(135deg, rgba(75,12,7,.82), rgba(8,2,3,.92)); box-shadow: 0 30px 90px rgba(0,0,0,.38); }
+.bbf-whatsapp-mark { display: grid; width: 150px; height: 150px; place-content: center; border: 1px solid rgba(247,207,115,.45); border-radius: 50%; color: var(--bbf-gold); text-align: center; box-shadow: inset 0 0 50px rgba(237,122,33,.12), 0 0 40px rgba(237,122,33,.12); }
+.bbf-whatsapp-mark span { font-size: .58rem; font-weight: 900; letter-spacing: .18em; }
+.bbf-whatsapp-mark strong { font-family: "Oswald"; font-size: 3rem; line-height: .9; }
+.bbf-whatsapp h3 { margin: 9px 0 12px; font-size: clamp(2rem,3.5vw,3.8rem); line-height: 1; }
+.bbf-whatsapp p:last-child { max-width: 650px; margin: 0; color: #c5b3b0; font-size: .8rem; line-height: 1.65; }
+#venue, #artists, #schedule, #passes, #travel, #faq { scroll-margin-top: 90px; }
 
 /* Ambassador crew — editorial community page */
 .ambassador-2026 { overflow: hidden; background: #0a0305; }
@@ -1704,9 +1742,13 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .home-berlin-grid { grid-template-columns: 1fr; }
   .home-berlin-intro { min-height: 530px; }
   .home-berlin-reasons { max-width: 850px; margin-left: auto; }
-  .bbf-city-editorial, .bbf-why-story { grid-template-columns: 1fr; }
+  .bbf-city-editorial { grid-template-columns: 1fr; }
   .bbf-city-copy { max-width: 850px; }
-  .bbf-city-portrait { max-width: 900px; }
+  .bbf-film { grid-template-columns: 1fr; }
+  .bbf-film-heading { max-width: 760px; }
+  .bbf-whatsapp { grid-template-columns: 130px 1fr; }
+  .bbf-whatsapp-mark { width: 120px; height: 120px; }
+  .bbf-whatsapp .button { grid-column: 2; justify-self: start; }
   .ambassador-statement-grid { grid-template-columns: 1fr 1fr; }
   .ambassador-statement-grid > p:last-child { grid-column: 2; }
   .ambassador-benefit-grid { grid-template-columns: repeat(2,1fr); }
@@ -1715,11 +1757,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
 @media (max-width: 820px) {
   .home-next-poster { min-height: 0; }
   .team-card, .team-card:hover, .team-card:focus-visible { flex-basis: 280px; width: 280px; }
-  .bbf-city-portrait { min-height: 560px; }
-  .bbf-city-portrait > img:first-child { height: 440px; }
-  .bbf-city-portrait > img:nth-child(2) { height: 300px; }
   .bbf-artist-rail { grid-template-columns: repeat(2,1fr); }
-  .bbf-why-image, .bbf-why-image img { min-height: 0; height: 580px; }
+  .bbf-travel-grid { grid-template-columns: 1fr; }
+  .bbf-travel-actions { align-items: stretch; flex-direction: column; }
+  .bbf-travel-actions .button { justify-content: center; }
+  .bbf-whatsapp { grid-template-columns: 1fr; }
+  .bbf-whatsapp .button { grid-column: auto; }
   .ambassador-hero-grid, .ambassador-role-grid, .ambassador-group-card, .ambassador-application-grid { grid-template-columns: 1fr; }
   .ambassador-hero-grid { padding-bottom: 120px; }
   .ambassador-photo-stack { width: min(100%,620px); }
@@ -1736,12 +1779,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .home-archive-label { align-items: flex-start; flex-direction: column; }
   .home-archive .archive-card { flex-basis: 235px; width: 235px; min-height: 310px; }
   .team-rail-instruction { margin-top: -28px; text-align: left; }
-  .bbf-city-portrait { min-height: 470px; }
-  .bbf-city-portrait > img:first-child { height: 360px; }
-  .bbf-city-portrait > img:nth-child(2) { right: 0; width: 56%; height: 240px; border-width: 6px; }
-  .bbf-city-portrait figcaption { bottom: 12px; left: 0; }
+  .bbf-city-proof article { grid-template-columns: 38px 1fr; padding: 23px 18px; }
+  .bbf-cinema video { aspect-ratio: 16 / 9; object-fit: contain; }
+  .bbf-cinema-label { padding: 14px; }
+  .bbf-whatsapp-mark { width: 104px; height: 104px; }
+  .bbf-whatsapp-mark strong { font-size: 2.45rem; }
   .bbf-artist-rail { grid-template-columns: 1fr; }
-  .bbf-why-beats { grid-template-columns: 1fr; }
   .ambassador-hero { min-height: 1080px; }
   .ambassador-hero-grid { min-height: 1080px; padding-top: 135px; }
   .ambassador-photo-stack { min-height: 500px; }

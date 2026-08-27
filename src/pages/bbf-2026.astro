@@ -33,6 +33,9 @@ const venueStories = [
 ] as const;
 
 const hotelBookingUrl = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/1902213";
+const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
+const routePlannerUrl = "https://www.bvg.de/en/connections/connection-search";
+const moaDirectionsUrl = "https://moa.de/anfahrt/";
 const hotelRooms = [
   { id: "single", tab: "Single room", price: "€129 / night", title: "Your own room inside the festival", text: "Private comfort for one dancer. Breakfast is included; your festival pass is booked separately.", points: ["1 guest", "Breakfast included", "No commute to the festival floor"], action: "Book single room" },
   { id: "double", tab: "Double room", price: "€149 / night", title: "Share the weekend", text: "A double room for two dancers, friends or partners who want the complete on-site experience together.", points: ["2 guests", "Breakfast included", "Hotel and venue connected"], action: "Book double room" },
@@ -92,7 +95,6 @@ const expandedFaqs = [
 >
   <div class="bbf-premium" data-pointer-glow data-wordpress-source="bbf-2026">
     <section class="bbf-hero" aria-labelledby="bbf-title">
-      <div class="urban-hero-word" aria-hidden="true">BERLIN</div>
       <video class="bbf-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" data-autoplay-video aria-hidden="true">
         <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
       </video>
@@ -131,16 +133,15 @@ const expandedFaqs = [
     <section class="bbf-intro bbf-pad">
       <div class="shell bbf-city-editorial">
         <div class="bbf-city-copy" data-reveal>
-          <p class="section-label">Berlin · by dancers, for dancers</p>
-          <h2>Berlin is not<br />the backdrop.<br /><em>It is part of the festival.</em></h2>
-          <p>Direct, international and still moving after midnight. Berlin runs through every workshop, social and competition.</p>
-          <div class="bbf-city-notes"><span>Direct energy</span><span>International room</span><span>After-dark rhythm</span></div>
+          <p class="section-label">Made in Berlin · open to the world</p>
+          <h2>This festival could only<br />have been made<br /><em>in Berlin.</em></h2>
+          <p>Direct, multicultural and still moving after midnight. You feel the city in the music, the people and the freedom to dance as yourself.</p>
         </div>
-        <figure class="bbf-city-portrait" data-reveal>
-          <img src="/media/brand/berlin-brandenburg-gold.png" alt="Brandenburg Gate in the gold and black Berlin Bachata Festival visual style" width="1680" height="945" loading="eager" />
-          <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="Bachata Explosion dancers celebrating together in Berlin" width="1200" height="800" loading="lazy" />
-          <figcaption>Born in Berlin · shared with the world</figcaption>
-        </figure>
+        <div class="bbf-city-proof" data-reveal>
+          <article><span>01</span><h3>Unpolished in the right places.</h3><p>Premium production without sanding away the character that made Explosion.</p></article>
+          <article><span>02</span><h3>International by nature.</h3><p>Berlin brings languages, styles and personalities together without asking them to become the same.</p></article>
+          <article><span>03</span><h3>Built for the whole night.</h3><p>Focused learning by day, a full room after dark, and a city that still has somewhere to go afterward.</p></article>
+        </div>
       </div>
     </section>
 
@@ -151,12 +152,15 @@ const expandedFaqs = [
           <p>Hotel rooms, workshops, social floors, parties and useful everyday services are connected inside the MOA Bogen complex.</p>
         </div>
 
-        <div class="bbf-cinema" data-reveal>
-          <video autoplay muted loop playsinline controls preload="metadata" poster="/media/bbf/venue/hero.png" data-autoplay-video>
-            <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
-            Your browser cannot play the festival video.
-          </video>
-          <div class="bbf-cinema-label"><span>Inside the Explosion</span><strong>Festival film · Berlin</strong></div>
+        <div class="bbf-film" data-reveal>
+          <div class="bbf-film-heading"><p class="section-label">Festival film</p><h3>See what an Explosion weekend feels like.</h3><p>Real footage from our Berlin dance floor. You can rename this film when the final 2026 title is ready.</p></div>
+          <div class="bbf-cinema">
+            <video autoplay muted loop playsinline controls preload="metadata" poster="/media/bbf/venue/hero.png" data-autoplay-video>
+              <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+              Your browser cannot play the festival video.
+            </video>
+            <div class="bbf-cinema-label"><span>Bachata Explosion</span><strong>Festival film · Berlin</strong></div>
+          </div>
         </div>
 
         <div class="bbf-venue-stories">
@@ -204,22 +208,6 @@ const expandedFaqs = [
           ))}
         </div>
         <p class="bbf-rail-note">The complete BBF 2026 lineup · artists, instructors and DJs.</p>
-      </div>
-    </section>
-
-    <section class="bbf-why bbf-pad">
-      <div class="shell bbf-why-story">
-        <figure class="bbf-why-image" data-reveal>
-          <img src="/media/bbf/atmosphere/party-143.jpg" alt="A packed Bachata Explosion party floor in Berlin" width="1200" height="800" loading="lazy" />
-          <figcaption>Workshops by day · Berlin after dark</figcaption>
-        </figure>
-        <div class="bbf-why-copy" data-reveal>
-          <p class="section-label">The weekend, without filler</p>
-          <h2>Train with intent.<br /><em>Dance without distance.</em></h2>
-          <p>Hotel, workshops and parties meet at MOA. Less commuting means more time on the floor.</p>
-          <div class="bbf-why-beats"><span><b>Day</b>Focused workshops</span><span><b>Night</b>Socials until 05:00</span><span><b>Place</b>Everything at MOA</span><span><b>Feeling</b>Berlin, not anonymous</span></div>
-          <a class="button button-gold" href={ticketUrl}>Join the weekend</a>
-        </div>
       </div>
     </section>
 
@@ -278,6 +266,31 @@ const expandedFaqs = [
           <article class="bbf-pass-full" data-pass-word="FULL" data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><ul><li>Friday–Sunday workshops</li><li>All three festival parties</li><li>Jack & Jill eligibility</li></ul><a href={ticketUrl}>See current price ↗</a></article>
           <article class="bbf-pass-featured" data-pass-word="GOLD" data-reveal><span>Maximum experience</span><h3>Gold Pass</h3><p>The premium route for dancers who want the most complete available festival package.</p><ul><li>Complete Full Pass access</li><li>Premium package additions</li><li>The fullest Explosion experience</li></ul><a href={ticketUrl}>Explore Gold ↗</a></article>
           <article class="bbf-pass-party" data-pass-word="PARTY" data-reveal><span>Nights only</span><h3>Party Pass</h3><p>Come for the social floors, shows and late-night Explosion atmosphere.</p><ul><li>Friday welcome party</li><li>Saturday main party</li><li>Sunday closing party</li></ul><a href={ticketUrl}>See current price ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bbf-travel bbf-pad" id="travel" aria-labelledby="travel-title">
+      <div class="shell">
+        <div class="bbf-heading" data-reveal>
+          <div><p class="section-label">Arriving in Berlin</p><h2 id="travel-title">Getting to the dance floor<br /><em>should be the easy part.</em></h2></div>
+          <p>MOA Berlin is at Stephanstraße 41 in Moabit, close to Birkenstraße U-Bahn, Westhafen S-Bahn and Berlin Hauptbahnhof.</p>
+        </div>
+        <div class="bbf-travel-grid">
+          <article data-reveal><span>From BER Airport</span><h3>Take the FEX into the city.</h3><p>The Airport Express reaches Hauptbahnhof in about 23 minutes. Continue toward Birkenstraße or Westhafen using the live route planner.</p><b>Berlin ABC ticket · €5.00 single</b></article>
+          <article data-reveal><span>From Hauptbahnhof</span><h3>You are already close.</h3><p>MOA lists the station as roughly ten minutes away by taxi. Public transport connections usually continue via M10, U9, Birkenstraße or Westhafen.</p><b>Berlin AB ticket · €4.00 single</b></article>
+          <article data-reveal><span>Moving around Berlin</span><h3>Use one ticket across the network.</h3><p>A single ticket is valid for one journey for up to 120 minutes with changes. For a full sightseeing day, a 24-hour ticket is usually simpler.</p><b>24-hour AB €11.20 · ABC €12.90</b></article>
+          <article data-reveal><span>Driving to MOA</span><h3>Park below the venue.</h3><p>The MOA parking entrance is at Birkenstraße 21. The hotel currently lists €3 per hour and €25 per day; always confirm before arrival.</p><b>Venue, hotel and parking together</b></article>
+        </div>
+        <div class="bbf-travel-actions" data-reveal>
+          <p>Schedules and engineering works can change. Check your exact route shortly before you travel.</p>
+          <a class="button button-gold" href={routePlannerUrl}>Plan with BVG ↗</a>
+          <a class="button button-outline" href={moaDirectionsUrl}>MOA directions ↗</a>
+        </div>
+        <div class="bbf-whatsapp" data-reveal>
+          <div class="bbf-whatsapp-mark" aria-hidden="true"><span>BBF</span><strong>2026</strong></div>
+          <div><p class="section-label">Official festival WhatsApp</p><h3>Land in Berlin already knowing someone.</h3><p>Join for festival updates, practical questions and community conversations before the first song starts.</p></div>
+          <a class="button button-gold" href={whatsappUrl}>Join the WhatsApp community ↗</a>
         </div>
       </div>
     </section>

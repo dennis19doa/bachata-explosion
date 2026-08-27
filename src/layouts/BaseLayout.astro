@@ -1,5 +1,8 @@
 ---
 import "../styles/global.css";
+import { ticketUrl } from "../data/festival";
+
+const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
 
 interface Props {
   title?: string;
@@ -56,24 +59,34 @@ const socialImage = new URL("/og.png", Astro.site);
       <nav class="desktop-nav" aria-label="Main navigation">
         <a class="nav-home" href="/">Home</a>
         <details class="nav-group">
-          <summary>Berlin Bachata Festival</summary>
+          <summary>Festival</summary>
           <div class="nav-popover">
             <span>BBF · October 16–18, 2026</span>
             <a href="/bbf-2026/"><b>Festival overview</b><small>Venue, artists, program & passes</small></a>
+            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Three days of workshops & parties</small></a>
             <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules & registration</small></a>
           </div>
         </details>
-        <a href="/archive/">Past events</a>
-        <a href="/explosion-history/">History</a>
-        <a href="/ambassadors/">Ambassadors</a>
         <details class="nav-group">
-          <summary>Contact</summary>
+          <summary>Travel</summary>
+          <div class="nav-popover">
+            <span>Arrive in Berlin without the guesswork</span>
+            <a href="/bbf-2026/#venue"><b>Hotel & venue</b><small>Stay and dance at MOA Berlin</small></a>
+            <a href="/bbf-2026/#travel"><b>Getting to MOA</b><small>Airport, Hauptbahnhof & local tickets</small></a>
+            <a href={whatsappUrl}><b>Festival WhatsApp ↗</b><small>Updates and community before arrival</small></a>
+          </div>
+        </details>
+        <a href="/archive/">Past events</a>
+        <details class="nav-group">
+          <summary>About</summary>
           <div class="nav-popover nav-popover-right">
-            <span>Talk to the team</span>
-            <a href="/contact/"><b>Contact</b><small>Questions, partnerships & support</small></a>
+            <span>The people and story behind Explosion</span>
+            <a href="/explosion-history/"><b>Our history</b><small>Every chapter since 2022</small></a>
+            <a href="/ambassadors/"><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
             <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
           </div>
         </details>
+        <a href="/contact/">Contact</a>
       </nav>
       <details class="mobile-nav" data-site-menu>
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
@@ -83,9 +96,15 @@ const socialImage = new URL("/og.png", Astro.site);
           </video>
           <div class="mobile-nav-shade" aria-hidden="true"></div>
           <nav aria-label="Mobile navigation">
-            <small>Choose your next Explosion</small>
+            <small>Festival</small>
             <a href="/bbf-2026/">Berlin Bachata Festival</a>
+            <a href="/bbf-2026/#schedule">Schedule</a>
             <a href="/jj/">Jack &amp; Jill</a>
+            <small>Travel & community</small>
+            <a href="/bbf-2026/#venue">Hotel & venue</a>
+            <a href="/bbf-2026/#travel">Getting to MOA</a>
+            <a href={whatsappUrl}>Festival WhatsApp ↗</a>
+            <small>About Explosion</small>
             <a href="/archive/">Past events</a>
             <a href="/explosion-history/">History</a>
             <a href="/ambassadors/">Ambassadors</a>
@@ -98,7 +117,7 @@ const socialImage = new URL("/og.png", Astro.site);
           </div>
         </div>
       </details>
-      <a class="button button-small button-gold" href="/tickets/">Get tickets</a>
+      <a class="button button-small button-gold" href={ticketUrl}>Get tickets</a>
     </header>
     <main id="main">
       <slot />
@@ -118,6 +137,7 @@ const socialImage = new URL("/og.png", Astro.site);
           <a href="/privacy/">Privacy</a>
           <a href="/terms-conditions/">Terms</a>
           <a href="/contact/">Contact</a>
+          <a href={whatsappUrl}>WhatsApp</a>
         </nav>
         <address>
           <strong>Elena & Dennis Events UG</strong><br />
@@ -126,7 +146,7 @@ const socialImage = new URL("/og.png", Astro.site);
         </address>
       </div>
     </footer>
-    <a class="mobile-ticket-dock" href="/tickets/"><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
