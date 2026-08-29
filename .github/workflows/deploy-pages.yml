@@ -2,7 +2,7 @@ name: Deploy GitHub Pages preview
 
 on:
   push:
-    branches: [main]
+    branches: [main, modernize-cloudflare-migration]
   workflow_dispatch:
 
 permissions:
@@ -38,6 +38,10 @@ jobs:
       - name: Build GitHub Pages preview
         env:
           PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.PUBLIC_CONTACT_FORM_ENDPOINT }}
+          PUBLIC_TICKETS_FORM_ENDPOINT: ${{ vars.PUBLIC_TICKETS_FORM_ENDPOINT }}
+          PUBLIC_GROUPS_FORM_ENDPOINT: ${{ vars.PUBLIC_GROUPS_FORM_ENDPOINT }}
+          PUBLIC_PARTNERS_FORM_ENDPOINT: ${{ vars.PUBLIC_PARTNERS_FORM_ENDPOINT }}
+          PUBLIC_MEDIA_FORM_ENDPOINT: ${{ vars.PUBLIC_MEDIA_FORM_ENDPOINT }}
           PUBLIC_VOLUNTEER_FORM_ENDPOINT: ${{ vars.PUBLIC_VOLUNTEER_FORM_ENDPOINT }}
           PUBLIC_AMBASSADOR_FORM_ENDPOINT: ${{ vars.PUBLIC_AMBASSADOR_FORM_ENDPOINT }}
           PUBLIC_JJ_FORM_ENDPOINT: ${{ vars.PUBLIC_JJ_FORM_ENDPOINT }}
