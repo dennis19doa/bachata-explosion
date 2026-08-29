@@ -36,5 +36,10 @@ jobs:
       - name: Audit generated site
         run: pnpm check:site
 
-      - name: Audit WordPress content parity
-        run: pnpm check:content
+      - name: Audit WordPress content parity when private export is available
+        run: |
+          if [ -f migration/wp-pages-public-export.json ]; then
+            pnpm check:content
+          else
+            echo "Skipping WordPress parity audit: private migration export is intentionally not committed to GitHub."
+          fi
