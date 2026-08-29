@@ -1,18 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { contactFormEndpoint } from "../lib/forms";
+import { contactTopicEndpoints } from "../lib/forms";
 
 const routes = [
-  { value: "Ticket question", number: "01", label: "Tickets", detail: "Passes, payments, confirmations or name changes" },
-  { value: "Group discount", number: "02", label: "Groups", detail: "Promo codes and bringing your dance community" },
-  { value: "Partnership or ambassador", number: "03", label: "Partners", detail: "Ambassadors, studios, brands and collaborations" },
-  { value: "Media or photographer", number: "04", label: "Media", detail: "Press, photographers, video and content requests" },
-  { value: "Volunteer", number: "05", label: "Volunteer", detail: "Help the team before or during an event" },
-  { value: "General question", number: "06", label: "General", detail: "Anything that does not fit the other routes" },
-];
+  { value: "Ticket question", number: "01", label: "Tickets", alias: "tickets@bachataexplosion.com", subject: "[Bachata Explosion] Ticket question", detail: "Passes, payments, confirmations or name changes" },
+  { value: "Group discount", number: "02", label: "Groups", alias: "groups@bachataexplosion.com", subject: "[Bachata Explosion] Group discount", detail: "Promo codes and bringing your dance community" },
+  { value: "Partnership or ambassador", number: "03", label: "Partners", alias: "partners@bachataexplosion.com", subject: "[Bachata Explosion] Partnership", detail: "Ambassadors, studios, brands and collaborations" },
+  { value: "Media or photographer", number: "04", label: "Media", alias: "media@bachataexplosion.com", subject: "[Bachata Explosion] Media request", detail: "Press, photographers, video and content requests" },
+  { value: "Volunteer", number: "05", label: "Volunteer", alias: "volunteers@bachataexplosion.com", subject: "[Bachata Explosion] Volunteer inquiry", detail: "Help the team before or during an event" },
+  { value: "General question", number: "06", label: "General", alias: "info@bachataexplosion.com", subject: "[Bachata Explosion] General contact", detail: "Anything that does not fit the other routes" },
+] as const;
 
 const events = ["Berlin Bachata Festival 2026", "Role Rotation", "Elite Dance #3", "Jack & Jill", "Past event / photo archive", "Not event-specific"];
-const formConnected = Boolean(contactFormEndpoint);
+const initialRoute = routes[0];
+const initialEndpoint = contactTopicEndpoints[initialRoute.value];
+const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
 ---
 
 <BaseLayout
@@ -43,7 +45,7 @@ const formConnected = Boolean(contactFormEndpoint);
       <div class="shell">
         <div class="contact-section-heading">
           <div><p class="section-label">Step 01 · Choose a topic</p><h2 id="contact-routing-title">What can we<br /><em>help with?</em></h2></div>
-          <p>One inbox, clearly sorted by topic.</p>
+          <p>One simple form, routed to the right part of the team.</p>
         </div>
         <div class="contact-route-grid">
           {routes.map((route, index) => (
@@ -63,11 +65,11 @@ const formConnected = Boolean(contactFormEndpoint);
         <div class="contact-workbench-intro">
           <p class="section-label">Step 02 · Add the details</p>
           <h2 id="contact-form-title">Make it easy<br /><em>to answer.</em></h2>
-          <p>For ticket questions, use the email address from checkout.</p>
+          <p>For ticket questions, use the same email address you used at checkout.</p>
           <div class="contact-delivery-card">
-            <span>Message destination</span>
-            <strong>info@bachataexplosion.com</strong>
-            <p>Ticket, group, partnership and media topics are labelled inside the submission.</p>
+            <span>Message route</span>
+            <strong data-contact-destination>{initialRoute.alias}</strong>
+            <p>The selected topic determines the form endpoint and the role address used for sorting and replies.</p>
           </div>
         </div>
 
@@ -75,10 +77,13 @@ const formConnected = Boolean(contactFormEndpoint);
           class="contact-form contact-form-2026"
           id="contact-form"
           method="POST"
-          action={contactFormEndpoint || undefined}
-          data-contact-endpoint={contactFormEndpoint}
+          action={initialEndpoint || undefined}
+          data-contact-endpoint={initialEndpoint}
+          data-contact-endpoints={JSON.stringify(contactTopicEndpoints)}
           data-contact-connected={String(formConnected)}
         >
+          <input type="hidden" name="_email.subject" value={initialRoute.subject} data-contact-subject />
+          <input type="hidden" name="destination_alias" value={initialRoute.alias} data-contact-alias />
           <label>
             <span>Full name *</span>
             <input type="text" name="name" autocomplete="name" required maxlength="100" placeholder="How should we call you?" />
@@ -118,10 +123,10 @@ const formConnected = Boolean(contactFormEndpoint);
           </label>
           <div class="contact-form-action full-field">
             <button class="button button-gold" type="submit" data-submit-label>Send message</button>
-            <small>{formConnected ? "Secure form delivery is connected." : "Preview mode: no message is transmitted yet."}</small>
+            <small>{formConnected ? "Secure form routing is configured." : "Preview mode: no message is transmitted yet."}</small>
           </div>
           <p class="contact-form-status full-field" role="status" aria-live="polite" data-contact-status>
-            {formConnected ? "Ready when you are." : "The design is ready. Connect the protected form endpoint to activate delivery to info@bachataexplosion.com."}
+            {formConnected ? "Ready when you are." : "The routing is ready. Add the protected form endpoints to activate delivery."}
           </p>
         </form>
       </div>
@@ -142,20 +147,55 @@ const formConnected = Boolean(contactFormEndpoint);
     const routeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-contact-topic]"));
     const status = form?.querySelector<HTMLElement>("[data-contact-status]");
     const submitButton = form?.querySelector<HTMLButtonElement>("[data-submit-label]");
+    const subjectInput = form?.querySelector<HTMLInputElement>("[data-contact-subject]");
+    const aliasInput = form?.querySelector<HTMLInputElement>("[data-contact-alias]");
+    const destination = document.querySelector<HTMLElement>("[data-contact-destination]");
+
+    const routing: Record<string, { alias: string; subject: string }> = {
+      "Ticket question": { alias: "tickets@bachataexplosion.com", subject: "[Bachata Explosion] Ticket question" },
+      "Group discount": { alias: "groups@bachataexplosion.com", subject: "[Bachata Explosion] Group discount" },
+      "Partnership or ambassador": { alias: "partners@bachataexplosion.com", subject: "[Bachata Explosion] Partnership" },
+      "Media or photographer": { alias: "media@bachataexplosion.com", subject: "[Bachata Explosion] Media request" },
+      Volunteer: { alias: "volunteers@bachataexplosion.com", subject: "[Bachata Explosion] Volunteer inquiry" },
+      "General question": { alias: "info@bachataexplosion.com", subject: "[Bachata Explosion] General contact" },
+    };
+
+    let endpoints: Record<string, string> = {};
+    try { endpoints = JSON.parse(form?.dataset.contactEndpoints ?? "{}"); } catch { endpoints = {}; }
+
+    const applyTopic = (topic: string) => {
+      const route = routing[topic] ?? routing["General question"];
+      const endpoint = endpoints[topic]?.trim() ?? "";
+      if (topicSelect) topicSelect.value = topic;
+      if (form) {
+        form.dataset.contactEndpoint = endpoint;
+        if (endpoint) form.action = endpoint;
+        else form.removeAttribute("action");
+      }
+      if (subjectInput) subjectInput.value = route.subject;
+      if (aliasInput) aliasInput.value = route.alias;
+      if (destination) destination.textContent = route.alias;
+      routeButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate.dataset.contactTopic === topic)));
+      if (status && !endpoint) status.textContent = `Preview mode for ${route.alias}: add its protected endpoint to activate delivery.`;
+      else if (status) status.textContent = `Ready to route this message through ${route.alias}.`;
+    };
 
     routeButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        routeButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
-        if (topicSelect) topicSelect.value = button.dataset.contactTopic ?? "General question";
+        applyTopic(button.dataset.contactTopic ?? "General question");
         document.querySelector("#message")?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
+    topicSelect?.addEventListener("change", () => applyTopic(topicSelect.value));
 
     form?.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const topic = topicSelect?.value ?? "General question";
+      applyTopic(topic);
       const endpoint = form.dataset.contactEndpoint?.trim();
+      const route = routing[topic] ?? routing["General question"];
       if (!endpoint) {
-        if (status) status.textContent = "Preview mode is active, so nothing was sent. Add the protected form endpoint to deliver this message to info@bachataexplosion.com.";
+        if (status) status.textContent = `Preview mode is active for ${route.alias}, so nothing was sent yet.`;
         return;
       }
 
@@ -163,7 +203,7 @@ const formConnected = Boolean(contactFormEndpoint);
         submitButton.disabled = true;
         submitButton.textContent = "Sending…";
       }
-      if (status) status.textContent = "Sending your message securely…";
+      if (status) status.textContent = `Sending securely via ${route.alias}…`;
 
       try {
         const response = await fetch(endpoint, {
@@ -173,17 +213,17 @@ const formConnected = Boolean(contactFormEndpoint);
         });
         if (!response.ok) throw new Error(`Submission failed with ${response.status}`);
         form.reset();
-        routeButtons.forEach((candidate, index) => candidate.setAttribute("aria-pressed", String(index === 0)));
+        applyTopic("Ticket question");
         if (status) {
           status.classList.remove("is-error");
           status.classList.add("is-success");
-          status.textContent = "Message received. Thank you—your topic and event details were included.";
+          status.textContent = "Message received. Thank you—your request was routed with its topic and event details.";
         }
       } catch {
         if (status) {
           status.classList.remove("is-success");
           status.classList.add("is-error");
-          status.textContent = "The message could not be delivered. Please try again or email info@bachataexplosion.com directly.";
+          status.textContent = `The message could not be delivered. Please try again or email ${route.alias} directly.`;
         }
       } finally {
         if (submitButton) {
