@@ -1,0 +1,85 @@
+name: Publish isolated public preview
+
+on:
+  push:
+    branches: [modernize-cloudflare-migration]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bachata-public-preview
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build static site
+        run: pnpm build
+
+      - name: Prepare renderer-safe preview
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { readdirSync, readFileSync, writeFileSync } = require('node:fs');
+          const { join, extname } = require('node:path');
+          const root = 'dist/client';
+          const base = 'https://raw.githack.com/dennis19doa/bachata-explosion/public-preview/';
+          const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+            const path = join(dir, entry.name);
+            return entry.isDirectory() ? walk(path) : [path];
+          });
+          for (const file of walk(root)) {
+            const ext = extname(file);
+            if (!['.html', '.css'].includes(ext)) continue;
+            let text = readFileSync(file, 'utf8');
+            if (ext === '.html') {
+              text = text
+                .replace(/(href|src|poster|action)=(['"])\/(?!\/)/g, (_, attr, quote) => `${attr}=${quote}${base}`)
+                .replace(/srcset=(['"])(.*?)\1/g, (_, quote, value) => `srcset=${quote}${value.replace(/(^|,\s*)\/(?!\/)/g, `$1${base}`)}${quote}`);
+              if (!/<meta\s+name=(['"])robots\1/i.test(text)) {
+                text = text.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
+              }
+            } else {
+              text = text.replace(/url\((['"]?)\/(?!\/)/g, (_, quote) => `url(${quote}${base}`);
+            }
+            writeFileSync(file, text);
+          }
+          NODE
+
+      - name: Publish public-preview branch
+        shell: bash
+        run: |
+          rm -rf /tmp/bachata-public-preview
+          mkdir -p /tmp/bachata-public-preview
+          cp -a dist/client/. /tmp/bachata-public-preview/
+          cd /tmp/bachata-public-preview
+          git init
+          git checkout -b public-preview
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git add -A
+          git commit -m "Publish modernization preview ${GITHUB_SHA}"
+          git push --force origin public-preview
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
