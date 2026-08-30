@@ -40,27 +40,42 @@ jobs:
         shell: bash
         run: |
           node <<'NODE'
-          const { readdirSync, readFileSync, writeFileSync } = require('node:fs');
-          const { join, extname } = require('node:path');
+          const { readdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs');
+          const { join, extname, relative } = require('node:path');
           const root = 'dist/client';
           const base = 'https://raw.githack.com/dennis19doa/bachata-explosion/public-preview/';
           const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
             const path = join(dir, entry.name);
             return entry.isDirectory() ? walk(path) : [path];
           });
-          for (const file of walk(root)) {
-            const ext = extname(file);
-            if (!['.html', '.css'].includes(ext)) continue;
+          const files = walk(root);
+
+          // First rewrite asset URLs inside CSS so an inlined stylesheet still resolves media correctly.
+          for (const file of files.filter((file) => extname(file) === '.css')) {
             let text = readFileSync(file, 'utf8');
-            if (ext === '.html') {
-              text = text
-                .replace(/(href|src|poster|action)=(['"])\/(?!\/)/g, (_, attr, quote) => `${attr}=${quote}${base}`)
-                .replace(/srcset=(['"])(.*?)\1/g, (_, quote, value) => `srcset=${quote}${value.replace(/(^|,\s*)\/(?!\/)/g, `$1${base}`)}${quote}`);
-              if (!/<meta\s+name=(['"])robots\1/i.test(text)) {
-                text = text.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
-              }
-            } else {
-              text = text.replace(/url\((['"]?)\/(?!\/)/g, (_, quote) => `url(${quote}${base}`);
+            text = text.replace(/url\((['"]?)\/(?!\/)/g, (_, quote) => `url(${quote}${base}`);
+            writeFileSync(file, text);
+          }
+
+          // Then make each HTML page self-contained for CSS. RawGitHack occasionally serves a
+          // freshly generated hashed stylesheet unreliably; inlining removes that preview-only failure mode.
+          for (const file of files.filter((file) => extname(file) === '.html')) {
+            let text = readFileSync(file, 'utf8');
+            text = text
+              .replace(/(href|src|poster|action)=(['"])\/(?!\/)/g, (_, attr, quote) => `${attr}=${quote}${base}`)
+              .replace(/srcset=(['"])(.*?)\1/g, (_, quote, value) => `srcset=${quote}${value.replace(/(^|,\s*)\/(?!\/)/g, `$1${base}`)}${quote}`);
+
+            text = text.replace(/<link\s+rel=(['"])stylesheet\1\s+href=(['"])(.*?)\2\s*\/?>/gi, (tag, _relQuote, _hrefQuote, href) => {
+              const rawPath = href.startsWith(base) ? href.slice(base.length) : href.replace(/^\//, '');
+              if (!rawPath.endsWith('.css')) return tag;
+              const cssPath = join(root, rawPath);
+              if (!existsSync(cssPath)) return tag;
+              const css = readFileSync(cssPath, 'utf8');
+              return `<style data-preview-bundle="${relative(root, cssPath)}">${css}</style>`;
+            });
+
+            if (!/<meta\s+name=(['"])robots\1/i.test(text)) {
+              text = text.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
             }
             writeFileSync(file, text);
           }
