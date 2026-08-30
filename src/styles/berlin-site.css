@@ -1,0 +1,773 @@
+/*
+  Bachata Explosion — Berlin site-wide layer
+  One material language across BBF, archive, contact, crew pages and preserved WordPress content.
+*/
+
+:root {
+  --berlin-ink: #070708;
+  --berlin-wall: #111012;
+  --berlin-paper: #e9e1d4;
+  --berlin-paper-dark: #191618;
+  --berlin-red: #6b1026;
+  --berlin-pink: #d42f7b;
+  --berlin-gold: #f0c15d;
+  --berlin-chalk: #f0ebe5;
+  --berlin-dim: #aaa0a3;
+  --berlin-rule: rgba(240, 193, 93, .22);
+  --berlin-shadow: 12px 14px 0 rgba(0, 0, 0, .34);
+}
+
+html { background: var(--berlin-ink); }
+
+body {
+  background-color: var(--berlin-ink);
+  background-image:
+    linear-gradient(rgba(7, 7, 8, .82), rgba(7, 7, 8, .82)),
+    url("/media/brand/berlin-wall.svg");
+  background-attachment: fixed;
+  color: var(--berlin-chalk);
+}
+
+main {
+  position: relative;
+  overflow: clip;
+}
+
+main::before {
+  content: "52°31'N · 13°24'E · BERLIN";
+  position: fixed;
+  z-index: 4;
+  left: 10px;
+  top: 52%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) translateY(50%);
+  color: rgba(240, 193, 93, .32);
+  font: 800 .56rem/1 var(--body);
+  letter-spacing: .2em;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.section-label,
+.eyebrow {
+  color: var(--berlin-gold);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.section-label::before {
+  content: "//";
+  margin-right: .65em;
+  color: var(--berlin-pink);
+}
+
+h1 em,
+h2 em {
+  color: var(--berlin-gold);
+  font-style: normal;
+}
+
+/* Header — one strong line, like a club flyer masthead. */
+.site-header {
+  border-bottom: 1px solid rgba(240, 193, 93, .18);
+}
+
+.site-header::after {
+  content: "BERLIN · BY DANCERS / FOR DANCERS";
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  color: rgba(240, 193, 93, .52);
+  font: 800 .52rem/1 var(--body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.desktop-nav > a,
+.nav-group > summary {
+  position: relative;
+  font: 800 .73rem/1 var(--body) !important;
+  letter-spacing: .085em !important;
+  text-transform: uppercase;
+}
+
+.desktop-nav > a::after,
+.nav-group > summary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -8px;
+  height: 2px;
+  background: var(--berlin-gold);
+  transition: right .18s ease;
+}
+
+.desktop-nav > a:hover::after,
+.nav-group[open] > summary::after,
+.nav-group > summary:hover::after { right: 0; }
+
+.nav-popover {
+  border: 1px solid rgba(240, 193, 93, .26);
+  border-radius: 0;
+  background:
+    linear-gradient(rgba(11, 9, 10, .95), rgba(11, 9, 10, .95)),
+    url("/media/brand/berlin-wall.svg");
+  box-shadow: var(--berlin-shadow);
+}
+
+.nav-popover::before {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 17px;
+  top: -9px;
+  left: 24px;
+  background: rgba(233, 225, 212, .72);
+  transform: rotate(-4deg);
+}
+
+/* Shared page hero language. */
+.page-hero,
+.contact-hero,
+.wp-source-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(240, 193, 93, .16);
+  background:
+    radial-gradient(circle at 78% 28%, rgba(212, 47, 123, .15), transparent 24rem),
+    linear-gradient(110deg, rgba(8, 7, 8, .98), rgba(18, 12, 15, .9));
+}
+
+.page-hero::before,
+.contact-hero::before,
+.wp-source-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(430px, 42vw);
+  aspect-ratio: 2.4 / 1;
+  right: 3vw;
+  bottom: 3vw;
+  opacity: .14;
+  background: url("/media/brand/explosion-mark.svg") center / contain no-repeat;
+  transform: rotate(-8deg);
+}
+
+.urban-hero-word,
+.ambassador-hero-type,
+.volunteer-hero-word,
+.bbf-artist-backdrop {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px rgba(240, 193, 93, .14);
+  color: transparent !important;
+}
+
+/* BBF 2026 — turn premium-event cards into Berlin poster / venue materials. */
+.bbf-premium {
+  --bbf-surface: rgba(13, 11, 12, .92);
+  background: transparent;
+}
+
+.bbf-premium .bbf-pad,
+.bbf-premium .bbf-stats,
+.bbf-premium .bbf-final {
+  position: relative;
+}
+
+.bbf-premium .bbf-pad:nth-of-type(even) {
+  background: rgba(255,255,255,.012);
+}
+
+.bbf-hero {
+  background: #080708;
+}
+
+.bbf-hero::after {
+  content: "BERLIN / 16—18 OCT / 2026";
+  position: absolute;
+  z-index: 3;
+  right: 3vw;
+  bottom: 3vw;
+  padding: 8px 11px;
+  border: 1px solid rgba(240, 193, 93, .5);
+  color: var(--berlin-gold);
+  background: rgba(8, 7, 8, .74);
+  font: 800 .6rem/1 var(--body);
+  letter-spacing: .13em;
+  transform: rotate(-2deg);
+}
+
+.bbf-hero-wash {
+  background:
+    linear-gradient(90deg, rgba(5,5,6,.95), rgba(5,5,6,.73) 45%, rgba(5,5,6,.35) 72%, rgba(5,5,6,.76)),
+    linear-gradient(0deg, #070708 0, transparent 30%);
+}
+
+.bbf-orbit { display: none; }
+
+.bbf-hero-poster,
+.bbf-venue-card,
+.bbf-hotel-deal,
+.bbf-pass-grid > article,
+.bbf-travel-grid > article,
+.bbf-whatsapp,
+.bbf-jj-card,
+.bbf-cinema,
+.bbf-schedule-day {
+  border-radius: 0 !important;
+  border-color: rgba(240, 193, 93, .2) !important;
+  box-shadow: var(--berlin-shadow) !important;
+}
+
+.bbf-hero-poster {
+  position: relative;
+  transform: rotate(1.15deg);
+  background: #0d0b0c;
+}
+
+.bbf-hero-poster::before,
+.bbf-venue-card::before,
+.library-card > a::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  width: 76px;
+  height: 19px;
+  left: 19%;
+  top: -10px;
+  background: rgba(233,225,212,.72);
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+
+.bbf-hero-poster img,
+.bbf-venue-card img,
+.bbf-cinema video,
+.bbf-final img {
+  filter: saturate(.82) contrast(1.08);
+}
+
+.bbf-stats {
+  border-block: 1px solid rgba(240, 193, 93, .16);
+  background: rgba(7, 7, 8, .96);
+}
+
+.bbf-stats-grid > div {
+  border-right: 1px solid rgba(240, 193, 93, .14);
+}
+
+.bbf-stats-grid strong {
+  color: var(--berlin-gold);
+  font-family: var(--display);
+}
+
+.bbf-city-editorial {
+  border-left: 2px solid var(--berlin-gold);
+  padding-left: clamp(22px, 4vw, 54px);
+}
+
+.bbf-city-proof article,
+.bbf-travel-grid > article,
+.bbf-pass-grid > article {
+  position: relative;
+  background:
+    linear-gradient(rgba(20,17,18,.96), rgba(20,17,18,.96)),
+    url("/media/brand/berlin-wall.svg");
+}
+
+.bbf-city-proof article:nth-child(2),
+.bbf-pass-grid > article:nth-child(2),
+.bbf-travel-grid > article:nth-child(even) { transform: translateY(12px); }
+
+.bbf-heading {
+  border-bottom: 1px solid rgba(240, 193, 93, .18);
+  padding-bottom: 28px;
+}
+
+.bbf-heading::after {
+  content: "BACHATA EXPLOSION / BERLIN";
+  color: rgba(240, 193, 93, .42);
+  font: 800 .58rem/1 var(--body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.bbf-film,
+.bbf-hotel-deal,
+.bbf-whatsapp {
+  position: relative;
+}
+
+.bbf-film::before,
+.bbf-hotel-deal::before,
+.bbf-whatsapp::before {
+  content: "";
+  position: absolute;
+  width: 88px;
+  height: 20px;
+  left: 6%;
+  top: -10px;
+  z-index: 4;
+  background: rgba(233,225,212,.68);
+  transform: rotate(-4deg);
+}
+
+.bbf-artist-rail {
+  gap: clamp(18px, 2vw, 30px);
+}
+
+.bbf-artist-card {
+  border-radius: 0 !important;
+  border: 1px solid rgba(240, 193, 93, .15);
+  background: #0a0909;
+  box-shadow: 7px 9px 0 rgba(0,0,0,.28);
+}
+
+.bbf-artist-card:nth-child(3n+1) { transform: rotate(-.45deg); }
+.bbf-artist-card:nth-child(3n+2) { transform: rotate(.35deg); }
+
+.bbf-schedule-tabs button,
+.bbf-hotel-tabs button,
+.archive-toolbar button {
+  border-radius: 0 !important;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.bbf-schedule-tabs button[aria-selected="true"],
+.bbf-hotel-tabs button[aria-selected="true"],
+.archive-toolbar button.active {
+  color: #0b0909;
+  background: var(--berlin-gold);
+  border-color: var(--berlin-gold);
+  transform: rotate(-1deg);
+}
+
+.bbf-workshop-row {
+  border-bottom-color: rgba(240, 193, 93, .13) !important;
+}
+
+.bbf-jj {
+  border-block: 1px solid rgba(240, 193, 93, .16);
+  background:
+    linear-gradient(rgba(20,6,11,.82), rgba(7,7,8,.96)),
+    url("/media/brand/berlin-wall.svg");
+}
+
+.bbf-jj-impact { opacity: .32; }
+
+.bbf-jj-burst {
+  border-radius: 0 !important;
+  transform: rotate(-3deg);
+  box-shadow: 8px 10px 0 rgba(0,0,0,.28);
+}
+
+.bbf-faq-list details {
+  border-radius: 0 !important;
+  border-color: rgba(240, 193, 93, .18) !important;
+  background: rgba(18, 15, 16, .9);
+}
+
+.bbf-faq-list details[open] {
+  border-left: 3px solid var(--berlin-gold) !important;
+}
+
+.bbf-final::after {
+  content: "SEE YOU ON THE FLOOR";
+  position: absolute;
+  right: 4vw;
+  bottom: 4vw;
+  color: rgba(240, 193, 93, .58);
+  font: 700 clamp(2.2rem, 5vw, 6rem)/.82 var(--display);
+  letter-spacing: -.03em;
+  transform: rotate(-4deg);
+  text-transform: uppercase;
+}
+
+/* Archive — literal poster wall of the event history. */
+.archive-library {
+  background: transparent;
+}
+
+.archive-toolbar {
+  border-block: 1px solid rgba(240, 193, 93, .18);
+  padding-block: 15px;
+}
+
+.migration-note {
+  border-radius: 0 !important;
+  border: 1px solid rgba(240, 193, 93, .2) !important;
+  border-left: 4px solid var(--berlin-gold) !important;
+  background: rgba(18, 15, 16, .9) !important;
+}
+
+.archive-year {
+  position: relative;
+  padding-top: 28px;
+  border-top: 1px solid rgba(240, 193, 93, .16);
+}
+
+.archive-year > header span {
+  color: var(--berlin-gold);
+  font: 700 clamp(4.5rem, 10vw, 9rem)/.7 var(--display);
+  letter-spacing: -.05em;
+  opacity: .72;
+}
+
+.library-card {
+  position: relative;
+}
+
+.library-card > a {
+  position: relative;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  box-shadow: 8px 10px 0 rgba(0,0,0,.3);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.library-card:nth-child(3n+1) > a { transform: rotate(-.65deg); }
+.library-card:nth-child(3n+2) > a { transform: rotate(.55deg); }
+.library-card > a:hover {
+  transform: translate(-4px,-5px) rotate(0);
+  box-shadow: 13px 15px 0 rgba(65,13,28,.5);
+}
+
+.library-card img { filter: saturate(.8) contrast(1.07); }
+.library-card h2 { text-transform: uppercase; }
+
+.archive-original-index {
+  border-radius: 0 !important;
+  border: 1px solid rgba(240, 193, 93, .18) !important;
+  background:
+    linear-gradient(rgba(21,17,18,.95), rgba(21,17,18,.95)),
+    url("/media/brand/berlin-wall.svg");
+  box-shadow: var(--berlin-shadow);
+}
+
+/* Contact — route board / production desk. */
+.contact-2026,
+.ambassador-2026,
+.volunteer-2026,
+.wp-preserved-page { background: transparent; }
+
+.contact-routing,
+.contact-next,
+.ambassador-benefits,
+.ambassador-group,
+.volunteer-roles {
+  background: rgba(255,255,255,.012);
+}
+
+.contact-route-grid,
+.ambassador-benefit-grid,
+.volunteer-role-grid { gap: 14px; }
+
+.contact-route,
+.ambassador-benefit-grid > article,
+.volunteer-role-grid > a {
+  border-radius: 0 !important;
+  border-color: rgba(240, 193, 93, .17) !important;
+  background: rgba(17, 15, 16, .9) !important;
+  box-shadow: 6px 8px 0 rgba(0,0,0,.22);
+}
+
+.contact-route[aria-pressed="true"] {
+  color: #090808;
+  background: var(--berlin-gold) !important;
+  border-color: var(--berlin-gold) !important;
+  transform: rotate(-.8deg);
+}
+
+.contact-route[aria-pressed="true"] small,
+.contact-route[aria-pressed="true"] span { color: #342613 !important; }
+
+.contact-workbench-grid,
+.ambassador-application-grid,
+.volunteer-application-grid {
+  align-items: start;
+}
+
+.contact-delivery-card,
+.ambassador-application-note,
+.volunteer-form-note {
+  border-radius: 0 !important;
+  border-left: 3px solid var(--berlin-gold) !important;
+  background: rgba(21, 17, 18, .9) !important;
+}
+
+.contact-form-2026,
+.ambassador-form,
+.volunteer-form {
+  position: relative;
+  border-radius: 0 !important;
+  border: 1px solid rgba(240, 193, 93, .2) !important;
+  background:
+    linear-gradient(rgba(18,15,16,.97), rgba(18,15,16,.97)),
+    url("/media/brand/berlin-wall.svg") !important;
+  box-shadow: var(--berlin-shadow) !important;
+}
+
+.contact-form-2026::before,
+.ambassador-form::before,
+.volunteer-form::before {
+  content: "";
+  position: absolute;
+  width: 96px;
+  height: 21px;
+  left: 8%;
+  top: -11px;
+  z-index: 3;
+  background: rgba(233,225,212,.7);
+  transform: rotate(-5deg);
+}
+
+.contact-form-2026 input,
+.contact-form-2026 select,
+.contact-form-2026 textarea,
+.ambassador-form input,
+.ambassador-form textarea,
+.volunteer-form input,
+.volunteer-form select,
+.volunteer-form textarea {
+  border-radius: 0 !important;
+  border-color: rgba(240, 193, 93, .16) !important;
+  background: #0d0b0c !important;
+}
+
+.contact-next-grid > a {
+  border-radius: 0 !important;
+  border-color: rgba(240, 193, 93, .18) !important;
+}
+
+/* Ambassador — crew wall / credentials. */
+.ambassador-hero,
+.volunteer-hero {
+  border-bottom: 1px solid rgba(240,193,93,.18);
+}
+
+.ambassador-hero-bg,
+.volunteer-hero > img {
+  filter: saturate(.72) contrast(1.12);
+}
+
+.ambassador-photo-stack figure {
+  border-radius: 0 !important;
+  border: 1px solid rgba(240,193,93,.2);
+  box-shadow: var(--berlin-shadow);
+}
+
+.ambassador-photo-stack figure:first-child { transform: rotate(-2.4deg); }
+.ambassador-photo-stack figure:last-child { transform: rotate(3deg); }
+
+.ambassador-statement-grid,
+.volunteer-promise-grid {
+  border-left: 2px solid var(--berlin-gold);
+  padding-left: clamp(22px,4vw,54px);
+}
+
+.ambassador-benefit-grid > article:nth-child(even),
+.volunteer-promise-cards > article:nth-child(even) { transform: translateY(10px); }
+
+.ambassador-role figure {
+  position: relative;
+  border: 1px solid rgba(240,193,93,.16);
+  box-shadow: var(--berlin-shadow);
+  transform: rotate(-1deg);
+}
+
+.ambassador-tags span {
+  border-radius: 0 !important;
+  border-color: rgba(240,193,93,.28) !important;
+  color: var(--berlin-gold) !important;
+}
+
+.ambassador-group-card {
+  border-radius: 0 !important;
+  box-shadow: var(--berlin-shadow);
+}
+
+/* Volunteers — backstage production board. */
+.volunteer-role-grid > a {
+  position: relative;
+}
+
+.volunteer-role-grid > a::before {
+  content: "CREW";
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  color: rgba(240,193,93,.2);
+  font: 700 2.4rem/.8 var(--display);
+}
+
+.volunteer-form-section {
+  border-radius: 0 !important;
+  border-color: rgba(240,193,93,.18) !important;
+}
+
+.volunteer-choice-grid label > span,
+.volunteer-language-field label span {
+  border-radius: 0 !important;
+}
+
+.volunteer-rules details {
+  border-radius: 0 !important;
+  border-color: rgba(240,193,93,.16) !important;
+}
+
+/* Preserved WordPress pages — keep the data, remove the WordPress visual feeling. */
+.wp-source-header {
+  padding-block: clamp(110px, 14vw, 180px) clamp(62px, 8vw, 100px) !important;
+}
+
+.wp-source-header .shell {
+  position: relative;
+  z-index: 2;
+}
+
+.wp-source-header h1,
+.wp-source-display-title {
+  max-width: 1050px;
+  color: var(--berlin-chalk);
+  font: 700 clamp(4rem, 9vw, 8.5rem)/.82 var(--display) !important;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+
+.wp-source-content {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 110px) 0;
+}
+
+.wp-source-content > * {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.wp-source-content h1,
+.wp-source-content h2,
+.wp-source-content h3,
+.wp-source-content h4 {
+  color: var(--berlin-chalk) !important;
+  font-family: var(--display) !important;
+  text-transform: uppercase;
+}
+
+.wp-source-content h2 {
+  margin-top: clamp(56px, 7vw, 90px) !important;
+  border-top: 1px solid rgba(240,193,93,.18);
+  padding-top: 24px;
+}
+
+.wp-source-content p,
+.wp-source-content li { color: #c8bfc2 !important; }
+
+.wp-source-content a { color: var(--berlin-gold) !important; }
+
+.wp-source-content img {
+  border-radius: 0 !important;
+  filter: saturate(.82) contrast(1.06);
+  box-shadow: 9px 11px 0 rgba(0,0,0,.28);
+}
+
+.wp-source-content figure,
+.wp-source-content .elementor-widget-image,
+.wp-source-content .wp-block-image {
+  position: relative;
+}
+
+.wp-source-content blockquote,
+.wp-source-content table,
+.wp-source-content form,
+.wp-source-content .elementor-widget-container {
+  border-radius: 0 !important;
+}
+
+.wp-source-content blockquote {
+  border-left: 3px solid var(--berlin-gold) !important;
+  background: rgba(20,17,18,.9) !important;
+}
+
+.wp-source-content table {
+  border-color: rgba(240,193,93,.18) !important;
+  background: rgba(14,12,13,.9) !important;
+}
+
+.wp-source-content hr { border-color: rgba(240,193,93,.18) !important; }
+
+/* Footer — poster credits rather than generic corporate footer. */
+.site-footer {
+  position: relative;
+  border-top: 1px solid rgba(240,193,93,.2);
+  background:
+    linear-gradient(rgba(8,7,8,.96), rgba(8,7,8,.96)),
+    url("/media/brand/berlin-wall.svg");
+}
+
+.site-footer::before {
+  content: "BACHATA EXPLOSION · BERLIN";
+  position: absolute;
+  right: 4vw;
+  top: 24px;
+  color: rgba(240,193,93,.13);
+  font: 700 clamp(2.7rem, 7vw, 8rem)/.8 var(--display);
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+}
+
+/* Motion restraint — physical materials move, the whole page does not float. */
+[data-reveal] {
+  transition-duration: .55s !important;
+  transition-timing-function: cubic-bezier(.2,.7,.2,1) !important;
+}
+
+.button {
+  border-radius: 0 !important;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.button-gold:hover {
+  box-shadow: 6px 7px 0 rgba(88,19,38,.7) !important;
+}
+
+@media (max-width: 1100px) {
+  main::before { display: none; }
+  .site-header::after { display: none; }
+  .bbf-city-proof article:nth-child(2),
+  .bbf-pass-grid > article:nth-child(2),
+  .bbf-travel-grid > article:nth-child(even),
+  .ambassador-benefit-grid > article:nth-child(even),
+  .volunteer-promise-cards > article:nth-child(even) { transform: none; }
+}
+
+@media (max-width: 760px) {
+  body { background-attachment: scroll; }
+  .page-hero::before,
+  .contact-hero::before,
+  .wp-source-header::before { width: 68vw; opacity: .09; }
+  .bbf-hero::after,
+  .bbf-final::after { display: none; }
+  .bbf-hero-poster,
+  .bbf-artist-card,
+  .library-card > a,
+  .ambassador-photo-stack figure,
+  .ambassador-role figure { transform: none !important; }
+  .wp-source-content { width: calc(100% - 30px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbf-artist-card,
+  .library-card > a,
+  .ambassador-photo-stack figure,
+  .ambassador-role figure,
+  .contact-route[aria-pressed="true"] { transform: none !important; }
+}
