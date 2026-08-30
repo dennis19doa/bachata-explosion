@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" role="img" aria-labelledby="title desc">
+  <title id="title">Bachata Explosion Berlin 030 stamp</title>
+  <desc id="desc">A rough circular Berlin 030 stamp used as a decorative brand mark.</desc>
+  <defs>
+    <filter id="rough" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="19" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="currentColor" filter="url(#rough)">
+    <circle cx="260" cy="260" r="216" stroke-width="18" stroke-dasharray="19 11 7 8"/>
+    <circle cx="260" cy="260" r="183" stroke-width="4" opacity=".75"/>
+    <path d="M76 174C138 110 222 78 310 88c55 6 105 25 143 56M70 344c49 59 125 91 211 88 76-3 139-29 180-74" stroke-width="7" opacity=".7"/>
+    <path d="M118 265c66-30 118-39 173-33 53 6 91 23 128 50M147 301c49-15 92-18 136-12 42 6 77 19 112 40" stroke-width="11" stroke-linecap="round" opacity=".55"/>
+    <path d="M96 95l56 39m-31-62l30 63M402 390l35 45m-8-70l32 54" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g fill="currentColor" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-weight="900">
+    <text x="260" y="218" font-size="62" letter-spacing="7">BERLIN</text>
+    <text x="260" y="315" font-size="132" letter-spacing="2">030</text>
+    <text x="260" y="365" font-size="25" letter-spacing="8">BACHATA EXPLOSION</text>
+  </g>
+  <g fill="currentColor">
+    <circle cx="109" cy="252" r="7"/><circle cx="415" cy="228" r="7"/>
+    <path d="M230 396l15 12-15 12-15-12zm60 0l15 12-15 12-15-12z"/>
+  </g>
+</svg>
