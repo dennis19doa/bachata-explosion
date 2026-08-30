@@ -1,11 +1,6 @@
 ---
 import "../styles/global.css";
-import "../styles/modern.css";
-import "../styles/identity.css";
-import "../styles/berlin-site.css";
-import "../styles/berlin-signature.css";
-import "../styles/berlin-replan.css";
-import "../styles/berlin-menu.css";
+import "../styles/berlin-web.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -32,7 +27,7 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#080809" />
+    <meta name="theme-color" content="#fff8ec" />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -53,45 +48,43 @@ const socialImage = new URL("/og.png", Astro.site);
       <a class="brand" href="/" aria-label="Bachata Explosion home">
         <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
       </a>
+
       <nav class="desktop-nav" aria-label="Main navigation">
         <a class="nav-home" href="/">Home</a>
         <details class="nav-group">
           <summary>Festival</summary>
           <div class="nav-popover">
-            <span>Berlin Bachata Festival · October 16–18, 2026</span>
-            <a href="/bbf-2026/"><b>Festival overview</b><small>Venue, artists, program & passes</small></a>
-            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Three days of workshops & parties</small></a>
-            <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules & registration</small></a>
+            <span>Berlin Bachata Festival · 16–18 October 2026</span>
+            <a href="/bbf-2026/"><b>Festival overview</b><small>Artists, venue, passes and everything you need</small></a>
+            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Workshops, parties and weekend program</small></a>
+            <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules and registration</small></a>
           </div>
         </details>
         <details class="nav-group">
-          <summary>Berlin trip</summary>
+          <summary>Berlin</summary>
           <div class="nav-popover">
-            <span>Get to Berlin and onto the dance floor</span>
-            <a href="/bbf-2026/#venue"><b>Hotel & venue</b><small>Stay and dance at MOA Berlin</small></a>
-            <a href="/bbf-2026/#travel"><b>Getting to MOA</b><small>Airport, Hauptbahnhof & local tickets</small></a>
-            <a href={whatsappUrl}><b>Festival WhatsApp ↗</b><small>Meet the community before arrival</small></a>
+            <span>Make a Berlin weekend out of it</span>
+            <a href="/bbf-2026/#venue"><b>Hotel &amp; venue</b><small>Stay and dance at MOA Berlin</small></a>
+            <a href="/bbf-2026/#travel"><b>Travel to Berlin</b><small>Airports, Hauptbahnhof and local transport</small></a>
+            <a href={whatsappUrl}><b>Festival community ↗</b><small>Meet dancers before you arrive</small></a>
           </div>
         </details>
         <a href="/archive/">Past events</a>
         <details class="nav-group">
-          <summary>Explosion</summary>
+          <summary>About</summary>
           <div class="nav-popover nav-popover-right">
-            <span>The people, history and community behind Explosion</span>
-            <a href="/explosion-history/"><b>Our history</b><small>How Explosion grew from Berlin since 2022</small></a>
+            <span>By dancers, for dancers — born in Berlin</span>
+            <a href="/explosion-history/"><b>Our story</b><small>How Bachata Explosion grew since 2022</small></a>
             <a href="/ambassadors/"><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
             <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
           </div>
         </details>
         <a href="/contact/">Contact</a>
       </nav>
+
       <details class="mobile-nav" data-site-menu>
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <div class="mobile-nav-panel">
-          <video class="mobile-nav-video" autoplay muted loop playsinline preload="metadata" poster="/media/motion/explosion-particles-poster.webp" aria-hidden="true">
-            <source src="/media/video/explosion-menu.mp4" type="video/mp4" />
-          </video>
-          <div class="mobile-nav-shade" aria-hidden="true"></div>
           <nav aria-label="Mobile navigation">
             <a class="mobile-nav-home" href="/">Home</a>
             <details class="mobile-nav-group">
@@ -103,18 +96,18 @@ const socialImage = new URL("/og.png", Astro.site);
               </div>
             </details>
             <details class="mobile-nav-group">
-              <summary><span>Berlin trip</span><i aria-hidden="true"></i></summary>
+              <summary><span>Berlin</span><i aria-hidden="true"></i></summary>
               <div>
                 <a href="/bbf-2026/#venue">Hotel &amp; venue</a>
-                <a href="/bbf-2026/#travel">Getting to MOA</a>
-                <a href={whatsappUrl}>Festival WhatsApp ↗</a>
+                <a href="/bbf-2026/#travel">Travel to Berlin</a>
+                <a href={whatsappUrl}>Festival community ↗</a>
               </div>
             </details>
             <details class="mobile-nav-group">
-              <summary><span>Explosion</span><i aria-hidden="true"></i></summary>
+              <summary><span>About</span><i aria-hidden="true"></i></summary>
               <div>
                 <a href="/archive/">Past events</a>
-                <a href="/explosion-history/">History</a>
+                <a href="/explosion-history/">Our story</a>
                 <a href="/ambassadors/">Ambassadors</a>
                 <a href="/volunteers/">Volunteers</a>
                 <a href="/contact/">Contact</a>
@@ -122,16 +115,19 @@ const socialImage = new URL("/og.png", Astro.site);
             </details>
           </nav>
           <div class="mobile-nav-meta">
-            <span>Berlin · by dancers, for dancers</span>
+            <span>Born in Berlin · open to the world</span>
             <a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a>
           </div>
         </div>
       </details>
+
       <a class="button button-small button-gold" href={ticketUrl}>Get tickets</a>
     </header>
+
     <main id="main">
       <slot />
     </main>
+
     <footer class="site-footer">
       <div class="shell footer-grid">
         <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
@@ -145,18 +141,19 @@ const socialImage = new URL("/og.png", Astro.site);
           <a href={whatsappUrl}>WhatsApp</a>
         </nav>
         <address>
-          <strong>Elena & Dennis Events UG</strong><br />
+          <strong>Elena &amp; Dennis Events UG</strong><br />
           C/O Dennis Boronowski · Berlin<br />
           <a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a>
         </address>
       </div>
     </footer>
+
     <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
+
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
-      const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
       const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
 
       heroVideo?.play().catch(() => undefined);
@@ -182,18 +179,18 @@ const socialImage = new URL("/og.png", Astro.site);
         document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open));
         if (siteMenu.open) {
           dropdowns.forEach((dropdown) => { dropdown.open = false; });
-          menuVideo?.play().catch(() => undefined);
         } else {
-          menuVideo?.pause();
           mobileGroups.forEach((group) => { group.open = false; });
         }
       });
+
       mobileGroups.forEach((group) => group.addEventListener("toggle", () => {
         if (!group.open) return;
         mobileGroups.forEach((candidate) => {
           if (candidate !== group) candidate.open = false;
         });
       }));
+
       siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
         siteMenu.open = false;
       }));
