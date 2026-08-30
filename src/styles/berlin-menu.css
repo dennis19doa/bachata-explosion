@@ -1,0 +1,116 @@
+/* Final navigation treatment for smaller screens. */
+
+.mobile-nav > summary {
+  min-width: 74px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(245,240,232,.24);
+  background: #0b0b0c;
+  color: #f5f0e8;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+.mobile-nav > summary::before {
+  content: "//";
+  margin-right: 6px;
+  color: #c7ff36;
+}
+
+.mobile-nav-panel {
+  isolation: isolate;
+  background: #2345ff !important;
+  color: #fff;
+}
+
+.mobile-nav-video {
+  opacity: .18 !important;
+  filter: grayscale(1) contrast(1.35) !important;
+}
+
+.mobile-nav-shade {
+  background:
+    linear-gradient(135deg, rgba(35,69,255,.9), rgba(20,33,109,.93) 55%, rgba(8,8,9,.96)) !important;
+}
+
+.mobile-nav-panel::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: min(72vw, 520px);
+  aspect-ratio: 1.45;
+  right: -8vw;
+  bottom: 8vh;
+  background: #c7ff36;
+  opacity: .3;
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.mobile-nav-panel nav,
+.mobile-nav-meta {
+  position: relative;
+  z-index: 2;
+}
+
+.mobile-nav-panel nav {
+  width: min(620px, calc(100% - 32px));
+  margin-inline: auto;
+  padding-top: clamp(100px, 16vh, 150px);
+}
+
+.mobile-nav-home,
+.mobile-nav-group > summary {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.2) !important;
+  border-radius: 0 !important;
+  min-height: 72px;
+  color: #fff !important;
+  font: 800 clamp(2.1rem, 9vw, 4.8rem)/.9 var(--display, Impact, sans-serif) !important;
+  letter-spacing: -.025em !important;
+  text-transform: uppercase;
+}
+
+.mobile-nav-home::before { content: "00 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
+.mobile-nav-group:nth-of-type(1) > summary span::before { content: "01 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
+.mobile-nav-group:nth-of-type(2) > summary span::before { content: "02 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
+.mobile-nav-group:nth-of-type(3) > summary span::before { content: "03 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
+
+.mobile-nav-group > div {
+  background: #ede5d7 !important;
+  color: #131214 !important;
+  padding: 8px !important;
+  box-shadow: 9px 10px 0 rgba(0,0,0,.34);
+}
+
+.mobile-nav-group > div a {
+  min-height: 48px;
+  display: flex !important;
+  align-items: center;
+  padding: 0 12px !important;
+  border-bottom: 1px solid rgba(0,0,0,.14) !important;
+  color: #131214 !important;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .76rem !important;
+  font-weight: 800 !important;
+}
+
+.mobile-nav-group > div a:hover { background: #c7ff36 !important; }
+
+.mobile-nav-meta {
+  border-top: 0 !important;
+  background: #72152d;
+  color: #fff;
+  padding: 14px 18px !important;
+}
+
+@media (min-width: 1081px) {
+  .mobile-nav-panel::after { display: none; }
+}
