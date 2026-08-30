@@ -1,0 +1,819 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Permanent+Marker&display=swap');
+
+/*
+ * BACHATA EXPLOSION — BERLIN WEBSITE SYSTEM
+ * One deliberate visual layer on top of the original stable site styles.
+ * Website usability first; Berlin character through imagery, colour,
+ * wayfinding, graffiti accents and recognisable city references.
+ */
+
+:root {
+  --be-ink: #171318;
+  --be-paper: #fff8ec;
+  --be-paper-2: #f4eadb;
+  --be-yellow: #ffd84a;
+  --be-blue: #99cfff;
+  --be-blue-deep: #315b91;
+  --be-coral: #f17864;
+  --be-burgundy: #7d1732;
+  --be-pink: #dc347f;
+  --be-night: #181116;
+  --be-muted: #746a6a;
+  --be-line: rgba(23, 19, 24, .13);
+  --be-shadow: 0 20px 60px rgba(65, 35, 39, .13);
+  --be-radius: 18px;
+  --display: 'Barlow Condensed', 'Oswald', Impact, sans-serif;
+  --body: 'Manrope', 'DM Sans', system-ui, sans-serif;
+}
+
+html { background: var(--be-paper); }
+body {
+  background: var(--be-paper);
+  color: var(--be-ink);
+  font-family: var(--body);
+}
+
+h1, h2, h3, h4, .desktop-nav, .mobile-nav { font-family: var(--display); }
+
+/* ---------- navigation: stable website first ---------- */
+.site-header {
+  position: fixed !important;
+  z-index: 1000 !important;
+  top: 14px !important;
+  left: 50% !important;
+  right: auto !important;
+  width: min(1220px, calc(100% - 28px)) !important;
+  height: 68px !important;
+  transform: translateX(-50%) !important;
+  display: grid !important;
+  grid-template-columns: 150px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 18px !important;
+  margin: 0 !important;
+  padding: 8px 10px 8px 16px !important;
+  border: 1px solid rgba(23,19,24,.10) !important;
+  border-radius: 18px !important;
+  background: rgba(255,248,236,.94) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 0 12px 42px rgba(31,18,20,.13) !important;
+  backdrop-filter: blur(16px) saturate(1.12);
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: -5px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--be-yellow) 0 42%, var(--be-coral) 42% 65%, var(--be-blue) 65% 82%, var(--be-burgundy) 82%);
+  pointer-events: none;
+}
+
+.brand {
+  width: 138px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.brand img {
+  width: 138px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+}
+
+.desktop-nav {
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(12px, 1.6vw, 24px) !important;
+}
+.desktop-nav > a,
+.nav-group > summary {
+  color: var(--be-ink) !important;
+  font-family: var(--body) !important;
+  font-size: .76rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .035em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+.desktop-nav > a { display: inline-flex !important; align-items: center !important; min-height: 40px !important; }
+.nav-home { display: inline-flex !important; }
+.nav-group { position: relative !important; }
+.nav-group > summary {
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+.nav-group > summary::-webkit-details-marker { display: none !important; }
+.nav-group > summary::after {
+  content: '↓' !important;
+  color: var(--be-burgundy) !important;
+  font-size: .72rem !important;
+  margin-left: 6px !important;
+  transform: translateY(-1px);
+}
+.nav-group[open] > summary::after { content: '↑' !important; }
+.desktop-nav > a:hover,
+.nav-group > summary:hover,
+.nav-group[open] > summary { color: var(--be-burgundy) !important; }
+
+.nav-popover {
+  position: absolute !important;
+  top: calc(100% + 15px) !important;
+  left: -18px !important;
+  width: 330px !important;
+  display: grid !important;
+  padding: 12px !important;
+  border: 1px solid var(--be-line) !important;
+  border-radius: 16px !important;
+  background: rgba(255,248,236,.99) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 0 28px 65px rgba(32,17,22,.18) !important;
+}
+.nav-popover-right { left: auto !important; right: -18px !important; }
+.nav-popover::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -17px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 18px !important;
+}
+.nav-popover > span {
+  padding: 8px 10px 10px !important;
+  color: var(--be-burgundy) !important;
+  font-family: var(--body) !important;
+  font-size: .62rem !important;
+  line-height: 1.4 !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+.nav-popover a {
+  min-height: 58px !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 3px !important;
+  padding: 10px 12px !important;
+  border: 0 !important;
+  border-top: 1px solid var(--be-line) !important;
+  border-radius: 10px !important;
+  color: var(--be-ink) !important;
+}
+.nav-popover a:hover { background: rgba(255,216,74,.35) !important; }
+.nav-popover a b {
+  color: var(--be-ink) !important;
+  font-family: var(--body) !important;
+  font-size: .82rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: .01em !important;
+  text-transform: none !important;
+}
+.nav-popover a small {
+  color: var(--be-muted) !important;
+  font-family: var(--body) !important;
+  font-size: .68rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.site-header > .button {
+  min-height: 46px !important;
+  padding: 0 19px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: var(--be-burgundy) !important;
+  color: white !important;
+  box-shadow: none !important;
+  font-size: .72rem !important;
+}
+.site-header > .button:hover { transform: translateY(-2px); background: #651127 !important; }
+
+/* ---------- mobile nav ---------- */
+.mobile-nav { display: none !important; }
+.mobile-ticket-dock { z-index: 990 !important; }
+
+@media (max-width: 1080px) {
+  .site-header {
+    grid-template-columns: 1fr auto auto !important;
+    height: 64px !important;
+    padding-left: 13px !important;
+  }
+  .desktop-nav { display: none !important; }
+  .mobile-nav { display: block !important; position: static !important; }
+  .mobile-nav > summary {
+    min-width: 68px !important;
+    min-height: 42px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 12px !important;
+    border: 1px solid var(--be-line) !important;
+    border-radius: 12px !important;
+    background: white !important;
+    color: var(--be-ink) !important;
+    font-family: var(--body) !important;
+    font-size: .7rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .05em !important;
+    text-transform: uppercase !important;
+    list-style: none !important;
+  }
+  .mobile-nav > summary::-webkit-details-marker { display: none !important; }
+  .mobile-nav > summary::before { content: none !important; }
+  .mobile-nav > summary i {
+    width: 15px !important;
+    height: 10px !important;
+    margin-left: 8px !important;
+    border-top: 2px solid currentColor !important;
+    border-bottom: 2px solid currentColor !important;
+  }
+  .mobile-nav-panel {
+    position: fixed !important;
+    z-index: 1100 !important;
+    inset: 0 !important;
+    overflow-y: auto !important;
+    padding: 102px 22px 30px !important;
+    background: var(--be-paper) !important;
+    color: var(--be-ink) !important;
+  }
+  .mobile-nav-panel::before {
+    content: 'BERLIN';
+    position: fixed;
+    z-index: 0;
+    right: -18px;
+    bottom: 55px;
+    color: rgba(125,23,50,.07);
+    font: 800 clamp(7rem, 34vw, 15rem)/.78 var(--display);
+    letter-spacing: -.06em;
+    transform: rotate(-90deg) translateX(25%);
+    pointer-events: none;
+  }
+  .mobile-nav-panel::after {
+    content: '';
+    position: fixed;
+    z-index: 0;
+    width: min(58vw, 300px);
+    aspect-ratio: 1.45;
+    right: -6vw;
+    top: 16vh;
+    background: var(--be-coral);
+    opacity: .16;
+    -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+    mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+    transform: rotate(-10deg);
+    pointer-events: none;
+  }
+  .mobile-nav-video, .mobile-nav-shade { display: none !important; }
+  .mobile-nav-panel nav,
+  .mobile-nav-meta { position: relative !important; z-index: 2 !important; width: min(640px, 100%) !important; margin: 0 auto !important; }
+  .mobile-nav-home,
+  .mobile-nav-group > summary {
+    min-height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--be-line) !important;
+    background: transparent !important;
+    color: var(--be-ink) !important;
+    font: 700 clamp(2rem, 8vw, 3.5rem)/1 var(--display) !important;
+    letter-spacing: -.02em !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+    list-style: none !important;
+  }
+  .mobile-nav-group > summary::-webkit-details-marker { display: none !important; }
+  .mobile-nav-group > summary i::after { content: '+'; font: 600 1.3rem/1 var(--body); }
+  .mobile-nav-group[open] > summary i::after { content: '−'; }
+  .mobile-nav-group > div {
+    display: grid !important;
+    padding: 7px 0 13px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .mobile-nav-group > div a {
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+    border: 0 !important;
+    border-left: 4px solid var(--be-yellow) !important;
+    color: var(--be-ink) !important;
+    font: 700 .82rem/1.2 var(--body) !important;
+    letter-spacing: .02em !important;
+    text-transform: none !important;
+  }
+  .mobile-nav-group > div a:hover { background: rgba(255,216,74,.25) !important; }
+  .mobile-nav-meta {
+    margin-top: 28px !important;
+    padding: 17px !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    background: var(--be-blue) !important;
+    color: var(--be-ink) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-header { top: 8px !important; width: calc(100% - 16px) !important; }
+  .brand, .brand img { width: 118px !important; }
+  .site-header > .button { display: none !important; }
+  .site-header { grid-template-columns: 1fr auto !important; }
+}
+
+/* ---------- reusable Berlin language ---------- */
+.section-label,
+.eyebrow {
+  color: var(--be-burgundy) !important;
+  font-family: var(--body) !important;
+  letter-spacing: .11em !important;
+}
+
+.button {
+  border-radius: 12px !important;
+  font-family: var(--body) !important;
+}
+.button-gold {
+  background: var(--be-yellow) !important;
+  color: var(--be-ink) !important;
+  box-shadow: none !important;
+}
+.button-outline {
+  border-color: rgba(23,19,24,.23) !important;
+  color: var(--be-ink) !important;
+  background: rgba(255,255,255,.38) !important;
+}
+
+/* subtle route-line detail rather than unexplained codes */
+.home-signal,
+.bbf-stats {
+  position: relative !important;
+  background: var(--be-yellow) !important;
+  color: var(--be-ink) !important;
+  border: 0 !important;
+}
+.home-signal::before,
+.bbf-stats::before {
+  content: 'BERLIN  •  MOABIT  •  BACHATA EXPLOSION';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #161216;
+  color: white;
+  font: 800 .56rem/1 var(--body);
+  letter-spacing: .11em;
+  white-space: nowrap;
+}
+.home-stat-grid > div,
+.bbf-stats-grid > div {
+  border-color: rgba(23,19,24,.16) !important;
+  color: var(--be-ink) !important;
+}
+.home-stat-grid span,
+.bbf-stats-grid span { color: rgba(23,19,24,.68) !important; }
+
+/* graffiti is an accent, not the interface */
+.home-manifesto::after,
+.home-feeling::after,
+.bbf-intro::after,
+.archive-hero::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: min(34vw, 430px);
+  aspect-ratio: 1.45;
+  background: var(--be-coral);
+  opacity: .10;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+  pointer-events: none;
+}
+.home-manifesto::after { right: 3vw; top: 6%; transform: rotate(7deg); }
+.home-feeling::after { left: -4vw; bottom: 3%; transform: rotate(-12deg); background: var(--be-burgundy); }
+.bbf-intro::after { right: -3vw; top: 8%; transform: rotate(9deg); background: var(--be-pink); }
+.archive-hero::after { right: 2vw; top: 10%; transform: rotate(-6deg); }
+
+/* ---------- homepage ---------- */
+.home-hero {
+  min-height: min(920px, 100svh) !important;
+  background: #1b1218 !important;
+}
+.home-hero-video {
+  filter: saturate(.98) contrast(1.04) !important;
+  opacity: 1 !important;
+}
+.home-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(19,12,17,.88) 0%, rgba(19,12,17,.56) 42%, rgba(19,12,17,.12) 72%),
+    linear-gradient(0deg, rgba(19,12,17,.72) 0%, transparent 38%) !important;
+}
+.home-hero-live-texture { opacity: .04 !important; }
+.home-hero-content { padding-top: 132px !important; }
+.home-hero h1,
+.bbf-hero h1 { color: white !important; text-shadow: 0 8px 35px rgba(0,0,0,.22); }
+.home-hero h1 em,
+.bbf-hero h1 em { color: var(--be-yellow) !important; }
+.home-hero-lead,
+.bbf-hero-lead { color: rgba(255,255,255,.88) !important; }
+.home-urban-sticker {
+  display: inline-flex !important;
+  padding: 8px 12px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: var(--be-yellow) !important;
+  color: var(--be-ink) !important;
+  transform: rotate(-1.5deg);
+}
+.home-hero-poster {
+  border: 8px solid var(--be-paper) !important;
+  border-radius: 7px !important;
+  box-shadow: 20px 24px 0 rgba(241,120,100,.65), 0 25px 80px rgba(0,0,0,.28) !important;
+  transform: rotate(2deg) !important;
+}
+.home-hero-poster::before {
+  content: 'BERLIN';
+  position: absolute;
+  z-index: 3;
+  top: -24px;
+  right: -26px;
+  padding: 8px 13px;
+  background: var(--be-blue);
+  color: var(--be-ink);
+  font: 800 .68rem/1 var(--body);
+  letter-spacing: .13em;
+  transform: rotate(4deg);
+}
+
+.home-manifesto,
+.event-switcher,
+.home-team,
+.home-berlin {
+  position: relative !important;
+  overflow: hidden !important;
+}
+.home-manifesto {
+  background: var(--be-paper) !important;
+  color: var(--be-ink) !important;
+}
+.home-manifesto h2,
+.home-manifesto p { color: var(--be-ink) !important; }
+.home-manifesto h2 em { color: var(--be-burgundy) !important; }
+.home-manifesto-city { display: none !important; }
+
+.event-switcher {
+  background: linear-gradient(180deg, #f4eadb, #fff8ec) !important;
+  color: var(--be-ink) !important;
+}
+.event-switcher h2,
+.event-switcher h3,
+.event-switcher p,
+.event-switcher li,
+.event-switcher a { color: var(--be-ink); }
+.home-next-event {
+  border: 1px solid var(--be-line) !important;
+  border-radius: 24px !important;
+  background: white !important;
+  box-shadow: var(--be-shadow) !important;
+  overflow: hidden !important;
+}
+.home-next-copy,
+.home-next-history { background: white !important; }
+.home-chapter-card,
+.home-chapter-note {
+  border: 1px solid var(--be-line) !important;
+  border-radius: 18px !important;
+  background: white !important;
+  color: var(--be-ink) !important;
+  box-shadow: 0 12px 35px rgba(55,32,34,.08) !important;
+}
+.home-chapter-card:nth-child(1) { transform: rotate(-.7deg); }
+.home-chapter-card:nth-child(2) { transform: rotate(.7deg); }
+.home-chapter-note {
+  position: relative !important;
+  background: var(--be-blue) !important;
+}
+.home-chapter-note::after {
+  content: 'made in Berlin';
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  color: rgba(23,19,24,.55);
+  font: 400 1.05rem/1 'Permanent Marker', cursive;
+  transform: rotate(-4deg);
+}
+
+.home-feeling {
+  position: relative !important;
+  overflow: hidden !important;
+  background: var(--be-burgundy) !important;
+  color: white !important;
+}
+.home-feeling h2,
+.home-feeling p { color: white !important; }
+.home-feeling h2 em { color: var(--be-yellow) !important; }
+.home-feeling figure {
+  padding: 10px !important;
+  border-radius: 8px !important;
+  background: var(--be-paper) !important;
+  transform: rotate(-1.5deg);
+  box-shadow: 18px 20px 0 rgba(255,216,74,.75) !important;
+}
+.home-feeling figure img { border-radius: 3px !important; }
+.home-feeling figcaption { color: var(--be-ink) !important; }
+
+.home-team {
+  background: #cfe8ff !important;
+  color: var(--be-ink) !important;
+}
+.home-team h2,
+.home-team p { color: var(--be-ink) !important; }
+.team-card {
+  overflow: hidden !important;
+  border: 1px solid rgba(23,19,24,.12) !important;
+  border-radius: 18px !important;
+  background: rgba(255,255,255,.82) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 0 12px 34px rgba(42,70,93,.10) !important;
+}
+.team-card:nth-child(3n+1) { transform: rotate(-.45deg); }
+.team-card:nth-child(3n+2) { transform: rotate(.45deg); }
+
+.home-archive,
+.archive-preview {
+  background: #f5c8ba !important;
+  color: var(--be-ink) !important;
+}
+.home-archive h2,
+.home-archive p,
+.home-archive a { color: var(--be-ink) !important; }
+.archive-card {
+  border: 8px solid var(--be-paper) !important;
+  border-radius: 5px !important;
+  background: var(--be-paper) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 10px 13px 0 rgba(125,23,50,.18) !important;
+}
+
+.home-berlin {
+  min-height: 650px;
+  background:
+    linear-gradient(90deg, rgba(153,207,255,.97) 0%, rgba(153,207,255,.88) 48%, rgba(153,207,255,.46) 72%, rgba(153,207,255,.18) 100%),
+    url('/media/brand/berlin-brandenburg-gold.png') right 4% bottom / min(56vw, 790px) auto no-repeat,
+    #99cfff !important;
+  color: var(--be-ink) !important;
+}
+.home-berlin::before {
+  content: 'BERLIN';
+  position: absolute;
+  left: -1vw;
+  bottom: -2.5vw;
+  z-index: 0;
+  color: rgba(23,19,24,.055);
+  font: 800 clamp(9rem, 24vw, 24rem)/.7 var(--display);
+  letter-spacing: -.06em;
+  pointer-events: none;
+}
+.home-berlin .shell { position: relative; z-index: 2; }
+.home-berlin h2,
+.home-berlin h3,
+.home-berlin p { color: var(--be-ink) !important; }
+.home-berlin h2 em { color: var(--be-burgundy) !important; }
+.home-berlin-reasons article {
+  border-color: rgba(23,19,24,.16) !important;
+  background: rgba(255,248,236,.76) !important;
+  backdrop-filter: blur(5px);
+}
+.home-berlin-stamp {
+  background: var(--be-yellow) !important;
+  color: var(--be-ink) !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  transform: rotate(-2deg);
+}
+
+/* ---------- BBF: Berlin + festival, not nightclub everywhere ---------- */
+.bbf-premium { background: var(--be-paper) !important; color: var(--be-ink) !important; }
+.bbf-hero { background: var(--be-night) !important; }
+.bbf-hero-video { opacity: 1 !important; filter: saturate(1) contrast(1.03) !important; }
+.bbf-hero-wash {
+  background: linear-gradient(90deg, rgba(20,12,18,.87), rgba(20,12,18,.55) 48%, rgba(20,12,18,.08)), linear-gradient(0deg, rgba(20,12,18,.62), transparent 42%) !important;
+}
+.bbf-hero-poster {
+  border: 9px solid var(--be-paper) !important;
+  border-radius: 7px !important;
+  box-shadow: 18px 20px 0 rgba(153,207,255,.62), 0 25px 70px rgba(0,0,0,.25) !important;
+  transform: rotate(1.4deg);
+}
+.bbf-intro {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(90deg, rgba(255,248,236,.96), rgba(255,248,236,.88) 58%, rgba(255,248,236,.50)),
+    url('/media/brand/berlin-brandenburg-gold.png') right -4vw center / min(52vw, 720px) auto no-repeat,
+    var(--be-paper) !important;
+  color: var(--be-ink) !important;
+}
+.bbf-intro h2,
+.bbf-intro h3,
+.bbf-intro p { color: var(--be-ink) !important; }
+.bbf-intro h2 em { color: var(--be-burgundy) !important; }
+.bbf-city-proof article {
+  border-color: var(--be-line) !important;
+  background: rgba(255,255,255,.72) !important;
+  border-radius: 16px !important;
+}
+.bbf-city-proof article:nth-child(2) { background: rgba(153,207,255,.70) !important; }
+.bbf-city-proof article:nth-child(3) { background: rgba(255,216,74,.72) !important; }
+
+.bbf-venue { background: #d8ebfa !important; color: var(--be-ink) !important; }
+.bbf-venue h2, .bbf-venue h3, .bbf-venue h4, .bbf-venue p, .bbf-venue li { color: var(--be-ink) !important; }
+.bbf-film,
+.bbf-hotel-deal,
+.bbf-venue-card,
+.bbf-hotel-panel {
+  border-color: var(--be-line) !important;
+  border-radius: 18px !important;
+  background: rgba(255,255,255,.86) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 0 13px 40px rgba(48,72,94,.09) !important;
+}
+
+.bbf-artists { background: var(--be-burgundy) !important; color: white !important; }
+.bbf-artists h2, .bbf-artists p { color: white !important; }
+.bbf-artists h2 em { color: var(--be-yellow) !important; }
+.bbf-artist-backdrop { color: rgba(255,255,255,.05) !important; }
+.bbf-artist-card {
+  border: 7px solid var(--be-paper) !important;
+  border-radius: 4px !important;
+  background: var(--be-paper) !important;
+  box-shadow: 9px 12px 0 rgba(255,216,74,.25) !important;
+}
+
+.bbf-schedule { background: var(--be-paper) !important; color: var(--be-ink) !important; }
+.bbf-schedule h2, .bbf-schedule h3, .bbf-schedule p { color: var(--be-ink) !important; }
+.bbf-day,
+.bbf-schedule-card,
+.bbf-timeline-item {
+  border-color: var(--be-line) !important;
+  background: white !important;
+  color: var(--be-ink) !important;
+}
+
+.bbf-passes { background: #f4c6b9 !important; color: var(--be-ink) !important; }
+.bbf-passes h2, .bbf-passes h3, .bbf-passes p { color: var(--be-ink) !important; }
+.bbf-pass-card {
+  border-color: var(--be-line) !important;
+  background: var(--be-paper) !important;
+  color: var(--be-ink) !important;
+  box-shadow: 10px 12px 0 rgba(125,23,50,.12) !important;
+}
+
+.bbf-travel { background: #cfe8ff !important; color: var(--be-ink) !important; }
+.bbf-travel h2, .bbf-travel h3, .bbf-travel p, .bbf-travel li { color: var(--be-ink) !important; }
+
+/* ---------- archive ---------- */
+.archive-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #f5c8ba !important;
+  color: var(--be-ink) !important;
+}
+.archive-hero h1,
+.archive-hero h2,
+.archive-hero p { color: var(--be-ink) !important; }
+.archive-grid,
+.archive-page,
+.archive-section { background: var(--be-paper) !important; color: var(--be-ink) !important; }
+.archive-page h1, .archive-page h2, .archive-page h3, .archive-page p { color: var(--be-ink) !important; }
+
+/* ---------- contact / crew ---------- */
+.contact-page,
+.ambassador-page,
+.volunteer-page {
+  background: var(--be-paper) !important;
+  color: var(--be-ink) !important;
+}
+.contact-page h1, .contact-page h2, .contact-page h3, .contact-page p,
+.ambassador-page h1, .ambassador-page h2, .ambassador-page h3, .ambassador-page p,
+.volunteer-page h1, .volunteer-page h2, .volunteer-page h3, .volunteer-page p { color: var(--be-ink) !important; }
+.contact-hero,
+.ambassador-hero,
+.volunteer-hero { background: #cfe8ff !important; color: var(--be-ink) !important; }
+.contact-card,
+.contact-form,
+.ambassador-card,
+.volunteer-card,
+.form-panel {
+  border-color: var(--be-line) !important;
+  border-radius: 18px !important;
+  background: white !important;
+  color: var(--be-ink) !important;
+  box-shadow: var(--be-shadow) !important;
+}
+input, textarea, select {
+  border-color: rgba(23,19,24,.16) !important;
+  border-radius: 10px !important;
+  background: #fffdf9 !important;
+  color: var(--be-ink) !important;
+}
+
+/* ---------- preserved WordPress + history: readable first ---------- */
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) {
+  background: var(--be-paper) !important;
+  color: var(--be-ink) !important;
+}
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) h1,
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) h2,
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) h3,
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) p,
+[data-wordpress-source]:not([data-wordpress-source='home']):not([data-wordpress-source='bbf-2026']) li { color: var(--be-ink) !important; }
+
+[data-wordpress-source='explosion-history'] {
+  background: linear-gradient(180deg, #fff8ec 0%, #fff8ec 50%, #d8ebfa 50%, #d8ebfa 100%) !important;
+}
+[data-wordpress-source='explosion-history'] * {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+[data-wordpress-source='explosion-history'] a,
+[data-wordpress-source='explosion-history'] span,
+[data-wordpress-source='explosion-history'] strong,
+[data-wordpress-source='explosion-history'] time {
+  white-space: normal;
+}
+[data-wordpress-source='explosion-history'] [class*='year'],
+[data-wordpress-source='explosion-history'] [class*='date'] {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  min-width: max-content;
+}
+[data-wordpress-source='explosion-history'] img {
+  border: 8px solid white !important;
+  border-radius: 6px !important;
+  box-shadow: 9px 12px 0 rgba(125,23,50,.13) !important;
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  border-top: 0 !important;
+  background: var(--be-night) !important;
+  color: white !important;
+}
+.site-footer a, .site-footer address, .site-footer strong { color: white !important; }
+.site-footer::before {
+  content: '';
+  display: block;
+  height: 7px;
+  background: linear-gradient(90deg, var(--be-yellow) 0 26%, var(--be-blue) 26% 52%, var(--be-coral) 52% 76%, var(--be-pink) 76%);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .home-hero-content,
+  .bbf-hero-grid { padding-top: 112px !important; }
+  .home-hero-poster,
+  .bbf-hero-poster { box-shadow: 10px 12px 0 rgba(153,207,255,.52) !important; }
+  .home-berlin {
+    background:
+      linear-gradient(180deg, rgba(153,207,255,.98), rgba(153,207,255,.86) 68%, rgba(153,207,255,.62)),
+      url('/media/brand/berlin-brandenburg-gold.png') center bottom / 115% auto no-repeat,
+      #99cfff !important;
+    padding-bottom: 260px !important;
+  }
+  .bbf-intro {
+    background:
+      linear-gradient(180deg, rgba(255,248,236,.98), rgba(255,248,236,.87)),
+      url('/media/brand/berlin-brandenburg-gold.png') center bottom / 120% auto no-repeat,
+      var(--be-paper) !important;
+    padding-bottom: 220px !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .home-signal::before,
+  .bbf-stats::before { font-size: .48rem; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis; }
+  .home-feeling figure { box-shadow: 8px 9px 0 rgba(255,216,74,.72) !important; }
+  .archive-card { box-shadow: 6px 8px 0 rgba(125,23,50,.15) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-poster,
+  .bbf-hero-poster,
+  .home-chapter-card,
+  .team-card,
+  .home-berlin-stamp { transform: none !important; }
+}
