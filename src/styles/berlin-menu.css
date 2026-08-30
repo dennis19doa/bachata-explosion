@@ -1,116 +1,646 @@
-/* Final navigation treatment for smaller screens. */
+/* Bachata Explosion — web-first Berlin balance
+   The site should feel like an inviting event website with Berlin character,
+   not a magazine/zine concept. This file loads last and intentionally softens
+   the earlier experimental layers while preserving the migrated content. */
+
+:root {
+  --web-cream: #f7efe5;
+  --web-cream-2: #fffaf4;
+  --web-ink: #20171a;
+  --web-wine: #68192f;
+  --web-wine-2: #8d2848;
+  --web-gold: #e8bd63;
+  --web-sky: #dcecf0;
+  --web-peach: #f3d7c8;
+  --web-blue: #375f91;
+  --web-green: #bddb86;
+  --web-shadow: 0 18px 55px rgba(40, 22, 27, .12);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation — simple, premium, readable, website-like
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: fixed !important;
+  inset: 14px 0 auto !important;
+  z-index: 90 !important;
+  width: min(1180px, calc(100% - 28px)) !important;
+  min-height: 66px;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(66, 38, 45, .11) !important;
+  border-radius: 18px !important;
+  background: rgba(255, 250, 244, .94) !important;
+  box-shadow: 0 12px 36px rgba(24, 11, 15, .17) !important;
+  backdrop-filter: blur(18px) saturate(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+}
+
+.site-header::before,
+.site-header::after,
+.brand::after,
+.desktop-nav > a::before,
+.nav-group > summary::before { content: none !important; display: none !important; }
+
+.brand {
+  width: 150px;
+  padding: 0 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  border-radius: 0 !important;
+}
+
+.brand img { width: 100%; max-height: 48px; object-fit: contain; }
+
+.desktop-nav {
+  gap: 2px !important;
+}
+
+.desktop-nav > a,
+.nav-group > summary {
+  color: #35282c !important;
+  padding: 10px 11px !important;
+  border-radius: 10px;
+  font-family: var(--body, Manrope, sans-serif) !important;
+  font-size: .72rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .055em !important;
+  text-transform: uppercase;
+  transition: background .18s ease, color .18s ease !important;
+}
+
+.desktop-nav > a::after { display: none !important; }
+
+.nav-group > summary::after {
+  content: "⌄" !important;
+  position: static !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  margin-left: 5px !important;
+  color: var(--web-wine) !important;
+  background: none !important;
+  font-size: .9em;
+}
+
+.desktop-nav > a:hover,
+.nav-group > summary:hover,
+.nav-group[open] > summary {
+  color: var(--web-wine) !important;
+  background: rgba(104, 25, 47, .075) !important;
+}
+
+.site-header > .button {
+  border-radius: 11px !important;
+  min-height: 44px !important;
+  padding-inline: 18px !important;
+  background: var(--web-wine) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.site-header > .button:hover {
+  transform: translateY(-1px) !important;
+  background: var(--web-wine-2) !important;
+}
+
+.nav-popover {
+  width: 320px !important;
+  top: calc(100% + 14px) !important;
+  padding: 10px !important;
+  border: 1px solid rgba(84, 52, 60, .12) !important;
+  border-radius: 16px !important;
+  background: #fffaf4 !important;
+  background-image: none !important;
+  color: var(--web-ink) !important;
+  box-shadow: 0 22px 60px rgba(40, 22, 27, .18) !important;
+}
+
+.nav-popover::before { background: transparent !important; height: 16px !important; top: -16px !important; transform: none !important; }
+.nav-popover > span { color: var(--web-wine) !important; padding: 9px 11px !important; }
+.nav-popover a { border-top-color: rgba(66, 38, 45, .09) !important; border-radius: 10px; color: var(--web-ink) !important; }
+.nav-popover a:hover { background: rgba(232, 189, 99, .18) !important; }
+.nav-popover a b { color: var(--web-ink) !important; }
+.nav-popover a small { color: #74666a !important; }
+
+/* --------------------------------------------------------------------------
+   Remove the overdone magazine styling
+   -------------------------------------------------------------------------- */
+
+.section-label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 !important;
+  margin-bottom: 16px !important;
+  color: var(--web-wine) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  font-size: .68rem !important;
+  letter-spacing: .11em !important;
+}
+
+.section-label::before {
+  content: "BERLIN" !important;
+  margin: 0 !important;
+  padding: 5px 7px;
+  border-radius: 6px;
+  background: var(--web-wine) !important;
+  color: #fff !important;
+  font-size: .58rem;
+  letter-spacing: .08em;
+}
+
+.button {
+  border-radius: 11px !important;
+  box-shadow: none !important;
+}
+
+.button:hover { transform: translateY(-2px) !important; box-shadow: 0 12px 30px rgba(46, 20, 27, .12) !important; }
+.button-gold { background: var(--web-gold) !important; color: #24181b !important; }
+.button-outline { border-color: rgba(83, 52, 59, .2) !important; }
+
+.bbf-city-proof article,
+.bbf-venue-card,
+.bbf-hotel-deal,
+.bbf-cinema,
+.bbf-schedule-day,
+.bbf-travel-grid > article,
+.bbf-whatsapp,
+.bbf-jj-card,
+.contact-route,
+.contact-form,
+.contact-delivery-card,
+.contact-next-grid > a,
+.ambassador-benefit-grid article,
+.volunteer-promise-cards article,
+.volunteer-role-grid > a,
+.ambassador-form,
+.volunteer-form,
+.library-card > a,
+.archive-cover,
+.album-mosaic figure,
+.nas-gallery-grid figure {
+  border-radius: 18px !important;
+  transform: none !important;
+  box-shadow: var(--web-shadow) !important;
+}
+
+.bbf-hero-poster { transform: rotate(1deg) !important; border-width: 5px !important; box-shadow: 0 24px 70px rgba(0,0,0,.28) !important; border-radius: 12px !important; }
+.bbf-hero-poster::after { display: none !important; }
+
+.library-card > a,
+.archive-cover,
+.album-mosaic figure,
+.nas-gallery-grid figure { border-width: 5px !important; }
+.library-card:nth-child(n) > a { transform: none !important; }
+
+/* --------------------------------------------------------------------------
+   Homepage — current video first, then an inviting Berlin journey
+   -------------------------------------------------------------------------- */
+
+.home-hero {
+  min-height: 790px;
+  border-bottom: 0 !important;
+}
+
+.home-hero-video {
+  opacity: 1 !important;
+  filter: saturate(.95) contrast(1.06) brightness(.88) !important;
+}
+
+.home-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(24,9,13,.88) 0%, rgba(24,9,13,.68) 46%, rgba(24,9,13,.22) 78%, rgba(24,9,13,.38) 100%),
+    linear-gradient(0deg, rgba(24,9,13,.38), transparent 45%) !important;
+}
+
+.home-urban-sticker {
+  border-radius: 8px !important;
+  background: rgba(255,250,244,.91) !important;
+  color: var(--web-wine) !important;
+  transform: none !important;
+}
+
+.home-hero-poster { border-radius: 14px !important; box-shadow: 0 28px 70px rgba(0,0,0,.28) !important; transform: rotate(1deg) !important; }
+
+.home-signal {
+  background: #fffaf4 !important;
+  color: var(--web-ink) !important;
+  border-block: 1px solid rgba(93,61,69,.1) !important;
+}
+.home-stat-grid > div { border-color: rgba(93,61,69,.11) !important; }
+.home-stat-grid strong { color: var(--web-wine) !important; }
+.home-stat-grid span { color: #75666a !important; }
+.home-signal-beam { opacity: .08 !important; }
+.home-impact-marquee { display: none !important; }
+
+.home-manifesto {
+  position: relative;
+  isolation: isolate;
+  color: var(--web-ink) !important;
+  background:
+    linear-gradient(90deg, rgba(247,239,229,1) 0%, rgba(247,239,229,.98) 48%, rgba(247,239,229,.82) 62%, rgba(247,239,229,.12) 100%),
+    url("/media/atmosphere/explosion-community.jpg") right 32% center / 52% cover no-repeat !important;
+}
+.home-manifesto::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 4%;
+  bottom: 2%;
+  width: min(350px, 34vw);
+  aspect-ratio: 1.5;
+  background: var(--web-wine);
+  opacity: .08;
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+}
+.home-manifesto .shell { position: relative; z-index: 1; }
+.home-manifesto h2,
+.home-manifesto p { color: var(--web-ink) !important; }
+.home-manifesto h2 em { color: var(--web-wine) !important; }
+.home-manifesto-city { display: none !important; }
+
+.event-switcher {
+  color: var(--web-ink) !important;
+  background: var(--web-cream-2) !important;
+}
+.event-switcher h2,
+.event-switcher h3,
+.event-switcher p { color: inherit !important; }
+.event-switcher h2 em { color: var(--web-wine) !important; }
+.home-next-event,
+.home-chapter-card,
+.home-chapter-note {
+  border-radius: 20px !important;
+  box-shadow: 0 15px 45px rgba(70,42,49,.09) !important;
+}
+.home-chapter-card { overflow: hidden; }
+.home-chapter-card:nth-child(n) { transform: none !important; }
+
+.home-feeling {
+  color: #fff !important;
+  background:
+    linear-gradient(110deg, rgba(88,18,42,.96), rgba(105,25,48,.83)),
+    url("/media/bbf/atmosphere/party-143.jpg") center / cover no-repeat !important;
+}
+.home-feeling figure { border-radius: 20px !important; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,.24); }
+.home-feeling figure img { filter: saturate(.95) contrast(1.04) !important; }
+.home-feeling h2,
+.home-feeling p { color: #fff !important; }
+.home-feeling .section-label { color: #f4d897 !important; }
+.home-feeling .section-label::before { background: #fff !important; color: var(--web-wine) !important; }
+.home-feeling h2 em { color: #f3d084 !important; }
+
+.home-team {
+  color: var(--web-ink) !important;
+  background: var(--web-sky) !important;
+}
+.home-team h2,
+.home-team p { color: inherit !important; }
+.home-team h2 em { color: var(--web-wine) !important; }
+.team-card { border-radius: 18px !important; overflow: hidden; background: #fff !important; color: var(--web-ink) !important; box-shadow: 0 13px 36px rgba(48,59,67,.1) !important; }
+.team-card img { filter: none !important; }
+
+.home-archive {
+  color: var(--web-ink) !important;
+  background: #f1e6d8 !important;
+}
+.home-archive h2,
+.home-archive p { color: inherit !important; }
+.home-archive h2 em { color: var(--web-wine) !important; }
+.archive-card { border-radius: 16px !important; overflow: hidden; transform: none !important; box-shadow: 0 12px 32px rgba(56,37,42,.11) !important; }
+.archive-card img { filter: saturate(.95) contrast(1.03) !important; }
+
+.home-berlin {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 620px;
+  color: var(--web-ink) !important;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(255,255,255,.8), transparent 23rem),
+    linear-gradient(135deg, #dcecf0 0%, #f8e7d7 58%, #f6eee5 100%) !important;
+}
+.home-berlin::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: clamp(-50px, -2vw, 0px);
+  bottom: -35px;
+  width: min(650px, 55vw);
+  aspect-ratio: 1.7;
+  background: url("/media/brand/berlin-brandenburg-gold.png") center bottom / contain no-repeat;
+  opacity: .42;
+  pointer-events: none;
+}
+.home-berlin::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 3%;
+  top: 7%;
+  width: min(300px, 28vw);
+  aspect-ratio: 1.45;
+  background: var(--web-wine);
+  opacity: .1;
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+  transform: rotate(-8deg);
+}
+.home-berlin .shell { position: relative; z-index: 1; }
+.home-berlin h2,
+.home-berlin h3,
+.home-berlin p { color: inherit !important; }
+.home-berlin h2 em { color: var(--web-wine) !important; }
+.home-berlin-reasons article { border-radius: 18px !important; background: rgba(255,250,244,.82) !important; color: var(--web-ink) !important; box-shadow: 0 12px 36px rgba(49,49,48,.09) !important; backdrop-filter: blur(8px); }
+.home-berlin-stamp { transform: none !important; border-radius: 14px !important; background: var(--web-wine) !important; color: #fff !important; }
+
+/* --------------------------------------------------------------------------
+   BBF — keep the video/night energy but alternate with light, welcoming sections
+   -------------------------------------------------------------------------- */
+
+.bbf-hero-video { filter: saturate(.95) contrast(1.04) brightness(.86) !important; }
+.bbf-hero-wash {
+  background:
+    linear-gradient(90deg, rgba(15,6,9,.9), rgba(15,6,9,.62) 47%, rgba(15,6,9,.18) 76%, rgba(15,6,9,.35)),
+    linear-gradient(0deg, rgba(15,6,9,.28), transparent 40%) !important;
+}
+
+.bbf-intro {
+  position: relative;
+  overflow: hidden;
+  color: var(--web-ink) !important;
+  background: var(--web-cream) !important;
+}
+.bbf-intro::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -20px;
+  width: min(470px, 40vw);
+  aspect-ratio: 1.7;
+  background: url("/media/brand/berlin-brandenburg-gold.png") center/contain no-repeat;
+  opacity: .18;
+  pointer-events: none;
+}
+.bbf-intro .shell { position: relative; z-index: 1; }
+.bbf-intro h2,
+.bbf-intro h3,
+.bbf-intro p { color: inherit !important; }
+.bbf-intro h2 em { color: var(--web-wine) !important; }
+.bbf-city-proof article { background: #fffaf4 !important; color: var(--web-ink) !important; border: 1px solid rgba(82,52,59,.09) !important; }
+.bbf-city-proof article:nth-child(2) { background: #f3d7c8 !important; color: var(--web-ink) !important; }
+.bbf-city-proof article span { color: var(--web-wine) !important; }
+
+.bbf-venue {
+  color: var(--web-ink) !important;
+  background: #fffaf4 !important;
+}
+.bbf-venue > .shell > .bbf-heading h2,
+.bbf-venue > .shell > .bbf-heading p { color: var(--web-ink) !important; }
+.bbf-venue > .shell > .bbf-heading h2 em { color: var(--web-wine) !important; }
+.bbf-film-heading { color: var(--web-ink) !important; }
+.bbf-film-heading h3,
+.bbf-film-heading p { color: inherit !important; }
+
+.bbf-artists {
+  background:
+    linear-gradient(rgba(35,19,25,.9), rgba(35,19,25,.93)),
+    url("/media/brand/live-explosion-background.png") center/cover !important;
+}
+.bbf-artist-rail > * { border-radius: 14px !important; transform: none !important; padding: 5px !important; }
+.bbf-artist-rail img { border-radius: 10px !important; }
+
+/* --------------------------------------------------------------------------
+   Archive / contact / crew pages — alternate light surfaces, normal UI
+   -------------------------------------------------------------------------- */
+
+.archive-gallery-section,
+.contact-routing,
+.contact-next,
+.ambassador-benefits,
+.ambassador-group,
+.volunteer-promise,
+.volunteer-roles {
+  color: var(--web-ink) !important;
+  background: var(--web-cream) !important;
+}
+.archive-gallery-section h2,
+.archive-gallery-section h3,
+.archive-gallery-section p,
+.contact-routing h2,
+.contact-routing h3,
+.contact-routing p,
+.contact-next h2,
+.contact-next h3,
+.contact-next p,
+.ambassador-benefits h2,
+.ambassador-benefits h3,
+.ambassador-benefits p,
+.volunteer-promise h2,
+.volunteer-promise h3,
+.volunteer-promise p,
+.volunteer-roles h2,
+.volunteer-roles h3,
+.volunteer-roles p { color: inherit !important; }
+
+.contact-route,
+.ambassador-benefit-grid article,
+.volunteer-promise-cards article,
+.volunteer-role-grid > a {
+  background: #fffaf4 !important;
+  color: var(--web-ink) !important;
+  border: 1px solid rgba(82,52,59,.09) !important;
+}
+.contact-route:nth-child(even),
+.ambassador-benefit-grid article:nth-child(even),
+.volunteer-role-grid > a:nth-child(even) {
+  background: var(--web-peach) !important;
+  color: var(--web-ink) !important;
+}
+
+.contact-form,
+.ambassador-form,
+.volunteer-form {
+  background: #fff !important;
+  color: var(--web-ink) !important;
+  border: 1px solid rgba(82,52,59,.11) !important;
+  border-top: 4px solid var(--web-wine) !important;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+.ambassador-form input,
+.ambassador-form textarea,
+.volunteer-form input,
+.volunteer-form select,
+.volunteer-form textarea {
+  background: #fffaf4 !important;
+  color: var(--web-ink) !important;
+  border-color: rgba(82,52,59,.14) !important;
+  border-radius: 9px !important;
+}
+
+/* History: keep all migrated chapters but make it feel like a website timeline. */
+.wp-source-content .be-history {
+  color: var(--web-ink) !important;
+  background: var(--web-cream) !important;
+}
+.wp-source-content .be-history__sidebar {
+  border-radius: 18px !important;
+  background: rgba(255,250,244,.94) !important;
+  box-shadow: var(--web-shadow) !important;
+}
+.wp-source-content .be-headline,
+.wp-source-content .be-event__title,
+.wp-source-content .be-event__text { color: var(--web-ink) !important; }
+.wp-source-content .be-year {
+  color: #5f5054 !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+.wp-source-content .be-year.is-active { color: #fff !important; background: var(--web-wine) !important; border-radius: 9px !important; }
+.wp-source-content .be-year-highlight { display: none !important; }
+.wp-source-content .be-event__media { border-radius: 18px !important; overflow: hidden; box-shadow: var(--web-shadow) !important; transform: none !important; }
+.wp-source-content .be-event__media img { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; transform: none !important; }
+.wp-source-content .be-event__chapter { border-radius: 7px !important; background: var(--web-wine) !important; color: #fff !important; }
+.archive-year > header > span,
+.archive-year > header time,
+.archive-year > header strong {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+/* Footer: dark anchor, but softer than the previous club-poster strip. */
+.site-footer {
+  border-top: 0 !important;
+  background: #2b171e !important;
+}
+.site-footer::before { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   Mobile navigation — conventional and inviting, with video + Berlin accents
+   -------------------------------------------------------------------------- */
 
 .mobile-nav > summary {
   min-width: 74px;
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(245,240,232,.24);
-  background: #0b0b0c;
-  color: #f5f0e8;
+  min-height: 44px;
+  border: 1px solid rgba(73,46,53,.13) !important;
+  border-radius: 11px !important;
+  background: var(--web-wine) !important;
+  color: #fff !important;
   text-transform: uppercase;
-  letter-spacing: .11em;
+  letter-spacing: .08em;
   font-size: .68rem;
-  font-weight: 900;
+  font-weight: 850;
 }
-
-.mobile-nav > summary::before {
-  content: "//";
-  margin-right: 6px;
-  color: #c7ff36;
-}
+.mobile-nav > summary::before { content: none !important; }
 
 .mobile-nav-panel {
   isolation: isolate;
-  background: #2345ff !important;
-  color: #fff;
+  background: #fffaf4 !important;
+  color: var(--web-ink) !important;
 }
-
 .mobile-nav-video {
-  opacity: .18 !important;
-  filter: grayscale(1) contrast(1.35) !important;
+  opacity: .24 !important;
+  filter: saturate(.75) contrast(1.05) !important;
+  height: 36vh !important;
+  object-fit: cover !important;
 }
-
 .mobile-nav-shade {
   background:
-    linear-gradient(135deg, rgba(35,69,255,.9), rgba(20,33,109,.93) 55%, rgba(8,8,9,.96)) !important;
+    linear-gradient(180deg, rgba(104,25,47,.34) 0%, rgba(255,250,244,.54) 31%, rgba(255,250,244,.98) 48%, #fffaf4 100%) !important;
 }
-
 .mobile-nav-panel::after {
   content: "";
   position: absolute;
   z-index: 0;
-  width: min(72vw, 520px);
+  width: min(330px, 62vw);
   aspect-ratio: 1.45;
-  right: -8vw;
-  bottom: 8vh;
-  background: #c7ff36;
-  opacity: .3;
-  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
-  mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
-  transform: rotate(-10deg);
+  right: -8%;
+  top: 23vh;
+  background: var(--web-wine);
+  opacity: .1;
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") center/contain no-repeat;
+  transform: rotate(-8deg);
   pointer-events: none;
 }
-
 .mobile-nav-panel nav,
-.mobile-nav-meta {
-  position: relative;
-  z-index: 2;
-}
-
+.mobile-nav-meta { position: relative; z-index: 2; }
 .mobile-nav-panel nav {
-  width: min(620px, calc(100% - 32px));
+  width: min(620px, calc(100% - 30px));
   margin-inline: auto;
-  padding-top: clamp(100px, 16vh, 150px);
+  padding-top: clamp(115px, 18vh, 155px);
 }
-
 .mobile-nav-home,
 .mobile-nav-group > summary {
+  min-height: 56px;
   border: 0 !important;
-  border-bottom: 1px solid rgba(255,255,255,.2) !important;
+  border-bottom: 1px solid rgba(72,45,52,.1) !important;
   border-radius: 0 !important;
-  min-height: 72px;
-  color: #fff !important;
-  font: 800 clamp(2.1rem, 9vw, 4.8rem)/.9 var(--display, Impact, sans-serif) !important;
-  letter-spacing: -.025em !important;
-  text-transform: uppercase;
+  color: var(--web-ink) !important;
+  font: 800 1.18rem/1.1 var(--body, Manrope, sans-serif) !important;
+  letter-spacing: .01em !important;
+  text-transform: none !important;
 }
-
-.mobile-nav-home::before { content: "00 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
-.mobile-nav-group:nth-of-type(1) > summary span::before { content: "01 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
-.mobile-nav-group:nth-of-type(2) > summary span::before { content: "02 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
-.mobile-nav-group:nth-of-type(3) > summary span::before { content: "03 "; color: #c7ff36; font-size: .42em; vertical-align: middle; }
-
+.mobile-nav-home::before,
+.mobile-nav-group > summary span::before { content: none !important; display: none !important; }
 .mobile-nav-group > div {
-  background: #ede5d7 !important;
-  color: #131214 !important;
-  padding: 8px !important;
-  box-shadow: 9px 10px 0 rgba(0,0,0,.34);
+  padding: 5px 0 12px !important;
+  background: transparent !important;
+  color: var(--web-ink) !important;
+  box-shadow: none !important;
 }
-
 .mobile-nav-group > div a {
-  min-height: 48px;
-  display: flex !important;
-  align-items: center;
+  min-height: 42px;
   padding: 0 12px !important;
-  border-bottom: 1px solid rgba(0,0,0,.14) !important;
-  color: #131214 !important;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  font-size: .76rem !important;
-  font-weight: 800 !important;
+  border: 0 !important;
+  border-radius: 9px;
+  color: #645458 !important;
+  font-size: .78rem !important;
+  text-transform: none !important;
+  letter-spacing: .01em !important;
 }
-
-.mobile-nav-group > div a:hover { background: #c7ff36 !important; }
-
+.mobile-nav-group > div a:hover { background: rgba(104,25,47,.07) !important; color: var(--web-wine) !important; }
 .mobile-nav-meta {
-  border-top: 0 !important;
-  background: #72152d;
-  color: #fff;
+  border-top: 1px solid rgba(72,45,52,.1) !important;
+  background: transparent !important;
+  color: #645458 !important;
   padding: 14px 18px !important;
 }
 
-@media (min-width: 1081px) {
-  .mobile-nav-panel::after { display: none; }
+@media (max-width: 1080px) {
+  .site-header { grid-template-columns: auto 1fr auto !important; }
+  .site-header > .button { display: none !important; }
+}
+
+@media (max-width: 760px) {
+  .site-header { inset: 9px 0 auto !important; width: min(100% - 18px, 1180px) !important; min-height: 58px; padding: 6px 8px !important; border-radius: 14px !important; }
+  .brand { width: 124px; padding-left: 5px !important; }
+  .home-hero { min-height: 720px; }
+  .home-hero-shade { background: linear-gradient(180deg, rgba(22,8,12,.54), rgba(22,8,12,.74) 54%, rgba(22,8,12,.9)) !important; }
+  .home-manifesto {
+    background:
+      linear-gradient(rgba(247,239,229,.94), rgba(247,239,229,.98)),
+      url("/media/atmosphere/explosion-community.jpg") center/cover no-repeat !important;
+  }
+  .home-berlin { min-height: 720px; padding-bottom: 230px !important; }
+  .home-berlin::before { width: 92vw; right: -12vw; opacity: .34; }
+  .bbf-intro::after { width: 78vw; opacity: .1; }
+  .section-label::before { font-size: .52rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-video,
+  .bbf-hero-video,
+  .mobile-nav-video { display: none !important; }
 }
