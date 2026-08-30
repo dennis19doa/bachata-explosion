@@ -4,6 +4,7 @@ import "../styles/modern.css";
 import "../styles/identity.css";
 import "../styles/berlin-site.css";
 import "../styles/berlin-signature.css";
+import "../styles/berlin-replan.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -30,7 +31,7 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#100609" />
+    <meta name="theme-color" content="#080809" />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -44,17 +45,8 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
-    <script is:inline>
-      (() => {
-        const concept = new URLSearchParams(window.location.search).get("concept");
-        if (concept === "explosion-underground") document.documentElement.dataset.siteConcept = concept;
-      })();
-    </script>
   </head>
   <body>
-    <script is:inline>
-      if (document.documentElement.dataset.siteConcept === "explosion-underground") document.body.classList.add("urban-site");
-    </script>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
       <a class="brand" href="/" aria-label="Bachata Explosion home">
@@ -65,27 +57,27 @@ const socialImage = new URL("/og.png", Astro.site);
         <details class="nav-group">
           <summary>Festival</summary>
           <div class="nav-popover">
-            <span>BBF · October 16–18, 2026</span>
+            <span>Berlin Bachata Festival · October 16–18, 2026</span>
             <a href="/bbf-2026/"><b>Festival overview</b><small>Venue, artists, program & passes</small></a>
             <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Three days of workshops & parties</small></a>
             <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules & registration</small></a>
           </div>
         </details>
         <details class="nav-group">
-          <summary>Travel</summary>
+          <summary>Berlin trip</summary>
           <div class="nav-popover">
-            <span>Arrive in Berlin without the guesswork</span>
+            <span>Get to Berlin and onto the dance floor</span>
             <a href="/bbf-2026/#venue"><b>Hotel & venue</b><small>Stay and dance at MOA Berlin</small></a>
             <a href="/bbf-2026/#travel"><b>Getting to MOA</b><small>Airport, Hauptbahnhof & local tickets</small></a>
-            <a href={whatsappUrl}><b>Festival WhatsApp ↗</b><small>Updates and community before arrival</small></a>
+            <a href={whatsappUrl}><b>Festival WhatsApp ↗</b><small>Meet the community before arrival</small></a>
           </div>
         </details>
         <a href="/archive/">Past events</a>
         <details class="nav-group">
-          <summary>About</summary>
+          <summary>Explosion</summary>
           <div class="nav-popover nav-popover-right">
-            <span>The people and story behind Explosion</span>
-            <a href="/explosion-history/"><b>Our history</b><small>Every chapter since 2022</small></a>
+            <span>The people, history and community behind Explosion</span>
+            <a href="/explosion-history/"><b>Our history</b><small>How Explosion grew from Berlin since 2022</small></a>
             <a href="/ambassadors/"><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
             <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
           </div>
@@ -110,7 +102,7 @@ const socialImage = new URL("/og.png", Astro.site);
               </div>
             </details>
             <details class="mobile-nav-group">
-              <summary><span>Travel &amp; community</span><i aria-hidden="true"></i></summary>
+              <summary><span>Berlin trip</span><i aria-hidden="true"></i></summary>
               <div>
                 <a href="/bbf-2026/#venue">Hotel &amp; venue</a>
                 <a href="/bbf-2026/#travel">Getting to MOA</a>
@@ -118,7 +110,7 @@ const socialImage = new URL("/og.png", Astro.site);
               </div>
             </details>
             <details class="mobile-nav-group">
-              <summary><span>About Explosion</span><i aria-hidden="true"></i></summary>
+              <summary><span>Explosion</span><i aria-hidden="true"></i></summary>
               <div>
                 <a href="/archive/">Past events</a>
                 <a href="/explosion-history/">History</a>
@@ -139,11 +131,6 @@ const socialImage = new URL("/og.png", Astro.site);
     <main id="main">
       <slot />
     </main>
-    <aside class="site-concept-toolbar" aria-label="Active design concept">
-      <span>Full-site concept</span>
-      <strong>Explosion Underground</strong>
-      <a href="/">Exit concept</a>
-    </aside>
     <footer class="site-footer">
       <div class="shell footer-grid">
         <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
@@ -170,18 +157,8 @@ const socialImage = new URL("/og.png", Astro.site);
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
       const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
       const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
-      const activeConcept = document.documentElement.dataset.siteConcept;
 
       heroVideo?.play().catch(() => undefined);
-
-      if (activeConcept) {
-        document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((link) => {
-          if (link.closest(".site-concept-toolbar")) return;
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set("concept", activeConcept);
-          link.href = `${url.pathname}${url.search}${url.hash}`;
-        });
-      }
 
       dropdowns.forEach((dropdown) => {
         dropdown.addEventListener("toggle", () => {
