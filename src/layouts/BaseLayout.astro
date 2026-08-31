@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "../styles/berlin-web.css";
 import "../styles/home-city.css";
+import "../styles/site-consistency.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -15,7 +16,6 @@ interface Props {
 const {
   title = "Bachata Explosion — By dancers, for dancers",
   description = "Berlin bachata festivals, workshops, socials and a growing event archive — built by dancers, for dancers.",
-  headerStyle = "overlay",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -45,7 +45,7 @@ const socialImage = new URL("/og.png", Astro.site);
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
+    <header class="site-header">
       <a class="brand" href="/" aria-label="Bachata Explosion home">
         <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
       </a>
