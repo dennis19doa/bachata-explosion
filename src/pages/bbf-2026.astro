@@ -115,11 +115,23 @@ const expandedFaqs = [
         <figure class="bbf-hero-poster" data-reveal>
           <div class="bbf-poster-halo" aria-hidden="true"></div>
           <img src="/media/events/bbf-2026-poster.jpg" alt="Complete Berlin Bachata Festival 2026 poster" width="1080" height="1350" />
-          <figcaption><span>Official artwork</span><b>Nothing cropped. Everything announced.</b></figcaption>
+          <figcaption><span>Official artwork</span><b>Berlin Bachata Festival 2026</b></figcaption>
         </figure>
       </div>
-      <a class="bbf-scroll" href="#festival-at-a-glance">Enter the experience <span aria-hidden="true">↓</span></a>
+      <a class="bbf-scroll" href="#festival-at-a-glance">Explore the festival <span aria-hidden="true">↓</span></a>
     </section>
+
+    <nav class="bbf-quicknav" aria-label="Festival page sections">
+      <div class="shell">
+        <a href="#festival-at-a-glance">Overview</a>
+        <a href="#venue">Venue & hotel</a>
+        <a href="#artists">Artists</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#passes">Passes</a>
+        <a href="#travel">Berlin & travel</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
 
     <section class="bbf-stats" id="festival-at-a-glance" aria-label="Festival at a glance">
       <div class="shell bbf-stats-grid">
@@ -153,7 +165,7 @@ const expandedFaqs = [
         </div>
 
         <div class="bbf-film" data-reveal>
-          <div class="bbf-film-heading"><p class="section-label">Festival film</p><h3>See what an Explosion weekend feels like.</h3><p>Real footage from our Berlin dance floor. You can rename this film when the final 2026 title is ready.</p></div>
+          <div class="bbf-film-heading"><p class="section-label">Festival film</p><h3>See what an Explosion weekend feels like.</h3><p>Real footage from our Berlin dance floor: crowded socials, shared energy and the atmosphere behind Bachata Explosion.</p></div>
           <div class="bbf-cinema">
             <video autoplay muted loop playsinline controls preload="metadata" poster="/media/bbf/venue/hero.png" data-autoplay-video>
               <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
@@ -198,7 +210,7 @@ const expandedFaqs = [
         <div class="bbf-artist-backdrop" aria-hidden="true">BERLIN 2026</div>
         <div class="bbf-heading" data-reveal>
           <div><p class="section-label">The complete 2026 lineup</p><h2 id="artists-title">The world comes<br /><em>to one Berlin floor.</em></h2></div>
-          <p>Every artist receives the same visual weight. The original posters carry the names, so the gallery stays clean, consistent and easy to scan.</p>
+          <p>International teachers, performers and DJs come together for one weekend. Scroll through the full announced lineup below.</p>
         </div>
         <div class="bbf-artist-rail" aria-label="Berlin Bachata Festival 2026 artists">
           {artists.map(([name, image], index) => (
@@ -215,7 +227,7 @@ const expandedFaqs = [
       <div class="shell">
         <div class="bbf-heading" data-reveal>
           <div><p class="section-label">Festival schedule</p><h2 id="schedule-title">Three distinct days.<br /><em>One flowing story.</em></h2></div>
-          <p>Artist, workshop, level and room details will appear here as they are confirmed.</p>
+          <p>Start with the day overview, then use the timetable for individual workshop slots as details are confirmed.</p>
         </div>
         <div class="bbf-schedule-tabs" role="tablist" aria-label="Festival days">
           {schedule.map((day, index) => (
@@ -260,7 +272,7 @@ const expandedFaqs = [
       <div class="shell">
         <div class="bbf-heading" data-reveal>
           <div><p class="section-label">Choose your pass</p><h2 id="passes-title">Build your<br /><em>Explosion.</em></h2></div>
-          <p>Choose your weekend. Current prices and inclusions are confirmed at checkout.</p>
+          <p>Choose the access that fits your weekend. Current prices and final inclusions are always shown at checkout.</p>
         </div>
         <div class="bbf-pass-grid">
           <article class="bbf-pass-full" data-pass-word="FULL" data-reveal><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><ul><li>Friday–Sunday workshops</li><li>All three festival parties</li><li>Jack & Jill eligibility</li></ul><a href={ticketUrl}>See current price ↗</a></article>
@@ -315,6 +327,16 @@ const expandedFaqs = [
       <div class="shell" data-reveal><p class="section-label">16–18 October 2026 · Berlin</p><h2>The floor is waiting.</h2><p>Workshops by day. Parties until 05:00. Your complete festival weekend at MOA Berlin.</p><a class="button button-gold" href={ticketUrl}>Secure your pass</a></div>
     </section>
   </div>
+
+  <style is:global>
+    .bbf-quicknav{position:sticky;z-index:900;top:94px;border-top:1px solid rgba(208,168,74,.22);border-bottom:1px solid rgba(208,168,74,.22);background:rgba(7,7,7,.94);backdrop-filter:blur(16px)}
+    .bbf-quicknav .shell{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+    .bbf-quicknav .shell::-webkit-scrollbar{display:none}
+    .bbf-quicknav a{flex:0 0 auto;padding:9px 12px;border:1px solid transparent;color:#aaa297;font:800 .68rem/1 'Manrope',system-ui,sans-serif;letter-spacing:.055em;text-transform:uppercase;white-space:nowrap;text-decoration:none}
+    .bbf-quicknav a:hover,.bbf-quicknav a:focus-visible{border-color:rgba(208,168,74,.42);color:#e4c36f;background:rgba(208,168,74,.07)}
+    @media(max-width:1280px){.bbf-quicknav{top:88px}}
+    @media(max-width:640px){.bbf-quicknav{top:80px}.bbf-quicknav .shell{width:100%;padding-left:14px;padding-right:14px}}
+  </style>
 
   <script>
     document.querySelectorAll<HTMLVideoElement>("[data-autoplay-video]").forEach((video) => {
