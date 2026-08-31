@@ -38,7 +38,7 @@ const previewPhotos = [
         <a class="archive-breadcrumb" href="/archive/">← All collections</a>
         <p class="eyebrow"><span></span>{event.category} · {event.year}</p>
         <h1>{event.title}<br /><em>{event.year}</em></h1>
-        <p class="hero-lead">{event.summary ?? "A community photo collection from the Bachata Explosion archive. The gallery stays part of this website while its full-size photo library lives on our own server."}</p>
+        <p class="hero-lead">{event.summary ?? "A community photo collection from the Bachata Explosion archive. Open the gallery below to revisit this edition."}</p>
         {event.albumGroups && <p class="album-credit">Photographs · {event.photographer}</p>}
       </div>
       <figure class="archive-cover">
@@ -56,8 +56,8 @@ const previewPhotos = [
           <h2>Photo<br /><em>gallery</em></h2>
         </div>
         <div>
-          <p>Photographs are loaded only when this collection is opened. That keeps the festival pages fast while the complete high-resolution library stays independent from the website.</p>
-          <p class="gallery-source"><span aria-hidden="true"></span><strong>{archiveMediaOrigin ? "High-resolution collection connected" : "Collection page preserved"}</strong></p>
+          <p>Each collection opens only when you choose it, keeping the main festival website fast while preserving the event memories in their own album.</p>
+          <p class="gallery-source"><span aria-hidden="true"></span><strong>{archiveMediaOrigin ? "High-resolution collection connected" : "Collection preview available"}</strong></p>
         </div>
       </div>
 
@@ -71,14 +71,14 @@ const previewPhotos = [
         {event.albumGroups && <nav class="album-tabs" aria-label="Album sections">{event.albumGroups.map((group, index) => <button class:list={[index === 0 && "active"]} type="button" data-album-group={group}>{group}</button>)}</nav>}
         {isAlbumPreview && (
           <div class="album-preview" data-album-preview>
-            <div class="album-preview-note"><span>Album layout preview</span><p>A first look at how this event will be explored. The complete verified collection will appear here when its high-resolution library is published.</p></div>
+            <div class="album-preview-note"><span>Event album</span><p>Browse selected memories from this edition. More high-resolution photographs will appear here as the complete collection is published.</p></div>
             <div class="album-mosaic">
               {previewPhotos.map((photo, index) => <figure class={photo.className} data-album-item-group={photo.group}><button type="button" aria-label={`Open image ${index + 1}: ${photo.label}`}><img src={photo.src} alt={photo.alt} loading="lazy" /></button><figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.label}</figcaption></figure>)}
             </div>
           </div>
         )}
         <div class="gallery-message" data-gallery-message hidden={isAlbumPreview}>
-          {manifestUrl ? "Opening this collection…" : "This event page is preserved while its complete high-resolution collection is being prepared."}
+          {manifestUrl ? "Opening this collection…" : "This collection is being prepared. The original event page is still available below."}
         </div>
         <div class="nas-gallery-grid" data-gallery-grid></div>
       </div>
@@ -86,13 +86,25 @@ const previewPhotos = [
       <div class="archive-fallback">
         <div>
           <p class="section-label">Original event page</p>
-          <h3>Nothing from the former website is lost</h3>
-          <p>The original event page remains available while this new collection is completed.</p>
+          <h3>Want the full event information?</h3>
+          <p>Open the original edition page for its event details, announcements and preserved content.</p>
         </div>
-        <a class="button button-outline" href={event.legacyUrl}>Open original event page ↗</a>
+        <a class="button button-outline" href={event.legacyUrl}>Open event page ↗</a>
       </div>
     </div>
   </section>
+
+  <style is:global>
+    .archive-detail-hero{background:linear-gradient(90deg,rgba(5,5,5,.96),rgba(5,5,5,.72)),url('/media/brand/live-explosion-background.png') center/cover!important;color:#f5efe5!important;border-bottom:1px solid rgba(208,168,74,.24)!important}
+    .archive-detail-hero h1{color:#f5efe5!important}.archive-detail-hero h1 em{color:#e4c36f!important}.archive-breadcrumb,.album-credit{color:#d0a84a!important}.archive-detail-hero .hero-lead{color:#aaa297!important}
+    .archive-cover{border:1px solid rgba(208,168,74,.28)!important;background:#11110f!important;box-shadow:18px 22px 0 rgba(208,168,74,.06)!important;transform:rotate(1deg)}
+    .archive-cover img{width:100%;height:100%;object-fit:cover;display:block}.archive-cover figcaption{color:#e4c36f!important;background:#0c0c0b!important}
+    .archive-gallery-section{background:#070707!important;color:#f5efe5!important}.archive-gallery-heading h2{color:#f5efe5!important}.archive-gallery-heading h2 em{color:#e4c36f!important}.archive-gallery-heading p{color:#aaa297!important}
+    .gallery-source{border-color:rgba(208,168,74,.24)!important}.gallery-source span{background:#d0a84a!important}.gallery-source strong{color:#f5efe5!important}
+    .album-tabs{border-color:rgba(208,168,74,.24)!important}.album-tabs button{border-color:rgba(208,168,74,.24)!important;background:transparent!important;color:#aaa297!important}.album-tabs button.active,.album-tabs button:hover{background:#d0a84a!important;color:#070707!important}
+    .album-preview-note,.gallery-message,.archive-fallback{border-color:rgba(208,168,74,.24)!important;background:#11110f!important;color:#aaa297!important}.album-preview-note span{color:#e4c36f!important}.archive-fallback h3{color:#f5efe5!important}.archive-fallback p{color:#aaa297!important}
+    .album-mosaic figure,.nas-gallery-grid figure{border:1px solid rgba(208,168,74,.22)!important;background:#0c0c0b!important}.album-mosaic img,.nas-gallery-grid img{width:100%!important;height:100%!important;object-fit:cover!important}.album-mosaic figcaption{color:#f5efe5!important;background:#0c0c0b!important}.album-mosaic figcaption span{color:#d0a84a!important}
+  </style>
 
   <script>
     type GalleryVariant = { path: string; width: number };
@@ -162,7 +174,7 @@ const previewPhotos = [
         grid.append(fragment);
         message.hidden = true;
       } catch {
-        message.textContent = "This high-resolution collection is temporarily unavailable. The event page remains online, and the original event page below can still be opened.";
+        message.textContent = "This high-resolution collection is temporarily unavailable. The original event page below can still be opened.";
         message.classList.add("gallery-message-error");
       }
     }
