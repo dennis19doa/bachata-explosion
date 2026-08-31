@@ -24,7 +24,6 @@ const currentPath = Astro.url.pathname;
 const current = (path: string) => currentPath === path || (path !== "/" && currentPath.startsWith(path));
 const festivalActive = current("/bbf-2026/") || current("/jj/");
 const eventsActive = current("/archive/") || current("/role-rotation") || current("/elite-dance");
-const communityActive = current("/explosion-history/") || current("/history/") || current("/ambassadors/") || current("/volunteers/") || current("/insider/");
 ---
 
 <!doctype html>
@@ -47,7 +46,22 @@ const communityActive = current("/explosion-history/") || current("/history/") |
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
-    <script is:inline src="https://cdn.tickettailor.com/js/TTWidget.js"></script>
+    <style is:global>
+      body.ticket-modal-open{overflow:hidden}
+      .ticket-modal[hidden]{display:none!important}
+      .ticket-modal{position:fixed;z-index:2000;inset:0;display:grid;place-items:center;padding:24px;background:rgba(5,5,5,.78);backdrop-filter:blur(10px)}
+      .ticket-modal__backdrop{position:absolute;inset:0;border:0;background:transparent;cursor:pointer}
+      .ticket-modal__panel{position:relative;z-index:1;width:min(980px,100%);height:min(900px,92dvh);display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:#f7f4ed;box-shadow:0 40px 120px rgba(0,0,0,.55)}
+      .ticket-modal__bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 16px 14px 20px;border-bottom:1px solid #d8d2c5;background:#f7f4ed;color:#151515}
+      .ticket-modal__bar div{display:grid;gap:2px}
+      .ticket-modal__bar strong{font:800 .84rem/1.15 var(--body);letter-spacing:.08em;text-transform:uppercase}
+      .ticket-modal__bar span{color:#746f66;font:650 .72rem/1.25 var(--body)}
+      .ticket-modal__close{width:42px;height:42px;display:grid;place-items:center;border:1px solid #b9b3a8;border-radius:50%;background:#fff;color:#111;font:500 1.45rem/1 Arial,sans-serif;cursor:pointer;transition:.16s ease}
+      .ticket-modal__close:hover,.ticket-modal__close:focus-visible{border-color:#111;background:#111;color:#fff;outline:none}
+      .ticket-modal__body{min-height:0;overflow:auto;background:#fff;overscroll-behavior:contain}
+      .ticket-modal__frame{display:block;width:100%;height:100%;min-height:720px;border:0;background:#fff}
+      @media(max-width:720px){.ticket-modal{padding:0}.ticket-modal__panel{width:100%;height:100dvh;border:0;border-radius:0}.ticket-modal__bar{padding:11px 12px 11px 16px}.ticket-modal__bar span{display:none}.ticket-modal__frame{min-height:calc(100dvh - 65px)}}
+    </style>
   </head>
   <body>
     <div class="site-city-atmosphere" aria-hidden="true"><span class="city-graffiti"></span><span class="city-gate"></span></div>
@@ -64,34 +78,15 @@ const communityActive = current("/explosion-history/") || current("/history/") |
         <details class:list={["nav-group", { "is-current": eventsActive }]}> 
           <summary>Events</summary>
           <div class="nav-popover">
-            <span>More ways to experience Explosion</span>
+            <span>Explore the Explosion formats</span>
             <a href="/archive/role-rotation-2026/"><b>Role Rotation</b><small>Lead, follow and understand both sides of connection</small></a>
             <a href="/archive/elite-dance-3/"><b>Elite Dance</b><small>A more focused and intimate event format</small></a>
-            <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}><b>Past events</b><small>Browse the complete Explosion archive since 2022</small></a>
+            <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}><b>Past events</b><small>The complete Explosion archive since 2022</small></a>
           </div>
         </details>
 
-        <details class="nav-group"> 
-          <summary>Berlin</summary>
-          <div class="nav-popover">
-            <span>Your festival weekend in Berlin</span>
-            <a href="/bbf-2026/#venue"><b>Venue &amp; hotel</b><small>Stay and dance at MOA Berlin</small></a>
-            <a href="/bbf-2026/#travel"><b>Getting here</b><small>Airports, Hauptbahnhof and local transport</small></a>
-            <a href={whatsappUrl}><b>Festival community ↗</b><small>Meet dancers before you arrive</small></a>
-          </div>
-        </details>
-
-        <details class:list={["nav-group", { "is-current": communityActive }]}> 
-          <summary>Community</summary>
-          <div class="nav-popover nav-popover-right">
-            <span>People first · by dancers, for dancers</span>
-            <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}><b>Our story</b><small>How Bachata Explosion grew from Berlin since 2022</small></a>
-            <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}><b>Ambassadors</b><small>Bring your local scene into the Explosion</small></a>
-            <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}><b>Volunteers</b><small>Help make the weekend happen from the inside</small></a>
-            <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}><b>Explosion Insider</b><small>Early access, artist drops and ticket news</small></a>
-          </div>
-        </details>
-
+        <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
+        <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
         <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
 
@@ -110,30 +105,16 @@ const communityActive = current("/explosion-history/") || current("/history/") |
               </div>
             </details>
 
-            <details class="mobile-nav-group">
-              <summary><span>Berlin</span><i aria-hidden="true"></i></summary>
-              <div>
-                <a href="/bbf-2026/#venue">Venue &amp; hotel</a>
-                <a href="/bbf-2026/#travel">Getting here</a>
-                <a href={whatsappUrl}>Festival community ↗</a>
-              </div>
-            </details>
-
-            <details class="mobile-nav-group">
-              <summary><span>Community</span><i aria-hidden="true"></i></summary>
-              <div>
-                <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our story</a>
-                <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
-                <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
-                <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}>Explosion Insider</a>
-              </div>
-            </details>
-
+            <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
+            <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
             <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
           </nav>
           <div class="mobile-nav-meta">
             <span>Born in Berlin · open to the world</span>
+            <a href="/volunteers/">Volunteer</a>
+            <a href="/insider/">Explosion Insider</a>
             <a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a>
+            <a href={whatsappUrl}>WhatsApp ↗</a>
           </div>
         </div>
       </details>
@@ -171,22 +152,57 @@ const communityActive = current("/explosion-history/") || current("/history/") |
 
     <a class="mobile-ticket-dock" href={ticketUrl} data-ticket-checkout><span>BBF 2026</span><strong>Get tickets →</strong></a>
 
+    <div class="ticket-modal" data-ticket-modal hidden>
+      <button class="ticket-modal__backdrop" type="button" aria-label="Close ticket checkout" data-ticket-close></button>
+      <section class="ticket-modal__panel" role="dialog" aria-modal="true" aria-labelledby="ticket-modal-title">
+        <div class="ticket-modal__bar">
+          <div><strong id="ticket-modal-title">Berlin Bachata Festival 2026 · Tickets</strong><span>Choose your pass without leaving Bachata Explosion.</span></div>
+          <button class="ticket-modal__close" type="button" aria-label="Close ticket checkout" data-ticket-close>×</button>
+        </div>
+        <div class="ticket-modal__body">
+          <iframe class="ticket-modal__frame" title="Berlin Bachata Festival 2026 ticket checkout" data-ticket-frame data-src={ticketUrl} allow="payment *; clipboard-write" loading="lazy"></iframe>
+        </div>
+      </section>
+    </div>
+
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
       const heroVideo = document.querySelector<HTMLVideoElement>(".ug-hero-video");
+      const ticketModal = document.querySelector<HTMLElement>("[data-ticket-modal]");
+      const ticketFrame = document.querySelector<HTMLIFrameElement>("[data-ticket-frame]");
+      const ticketCloseButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-ticket-close]"));
+      let ticketTrigger: HTMLElement | null = null;
 
       heroVideo?.play().catch(() => undefined);
 
+      const closeTicketModal = () => {
+        if (!ticketModal || ticketModal.hidden) return;
+        ticketModal.hidden = true;
+        document.body.classList.remove("ticket-modal-open");
+        ticketTrigger?.focus();
+      };
+
+      const openTicketModal = (trigger: HTMLElement) => {
+        if (!ticketModal || !ticketFrame) return false;
+        ticketTrigger = trigger;
+        if (!ticketFrame.src) {
+          const source = ticketFrame.dataset.src;
+          if (source) ticketFrame.src = source;
+        }
+        ticketModal.hidden = false;
+        document.body.classList.add("ticket-modal-open");
+        requestAnimationFrame(() => ticketModal.querySelector<HTMLButtonElement>(".ticket-modal__close")?.focus());
+        return true;
+      };
+
       document.querySelectorAll<HTMLAnchorElement>("[data-ticket-checkout]").forEach((link) => {
         link.addEventListener("click", (event) => {
-          const widget = (window as Window & { TTWidget?: { loadEvent?: (...args: unknown[]) => void } }).TTWidget;
-          if (!widget?.loadEvent) return;
-          event.preventDefault();
-          widget.loadEvent("bachataexplosionbyelenadennis", 1902213, "widget");
+          if (openTicketModal(link)) event.preventDefault();
         });
       });
+      ticketCloseButtons.forEach((button) => button.addEventListener("click", closeTicketModal));
 
       dropdowns.forEach((dropdown) => {
         dropdown.addEventListener("toggle", () => {
@@ -227,6 +243,10 @@ const communityActive = current("/explosion-history/") || current("/history/") |
 
       document.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
+        if (ticketModal && !ticketModal.hidden) {
+          closeTicketModal();
+          return;
+        }
         dropdowns.forEach((dropdown) => { dropdown.open = false; });
         if (siteMenu) siteMenu.open = false;
       });
