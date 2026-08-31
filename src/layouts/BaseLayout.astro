@@ -1,8 +1,7 @@
 ---
 import "../styles/global.css";
-import "../styles/berlin-web.css";
-import "../styles/home-city.css";
 import "../styles/site-consistency-v2.css";
+import "../styles/urban-gold.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -33,7 +32,7 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#fff8ec" />
+    <meta name="theme-color" content="#070707" />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -47,18 +46,6 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
-    <style is:global>
-      .site-city-atmosphere{position:fixed;z-index:-1;inset:0;pointer-events:none;overflow:hidden;background:#fff8ec}
-      .site-city-atmosphere .city-graffiti{position:absolute;right:-7vw;top:16vh;width:min(34vw,520px);aspect-ratio:1.45;background:#7d1732;opacity:.035;-webkit-mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;transform:rotate(-9deg)}
-      .site-city-atmosphere .city-gate{position:absolute;left:-80px;bottom:-70px;width:min(46vw,680px);height:330px;background:url('/media/brand/berlin-brandenburg-gold.png') left bottom/contain no-repeat;opacity:.035;filter:saturate(.7)}
-      .desktop-nav [aria-current="page"],.desktop-nav .nav-group.is-current>summary{color:#7d1732!important;position:relative}
-      .desktop-nav [aria-current="page"]::before,.desktop-nav .nav-group.is-current>summary::before{content:"";position:absolute;left:0;right:0;bottom:1px;height:2px;border-radius:999px;background:#7d1732}
-      .nav-group.is-current>summary::before{right:18px}
-      .mobile-nav a[aria-current="page"]{color:#7d1732!important}
-      .site-header,.site-header-solid{isolation:isolate}
-      .site-header::before,.site-header-solid::before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;border-radius:inherit!important;opacity:.13!important;background:url('/media/brand/live-explosion-background.png') center 45%/cover no-repeat!important;pointer-events:none!important}
-      @media(max-width:1280px){.site-header::before,.site-header-solid::before{opacity:.1!important}}
-    </style>
   </head>
   <body>
     <div class="site-city-atmosphere" aria-hidden="true"><span class="city-graffiti"></span><span class="city-gate"></span></div>
@@ -178,7 +165,7 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
-      const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
+      const heroVideo = document.querySelector<HTMLVideoElement>(".ug-hero-video");
 
       heroVideo?.play().catch(() => undefined);
 
