@@ -20,6 +20,11 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL("/og.png", Astro.site);
+const currentPath = Astro.url.pathname;
+const current = (path: string) => currentPath === path || (path !== "/" && currentPath.startsWith(path));
+const festivalActive = current("/bbf-2026/") || current("/jj/");
+const berlinActive = current("/bbf-2026/");
+const aboutActive = current("/explosion-history/") || current("/ambassadors/") || current("/volunteers/") || current("/insider/");
 ---
 
 <!doctype html>
@@ -42,8 +47,21 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <style is:global>
+      .site-city-atmosphere{position:fixed;z-index:-1;inset:0;pointer-events:none;overflow:hidden;background:#fff8ec}
+      .site-city-atmosphere .city-graffiti{position:absolute;right:-7vw;top:16vh;width:min(34vw,520px);aspect-ratio:1.45;background:#7d1732;opacity:.035;-webkit-mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;transform:rotate(-9deg)}
+      .site-city-atmosphere .city-gate{position:absolute;left:-80px;bottom:-70px;width:min(46vw,680px);height:330px;background:url('/media/brand/berlin-brandenburg-gold.png') left bottom/contain no-repeat;opacity:.035;filter:saturate(.7)}
+      .desktop-nav [aria-current="page"],.desktop-nav .nav-group.is-current>summary{color:#7d1732!important;position:relative}
+      .desktop-nav [aria-current="page"]::before,.desktop-nav .nav-group.is-current>summary::before{content:"";position:absolute;left:0;right:0;bottom:1px;height:2px;border-radius:999px;background:#7d1732}
+      .nav-group.is-current>summary::before{right:18px}
+      .mobile-nav a[aria-current="page"]{color:#7d1732!important}
+      .site-header,.site-header-solid{isolation:isolate}
+      .site-header::before,.site-header-solid::before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;border-radius:inherit!important;opacity:.13!important;background:url('/media/brand/live-explosion-background.png') center 45%/cover no-repeat!important;pointer-events:none!important}
+      @media(max-width:1280px){.site-header::before,.site-header-solid::before{opacity:.1!important}}
+    </style>
   </head>
   <body>
+    <div class="site-city-atmosphere" aria-hidden="true"><span class="city-graffiti"></span><span class="city-gate"></span></div>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href="/" aria-label="Bachata Explosion home">
@@ -51,17 +69,17 @@ const socialImage = new URL("/og.png", Astro.site);
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a class="nav-home" href="/">Home</a>
-        <details class="nav-group">
+        <a class="nav-home" href="/" aria-current={current("/") ? "page" : undefined}>Home</a>
+        <details class:list={["nav-group", { "is-current": festivalActive }]}> 
           <summary>Festival</summary>
           <div class="nav-popover">
             <span>Berlin Bachata Festival · 16–18 October 2026</span>
-            <a href="/bbf-2026/"><b>Festival overview</b><small>Artists, venue, passes and everything you need</small></a>
+            <a href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}><b>Festival overview</b><small>Artists, venue, passes and everything you need</small></a>
             <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Workshops, parties and weekend program</small></a>
-            <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules and registration</small></a>
+            <a href="/jj/" aria-current={current("/jj/") ? "page" : undefined}><b>Jack &amp; Jill</b><small>Competition, rules and registration</small></a>
           </div>
         </details>
-        <details class="nav-group">
+        <details class:list={["nav-group", { "is-current": berlinActive }]}> 
           <summary>Berlin</summary>
           <div class="nav-popover">
             <span>Make a Berlin weekend out of it</span>
@@ -70,30 +88,31 @@ const socialImage = new URL("/og.png", Astro.site);
             <a href={whatsappUrl}><b>Festival community ↗</b><small>Meet dancers before you arrive</small></a>
           </div>
         </details>
-        <a href="/archive/">Past events</a>
-        <details class="nav-group">
+        <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}>Past events</a>
+        <details class:list={["nav-group", { "is-current": aboutActive }]}> 
           <summary>About</summary>
           <div class="nav-popover nav-popover-right">
             <span>By dancers, for dancers — born in Berlin</span>
-            <a href="/explosion-history/"><b>Our story</b><small>How Bachata Explosion grew since 2022</small></a>
-            <a href="/ambassadors/"><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
-            <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
+            <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}><b>Our story</b><small>How Bachata Explosion grew since 2022</small></a>
+            <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
+            <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}><b>Volunteers</b><small>Help make the weekend happen</small></a>
+            <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}><b>Explosion Insider</b><small>Early access, artist drops and ticket news</small></a>
           </div>
         </details>
-        <a href="/contact/">Contact</a>
+        <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
 
       <details class="mobile-nav" data-site-menu>
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <div class="mobile-nav-panel">
           <nav aria-label="Mobile navigation">
-            <a class="mobile-nav-home" href="/">Home</a>
+            <a class="mobile-nav-home" href="/" aria-current={current("/") ? "page" : undefined}>Home</a>
             <details class="mobile-nav-group">
               <summary><span>Festival</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/bbf-2026/">Berlin Bachata Festival</a>
+                <a href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Berlin Bachata Festival</a>
                 <a href="/bbf-2026/#schedule">Schedule</a>
-                <a href="/jj/">Jack &amp; Jill</a>
+                <a href="/jj/" aria-current={current("/jj/") ? "page" : undefined}>Jack &amp; Jill</a>
               </div>
             </details>
             <details class="mobile-nav-group">
@@ -107,11 +126,12 @@ const socialImage = new URL("/og.png", Astro.site);
             <details class="mobile-nav-group">
               <summary><span>About</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/archive/">Past events</a>
-                <a href="/explosion-history/">Our story</a>
-                <a href="/ambassadors/">Ambassadors</a>
-                <a href="/volunteers/">Volunteers</a>
-                <a href="/contact/">Contact</a>
+                <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}>Past events</a>
+                <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our story</a>
+                <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
+                <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
+                <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}>Explosion Insider</a>
+                <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
               </div>
             </details>
           </nav>
@@ -135,6 +155,9 @@ const socialImage = new URL("/og.png", Astro.site);
         <nav aria-label="Legal navigation">
           <a href="/archive/">Past events</a>
           <a href="/explosion-history/">History</a>
+          <a href="/ambassadors/">Ambassadors</a>
+          <a href="/volunteers/">Volunteers</a>
+          <a href="/insider/">Insider</a>
           <a href="/imprint/">Imprint</a>
           <a href="/privacy/">Privacy</a>
           <a href="/terms-conditions/">Terms</a>
