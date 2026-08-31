@@ -11,8 +11,8 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
     <div class="shell">
       <p class="eyebrow"><span></span> Since 2022</p>
       <h1>Explosion<br /><em>Archive</em></h1>
-      <p class="hero-lead">The people, workshops and nights that built the Explosion community—organized by event, not buried in an endless media library.</p>
-      <div class="archive-stats"><div><b>16</b><span>Event collections</span></div><div><b>5</b><span>Years of memories</span></div><div><b>12k+</b><span>Media items to migrate</span></div></div>
+      <p class="hero-lead">The people, workshops and nights that built Bachata Explosion—organized by event so you can find each edition quickly.</p>
+      <div class="archive-stats"><div><b>16</b><span>Event collections</span></div><div><b>5</b><span>Years of memories</span></div><div><b>12k+</b><span>Photos & moments preserved</span></div></div>
     </div>
   </section>
 
@@ -21,7 +21,7 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
       <div class="archive-toolbar" aria-label="Filter archive by year">
         {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
       </div>
-      <p class="migration-note"><strong>The archive stays with Bachata Explosion.</strong> Every original event page remains available while the high-resolution galleries are reconnected to our independent media library.</p>
+      <p class="migration-note"><strong>Every edition stays part of the story.</strong> Browse the event collections below and open an edition to see its photos, artwork and preserved event page.</p>
       <div class="archive-years">
         {archiveYears.map((group) => (
           <section class="archive-year" data-year-group={group.year}>
@@ -42,8 +42,8 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
         ))}
       </div>
       <div class="archive-original-index">
-        <div><p class="section-label">Nothing disappears</p><h2>Looking for the<br /><em>original index?</em></h2></div>
-        <div><p>The former Past Events page is preserved as part of the transition, including its original structure and links.</p><a class="button button-outline" href="/past-events/">Open preserved archive index</a></div>
+        <div><p class="section-label">Looking for something specific?</p><h2>Open the complete<br /><em>event index.</em></h2></div>
+        <div><p>The original event index is still available for older links and editions while the visual archive above gives you the fastest way to browse by year.</p><a class="button button-outline" href="/past-events/">Open full event index</a></div>
       </div>
     </div>
   </section>
