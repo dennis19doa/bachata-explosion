@@ -47,6 +47,7 @@ const communityActive = current("/explosion-history/") || current("/history/") |
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <script is:inline src="https://cdn.tickettailor.com/js/TTWidget.js"></script>
   </head>
   <body>
     <div class="site-city-atmosphere" aria-hidden="true"><span class="city-graffiti"></span><span class="city-gate"></span></div>
@@ -137,7 +138,7 @@ const communityActive = current("/explosion-history/") || current("/history/") |
         </div>
       </details>
 
-      <a class="button button-small button-gold" href={ticketUrl}>Get tickets</a>
+      <a class="button button-small button-gold" href={ticketUrl} data-ticket-checkout>Get tickets</a>
     </header>
 
     <main id="main">
@@ -168,7 +169,7 @@ const communityActive = current("/explosion-history/") || current("/history/") |
       </div>
     </footer>
 
-    <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <a class="mobile-ticket-dock" href={ticketUrl} data-ticket-checkout><span>BBF 2026</span><strong>Get tickets →</strong></a>
 
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
@@ -177,6 +178,15 @@ const communityActive = current("/explosion-history/") || current("/history/") |
       const heroVideo = document.querySelector<HTMLVideoElement>(".ug-hero-video");
 
       heroVideo?.play().catch(() => undefined);
+
+      document.querySelectorAll<HTMLAnchorElement>("[data-ticket-checkout]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const widget = (window as Window & { TTWidget?: { loadEvent?: (...args: unknown[]) => void } }).TTWidget;
+          if (!widget?.loadEvent) return;
+          event.preventDefault();
+          widget.loadEvent("bachataexplosionbyelenadennis", 1902213, "widget");
+        });
+      });
 
       dropdowns.forEach((dropdown) => {
         dropdown.addEventListener("toggle", () => {
