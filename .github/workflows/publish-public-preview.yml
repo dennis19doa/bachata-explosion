@@ -50,15 +50,12 @@ jobs:
           });
           const files = walk(root);
 
-          // First rewrite asset URLs inside CSS so an inlined stylesheet still resolves media correctly.
           for (const file of files.filter((file) => extname(file) === '.css')) {
             let text = readFileSync(file, 'utf8');
             text = text.replace(/url\((['"]?)\/(?!\/)/g, (_, quote) => `url(${quote}${base}`);
             writeFileSync(file, text);
           }
 
-          // Then make each HTML page self-contained for CSS. RawGitHack occasionally serves a
-          // freshly generated hashed stylesheet unreliably; inlining removes that preview-only failure mode.
           for (const file of files.filter((file) => extname(file) === '.html')) {
             let text = readFileSync(file, 'utf8');
             text = text
@@ -80,6 +77,14 @@ jobs:
             writeFileSync(file, text);
           }
           NODE
+
+      - name: Upload exact preview bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bachata-explosion-preview-${{ github.sha }}
+          path: dist/client
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Publish public-preview branch
         shell: bash
