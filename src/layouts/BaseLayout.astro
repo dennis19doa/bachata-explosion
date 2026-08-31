@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "../styles/site-consistency-v2.css";
 import "../styles/urban-gold.css";
+import "../styles/urban-full-site.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -22,8 +23,8 @@ const socialImage = new URL("/og.png", Astro.site);
 const currentPath = Astro.url.pathname;
 const current = (path: string) => currentPath === path || (path !== "/" && currentPath.startsWith(path));
 const festivalActive = current("/bbf-2026/") || current("/jj/");
-const berlinActive = current("/bbf-2026/");
-const aboutActive = current("/explosion-history/") || current("/ambassadors/") || current("/volunteers/") || current("/insider/");
+const eventsActive = current("/archive/") || current("/role-rotation") || current("/elite-dance");
+const communityActive = current("/explosion-history/") || current("/history/") || current("/ambassadors/") || current("/volunteers/") || current("/insider/");
 ---
 
 <!doctype html>
@@ -50,42 +51,46 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
   <body>
     <div class="site-city-atmosphere" aria-hidden="true"><span class="city-graffiti"></span><span class="city-gate"></span></div>
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <a class="brand" href="/" aria-label="Bachata Explosion home">
         <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a class="nav-home" href="/" aria-current={current("/") ? "page" : undefined}>Home</a>
-        <details class:list={["nav-group", { "is-current": festivalActive }]}> 
-          <summary>Festival</summary>
+        <a class:list={["nav-primary-link", { "nav-section-current": festivalActive }]} href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Festival</a>
+
+        <details class:list={["nav-group", { "is-current": eventsActive }]}> 
+          <summary>Events</summary>
           <div class="nav-popover">
-            <span>Berlin Bachata Festival · 16–18 October 2026</span>
-            <a href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}><b>Festival overview</b><small>Artists, venue, passes and everything you need</small></a>
-            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Workshops, parties and weekend program</small></a>
-            <a href="/jj/" aria-current={current("/jj/") ? "page" : undefined}><b>Jack &amp; Jill</b><small>Competition, rules and registration</small></a>
+            <span>More ways to experience Explosion</span>
+            <a href="/archive/role-rotation-2026/"><b>Role Rotation</b><small>Lead, follow and understand both sides of connection</small></a>
+            <a href="/archive/elite-dance-3/"><b>Elite Dance</b><small>A more focused and intimate event format</small></a>
+            <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}><b>Past events</b><small>Browse the complete Explosion archive since 2022</small></a>
           </div>
         </details>
-        <details class:list={["nav-group", { "is-current": berlinActive }]}> 
+
+        <details class="nav-group"> 
           <summary>Berlin</summary>
           <div class="nav-popover">
-            <span>Make a Berlin weekend out of it</span>
-            <a href="/bbf-2026/#venue"><b>Hotel &amp; venue</b><small>Stay and dance at MOA Berlin</small></a>
-            <a href="/bbf-2026/#travel"><b>Travel to Berlin</b><small>Airports, Hauptbahnhof and local transport</small></a>
+            <span>Your festival weekend in Berlin</span>
+            <a href="/bbf-2026/#venue"><b>Venue &amp; hotel</b><small>Stay and dance at MOA Berlin</small></a>
+            <a href="/bbf-2026/#travel"><b>Getting here</b><small>Airports, Hauptbahnhof and local transport</small></a>
             <a href={whatsappUrl}><b>Festival community ↗</b><small>Meet dancers before you arrive</small></a>
           </div>
         </details>
-        <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}>Past events</a>
-        <details class:list={["nav-group", { "is-current": aboutActive }]}> 
-          <summary>About</summary>
+
+        <details class:list={["nav-group", { "is-current": communityActive }]}> 
+          <summary>Community</summary>
           <div class="nav-popover nav-popover-right">
-            <span>By dancers, for dancers — born in Berlin</span>
-            <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}><b>Our story</b><small>How Bachata Explosion grew since 2022</small></a>
-            <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
-            <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}><b>Volunteers</b><small>Help make the weekend happen</small></a>
+            <span>People first · by dancers, for dancers</span>
+            <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}><b>Our story</b><small>How Bachata Explosion grew from Berlin since 2022</small></a>
+            <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}><b>Ambassadors</b><small>Bring your local scene into the Explosion</small></a>
+            <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}><b>Volunteers</b><small>Help make the weekend happen from the inside</small></a>
             <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}><b>Explosion Insider</b><small>Early access, artist drops and ticket news</small></a>
           </div>
         </details>
+
         <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
 
@@ -93,34 +98,37 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <div class="mobile-nav-panel">
           <nav aria-label="Mobile navigation">
-            <a class="mobile-nav-home" href="/" aria-current={current("/") ? "page" : undefined}>Home</a>
+            <a href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Festival</a>
+
             <details class="mobile-nav-group">
-              <summary><span>Festival</span><i aria-hidden="true"></i></summary>
+              <summary><span>Events</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Berlin Bachata Festival</a>
-                <a href="/bbf-2026/#schedule">Schedule</a>
-                <a href="/jj/" aria-current={current("/jj/") ? "page" : undefined}>Jack &amp; Jill</a>
+                <a href="/archive/role-rotation-2026/">Role Rotation</a>
+                <a href="/archive/elite-dance-3/">Elite Dance</a>
+                <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}>Past events</a>
               </div>
             </details>
+
             <details class="mobile-nav-group">
               <summary><span>Berlin</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/bbf-2026/#venue">Hotel &amp; venue</a>
-                <a href="/bbf-2026/#travel">Travel to Berlin</a>
+                <a href="/bbf-2026/#venue">Venue &amp; hotel</a>
+                <a href="/bbf-2026/#travel">Getting here</a>
                 <a href={whatsappUrl}>Festival community ↗</a>
               </div>
             </details>
+
             <details class="mobile-nav-group">
-              <summary><span>About</span><i aria-hidden="true"></i></summary>
+              <summary><span>Community</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/archive/" aria-current={current("/archive/") ? "page" : undefined}>Past events</a>
                 <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our story</a>
                 <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
                 <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
                 <a href="/insider/" aria-current={current("/insider/") ? "page" : undefined}>Explosion Insider</a>
-                <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
               </div>
             </details>
+
+            <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
           </nav>
           <div class="mobile-nav-meta">
             <span>Born in Berlin · open to the world</span>
@@ -139,16 +147,17 @@ const aboutActive = current("/explosion-history/") || current("/ambassadors/") |
     <footer class="site-footer">
       <div class="shell footer-grid">
         <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
-        <nav aria-label="Legal navigation">
+        <nav aria-label="Footer navigation">
+          <a href="/bbf-2026/">Festival</a>
           <a href="/archive/">Past events</a>
-          <a href="/explosion-history/">History</a>
+          <a href="/explosion-history/">Our story</a>
           <a href="/ambassadors/">Ambassadors</a>
           <a href="/volunteers/">Volunteers</a>
           <a href="/insider/">Insider</a>
+          <a href="/contact/">Contact</a>
           <a href="/imprint/">Imprint</a>
           <a href="/privacy/">Privacy</a>
           <a href="/terms-conditions/">Terms</a>
-          <a href="/contact/">Contact</a>
           <a href={whatsappUrl}>WhatsApp</a>
         </nav>
         <address>
