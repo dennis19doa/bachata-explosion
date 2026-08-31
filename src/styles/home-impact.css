@@ -1,187 +1,173 @@
-/* BACHATA EXPLOSION — URBAN IMPACT HOMEPAGE
-   Source of truth: approved black/gold concept board.
-   One dark concrete world, real event media, gold graffiti and strong hierarchy. */
+/* BACHATA EXPLOSION — HOMEPAGE REFINEMENT
+   Clean festival website first. Berlin utility second. Explosion personality throughout. */
 
-.impact-home {
-  --ih-black:#050505;
-  --ih-panel:#0b0b0a;
-  --ih-panel-2:#11100e;
-  --ih-gold:#d3a94b;
-  --ih-gold-bright:#e4c26e;
-  --ih-paper:#e7ddca;
-  --ih-white:#f5efe5;
-  --ih-muted:#aaa296;
-  --ih-line:rgba(211,169,75,.24);
-  --ih-soft-line:rgba(245,239,229,.12);
-  overflow:hidden;
-  color:var(--ih-white);
-  background:
-    linear-gradient(rgba(5,5,5,.94),rgba(5,5,5,.94)),
-    url('/media/brand/berlin-wall.svg') center top/760px repeat;
+.impact-home{
+  --ih-ink:#171717;
+  --ih-soft-ink:#4e4a43;
+  --ih-paper:#f2eee5;
+  --ih-paper-2:#e8e2d7;
+  --ih-white:#fffdf8;
+  --ih-yellow:#d8ad38;
+  --ih-yellow-bright:#efc94f;
+  --ih-burgundy:#6b2434;
+  --ih-night:#101010;
+  --ih-line:#cfc7ba;
+  --ih-dark-line:rgba(255,255,255,.16);
+  color:var(--ih-ink);
+  background:var(--ih-paper);
+  overflow:clip;
 }
 .impact-home *{box-sizing:border-box}
 .impact-shell{width:min(1240px,calc(100% - 48px));margin-inline:auto}
-.impact-section{position:relative;padding:clamp(82px,9vw,132px) 0;border-top:1px solid var(--ih-soft-line)}
-.impact-kicker{margin:0 0 15px;color:var(--ih-gold);font:800 .7rem/1.2 var(--body);letter-spacing:.15em;text-transform:uppercase}
-.impact-title{margin:0;color:var(--ih-white);font:900 clamp(3.7rem,7.2vw,7.6rem)/.79 var(--display);letter-spacing:-.035em;text-transform:uppercase}
-.impact-title em{color:var(--ih-gold);font-style:normal}
-.impact-copy{color:var(--ih-muted);font:500 clamp(.98rem,1.25vw,1.1rem)/1.75 var(--body)}
-.impact-button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;padding:0 21px;border:1px solid var(--ih-gold);border-radius:2px;background:var(--ih-gold);color:var(--ih-black);font:900 .73rem/1 var(--body);letter-spacing:.075em;text-transform:uppercase;transition:.18s ease}
-.impact-button:hover{transform:translateY(-2px);background:var(--ih-gold-bright);border-color:var(--ih-gold-bright)}
-.impact-button.ghost{background:rgba(0,0,0,.28);color:var(--ih-white);border-color:rgba(245,239,229,.35)}
-.impact-button.ghost:hover{color:var(--ih-black);background:var(--ih-gold);border-color:var(--ih-gold)}
+.impact-section{position:relative;padding:clamp(82px,9vw,132px) 0;border-top:1px solid var(--ih-line)}
+.impact-kicker{margin:0 0 15px;color:#7b5b09;font:850 .7rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.15em;text-transform:uppercase}
+.impact-title{margin:0;color:var(--ih-ink);font:900 clamp(3.2rem,6.8vw,7rem)/.84 var(--display,Impact,sans-serif);letter-spacing:-.034em;text-transform:uppercase;text-wrap:balance}
+.impact-title em{color:var(--ih-burgundy);font-style:normal}
+.impact-copy{color:var(--ih-soft-ink);font:520 clamp(.98rem,1.25vw,1.08rem)/1.72 var(--body,Arial,sans-serif)}
+.impact-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.impact-button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;padding:0 22px;border:1px solid var(--ih-ink);border-radius:2px;background:var(--ih-yellow-bright);color:var(--ih-ink);font:900 .73rem/1 var(--body,Arial,sans-serif);letter-spacing:.075em;text-transform:uppercase;text-decoration:none;transition:.18s ease}
+.impact-button:hover{transform:translateY(-2px);background:#ffe06d}
+.impact-button.ghost{background:rgba(0,0,0,.2);color:var(--ih-white);border-color:rgba(255,255,255,.55)}
+.impact-button.ghost:hover{background:var(--ih-white);color:var(--ih-ink)}
+.impact-button.dark{background:var(--ih-ink);color:var(--ih-white)}
+.impact-button.dark:hover{background:#303030}
+.impact-text-link{display:inline-flex;align-items:center;gap:8px;color:var(--ih-ink);font:850 .78rem/1.3 var(--body,Arial,sans-serif);letter-spacing:.06em;text-transform:uppercase;text-underline-offset:5px}
+.impact-text-link.light{color:var(--ih-white)}
 
-/* HERO — concept composition */
-.impact-hero{position:relative;min-height:940px;display:flex;align-items:stretch;overflow:hidden;border-bottom:1px solid var(--ih-line);background:#050505}
-.impact-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.48) contrast(1.18) brightness(.52)}
-.impact-hero::before{content:'';position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.98) 0%,rgba(3,3,3,.91) 35%,rgba(3,3,3,.46) 66%,rgba(3,3,3,.75) 100%),linear-gradient(0deg,#050505 0%,transparent 28%),radial-gradient(circle at 80% 34%,rgba(211,169,75,.16),transparent 27rem)}
-.impact-hero::after{content:'';position:absolute;z-index:1;inset:0;opacity:.28;background:url('/media/brand/explosion-texture.png') center/cover no-repeat;mix-blend-mode:screen;pointer-events:none}
-.impact-hero-inner{position:relative;z-index:3;width:min(1320px,calc(100% - 48px));margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(30px,5vw,76px);align-items:center;padding:150px 0 92px}
-.impact-hero-copy{max-width:880px}
-.impact-hero-overline{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:24px;color:#d2c9bb;font:800 .72rem/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase}
-.impact-hero-overline b{color:var(--ih-gold)}
-.impact-hero h1{margin:0;color:var(--ih-white);font:900 clamp(5.7rem,10.5vw,11.8rem)/.69 var(--display);letter-spacing:-.048em;text-transform:uppercase;text-shadow:0 14px 34px rgba(0,0,0,.45)}
+.impact-hero{position:relative;min-height:800px;display:grid;align-items:end;overflow:hidden;background:#0d0d0d;color:var(--ih-white)}
+.impact-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(.7) contrast(1.08) brightness(.72)}
+.impact-hero-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,7,.94) 0%,rgba(7,7,7,.78) 41%,rgba(7,7,7,.32) 72%,rgba(7,7,7,.45) 100%),linear-gradient(0deg,rgba(7,7,7,.84),transparent 34%)}
+.impact-hero-layout{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:clamp(42px,7vw,92px);align-items:end;padding:160px 0 74px}
+.impact-hero-copy{max-width:860px}
+.impact-route-label{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 24px;font:800 .66rem/1.15 var(--body,Arial,sans-serif);letter-spacing:.115em;text-transform:uppercase}
+.impact-route-label span,.impact-route-label b{padding:8px 10px;border:1px solid rgba(255,255,255,.34);font-weight:800}
+.impact-route-label b{border-color:var(--ih-yellow-bright);background:var(--ih-yellow-bright);color:#181818}
+.impact-hero h1{margin:0;color:var(--ih-white);font:900 clamp(5rem,10vw,10.5rem)/.72 var(--display,Impact,sans-serif);letter-spacing:-.047em;text-transform:uppercase;text-shadow:0 12px 40px rgba(0,0,0,.38)}
 .impact-hero h1 span{display:block}
-.impact-hero h1 span:last-child{color:var(--ih-gold-bright);text-shadow:0 0 32px rgba(211,169,75,.16)}
-.impact-tagline{position:relative;width:max-content;max-width:100%;margin:25px 0 22px;padding:5px 10px 6px;color:var(--ih-gold-bright);font:400 clamp(1.55rem,2.6vw,2.55rem)/1 var(--marker);transform:rotate(-2deg)}
-.impact-tagline::after{content:'';position:absolute;left:4px;right:-8px;bottom:-7px;height:4px;background:var(--ih-gold);transform:rotate(-1deg)}
-.impact-hero-lead{max-width:650px;margin:0 0 28px;color:#d1c9bd}
-.impact-actions{display:flex;flex-wrap:wrap;gap:11px}
-.impact-hero-side{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:0}
-.impact-hero-graffiti{position:absolute;right:-8px;top:17%;width:310px;color:var(--ih-white);font:400 clamp(2rem,3.3vw,3.2rem)/1.05 var(--marker);text-align:center;transform:rotate(-5deg);text-shadow:0 3px 10px #000}
-.impact-hero-graffiti em{display:block;color:var(--ih-gold);font-style:normal;font-size:1.15em}
-.impact-hero-side::before{content:'';position:absolute;width:330px;aspect-ratio:1.45;right:-30px;bottom:15%;background:var(--ih-gold);opacity:.19;-webkit-mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;transform:rotate(8deg)}
-.impact-poster{position:absolute;right:10px;bottom:0;width:180px;padding:6px;border:1px solid rgba(211,169,75,.45);background:#090909;box-shadow:15px 16px 0 rgba(0,0,0,.38);transform:rotate(2deg)}
-.impact-poster img{width:100%;height:auto;display:block}
-.impact-poster span{display:block;padding:7px 3px 3px;color:var(--ih-gold);font:800 .6rem/1.25 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.impact-hero h1 span:last-child{color:var(--ih-yellow-bright)}
+.impact-tagline{width:max-content;max-width:100%;margin:24px 0 19px;color:#ffe282;font:400 clamp(1.5rem,2.5vw,2.25rem)/1.05 var(--marker,cursive);transform:rotate(-1.5deg)}
+.impact-hero-lead{max-width:650px;margin:0 0 28px;color:#e3ddd4}
+.impact-hero-note{align-self:end;display:grid;gap:20px;padding:28px;border-left:4px solid var(--ih-yellow-bright);background:rgba(12,12,12,.68);backdrop-filter:blur(8px)}
+.impact-hero-note>span{color:#d6d0c8;font:800 .62rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.14em;text-transform:uppercase}
+.impact-hero-note p{margin:0;color:var(--ih-white);font:400 clamp(2.1rem,3.4vw,3.25rem)/1.02 var(--marker,cursive);transform:rotate(-2deg)}
+.impact-hero-note em{display:block;color:var(--ih-yellow-bright);font-style:normal}
+.impact-hero-note small{color:#bdb6ad;font:650 .72rem/1.5 var(--body,Arial,sans-serif);letter-spacing:.05em;text-transform:uppercase}
 
-/* STATS STRIP */
-.impact-stats{position:relative;z-index:4;margin-top:-1px;border-top:1px solid var(--ih-line);border-bottom:1px solid var(--ih-line);background:rgba(7,7,7,.96)}
-.impact-stats-grid{display:grid;grid-template-columns:repeat(5,1fr)}
-.impact-stat{min-height:118px;display:flex;align-items:center;gap:14px;padding:22px 24px;border-right:1px solid var(--ih-soft-line)}
-.impact-stat:last-child{border-right:0}
-.impact-stat strong{color:var(--ih-gold);font:900 clamp(2.2rem,3vw,3.2rem)/.9 var(--display)}
-.impact-stat span{color:#d1c9bd;font:800 .68rem/1.35 var(--body);letter-spacing:.09em;text-transform:uppercase}
+.impact-info-strip{position:relative;z-index:3;border-bottom:1px solid var(--ih-line);background:var(--ih-white)}
+.impact-info-grid{display:grid;grid-template-columns:repeat(5,1fr)}
+.impact-info-grid>div{min-height:105px;display:grid;align-content:center;gap:6px;padding:18px 22px;border-right:1px solid var(--ih-line)}
+.impact-info-grid>div:first-child{border-left:1px solid var(--ih-line)}
+.impact-info-grid small{color:#787166;font:850 .6rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.13em;text-transform:uppercase}
+.impact-info-grid strong{color:var(--ih-ink);font:850 clamp(1.15rem,1.7vw,1.55rem)/1 var(--display,Impact,sans-serif);letter-spacing:.015em;text-transform:uppercase}
+.impact-info-grid>div:nth-child(2){background:var(--ih-yellow-bright)}
+.impact-info-grid>div:nth-child(2) small{color:#55430d}
 
-/* MORE THAN FESTIVAL */
-.impact-story::before{content:'EXPLOSION';position:absolute;right:-25px;top:35px;color:rgba(211,169,75,.045);font:900 clamp(8rem,20vw,19rem)/.8 var(--display);letter-spacing:-.06em;pointer-events:none}
-.impact-story-grid{position:relative;z-index:2;display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(48px,7vw,104px);align-items:center}
-.impact-story-copy{max-width:530px}
-.impact-story-copy .impact-copy{margin:26px 0 30px}
-.impact-values{display:grid;border-top:1px solid var(--ih-soft-line)}
-.impact-values div{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--ih-soft-line)}
-.impact-values b{color:var(--ih-gold);font:900 .7rem/1.4 var(--body);letter-spacing:.09em;text-transform:uppercase}
-.impact-values span{color:#d7cfc3;font-weight:650;line-height:1.45}
-.impact-story-media{position:relative;min-height:620px;margin:0;border:1px solid rgba(211,169,75,.26);background:#090909;box-shadow:20px 24px 0 rgba(0,0,0,.28)}
-.impact-story-media img{width:100%;height:100%;min-height:620px;display:block;object-fit:cover;filter:saturate(.67) contrast(1.08) brightness(.82)}
-.impact-story-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,rgba(0,0,0,.72))}
-.impact-story-media figcaption{position:absolute;z-index:2;left:24px;bottom:22px;color:var(--ih-paper);font:400 1.35rem/1.1 var(--marker);transform:rotate(-2deg)}
+.impact-story{background:var(--ih-paper)}
+.impact-story-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(46px,7vw,94px);align-items:center}
+.impact-story-copy{max-width:580px}
+.impact-story-copy .impact-copy{margin:28px 0 24px}
+.impact-story-media{position:relative;margin:0;min-height:530px;background:#ddd7cc;overflow:hidden}
+.impact-story-media img{width:100%;height:100%;min-height:530px;display:block;object-fit:cover;object-position:center 42%;filter:saturate(.9) contrast(1.02)}
+.impact-story-media figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px;background:rgba(17,17,17,.88);color:#fff}
+.impact-story-media figcaption b{font:850 .78rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
+.impact-story-media figcaption span{color:#d4cec4;font-size:.8rem}
+.impact-values{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid #aaa298;border-bottom:1px solid #aaa298}
+.impact-values>div{min-height:180px;padding:28px 28px 30px;border-right:1px solid #aaa298}
+.impact-values>div:first-child{border-left:1px solid #aaa298}
+.impact-values span{display:block;margin-bottom:34px;color:#876609;font:850 .68rem/1 var(--body,Arial,sans-serif)}
+.impact-values b{display:block;margin-bottom:10px;font:900 1.6rem/1 var(--display,Impact,sans-serif);text-transform:uppercase}
+.impact-values p{margin:0;color:#575149;font-size:.9rem;line-height:1.55}
 
-/* FLAGSHIP EVENT */
-.impact-feature{background:linear-gradient(rgba(9,9,8,.94),rgba(9,9,8,.94)),url('/media/brand/live-explosion-background.png') center/cover no-repeat}
-.impact-feature-head{display:grid;grid-template-columns:1fr .72fr;gap:50px;align-items:end;margin-bottom:40px}
-.impact-feature-head .impact-copy{max-width:470px;margin:0}
-.impact-feature-card{display:grid;grid-template-columns:360px 1fr;min-height:560px;border:1px solid var(--ih-line);background:rgba(5,5,5,.72);box-shadow:0 28px 65px rgba(0,0,0,.34)}
-.impact-feature-poster{position:relative;overflow:hidden;background:#060606}
-.impact-feature-poster img{width:100%;height:100%;object-fit:cover;display:block}
-.impact-feature-poster::after{content:'';position:absolute;inset:0;border:8px solid rgba(211,169,75,.07);pointer-events:none}
-.impact-feature-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(42px,6vw,82px)}
-.impact-feature-copy h3{margin:0;color:var(--ih-white);font:900 clamp(3.6rem,6vw,6.5rem)/.78 var(--display);letter-spacing:-.035em;text-transform:uppercase}
-.impact-feature-copy p{max-width:640px;margin:24px 0;color:var(--ih-muted);line-height:1.7}
-.impact-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:29px}
-.impact-tags span{padding:8px 11px;border:1px solid rgba(211,169,75,.27);color:var(--ih-paper);font:800 .65rem/1 var(--body);letter-spacing:.07em;text-transform:uppercase}
+.impact-feature{background:var(--ih-white)}
+.impact-feature-grid{display:grid;grid-template-columns:minmax(280px,420px) minmax(0,1fr);gap:clamp(52px,8vw,112px);align-items:center}
+.impact-feature-art{position:relative;padding:24px;background:#171717;box-shadow:18px 18px 0 var(--ih-yellow-bright)}
+.impact-feature-art img{width:100%;height:auto;display:block;object-fit:contain}
+.impact-art-label{position:absolute;left:24px;top:-34px;color:#6d665d;font:850 .62rem/1 var(--body,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase}
+.impact-feature-copy{max-width:650px}
+.impact-feature-copy .impact-copy{max-width:600px;margin:28px 0 32px}
+.impact-festival-facts{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 34px;border-top:1px solid #bdb5aa;border-bottom:1px solid #bdb5aa}
+.impact-festival-facts>div{padding:21px 20px;border-right:1px solid #bdb5aa}
+.impact-festival-facts>div:first-child{border-left:1px solid #bdb5aa}
+.impact-festival-facts dt{color:var(--ih-burgundy);font:900 2.5rem/1 var(--display,Impact,sans-serif)}
+.impact-festival-facts dd{margin:5px 0 0;color:#625c53;font:800 .65rem/1.3 var(--body,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
 
-/* EVENT UNIVERSE */
-.impact-events-head{max-width:880px;margin-bottom:42px}
-.impact-event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.impact-event-card{position:relative;min-height:520px;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(211,169,75,.22);background:#090909;color:var(--ih-white);transition:.2s ease}
-.impact-event-card:hover{transform:translateY(-5px);border-color:rgba(211,169,75,.5);box-shadow:0 22px 45px rgba(0,0,0,.28)}
-.impact-event-card img{width:100%;aspect-ratio:4/3;display:block;object-fit:cover;filter:saturate(.68) contrast(1.08) brightness(.78)}
-.impact-event-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 25%,rgba(5,5,5,.15) 46%,rgba(5,5,5,.92) 70%)}
-.impact-event-card div{position:relative;z-index:2;display:flex;flex:1;flex-direction:column;padding:23px;margin-top:-86px}
-.impact-event-card small{color:var(--ih-gold);font:900 .64rem/1.2 var(--body);letter-spacing:.09em;text-transform:uppercase}
-.impact-event-card h3{margin:7px 0 8px;font:900 clamp(2rem,3vw,3rem)/.9 var(--display);text-transform:uppercase}
-.impact-event-card p{margin:0 0 16px;color:#b7afa4;line-height:1.55}
-.impact-event-card b{margin-top:auto;color:var(--ih-gold);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase}
+.impact-concepts{background:var(--ih-paper-2)}
+.impact-section-heading>.impact-copy{max-width:600px;margin:24px 0 0}
+.impact-concept-list{display:grid;gap:18px;margin-top:52px}
+.impact-concept{display:grid;grid-template-columns:minmax(230px,340px) 1fr;min-height:400px;color:inherit;text-decoration:none;overflow:hidden;transition:.2s ease}
+.impact-concept:hover{transform:translateY(-3px)}
+.impact-concept figure{margin:0;padding:24px;display:grid;place-items:center}
+.impact-concept figure img{width:auto;max-width:100%;height:auto;max-height:420px;object-fit:contain;display:block;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.impact-concept>div{display:flex;flex-direction:column;justify-content:center;padding:clamp(34px,6vw,76px)}
+.impact-concept small{font:850 .65rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase}
+.impact-concept h3{margin:12px 0 16px;font:900 clamp(2.8rem,5.5vw,5.8rem)/.83 var(--display,Impact,sans-serif);letter-spacing:-.03em;text-transform:uppercase}
+.impact-concept p{max-width:620px;margin:0 0 28px;font-size:1rem;line-height:1.65}
+.impact-concept b{margin-top:auto;font:850 .72rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
+.impact-concept-bbf{background:#161616;color:#fff}
+.impact-concept-bbf figure{background:#26231d}.impact-concept-bbf small,.impact-concept-bbf b{color:#ffe177}.impact-concept-bbf p{color:#c9c3b9}
+.impact-concept-role{grid-template-columns:1fr minmax(230px,340px);background:#fffdf8;color:#1b1b1b}.impact-concept-role figure{grid-column:2;grid-row:1;background:#d8ad38}.impact-concept-role>div{grid-column:1;grid-row:1}.impact-concept-role small,.impact-concept-role b{color:#765b0c}
+.impact-concept-elite{background:#6b2434;color:#fff}.impact-concept-elite figure{background:#3d1520}.impact-concept-elite small,.impact-concept-elite b{color:#ffe7a0}.impact-concept-elite p{color:#eadce0}
 
-/* BERLIN / COMMUNITY */
-.impact-berlin{overflow:hidden;background:#090909}
-.impact-berlin::before{content:'';position:absolute;inset:0;opacity:.12;background:url('/media/brand/live-explosion-background.png') center/cover no-repeat;filter:grayscale(1)}
-.impact-berlin-grid{position:relative;z-index:2;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(44px,7vw,96px);align-items:center}
-.impact-berlin-art{position:relative;min-height:600px}
-.impact-berlin-gate{position:absolute;inset:auto 0 0 0;width:100%;max-height:520px;object-fit:contain;object-position:left bottom;filter:saturate(.8) brightness(.8);opacity:.72}
-.impact-berlin-photo{position:absolute;right:0;top:0;width:58%;height:54%;object-fit:cover;border:1px solid rgba(211,169,75,.28);filter:saturate(.58) contrast(1.1) brightness(.72);box-shadow:16px 18px 0 rgba(0,0,0,.35)}
-.impact-berlin-tag{position:absolute;left:4%;top:3%;z-index:3;color:var(--ih-gold);font:400 clamp(2rem,4vw,4rem)/1 var(--marker);transform:rotate(-7deg)}
-.impact-berlin-copy{max-width:540px}
-.impact-berlin-copy .impact-copy{margin:26px 0 28px}
-.impact-berlin-points{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
-.impact-berlin-points span{padding:12px;border:1px solid var(--ih-soft-line);color:#d7cfc4;font:800 .66rem/1.2 var(--body);letter-spacing:.07em;text-transform:uppercase}
+.impact-berlin{background:#f7f3eb}
+.impact-berlin::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(216,173,56,.11) 1px,transparent 1px),linear-gradient(rgba(216,173,56,.08) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.impact-berlin-grid{position:relative;z-index:1;display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(50px,8vw,110px);align-items:center}
+.impact-berlin-copy{max-width:560px}
+.impact-berlin-copy .impact-copy{margin:26px 0}
+.impact-berlin-signs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.impact-berlin-signs span{padding:9px 11px;border:1px solid #847e74;background:#fff;color:#191919;font:850 .62rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.1em;text-transform:uppercase}
+.impact-berlin-signs span:first-child{border-color:#181818;background:var(--ih-yellow-bright)}
+.impact-berlin-media{position:relative;margin:0;min-height:600px;overflow:hidden;background:#111}
+.impact-berlin-media img{width:100%;height:100%;min-height:600px;display:block;object-fit:cover;object-position:center 45%;filter:saturate(.85) contrast(1.06)}
+.impact-berlin-media span{position:absolute;left:20px;bottom:20px;padding:10px 12px;background:var(--ih-yellow-bright);color:#111;font:900 .66rem/1 var(--body,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase}
 
-/* FOUNDERS + HISTORY */
-.impact-people-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(44px,7vw,96px);align-items:center}
-.impact-founders{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.impact-founders figure{position:relative;margin:0;min-height:520px;overflow:hidden;border:1px solid rgba(211,169,75,.22);background:#090909}
-.impact-founders img{width:100%;height:100%;min-height:520px;object-fit:cover;display:block;filter:saturate(.63) contrast(1.08) brightness(.8)}
-.impact-founders figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:rgba(5,5,5,.86);color:var(--ih-gold);font:900 .68rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
-.impact-team{display:flex;flex-wrap:wrap;gap:7px;margin-top:26px}
-.impact-team span{padding:8px 10px;border:1px solid var(--ih-soft-line);color:#cfc7bb;font:800 .64rem/1 var(--body);letter-spacing:.07em;text-transform:uppercase}
-.impact-history{background:linear-gradient(180deg,#080808,#040404)}
-.impact-history-grid{display:grid;grid-template-columns:1fr .72fr;gap:60px;align-items:end}
-.impact-history-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.impact-history-years{display:flex;gap:0;margin-top:30px;border-top:1px solid var(--ih-line);border-bottom:1px solid var(--ih-line)}
-.impact-history-years span{flex:1;padding:16px 8px;border-right:1px solid var(--ih-soft-line);color:var(--ih-gold);font:900 clamp(1.3rem,2.2vw,2.4rem)/1 var(--display);text-align:center}
-.impact-history-years span:last-child{border-right:0}
+.impact-people{background:var(--ih-white)}
+.impact-people-heading{display:grid;grid-template-columns:1.15fr .7fr;gap:50px;align-items:end}
+.impact-people-heading>.impact-copy{margin:0 0 4px}
+.impact-team-wall{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:54px}
+.impact-person{position:relative;margin:0;min-height:310px;overflow:hidden;background:#d7d1c6}
+.impact-person.is-founder{grid-column:span 2;min-height:500px}
+.impact-person img{width:100%;height:100%;min-height:310px;display:block;object-fit:cover;object-position:center 24%;filter:saturate(.92) contrast(1.02);transition:transform .3s ease}
+.impact-person.is-founder img{min-height:500px}
+.impact-person:hover img{transform:scale(1.025)}
+.impact-person figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:16px 15px;background:linear-gradient(0deg,rgba(0,0,0,.84),rgba(0,0,0,.58),transparent);color:#fff}
+.impact-person figcaption strong{font:900 clamp(1.15rem,1.6vw,1.55rem)/1 var(--display,Impact,sans-serif);text-transform:uppercase}
+.impact-person figcaption span{color:#d7d0c5;font:750 .6rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.09em;text-transform:uppercase}
 
-@media(max-width:1080px){
-  .impact-hero-inner{grid-template-columns:1fr;padding-top:138px}
-  .impact-hero-side{min-height:240px;align-items:flex-start}
-  .impact-hero-graffiti{left:0;right:auto;top:20px;text-align:left}
-  .impact-poster{right:5%;bottom:0;width:155px}
-  .impact-stats-grid{grid-template-columns:repeat(5,1fr)}
-  .impact-stat{padding:18px 14px}
-  .impact-story-grid,.impact-berlin-grid,.impact-people-grid{grid-template-columns:1fr}
-  .impact-feature-card{grid-template-columns:300px 1fr}
-  .impact-story-media,.impact-story-media img{min-height:520px}
-  .impact-berlin-art{min-height:520px}
+.impact-history{background:#151515;color:#fff;border-top:0}
+.impact-history .impact-title{color:#fff}.impact-history .impact-title em{color:#ffe071}.impact-history .impact-kicker{color:#ffe071}.impact-history .impact-copy{color:#c4beb4}
+.impact-history-head{display:grid;grid-template-columns:1.05fr .75fr;gap:70px;align-items:end}
+.impact-history-head>div:last-child{max-width:500px}.impact-history-head .impact-copy{margin:0 0 28px}
+.impact-history-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:58px}
+.impact-history-card{display:grid;gap:10px;color:#fff;text-decoration:none}
+.impact-history-card>span{color:#ffe071;font:900 1.35rem/1 var(--display,Impact,sans-serif)}
+.impact-history-card figure{margin:0;aspect-ratio:4/5;padding:12px;display:grid;place-items:center;background:#242424;border:1px solid rgba(255,255,255,.13);overflow:hidden}
+.impact-history-card img{width:auto;max-width:100%;height:auto;max-height:100%;display:block;object-fit:contain;transition:transform .25s ease}
+.impact-history-card:hover img{transform:scale(1.03)}
+.impact-history-card>div{display:grid;gap:3px}.impact-history-card strong{font:850 .9rem/1.2 var(--body,Arial,sans-serif)}.impact-history-card small{color:#8f887f;font:750 .6rem/1.2 var(--body,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
+
+@media(max-width:1050px){
+  .impact-hero-layout{grid-template-columns:1fr;align-items:end}.impact-hero-note{max-width:420px;margin-left:auto}
+  .impact-story-grid,.impact-feature-grid,.impact-berlin-grid{grid-template-columns:1fr}.impact-story-copy,.impact-feature-copy,.impact-berlin-copy{max-width:760px}
+  .impact-story-media,.impact-story-media img{min-height:480px}.impact-feature-art{width:min(470px,78%);margin-inline:auto}
+  .impact-concept{grid-template-columns:minmax(210px,300px) 1fr}.impact-concept-role{grid-template-columns:1fr minmax(210px,300px)}
+  .impact-people-heading,.impact-history-head{grid-template-columns:1fr}.impact-people-heading>.impact-copy,.impact-history-head>div:last-child{max-width:650px}
+  .impact-team-wall{grid-template-columns:repeat(4,1fr)}.impact-person.is-founder{grid-column:span 2}
 }
-@media(max-width:780px){
-  .impact-shell,.impact-hero-inner{width:min(100% - 30px,1240px)}
-  .impact-section{padding:72px 0}
-  .impact-hero{min-height:860px}
-  .impact-hero-inner{padding:118px 0 58px}
-  .impact-hero h1{font-size:clamp(4.4rem,20vw,7.4rem)}
-  .impact-hero-side{min-height:210px}
-  .impact-poster{width:130px}
-  .impact-stats-grid{grid-template-columns:repeat(2,1fr)}
-  .impact-stat{min-height:100px;border-bottom:1px solid var(--ih-soft-line)}
-  .impact-stat:nth-child(2n){border-right:0}
-  .impact-stat:last-child{grid-column:1/-1}
-  .impact-feature-head,.impact-history-grid{grid-template-columns:1fr;gap:24px}
-  .impact-feature-card{grid-template-columns:1fr}
-  .impact-feature-poster{max-height:520px}
-  .impact-feature-poster img{height:auto;max-height:520px;object-fit:cover;object-position:center 24%}
-  .impact-event-grid{grid-template-columns:1fr}
-  .impact-event-card{min-height:460px}
-  .impact-founders{grid-template-columns:1fr 1fr}
-  .impact-founders figure,.impact-founders img{min-height:390px}
+
+@media(max-width:760px){
+  .impact-shell{width:min(100% - 28px,1240px)}.impact-section{padding:72px 0}.impact-title{font-size:clamp(2.75rem,14vw,4.8rem);line-height:.88}
+  .impact-hero{min-height:760px}.impact-hero-layout{padding:132px 0 48px;gap:32px}.impact-hero h1{font-size:clamp(4rem,18vw,6.2rem);line-height:.75}.impact-hero-note{margin:0;max-width:none;padding:20px}.impact-hero-note p{font-size:2rem}.impact-hero-lead{font-size:.95rem}
+  .impact-info-grid{grid-template-columns:repeat(2,1fr)}.impact-info-grid>div{min-height:88px;padding:15px;border-bottom:1px solid var(--ih-line)}.impact-info-grid>div:nth-child(5){grid-column:1/-1}.impact-info-grid>div:first-child{border-left:0}
+  .impact-story-media,.impact-story-media img{min-height:340px}.impact-story-media figcaption{align-items:flex-start;flex-direction:column}.impact-values{grid-template-columns:1fr}.impact-values>div,.impact-values>div:first-child{min-height:0;border-left:1px solid #aaa298;border-right:1px solid #aaa298;border-bottom:1px solid #aaa298}.impact-values>div:last-child{border-bottom:0}.impact-values span{margin-bottom:14px}
+  .impact-feature-art{width:88%;padding:14px;box-shadow:10px 10px 0 var(--ih-yellow-bright)}.impact-festival-facts{grid-template-columns:1fr}.impact-festival-facts>div,.impact-festival-facts>div:first-child{border-left:1px solid #bdb5aa;border-right:1px solid #bdb5aa;border-bottom:1px solid #bdb5aa}.impact-festival-facts>div:last-child{border-bottom:0}
+  .impact-concept,.impact-concept-role{grid-template-columns:1fr}.impact-concept figure,.impact-concept-role figure{grid-column:1;grid-row:1;padding:22px}.impact-concept>div,.impact-concept-role>div{grid-column:1;grid-row:2;padding:30px}.impact-concept figure img{max-height:360px}.impact-concept h3{font-size:clamp(2.6rem,13vw,4.4rem)}
+  .impact-berlin-media,.impact-berlin-media img{min-height:380px}
+  .impact-team-wall{grid-template-columns:repeat(2,1fr)}.impact-person,.impact-person.is-founder{grid-column:span 1;min-height:300px}.impact-person.is-founder{min-height:410px}.impact-person img{min-height:300px}.impact-person.is-founder img{min-height:410px}
+  .impact-history-gallery{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}.impact-history-card{min-width:210px;scroll-snap-align:start}
 }
-@media(max-width:520px){
-  .impact-hero{min-height:820px}
-  .impact-hero-inner{padding-top:104px}
-  .impact-hero h1{font-size:clamp(3.9rem,22vw,6rem)}
-  .impact-tagline{font-size:1.35rem}
-  .impact-hero-graffiti{font-size:1.75rem;width:230px}
-  .impact-poster{display:none}
-  .impact-title{font-size:clamp(3.1rem,16vw,4.8rem)}
-  .impact-values div{grid-template-columns:1fr;gap:7px}
-  .impact-story-media,.impact-story-media img{min-height:390px}
-  .impact-feature-copy{padding:34px 24px}
-  .impact-feature-copy h3{font-size:3.3rem}
-  .impact-berlin-art{min-height:410px}
-  .impact-berlin-photo{width:70%;height:48%}
-  .impact-berlin-points{grid-template-columns:1fr}
-  .impact-founders{grid-template-columns:1fr}
-  .impact-founders figure,.impact-founders img{min-height:460px}
-  .impact-history-years{overflow-x:auto}
-  .impact-history-years span{min-width:90px}
+
+@media(max-width:430px){
+  .impact-route-label span:last-child{display:none}.impact-info-grid strong{font-size:1.05rem}.impact-team-wall{grid-template-columns:1fr 1fr}.impact-person,.impact-person.is-founder{min-height:290px}.impact-person.is-founder img,.impact-person img{min-height:290px}.impact-person figcaption{padding:12px 10px}
 }
+
+@media(prefers-reduced-motion:reduce){.impact-button,.impact-concept,.impact-person img,.impact-history-card img{transition:none}.impact-tagline,.impact-hero-note p{transform:none}}
