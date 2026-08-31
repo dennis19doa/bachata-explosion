@@ -2,7 +2,7 @@ name: Deploy GitHub Pages preview
 
 on:
   push:
-    branches: [main]
+    branches: [modernize-cloudflare-migration]
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-preview
   cancel-in-progress: true
 
 jobs:
