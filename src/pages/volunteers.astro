@@ -4,128 +4,219 @@ import { volunteerFormEndpoint } from "../lib/forms";
 
 const formConnected = Boolean(volunteerFormEndpoint);
 const roles = [
-  { value: "Door and check-in", title: "Door & check-in", text: "Scan tickets, distribute wristbands and welcome dancers into the event." },
-  { value: "Pickup driver", title: "Pickup driver", text: "Pick up and drop off artists using your own car and keep the team informed." },
-  { value: "Construction volunteer", title: "Setup crew", text: "Help with practical construction and setup work before and after the event." },
-  { value: "Event research", title: "Event research", text: "Research hotels, venues, travel routes, suppliers and cost-effective options." },
-  { value: "Other contribution", title: "Something else", text: "Bring a skill, idea or kind of support we have not listed yet." },
+  { value: "Door and check-in", title: "Door & check-in", text: "Scan tickets, distribute wristbands and welcome dancers." },
+  { value: "Artist transport", title: "Artist transport", text: "Airport, station and hotel pickups with your own car." },
+  { value: "Event errands", title: "Event errands", text: "Help with water, food and practical purchases during the event." },
+  { value: "Travel and venue research", title: "Travel & research", text: "Compare travel, venues, hotels and useful suppliers." },
+  { value: "Social media support", title: "Social media support", text: "Help spread event information and selected promotional posts." },
+  { value: "Setup crew", title: "Setup crew", text: "Support practical setup and breakdown around the venue." },
+  { value: "Other contribution", title: "Something else", text: "Bring a useful skill or idea we have not listed." },
 ] as const;
-const events = ["Berlin Bachata Festival", "Role Rotation", "Summer Edition", "Elite Dance", "More than one event"];
+
+const events = ["Berlin Bachata Festival 2026", "Role Rotation", "Elite Dance", "More than one event"];
 const languages = ["German", "English", "Spanish", "Other"];
 ---
 
-<BaseLayout title="Volunteer with Bachata Explosion — join the event team" description="Apply directly to the Bachata Explosion volunteer team for check-in, artist transport, setup, event research or another contribution.">
-  <article class="volunteer-2026" data-wordpress-source="volunteers">
-    <section class="volunteer-hero" aria-labelledby="volunteer-title">
-      <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="The Bachata Explosion community together in Berlin" width="1800" height="1200" />
-      <div class="volunteer-hero-shade" aria-hidden="true"></div>
-      <div class="volunteer-hero-word" aria-hidden="true">FAMILY</div>
-      <div class="shell volunteer-hero-content">
-        <p class="eyebrow"><span></span>Join the Explosion team</p>
-        <h1 id="volunteer-title">We are<br /><em>Explosion.</em></h1>
-        <p>Help build the weekend from the inside and become part of the family behind the floor.</p>
-        <a class="button button-gold" href="#volunteer-application">Start your application</a>
-      </div>
-    </section>
-
-    <section class="volunteer-promise section-pad">
-      <div class="shell volunteer-promise-grid">
-        <div><p class="section-label">The exchange</p><h2>Bring your energy.<br /><em>Live the whole event.</em></h2></div>
-        <div class="volunteer-promise-cards">
-          <article><span>What you give</span><strong>Around 8 hours</strong><p>Reliable help, clear communication and responsibility for your assigned task.</p></article>
-          <article><span>What you receive</span><strong>A festival Full Pass</strong><p>Free access to the regular event programme outside your agreed volunteer shifts.</p></article>
-          <article><span>What you join</span><strong>A real team</strong><p>Behind-the-scenes experience, community visibility and people who want you to feel at home.</p></article>
+<BaseLayout title="Volunteer with Bachata Explosion — join the event team" description="Apply directly to the Bachata Explosion volunteer team on our own website. No Typeform account or external form required.">
+  <article class="volunteer-flow" data-wordpress-source="volunteers">
+    <section class="vf-hero" aria-labelledby="volunteer-title">
+      <img src="/media/bbf/atmosphere/saturday-62.jpg" alt="Bachata Explosion dancers and community in Berlin" width="1800" height="1200" />
+      <div class="vf-hero-shade" aria-hidden="true"></div>
+      <div class="vf-shell vf-hero-grid">
+        <div>
+          <p class="vf-code">BERLIN / VOLUNTEERS</p>
+          <h1 id="volunteer-title">Join the team<br />behind the floor.</h1>
+          <p class="vf-lead">Help us run the event, receive festival access in return, and stay part of the experience instead of filling out a form somewhere else.</p>
+          <a class="vf-button vf-button-primary" href="#volunteer-application">Start application</a>
+        </div>
+        <div class="vf-exchange" aria-label="Volunteer exchange at a glance">
+          <div><span>YOU GIVE</span><strong>≈ 8 hours</strong></div>
+          <div><span>YOU GET</span><strong>Festival access</strong></div>
+          <div><span>APPLICATION</span><strong>≈ 3 minutes</strong></div>
         </div>
       </div>
     </section>
 
-    <section class="volunteer-roles section-pad" aria-labelledby="volunteer-roles-title">
-      <div class="shell">
-        <div class="volunteer-heading">
-          <div><p class="section-label">Where you can help</p><h2 id="volunteer-roles-title">Choose your<br /><em>place in the team.</em></h2></div>
-          <p>You can select more than one role in the application. Tell us about other useful experience or ideas as well.</p>
+    <section class="vf-intro">
+      <div class="vf-shell vf-intro-grid">
+        <div>
+          <p class="vf-code">HOW IT WORKS</p>
+          <h2>Simple enough to finish.<br />Detailed enough to plan.</h2>
         </div>
-        <div class="volunteer-role-grid">
-          {roles.map((role) => <a href="#volunteer-application" data-volunteer-role-link={role.value}><span>{role.title}</span><p>{role.text}</p><b>Choose this role ↘</b></a>)}
+        <div class="vf-process">
+          <div><b>01</b><span>Choose how you can help.</span></div>
+          <div><b>02</b><span>Tell us about your fit and availability.</span></div>
+          <div><b>03</b><span>Leave your contact details.</span></div>
+          <div><b>04</b><span>Agree to the team rules and send.</span></div>
         </div>
       </div>
     </section>
 
-    <section class="volunteer-application section-pad" id="volunteer-application" aria-labelledby="volunteer-form-title">
-      <div class="shell volunteer-application-grid">
-        <aside>
-          <p class="section-label">Native application</p>
-          <h2 id="volunteer-form-title">Your application.<br /><em>Right here.</em></h2>
-          <p>This replaces Typeform completely. You stay on the Bachata Explosion website from start to finish.</p>
-          <div class="volunteer-form-note"><span>What happens next</span><p>We review your preferred role, event, languages and availability, then contact you directly.</p></div>
+    <section class="vf-application" id="volunteer-application" aria-labelledby="volunteer-form-title">
+      <div class="vf-shell vf-app-grid">
+        <aside class="vf-progress" aria-label="Application progress">
+          <p class="vf-code">NATIVE APPLICATION</p>
+          <h2 id="volunteer-form-title">Apply without Typeform.</h2>
+          <p>Your application stays on bachataexplosion.com and can be delivered directly to the volunteer Zoho alias.</p>
+          <ol>
+            <li class="is-active" data-progress-step="0"><span>1</span><b>Role</b></li>
+            <li data-progress-step="1"><span>2</span><b>Fit</b></li>
+            <li data-progress-step="2"><span>3</span><b>Contact</b></li>
+            <li data-progress-step="3"><span>4</span><b>Confirm</b></li>
+          </ol>
+          <div class="vf-progress-bar"><i data-progress-bar></i></div>
+          <small data-progress-label>Step 1 of 4</small>
         </aside>
 
-        <form class="volunteer-form" method="POST" action={volunteerFormEndpoint || undefined} data-volunteer-form data-volunteer-endpoint={volunteerFormEndpoint}>
+        <form class="vf-form" method="POST" action={volunteerFormEndpoint || undefined} data-volunteer-form data-volunteer-endpoint={volunteerFormEndpoint} novalidate>
           <input type="hidden" name="topic" value="Volunteer application" />
 
-          <fieldset class="volunteer-form-section">
-            <legend><span>Preferred tasks</span> What are you applying for? *</legend>
-            <p>Choose as many as you like.</p>
-            <div class="volunteer-choice-grid">
-              {roles.map((role) => <label><input type="checkbox" name="roles" value={role.value} data-volunteer-role required /><span><strong>{role.title}</strong><small>{role.text}</small></span></label>)}
+          <section class="vf-step is-active" data-step="0" aria-labelledby="vf-step-role">
+            <div class="vf-step-head"><span>01 / ROLE</span><h3 id="vf-step-role">Where would you like to help?</h3><p>Select one or more. You can change this later with the team.</p></div>
+            <div class="vf-role-grid">
+              {roles.map((role) => (
+                <label class="vf-choice">
+                  <input type="checkbox" name="roles" value={role.value} data-volunteer-role />
+                  <span><i aria-hidden="true"></i><strong>{role.title}</strong><small>{role.text}</small></span>
+                </label>
+              ))}
             </div>
-          </fieldset>
+            <p class="vf-error" data-role-error hidden>Please choose at least one role.</p>
+          </section>
 
-          <fieldset class="volunteer-form-section volunteer-field-grid">
-            <legend><span>Your contribution</span> Tell us where you fit</legend>
-            <label class="full-field"><span>What can you do that we did not mention?</span><textarea name="other_contribution" rows="5" maxlength="1600" placeholder="Share your skills, experience or ideas. How do you see yourself in the Explosion team?"></textarea></label>
-            <label><span>Which event are you applying for? *</span><select name="event" required><option value="">Choose an event</option>{events.map((event) => <option value={event}>{event}</option>)}</select></label>
-            <div class="volunteer-language-field"><span>Which languages do you speak? *</span><div>{languages.map((language) => <label><input type="checkbox" name="languages" value={language} required /><span>{language}</span></label>)}</div></div>
-          </fieldset>
+          <section class="vf-step" data-step="1" aria-labelledby="vf-step-fit" hidden>
+            <div class="vf-step-head"><span>02 / FIT</span><h3 id="vf-step-fit">Tell us where you fit.</h3><p>Only the information we actually need to plan with you.</p></div>
+            <div class="vf-fields">
+              <label><span>Which event? *</span><select name="event" required><option value="">Choose an event</option>{events.map((event) => <option value={event}>{event}</option>)}</select></label>
+              <fieldset class="vf-languages"><legend>Languages *</legend><div>{languages.map((language) => <label><input type="checkbox" name="languages" value={language} data-language /><span>{language}</span></label>)}</div><p class="vf-error" data-language-error hidden>Please choose at least one language.</p></fieldset>
+              <label class="vf-full"><span>Relevant experience or useful skills</span><textarea name="experience" rows="5" maxlength="1600" placeholder="Tell us briefly about experience, driving, event work, social media, logistics, research, languages or anything else that helps us place you well."></textarea></label>
+              <label class="vf-full"><span>Availability or restrictions</span><textarea name="availability" rows="4" maxlength="1200" placeholder="For example: only Saturday, no late-night shift, arriving Friday at 18:00..."></textarea></label>
+            </div>
+          </section>
 
-          <fieldset class="volunteer-form-section volunteer-field-grid">
-            <legend><span>Contact information</span> How can we reach you? *</legend>
-            <label><span>First name *</span><input type="text" name="first_name" autocomplete="given-name" required maxlength="80" /></label>
-            <label><span>Last name *</span><input type="text" name="last_name" autocomplete="family-name" required maxlength="80" /></label>
-            <label><span>Phone / WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="40" placeholder="Including country code" /></label>
-            <label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label>
-            <label class="full-field"><span>Availability or exceptions</span><textarea name="availability" rows="4" maxlength="1200" placeholder="Tell us if you cannot be available Friday–Sunday or have timing restrictions."></textarea></label>
-          </fieldset>
+          <section class="vf-step" data-step="2" aria-labelledby="vf-step-contact" hidden>
+            <div class="vf-step-head"><span>03 / CONTACT</span><h3 id="vf-step-contact">How can we reach you?</h3><p>We use this only to review and coordinate your application.</p></div>
+            <div class="vf-fields">
+              <label><span>First name *</span><input type="text" name="first_name" autocomplete="given-name" required maxlength="80" /></label>
+              <label><span>Last name *</span><input type="text" name="last_name" autocomplete="family-name" required maxlength="80" /></label>
+              <label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label>
+              <label><span>Phone / WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="40" placeholder="Including country code" /></label>
+              <label class="vf-full"><span>City</span><input type="text" name="city" autocomplete="address-level2" maxlength="100" placeholder="Where are you based?" /></label>
+            </div>
+          </section>
 
-          <fieldset class="volunteer-form-section volunteer-rules">
-            <legend><span>Rules & conditions</span> A clear agreement</legend>
-            <details open><summary>Door and event-team rules <span aria-hidden="true">+</span></summary><ul><li>Be at your shift at least 10 minutes before it starts.</li><li>Tell the organisers immediately if you are late, unavailable or need to cancel.</li><li>Do not dance during your shift or leave the door unattended without informing the team.</li><li>Breaking the rules can lead to exclusion from the event and cancellation of the Full Pass.</li></ul></details>
-            <details><summary>Pickup-driver rules <span aria-hidden="true">+</span></summary><ul><li>You need your own safe, roadworthy car and must complete the agreed artist pickups.</li><li>Confirm every artist pickup and drop-off with the organising team.</li><li>Two or three completed pickups may be required to qualify for the Full Pass.</li><li>Notify us immediately if you cannot complete an assigned journey.</li></ul></details>
-            <label class="volunteer-consent"><input type="checkbox" name="volunteer_rules" value="agreed" required /><span>I have read and agree to the rules that apply to my volunteer role.</span></label>
-            <label class="volunteer-consent"><input type="checkbox" name="conditions" value="agreed" required /><span>I understand that the expected work is around 8 hours, information shared with the team is confidential, absences must be reported promptly, and I may be asked to repost event advertising at least once.</span></label>
-            <label class="volunteer-consent"><input type="checkbox" name="privacy_consent" value="yes" required /><span>I agree that my details may be used to review this application and contact me. See the <a href="/privacy/">privacy policy</a>.</span></label>
-          </fieldset>
+          <section class="vf-step" data-step="3" aria-labelledby="vf-step-confirm" hidden>
+            <div class="vf-step-head"><span>04 / CONFIRM</span><h3 id="vf-step-confirm">One clear agreement.</h3><p>No wall of legal text. These are the practical rules that matter during an event.</p></div>
+            <div class="vf-rules">
+              <ul>
+                <li>Be at your agreed shift at least 10 minutes before it starts.</li>
+                <li>Tell the team immediately if you are late, unavailable or need to cancel.</li>
+                <li>Stay responsible for the task you accepted and do not leave a shift unattended.</li>
+                <li>If you drive artists, use a safe roadworthy car and confirm each agreed pickup.</li>
+                <li>Volunteer access depends on completing the agreed contribution, normally around 8 hours.</li>
+              </ul>
+              <label class="vf-consent"><input type="checkbox" name="volunteer_rules" value="agreed" required /><span>I have read and agree to the volunteer rules.</span></label>
+              <label class="vf-consent"><input type="checkbox" name="privacy_consent" value="yes" required /><span>I agree that Bachata Explosion may use these details to review my application and contact me. See the <a href="/privacy/">privacy policy</a>.</span></label>
+            </div>
+          </section>
 
-          <label class="form-trap" aria-hidden="true"><span>Leave empty</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-          <div class="volunteer-submit"><button class="button button-gold" type="submit" data-volunteer-submit>Apply to the team</button><p role="status" aria-live="polite" data-volunteer-status>{formConnected ? "Ready when you are." : "Preview mode: the Typeform is removed; activate the protected email endpoint to deliver applications."}</p></div>
+          <label class="vf-trap" aria-hidden="true">Leave empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+
+          <div class="vf-actions">
+            <button class="vf-button vf-button-secondary" type="button" data-prev hidden>Back</button>
+            <button class="vf-button vf-button-primary" type="button" data-next>Continue</button>
+            <button class="vf-button vf-button-primary" type="submit" data-submit hidden>Send application</button>
+          </div>
+          <p class="vf-status" role="status" aria-live="polite" data-status>{formConnected ? "Your application will be sent securely to the Bachata Explosion team." : "Preview mode: the application design is live; connect the protected form endpoint to receive submissions."}</p>
         </form>
       </div>
     </section>
   </article>
 
+  <style>
+    .volunteer-flow{--vf-bg:#f3f0e8;--vf-ink:#111;--vf-yellow:#f2c500;--vf-line:#d8d3c8;--vf-muted:#67645e;background:var(--vf-bg);color:var(--vf-ink);font-family:Arial,Helvetica,sans-serif}
+    .vf-shell{width:min(1180px,calc(100% - 40px));margin:0 auto}.vf-code{margin:0 0 18px;font:800 12px/1 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}.vf-hero{position:relative;min-height:690px;display:grid;align-items:end;overflow:hidden;background:#111;color:#fff}.vf-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.vf-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.48) 55%,rgba(0,0,0,.18) 100%),linear-gradient(0deg,rgba(0,0,0,.55),transparent 60%)}.vf-hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:60px;align-items:end;padding:170px 0 70px}.vf-hero h1{max-width:760px;margin:0;font:900 clamp(4rem,8vw,8.2rem)/.82 Arial,sans-serif;letter-spacing:-.07em;text-transform:uppercase}.vf-lead{max-width:650px;margin:28px 0;font-size:1.1rem;line-height:1.65;color:#e7e2d8}.vf-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:0 22px;border:1px solid var(--vf-ink);border-radius:0;font:800 13px/1 Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;text-decoration:none}.vf-button-primary{background:var(--vf-yellow);color:#111;border-color:var(--vf-yellow)}.vf-button-secondary{background:transparent;color:#111}.vf-exchange{display:grid;border-top:1px solid rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.5)}.vf-exchange div{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.22)}.vf-exchange div:last-child{border-bottom:0}.vf-exchange span{font-size:.68rem;letter-spacing:.12em}.vf-exchange strong{font-size:1rem}.vf-intro{padding:90px 0;border-bottom:1px solid var(--vf-line)}.vf-intro-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:90px}.vf-intro h2,.vf-progress h2{margin:0;font:900 clamp(2.6rem,5vw,5rem)/.92 Arial,sans-serif;letter-spacing:-.05em;text-transform:uppercase}.vf-process{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #111}.vf-process div{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--vf-line)}.vf-process div:nth-child(odd){padding-right:28px}.vf-process b{font-size:.74rem}.vf-process span{font-size:1rem;line-height:1.4}.vf-application{padding:100px 0 130px}.vf-app-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:90px;align-items:start}.vf-progress{position:sticky;top:110px}.vf-progress>p:not(.vf-code){margin:24px 0;color:var(--vf-muted);line-height:1.6}.vf-progress ol{list-style:none;padding:0;margin:34px 0 20px;border-top:1px solid var(--vf-line)}.vf-progress li{display:grid;grid-template-columns:34px 1fr;align-items:center;padding:15px 0;border-bottom:1px solid var(--vf-line);color:#9a978f}.vf-progress li span{width:25px;height:25px;display:grid;place-items:center;border:1px solid currentColor;border-radius:50%;font-size:.7rem}.vf-progress li b{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}.vf-progress li.is-active{color:#111}.vf-progress li.is-active span{background:var(--vf-yellow);border-color:var(--vf-yellow)}.vf-progress-bar{height:3px;background:#dad5c9}.vf-progress-bar i{display:block;width:25%;height:100%;background:#111;transition:width .25s ease}.vf-progress small{display:block;margin-top:10px;color:var(--vf-muted)}.vf-form{min-width:0;background:#fff;border:1px solid var(--vf-line);padding:clamp(28px,5vw,58px);box-shadow:0 18px 50px rgba(0,0,0,.06)}.vf-step-head{padding-bottom:28px;border-bottom:1px solid var(--vf-line);margin-bottom:30px}.vf-step-head>span{display:block;margin-bottom:12px;font-size:.72rem;font-weight:800;letter-spacing:.13em}.vf-step-head h3{margin:0;font:900 clamp(2.1rem,4.4vw,4rem)/.95 Arial,sans-serif;letter-spacing:-.045em;text-transform:uppercase}.vf-step-head p{margin:14px 0 0;color:var(--vf-muted);line-height:1.55}.vf-role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vf-choice{display:block;cursor:pointer}.vf-choice input{position:absolute;opacity:0;pointer-events:none}.vf-choice>span{min-height:122px;display:grid;grid-template-columns:24px 1fr;grid-template-rows:auto 1fr;gap:6px 13px;padding:18px;border:1px solid var(--vf-line);transition:.15s ease}.vf-choice i{grid-row:1/3;width:20px;height:20px;border:1px solid #777;margin-top:2px}.vf-choice strong{font-size:.98rem}.vf-choice small{color:var(--vf-muted);line-height:1.45}.vf-choice input:checked+span{border-color:#111;background:#faf7e8}.vf-choice input:checked+span i{background:var(--vf-yellow);border-color:#111;box-shadow:inset 0 0 0 4px #faf7e8}.vf-fields{display:grid;grid-template-columns:1fr 1fr;gap:22px}.vf-fields label,.vf-languages{display:grid;gap:8px}.vf-fields label>span,.vf-languages legend{font-size:.77rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.vf-fields input,.vf-fields select,.vf-fields textarea{width:100%;box-sizing:border-box;border:1px solid var(--vf-line);border-radius:0;background:#fff;color:#111;padding:14px 15px;font:inherit}.vf-fields input,.vf-fields select{min-height:50px}.vf-fields textarea{resize:vertical;line-height:1.5}.vf-fields input:focus,.vf-fields select:focus,.vf-fields textarea:focus{outline:2px solid var(--vf-yellow);outline-offset:1px}.vf-full{grid-column:1/-1}.vf-languages{grid-column:1/-1;border:0;padding:0;margin:0}.vf-languages>div{display:flex;flex-wrap:wrap;gap:8px}.vf-languages label{display:block}.vf-languages input{position:absolute;opacity:0}.vf-languages label span{display:block;padding:10px 14px;border:1px solid var(--vf-line);font-size:.85rem;cursor:pointer}.vf-languages input:checked+span{background:#111;color:#fff;border-color:#111}.vf-rules ul{margin:0 0 28px;padding-left:20px;color:#302e2a;line-height:1.65}.vf-consent{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--vf-line);line-height:1.5}.vf-consent input{width:18px;height:18px;margin-top:2px;accent-color:#111}.vf-error{margin:14px 0 0;color:#a72525;font-weight:700;font-size:.85rem}.vf-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:34px;padding-top:24px;border-top:1px solid var(--vf-line)}.vf-status{margin:16px 0 0;color:var(--vf-muted);font-size:.85rem;line-height:1.5}.vf-trap{position:absolute!important;left:-9999px!important}.vf-step[hidden]{display:none!important}
+    @media(max-width:900px){.vf-hero-grid{grid-template-columns:1fr;gap:40px;padding-top:150px}.vf-exchange{max-width:520px}.vf-intro-grid,.vf-app-grid{grid-template-columns:1fr;gap:50px}.vf-progress{position:static}.vf-progress ol{display:grid;grid-template-columns:repeat(4,1fr)}.vf-progress li{grid-template-columns:1fr;gap:7px;text-align:center}.vf-progress li span{margin:auto}.vf-progress li b{font-size:.68rem}.vf-process{grid-template-columns:1fr}.vf-process div:nth-child(odd){padding-right:0}}
+    @media(max-width:620px){.vf-shell{width:min(100% - 24px,1180px)}.vf-hero{min-height:620px}.vf-hero-grid{padding:130px 0 38px}.vf-hero h1{font-size:clamp(3.5rem,17vw,6rem)}.vf-intro,.vf-application{padding:65px 0}.vf-role-grid,.vf-fields{grid-template-columns:1fr}.vf-full,.vf-languages{grid-column:auto}.vf-form{padding:24px 18px}.vf-actions{justify-content:stretch}.vf-actions .vf-button{flex:1;padding:0 12px}.vf-progress ol{gap:0}.vf-progress li b{display:none}}
+  </style>
+
   <script>
-    const volunteerForm = document.querySelector<HTMLFormElement>("[data-volunteer-form]");
-    const volunteerStatus = volunteerForm?.querySelector<HTMLElement>("[data-volunteer-status]");
-    const volunteerSubmit = volunteerForm?.querySelector<HTMLButtonElement>("[data-volunteer-submit]");
-    const roleInputs = Array.from(document.querySelectorAll<HTMLInputElement>("[data-volunteer-role]"));
-    const languageInputs = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="languages"]'));
-    const maintainRequirement = (inputs: HTMLInputElement[]) => { const selected = inputs.some((input) => input.checked); inputs.forEach((input) => { input.required = !selected; }); };
-    roleInputs.forEach((input) => input.addEventListener("change", () => maintainRequirement(roleInputs)));
-    languageInputs.forEach((input) => input.addEventListener("change", () => maintainRequirement(languageInputs)));
-    document.querySelectorAll<HTMLAnchorElement>("[data-volunteer-role-link]").forEach((link) => link.addEventListener("click", () => { const input = roleInputs.find((candidate) => candidate.value === link.dataset.volunteerRoleLink); if (input) input.checked = true; maintainRequirement(roleInputs); }));
-    volunteerForm?.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const endpoint = volunteerForm.dataset.volunteerEndpoint?.trim();
-      if (!endpoint) { if (volunteerStatus) volunteerStatus.textContent = "The native application is ready, but delivery is still in preview mode. Connect the protected email endpoint to receive applications."; return; }
-      if (volunteerSubmit) { volunteerSubmit.disabled = true; volunteerSubmit.textContent = "Sending application…"; }
-      if (volunteerStatus) volunteerStatus.textContent = "Sending your application securely…";
-      try {
-        const response = await fetch(endpoint, { method: "POST", body: new FormData(volunteerForm), headers: { Accept: "application/json" } });
-        if (!response.ok) throw new Error("Application failed");
-        volunteerForm.reset(); maintainRequirement(roleInputs); maintainRequirement(languageInputs);
-        if (volunteerStatus) volunteerStatus.textContent = "Application received. Thank you—our team will review it and contact you.";
-      } catch { if (volunteerStatus) volunteerStatus.textContent = "The application could not be delivered. Please try again or email info@bachataexplosion.com."; }
-      finally { if (volunteerSubmit) { volunteerSubmit.disabled = false; volunteerSubmit.textContent = "Apply to the team"; } }
-    });
+    const form = document.querySelector<HTMLFormElement>("[data-volunteer-form]");
+    if (form) {
+      const steps = Array.from(form.querySelectorAll<HTMLElement>("[data-step]"));
+      const progressItems = Array.from(document.querySelectorAll<HTMLElement>("[data-progress-step]"));
+      const progressBar = document.querySelector<HTMLElement>("[data-progress-bar]");
+      const progressLabel = document.querySelector<HTMLElement>("[data-progress-label]");
+      const next = form.querySelector<HTMLButtonElement>("[data-next]");
+      const prev = form.querySelector<HTMLButtonElement>("[data-prev]");
+      const submit = form.querySelector<HTMLButtonElement>("[data-submit]");
+      const status = form.querySelector<HTMLElement>("[data-status]");
+      const roleInputs = Array.from(form.querySelectorAll<HTMLInputElement>("[data-volunteer-role]"));
+      const languageInputs = Array.from(form.querySelectorAll<HTMLInputElement>("[data-language]"));
+      const roleError = form.querySelector<HTMLElement>("[data-role-error]");
+      const languageError = form.querySelector<HTMLElement>("[data-language-error]");
+      let currentStep = 0;
+
+      const showStep = (index: number) => {
+        currentStep = Math.max(0, Math.min(index, steps.length - 1));
+        steps.forEach((step, stepIndex) => {
+          step.hidden = stepIndex !== currentStep;
+          step.classList.toggle("is-active", stepIndex === currentStep);
+        });
+        progressItems.forEach((item, itemIndex) => item.classList.toggle("is-active", itemIndex === currentStep));
+        if (progressBar) progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+        if (progressLabel) progressLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+        if (prev) prev.hidden = currentStep === 0;
+        if (next) next.hidden = currentStep === steps.length - 1;
+        if (submit) submit.hidden = currentStep !== steps.length - 1;
+        steps[currentStep]?.querySelector<HTMLElement>("h3")?.focus?.();
+      };
+
+      const checkStep = () => {
+        if (currentStep === 0) {
+          const valid = roleInputs.some((input) => input.checked);
+          if (roleError) roleError.hidden = valid;
+          if (!valid) return false;
+        }
+        if (currentStep === 1) {
+          const validLanguages = languageInputs.some((input) => input.checked);
+          if (languageError) languageError.hidden = validLanguages;
+          if (!validLanguages) return false;
+        }
+        const required = Array.from(steps[currentStep].querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("input[required],select[required],textarea[required]"));
+        for (const field of required) {
+          if (!field.checkValidity()) { field.reportValidity(); return false; }
+        }
+        return true;
+      };
+
+      next?.addEventListener("click", () => { if (checkStep()) { showStep(currentStep + 1); document.querySelector("#volunteer-application")?.scrollIntoView({ behavior: "smooth", block: "start" }); } });
+      prev?.addEventListener("click", () => showStep(currentStep - 1));
+      roleInputs.forEach((input) => input.addEventListener("change", () => { if (roleError) roleError.hidden = roleInputs.some((candidate) => candidate.checked); }));
+      languageInputs.forEach((input) => input.addEventListener("change", () => { if (languageError) languageError.hidden = languageInputs.some((candidate) => candidate.checked); }));
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!checkStep()) return;
+        const endpoint = form.dataset.volunteerEndpoint?.trim();
+        if (!endpoint) { if (status) status.textContent = "The application is ready, but delivery is still in preview mode. Connect the protected endpoint to receive submissions."; return; }
+        if (submit) { submit.disabled = true; submit.textContent = "Sending…"; }
+        if (status) status.textContent = "Sending your application securely…";
+        try {
+          const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result?.error || "Application failed");
+          form.reset();
+          showStep(0);
+          if (status) status.textContent = "Application received. Thank you — the team will review it and contact you.";
+        } catch (error) {
+          if (status) status.textContent = error instanceof Error ? error.message : "The application could not be delivered. Please try again or email info@bachataexplosion.com.";
+        } finally {
+          if (submit) { submit.disabled = false; submit.textContent = "Send application"; }
+        }
+      });
+
+      showStep(0);
+    }
   </script>
 </BaseLayout>
