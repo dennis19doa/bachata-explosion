@@ -3,141 +3,77 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { volunteerFormEndpoint } from "../lib/forms";
 
 const formConnected = Boolean(volunteerFormEndpoint);
-const roles = [
-  "Door & check-in",
-  "Artist transport",
-  "Event errands",
-  "Travel & research",
-  "Social media support",
-  "Setup crew",
-  "Something else",
-];
+const roles = ["Door & check-in", "Artist transport", "Event errands", "Travel & research", "Social media support", "Setup crew", "Something else"];
 const events = ["Berlin Bachata Festival 2026", "Role Rotation", "Elite Dance", "More than one event"];
 const languages = ["German", "English", "Spanish", "Other"];
+const volunteerSlides = [
+  { image: "/media/atmosphere/explosion-community.jpg", kicker: "Behind the weekend", title: "Be part of the people who make Explosion happen.", text: "Real events, real teamwork and a community where your contribution is visible." },
+  { image: "/media/bbf/atmosphere/party-143.jpg", kicker: "On the floor", title: "Help create the experience dancers remember.", text: "From arrival to the last social song, the volunteer team helps the weekend feel welcoming and organised." },
+  { image: "/media/bbf/atmosphere/saturday-60.jpg", kicker: "Inside Explosion", title: "Work with the team, then enjoy the event too.", text: "Roles are planned around the festival so you know what you are responsible for and when you are free." },
+  { image: "/media/archive/role-rotation-2026-party.jpg", kicker: "One community", title: "Different roles. One team.", text: "Door, transport, logistics, setup, research and media support all connect behind the scenes." },
+] as const;
 ---
 
-<BaseLayout title="Volunteer with Bachata Explosion — join the event team" description="Apply directly on the Bachata Explosion website. No Typeform account or external form required.">
-  <main class="tf-native" id="volunteer-application">
+<BaseLayout title="Volunteer with Bachata Explosion — join the event team" description="Apply directly on the Bachata Explosion website and become part of the event team.">
+  <div class="tf-native" id="volunteer-application">
     <div class="tf-topbar">
-      <a href="/" class="tf-wordmark">BACHATA EXPLOSION</a>
       <div class="tf-progress-wrap" aria-label="Application progress">
         <span data-progress-label>1 / 6</span>
         <div class="tf-progress"><i data-progress-bar></i></div>
       </div>
-      <span class="tf-location">BERLIN</span>
     </div>
+
+    <section class="tf-volunteer-showcase" aria-label="Life inside the Bachata Explosion volunteer team">
+      <div class="tf-showcase-track" data-volunteer-slides>
+        {volunteerSlides.map((slide) => (
+          <figure class="tf-showcase-slide">
+            <img src={slide.image} alt={slide.title} width="1200" height="800" loading="lazy" />
+            <figcaption><small>{slide.kicker}</small><strong>{slide.title}</strong><span>{slide.text}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="tf-showcase-controls" aria-label="Volunteer slideshow controls">
+        <button type="button" data-slide-prev aria-label="Previous volunteer image">←</button>
+        <button type="button" data-slide-next aria-label="Next volunteer image">→</button>
+      </div>
+    </section>
 
     <form class="tf-form" method="POST" action={volunteerFormEndpoint || undefined} data-volunteer-form data-volunteer-endpoint={volunteerFormEndpoint} novalidate>
       <input type="hidden" name="topic" value="Volunteer application" />
 
-      <section class="tf-step is-active" data-step="0">
-        <div class="tf-question">
-          <p class="tf-kicker">01 / YOUR ROLE</p>
-          <h1>How would you like to help?</h1>
-          <p class="tf-help">Choose one or more. You can always adjust this later with the team.</p>
-          <div class="tf-choice-list">
-            {roles.map((role, index) => (
-              <label class="tf-choice">
-                <input type="checkbox" name="roles" value={role} data-role />
-                <span><b>{String.fromCharCode(65 + index)}</b>{role}<i>✓</i></span>
-              </label>
-            ))}
-          </div>
-          <p class="tf-error" data-role-error hidden>Please choose at least one option.</p>
-        </div>
-      </section>
+      <section class="tf-step is-active" data-step="0"><div class="tf-question"><p class="tf-kicker">01 / YOUR ROLE</p><h1>How would you like to help?</h1><p class="tf-help">Choose one or more. You can always adjust this later with the team.</p><div class="tf-choice-list">{roles.map((role, index) => <label class="tf-choice"><input type="checkbox" name="roles" value={role} data-role /><span><b>{String.fromCharCode(65 + index)}</b>{role}<i>✓</i></span></label>)}</div><p class="tf-error" data-role-error hidden>Please choose at least one option.</p></div></section>
 
-      <section class="tf-step" data-step="1" hidden>
-        <div class="tf-question">
-          <p class="tf-kicker">02 / EVENT</p>
-          <h2>Which event are you applying for?</h2>
-          <div class="tf-choice-list tf-single-list">
-            {events.map((event, index) => (
-              <label class="tf-choice">
-                <input type="radio" name="event" value={event} required data-auto-next />
-                <span><b>{String.fromCharCode(65 + index)}</b>{event}<i>✓</i></span>
-              </label>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section class="tf-step" data-step="1" hidden><div class="tf-question"><p class="tf-kicker">02 / EVENT</p><h2>Which event are you applying for?</h2><div class="tf-choice-list tf-single-list">{events.map((event, index) => <label class="tf-choice"><input type="radio" name="event" value={event} required data-auto-next /><span><b>{String.fromCharCode(65 + index)}</b>{event}<i>✓</i></span></label>)}</div></div></section>
 
-      <section class="tf-step" data-step="2" hidden>
-        <div class="tf-question">
-          <p class="tf-kicker">03 / LANGUAGES</p>
-          <h2>Which languages do you speak?</h2>
-          <p class="tf-help">Select all that apply.</p>
-          <div class="tf-choice-list tf-inline-choices">
-            {languages.map((language, index) => (
-              <label class="tf-choice">
-                <input type="checkbox" name="languages" value={language} data-language />
-                <span><b>{String.fromCharCode(65 + index)}</b>{language}<i>✓</i></span>
-              </label>
-            ))}
-          </div>
-          <p class="tf-error" data-language-error hidden>Please choose at least one language.</p>
-        </div>
-      </section>
+      <section class="tf-step" data-step="2" hidden><div class="tf-question"><p class="tf-kicker">03 / LANGUAGES</p><h2>Which languages do you speak?</h2><p class="tf-help">Select all that apply.</p><div class="tf-choice-list tf-inline-choices">{languages.map((language, index) => <label class="tf-choice"><input type="checkbox" name="languages" value={language} data-language /><span><b>{String.fromCharCode(65 + index)}</b>{language}<i>✓</i></span></label>)}</div><p class="tf-error" data-language-error hidden>Please choose at least one language.</p></div></section>
 
-      <section class="tf-step" data-step="3" hidden>
-        <div class="tf-question">
-          <p class="tf-kicker">04 / YOUR FIT</p>
-          <h2>Tell us a little about you.</h2>
-          <p class="tf-help">What experience, skills or availability should we know about?</p>
-          <label class="tf-field-label" for="experience">Your answer</label>
-          <textarea id="experience" name="experience" rows="5" maxlength="1600" placeholder="For example: event experience, driving, social media, logistics, research, languages..." data-enter-block></textarea>
-          <label class="tf-field-label" for="availability">Availability or restrictions</label>
-          <textarea id="availability" name="availability" rows="3" maxlength="1200" placeholder="For example: arriving Friday evening, only available Saturday..." data-enter-block></textarea>
-        </div>
-      </section>
+      <section class="tf-step" data-step="3" hidden><div class="tf-question"><p class="tf-kicker">04 / YOUR FIT</p><h2>Tell us a little about you.</h2><p class="tf-help">What experience, skills or availability should we know about?</p><label class="tf-field-label" for="experience">Your answer</label><textarea id="experience" name="experience" rows="5" maxlength="1600" placeholder="For example: event experience, driving, social media, logistics, research, languages..." data-enter-block></textarea><label class="tf-field-label" for="availability">Availability or restrictions</label><textarea id="availability" name="availability" rows="3" maxlength="1200" placeholder="For example: arriving Friday evening, only available Saturday..." data-enter-block></textarea></div></section>
 
-      <section class="tf-step" data-step="4" hidden>
-        <div class="tf-question">
-          <p class="tf-kicker">05 / CONTACT</p>
-          <h2>How can we reach you?</h2>
-          <div class="tf-contact-grid">
-            <label><span>First name *</span><input type="text" name="first_name" autocomplete="given-name" required maxlength="80" /></label>
-            <label><span>Last name *</span><input type="text" name="last_name" autocomplete="family-name" required maxlength="80" /></label>
-            <label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label>
-            <label><span>Phone / WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="40" placeholder="+49 ..." /></label>
-            <label class="tf-full"><span>City</span><input type="text" name="city" autocomplete="address-level2" maxlength="100" placeholder="Berlin, Hamburg, Madrid..." /></label>
-          </div>
-        </div>
-      </section>
+      <section class="tf-step" data-step="4" hidden><div class="tf-question"><p class="tf-kicker">05 / CONTACT</p><h2>How can we reach you?</h2><div class="tf-contact-grid"><label><span>First name *</span><input type="text" name="first_name" autocomplete="given-name" required maxlength="80" /></label><label><span>Last name *</span><input type="text" name="last_name" autocomplete="family-name" required maxlength="80" /></label><label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label><label><span>Phone / WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="40" placeholder="+49 ..." /></label><label class="tf-full"><span>City</span><input type="text" name="city" autocomplete="address-level2" maxlength="100" placeholder="Berlin, Hamburg, Madrid..." /></label></div></div></section>
 
-      <section class="tf-step" data-step="5" hidden>
-        <div class="tf-question">
-          <p class="tf-kicker">06 / FINISH</p>
-          <h2>Almost done.</h2>
-          <p class="tf-help">We only need two confirmations before you send your application.</p>
-          <div class="tf-confirmations">
-            <label><input type="checkbox" name="volunteer_rules" value="agreed" required /><span>I understand that volunteer access depends on completing the agreed role and hours, and I will tell the team promptly if I am late or unavailable.</span></label>
-            <label><input type="checkbox" name="privacy_consent" value="yes" required /><span>I agree that Bachata Explosion may use these details to review my application and contact me. <a href="/privacy/">Privacy policy</a></span></label>
-          </div>
-          <div class="tf-summary-note"><strong>What happens next?</strong><p>Your application is delivered directly to the Bachata Explosion volunteer inbox. We review it and contact you personally.</p></div>
-        </div>
-      </section>
+      <section class="tf-step" data-step="5" hidden><div class="tf-question"><p class="tf-kicker">06 / FINISH</p><h2>Almost done.</h2><p class="tf-help">We only need two confirmations before you send your application.</p><div class="tf-confirmations"><label><input type="checkbox" name="volunteer_rules" value="agreed" required /><span>I understand that volunteer access depends on completing the agreed role and hours, and I will tell the team promptly if I am late or unavailable.</span></label><label><input type="checkbox" name="privacy_consent" value="yes" required /><span>I agree that Bachata Explosion may use these details to review my application and contact me. <a href="/privacy/">Privacy policy</a></span></label></div><div class="tf-summary-note"><strong>What happens next?</strong><p>Your application is delivered directly to the Bachata Explosion volunteer inbox. We review it and contact you personally.</p></div></div></section>
 
       <label class="tf-trap" aria-hidden="true">Leave empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-
-      <div class="tf-controls">
-        <button type="button" class="tf-back" data-prev hidden>← Back</button>
-        <div class="tf-control-right">
-          <span class="tf-enter-hint" data-enter-hint>press Enter ↵</span>
-          <button type="button" class="tf-next" data-next>OK</button>
-          <button type="submit" class="tf-next" data-submit hidden>Send application</button>
-        </div>
-      </div>
+      <div class="tf-controls"><button type="button" class="tf-back" data-prev hidden>← Back</button><div class="tf-control-right"><span class="tf-enter-hint" data-enter-hint>or press Enter</span><button type="button" class="tf-next" data-next>Next →</button><button type="submit" class="tf-next" data-submit hidden>Send application</button></div></div>
       <p class="tf-status" role="status" aria-live="polite" data-status>{formConnected ? "Your application will be sent securely to the Bachata Explosion team." : "Preview mode: the form design is active; submission delivery is enabled when the protected endpoint is configured."}</p>
     </form>
-  </main>
+  </div>
 
   <style>
-    .tf-native{--bg:#f2f0e8;--ink:#111;--muted:#6e6b64;--accent:#f2cc00;--line:#cbc7bc;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding-top:92px}.tf-topbar{position:fixed;z-index:30;top:0;left:0;right:0;height:72px;display:grid;grid-template-columns:1fr minmax(240px,420px) 1fr;align-items:center;gap:28px;padding:0 34px;background:rgba(242,240,232,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.tf-wordmark{color:var(--ink);font-weight:900;font-size:.74rem;letter-spacing:.14em;text-decoration:none}.tf-location{justify-self:end;font-size:.7rem;font-weight:800;letter-spacing:.14em}.tf-progress-wrap{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:13px}.tf-progress-wrap>span{font-size:.68rem;font-weight:800;letter-spacing:.08em}.tf-progress{height:3px;background:#d7d3c8}.tf-progress i{display:block;height:100%;width:16.666%;background:var(--ink);transition:width .25s ease}.tf-form{position:relative;min-height:calc(100vh - 92px);display:flex;flex-direction:column}.tf-step{flex:1;display:grid;place-items:center;padding:52px 24px 120px}.tf-step[hidden]{display:none!important}.tf-question{width:min(820px,100%)}.tf-kicker{margin:0 0 18px;font-size:.7rem;font-weight:900;letter-spacing:.14em}.tf-question h1,.tf-question h2{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-weight:850;letter-spacing:-.05em;line-height:1.02;text-transform:none}.tf-question h1{font-size:clamp(3.2rem,7vw,6.7rem)}.tf-question h2{font-size:clamp(2.7rem,6vw,5.7rem)}.tf-help{max-width:680px;margin:20px 0 30px;color:var(--muted);font-size:1.05rem;line-height:1.6}.tf-choice-list{display:grid;gap:9px;max-width:720px}.tf-inline-choices{grid-template-columns:1fr 1fr}.tf-choice{display:block;cursor:pointer}.tf-choice input{position:absolute;opacity:0;pointer-events:none}.tf-choice span{min-height:54px;display:grid;grid-template-columns:34px 1fr 24px;align-items:center;gap:10px;padding:8px 14px;border:1px solid #a9a69d;background:rgba(255,255,255,.32);font-size:1rem;transition:.14s ease}.tf-choice b{width:26px;height:26px;display:grid;place-items:center;border:1px solid #77736b;font-size:.72rem}.tf-choice i{opacity:0;font-style:normal;font-weight:900}.tf-choice input:checked+span{border-color:#111;background:#fff8cc;box-shadow:0 0 0 1px #111}.tf-choice input:checked+span b{background:var(--accent);border-color:#111}.tf-choice input:checked+span i{opacity:1}.tf-choice:hover span{border-color:#111}.tf-field-label{display:block;margin:25px 0 8px;font-size:.72rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.tf-question textarea,.tf-contact-grid input{width:100%;box-sizing:border-box;border:0;border-bottom:2px solid #8f8b81;border-radius:0;background:transparent;color:var(--ink);padding:12px 2px;font:500 1.15rem/1.5 Arial,sans-serif;outline:none}.tf-question textarea{resize:vertical;min-height:110px}.tf-question textarea:focus,.tf-contact-grid input:focus{border-bottom-color:#111}.tf-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 36px;margin-top:34px}.tf-contact-grid label{display:grid;gap:8px}.tf-contact-grid label>span{font-size:.72rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.tf-contact-grid .tf-full{grid-column:1/-1}.tf-confirmations{display:grid;gap:14px;max-width:760px;margin-top:34px}.tf-confirmations label{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:start;padding:16px;border:1px solid var(--line);background:rgba(255,255,255,.35);line-height:1.5}.tf-confirmations input{width:20px;height:20px;accent-color:#111}.tf-confirmations a{text-underline-offset:3px}.tf-summary-note{max-width:760px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}.tf-summary-note p{margin:7px 0;color:var(--muted);line-height:1.55}.tf-controls{position:fixed;z-index:20;left:0;right:0;bottom:0;min-height:78px;display:flex;justify-content:space-between;align-items:center;padding:14px 34px;background:linear-gradient(0deg,var(--bg) 70%,rgba(242,240,232,.86),rgba(242,240,232,0))}.tf-control-right{display:flex;align-items:center;gap:12px;margin-left:auto}.tf-back{border:0;background:transparent;color:#444;font-weight:700;cursor:pointer}.tf-next{min-width:74px;height:44px;border:0;background:var(--ink);color:#fff;padding:0 20px;font-weight:900;font-size:.9rem;cursor:pointer}.tf-next:hover{background:#2c2c2c}.tf-next:disabled{opacity:.5;cursor:wait}.tf-enter-hint{color:#77736b;font-size:.72rem}.tf-status{position:fixed;z-index:22;left:50%;bottom:18px;transform:translateX(-50%);margin:0;max-width:50vw;color:var(--muted);font-size:.72rem;text-align:center;pointer-events:none}.tf-error{color:#9d1f1f;font-size:.82rem;font-weight:700}.tf-trap{position:absolute!important;left:-9999px!important}
-    @media(max-width:760px){.tf-native{padding-top:70px}.tf-topbar{height:58px;grid-template-columns:1fr auto;padding:0 16px}.tf-progress-wrap{grid-column:1/-1;grid-row:2;position:absolute;left:16px;right:16px;bottom:-9px}.tf-location{display:none}.tf-step{padding:48px 18px 110px}.tf-question h1{font-size:clamp(2.8rem,15vw,5rem)}.tf-question h2{font-size:clamp(2.5rem,13vw,4.5rem)}.tf-help{font-size:.95rem}.tf-inline-choices,.tf-contact-grid{grid-template-columns:1fr}.tf-contact-grid .tf-full{grid-column:auto}.tf-controls{padding:12px 16px}.tf-enter-hint{display:none}.tf-status{display:none}.tf-choice span{font-size:.92rem}}
+    .tf-native{--bg:#100609;--ink:#fff5ee;--muted:#c7b4bb;--accent:#e3b75f;--line:rgba(247,221,176,.18);min-height:100vh;color:var(--ink);background:linear-gradient(rgba(12,4,8,.9),rgba(28,7,17,.94)),url('/media/brand/berlin-brandenburg-gold.png') center 28%/cover fixed no-repeat;font-family:'DM Sans',Arial,sans-serif;padding:116px 0 90px}.tf-topbar{position:sticky;z-index:40;top:92px;width:min(920px,calc(100% - 36px));height:54px;margin:0 auto 18px;padding:0 18px;display:grid;align-items:center;background:rgba(18,7,12,.94);border:1px solid rgba(227,183,95,.35);backdrop-filter:blur(14px)}.tf-progress-wrap{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px}.tf-progress-wrap>span{color:#f7ddb0;font-size:.68rem;font-weight:900;letter-spacing:.08em}.tf-progress{height:3px;background:rgba(255,255,255,.1)}.tf-progress i{display:block;height:100%;width:16.666%;background:linear-gradient(90deg,#ef4c89,#e3b75f);transition:width .25s ease}.tf-form{position:relative;min-height:620px}.tf-step{display:grid;place-items:start center;padding:46px 22px 110px}.tf-step[hidden]{display:none!important}.tf-question{width:min(900px,100%)}.tf-kicker{margin:0 0 16px;color:#e3b75f;font-size:.68rem;font-weight:900;letter-spacing:.13em}.tf-question h1,.tf-question h2{margin:0;color:#fff5ee;font-family:'Oswald',Impact,sans-serif;text-transform:uppercase;letter-spacing:-.035em;line-height:.94}.tf-question h1{font-size:clamp(3.8rem,7.5vw,6.5rem)}.tf-question h2{font-size:clamp(3rem,6vw,5.2rem)}.tf-help{max-width:700px;margin:18px 0 26px;color:#c7b4bb;font-size:1rem;line-height:1.6}.tf-choice-list{display:grid;gap:10px;max-width:820px}.tf-inline-choices{grid-template-columns:1fr 1fr}.tf-choice{display:block;cursor:pointer}.tf-choice input{position:absolute;opacity:0;pointer-events:none}.tf-choice span{min-height:60px;display:grid;grid-template-columns:34px 1fr 24px;align-items:center;gap:10px;padding:8px 14px;color:#fff5ee;background:rgba(35,15,24,.92);border:1px solid rgba(227,183,95,.28);font-size:1rem;transition:.16s ease}.tf-choice b{width:26px;height:26px;display:grid;place-items:center;color:#f7ddb0;border:1px solid rgba(227,183,95,.62);font-size:.72rem}.tf-choice i{opacity:0;font-style:normal;font-weight:900}.tf-choice input:checked+span{background:linear-gradient(145deg,#7b203e,#9e3159);border-color:#e3b75f;box-shadow:0 0 0 1px #e3b75f}.tf-choice input:checked+span b{color:#24121b;background:#e3b75f}.tf-choice input:checked+span i{opacity:1}.tf-choice:hover span{border-color:#e3b75f}.tf-field-label{display:block;margin:25px 0 8px;color:#e3b75f;font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.tf-question textarea,.tf-contact-grid input{width:100%;box-sizing:border-box;border:0;border-bottom:2px solid rgba(227,183,95,.42);border-radius:0;background:rgba(18,7,12,.38);color:#fff5ee;padding:12px 8px;font:500 1.05rem/1.5 'DM Sans',sans-serif;outline:none}.tf-question textarea{resize:vertical;min-height:110px}.tf-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 30px;margin-top:32px}.tf-contact-grid label{display:grid;gap:8px;min-width:0}.tf-contact-grid label>span{color:#e3b75f;font-size:.7rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.tf-contact-grid .tf-full{grid-column:1/-1}.tf-confirmations{display:grid;gap:12px;max-width:800px;margin-top:30px}.tf-confirmations label{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:start;padding:16px;color:#f3e5e9;background:rgba(35,15,24,.92);border:1px solid rgba(227,183,95,.26);line-height:1.5}.tf-confirmations input{width:20px;height:20px;accent-color:#8b274a}.tf-summary-note{max-width:800px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(227,183,95,.24)}.tf-summary-note p{margin:7px 0;color:#c7b4bb;line-height:1.55}.tf-controls{position:fixed;z-index:80;left:50%;right:auto;bottom:18px;width:min(920px,calc(100% - 36px));min-height:64px;padding:10px 12px;transform:translateX(-50%);display:flex;justify-content:space-between;align-items:center;background:rgba(16,6,9,.95);border:1px solid rgba(227,183,95,.3);box-shadow:0 16px 45px rgba(0,0,0,.38)}.tf-control-right{display:flex;align-items:center;gap:12px;margin-left:auto}.tf-back{border:0;background:transparent;color:#d7c2c9;font-weight:700;cursor:pointer}.tf-next{min-width:126px;height:44px;border:1px solid #e3b75f;background:#8b274a;color:#fff;padding:0 20px;font-weight:900;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}.tf-next:hover{background:#a5325d}.tf-next:disabled{opacity:.5;cursor:wait}.tf-enter-hint{color:#9f8d94;font-size:.7rem}.tf-status{max-width:900px;margin:0 auto;padding:0 22px;color:#9f8d94;font-size:.72rem}.tf-error{color:#ff8ea9;font-size:.82rem;font-weight:700}.tf-trap{position:absolute!important;left:-9999px!important}
+    @media(max-width:760px){.tf-native{padding-top:96px}.tf-topbar{top:76px;width:calc(100% - 24px)}.tf-step{padding:38px 18px 106px}.tf-question h1{font-size:clamp(2.8rem,15vw,5rem)}.tf-question h2{font-size:clamp(2.5rem,13vw,4.5rem)}.tf-help{font-size:.95rem}.tf-inline-choices,.tf-contact-grid{grid-template-columns:1fr}.tf-contact-grid .tf-full{grid-column:auto}.tf-controls{width:calc(100% - 24px);bottom:10px}.tf-enter-hint{display:none!important}.tf-status{padding-bottom:82px}.tf-choice span{font-size:.92rem}}
   </style>
 
   <script>
+    const slideTrack = document.querySelector<HTMLElement>("[data-volunteer-slides]");
+    const slides = slideTrack ? Array.from(slideTrack.children) : [];
+    let slideIndex = 0;
+    const showSlide = (index: number) => { if (!slideTrack || !slides.length) return; slideIndex = (index + slides.length) % slides.length; slideTrack.style.transform = `translateX(-${slideIndex * 100}%)`; };
+    document.querySelector("[data-slide-prev]")?.addEventListener("click", () => showSlide(slideIndex - 1));
+    document.querySelector("[data-slide-next]")?.addEventListener("click", () => showSlide(slideIndex + 1));
+    const slideTimer = window.setInterval(() => showSlide(slideIndex + 1), 6000);
+    slideTrack?.addEventListener("pointerenter", () => window.clearInterval(slideTimer), { once: true });
+
     const form = document.querySelector<HTMLFormElement>("[data-volunteer-form]");
     if (form) {
       const steps = Array.from(form.querySelectorAll<HTMLElement>("[data-step]"));
@@ -161,62 +97,32 @@ const languages = ["German", "English", "Spanish", "Other"];
         if (prev) prev.hidden = current === 0;
         if (next) next.hidden = current === steps.length - 1;
         if (submit) submit.hidden = current !== steps.length - 1;
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.querySelector(".tf-topbar")?.scrollIntoView({ behavior: "smooth", block: "start" });
       };
 
       const validate = () => {
-        if (current === 0) {
-          const ok = roleInputs.some((input) => input.checked);
-          if (roleError) roleError.hidden = ok;
-          if (!ok) return false;
-        }
-        if (current === 2) {
-          const ok = languageInputs.some((input) => input.checked);
-          if (languageError) languageError.hidden = ok;
-          if (!ok) return false;
-        }
-        for (const field of Array.from(steps[current].querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("input[required],select[required],textarea[required]"))) {
-          if (!field.checkValidity()) { field.reportValidity(); return false; }
-        }
+        if (current === 0) { const ok = roleInputs.some((input) => input.checked); if (roleError) roleError.hidden = ok; if (!ok) return false; }
+        if (current === 2) { const ok = languageInputs.some((input) => input.checked); if (languageError) languageError.hidden = ok; if (!ok) return false; }
+        for (const field of Array.from(steps[current].querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("input[required],select[required],textarea[required]"))) { if (!field.checkValidity()) { field.reportValidity(); return false; } }
         return true;
       };
 
       const goNext = () => { if (validate()) show(current + 1); };
-      next?.addEventListener("click", goNext);
-      prev?.addEventListener("click", () => show(current - 1));
-
+      next?.addEventListener("click", goNext); prev?.addEventListener("click", () => show(current - 1));
       form.querySelectorAll<HTMLInputElement>("[data-auto-next]").forEach((input) => input.addEventListener("change", () => setTimeout(goNext, 180)));
       roleInputs.forEach((input) => input.addEventListener("change", () => { if (roleError) roleError.hidden = roleInputs.some((candidate) => candidate.checked); }));
       languageInputs.forEach((input) => input.addEventListener("change", () => { if (languageError) languageError.hidden = languageInputs.some((candidate) => candidate.checked); }));
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" || event.shiftKey) return;
-        const target = event.target as HTMLElement;
-        if (target?.matches("textarea,[data-enter-block]")) return;
-        event.preventDefault();
-        if (current < steps.length - 1) goNext();
-      });
+      document.addEventListener("keydown", (event) => { if (event.key !== "Enter" || event.shiftKey) return; const target = event.target as HTMLElement; if (target?.matches("textarea,[data-enter-block]")) return; event.preventDefault(); if (current < steps.length - 1) goNext(); });
 
       form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        if (!validate()) return;
+        event.preventDefault(); if (!validate()) return;
         const endpoint = form.dataset.volunteerEndpoint?.trim();
         if (!endpoint) { if (status) status.textContent = "Preview mode: connect the protected volunteer endpoint to receive applications."; return; }
-        if (submit) { submit.disabled = true; submit.textContent = "Sending…"; }
-        if (status) status.textContent = "Sending your application securely…";
-        try {
-          const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-          const result = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(result?.error || "Application failed");
-          form.reset(); show(0);
-          if (status) status.textContent = "Application received. Thank you — we will contact you soon.";
-        } catch (error) {
-          if (status) status.textContent = error instanceof Error ? error.message : "The application could not be delivered. Please try again.";
-        } finally {
-          if (submit) { submit.disabled = false; submit.textContent = "Send application"; }
-        }
+        if (submit) { submit.disabled = true; submit.textContent = "Sending…"; } if (status) status.textContent = "Sending your application securely…";
+        try { const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } }); const result = await response.json().catch(() => ({})); if (!response.ok) throw new Error(result?.error || "Application failed"); form.reset(); show(0); if (status) status.textContent = "Application received. Thank you — we will contact you soon."; }
+        catch (error) { if (status) status.textContent = error instanceof Error ? error.message : "The application could not be delivered. Please try again."; }
+        finally { if (submit) { submit.disabled = false; submit.textContent = "Send application"; } }
       });
-
       show(0);
     }
   </script>
