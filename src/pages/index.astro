@@ -41,6 +41,14 @@ const historyImages = [
   ["/media/archive/bbf-2025.jpg", "Berlin Bachata Festival 2025"],
   ["/media/archive/role-rotation-2026.jpg", "Role Rotation 2026"],
 ] as const;
+
+const memoryStrip = [
+  ["/media/archive/gold-2022.jpg", "2022 · where it started"],
+  ["/media/archive/bbf-2023.jpg", "2023 · Berlin Bachata Festival"],
+  ["/media/archive/role-rotation-2024.jpg", "2024 · new ideas"],
+  ["/media/archive/bbf-2025.jpg", "2025 · growing together"],
+  ["/media/archive/role-rotation-2026.jpg", "2026 · the story continues"],
+] as const;
 ---
 
 <BaseLayout
@@ -74,22 +82,25 @@ const historyImages = [
     <section class="ex-events ex-section" aria-labelledby="ex-events-title">
       <div class="ex-shell">
         <div class="ex-events-head">
-          <div><p class="ex-kicker">Explosion events</p><h2 class="ex-display" id="ex-events-title">Three formats.<br /><em>One family.</em></h2></div>
-          <p class="ex-copy">Each Explosion has its own feeling. The concept changes; the focus on dancers, connection and quality stays the same.</p>
+          <div><p class="ex-kicker">Explosion · 2026 editions</p><h2 class="ex-display" id="ex-events-title">Three chapters.<br /><em>One year of Explosion.</em></h2></div>
+          <p class="ex-copy">The events change from year to year. In 2026, Role Rotation, Elite Dance and Berlin Bachata Festival each bring a different kind of weekend to the same dancer-built community.</p>
         </div>
         <div class="ex-event-grid">
           <a class="ex-event-card" href="/archive/role-rotation-2026/">
             <figure class="ex-event-poster"><img src="/media/events/role-rotation-2026.webp" alt="Role Rotation 2026 poster" width="900" height="1100" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>01 · Role Rotation</small><h3>Change perspective.</h3><p>Lead, follow and switch roles. A focused Explosion weekend built around connection, technique, musicality and freedom.</p><span class="ex-event-link">Discover Role Rotation →</span></div>
+            <div class="ex-event-card-body"><small>01 · 2026 chapter</small><h3>Role Rotation.</h3><p>Lead, follow and switch roles. A focused Explosion weekend built around connection, technique, musicality and freedom.</p><span class="ex-event-link">See the edition →</span></div>
           </a>
           <a class="ex-event-card" href="/archive/elite-dance-3/">
             <figure class="ex-event-poster"><img src="/media/events/elite-dance-3.webp" alt="Elite Dance third edition poster" width="900" height="1100" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>02 · Elite Dance</small><h3>Go deeper.</h3><p>A smaller, intimate edition with selected artists, concentrated learning and a close community atmosphere.</p><span class="ex-event-link">Discover Elite Dance →</span></div>
+            <div class="ex-event-card-body"><small>02 · 2026 chapter</small><h3>Elite Dance.</h3><p>A smaller, intimate edition with selected artists, concentrated learning and a close community atmosphere.</p><span class="ex-event-link">See the edition →</span></div>
           </a>
           <a class="ex-event-card" href="/bbf-2026/">
             <figure class="ex-event-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 poster" width="1080" height="1350" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>03 · Berlin Bachata Festival</small><h3>The flagship.</h3><p>The full Explosion experience with international artists, workshops, parties, competition and the whole community under one roof.</p><span class="ex-event-link">Explore BBF 2026 →</span></div>
+            <div class="ex-event-card-body"><small>03 · 2026 chapter</small><h3>Berlin Bachata Festival.</h3><p>The full Explosion experience with international artists, workshops, parties, competition and the whole community under one roof.</p><span class="ex-event-link">Explore BBF 2026 →</span></div>
           </a>
+        </div>
+        <div class="ex-event-memory-strip" aria-label="Previous Bachata Explosion editions">
+          {memoryStrip.map(([src, caption]) => <figure><img src={src} alt={caption} loading="lazy" /><figcaption>{caption}</figcaption></figure>)}
         </div>
       </div>
     </section>
@@ -99,7 +110,8 @@ const historyImages = [
         <div class="ex-proof-copy">
           <p class="ex-kicker">We are all about you</p>
           <h2 class="ex-display" id="ex-proof-title">The dancers make the <em>Explosion.</em></h2>
-          <p class="ex-copy">We build events around the people on the floor: clear teaching, welcoming socials, ambitious artists and a team you can actually talk to.</p>
+          <p class="ex-copy">Our events are designed by dancers, for dancers. From the first workshop to the last song, we focus on connection, growth and the family feeling that makes people feel at home in Berlin.</p>
+          <p class="ex-copy">Come to improve, stay for the community, and leave with memories that keep you dancing long after the weekend is over.</p>
           <div class="ex-proof-photos" aria-label="Bachata Explosion community">
             <img src="/media/bbf/atmosphere/party-141.jpg" alt="Bachata Explosion dancers at a Berlin party" loading="lazy" />
             <img src="/media/bbf/atmosphere/saturday-60.jpg" alt="Bachata Explosion festival atmosphere" loading="lazy" />
@@ -112,7 +124,7 @@ const historyImages = [
           <div class="ex-stat"><strong>6,000+</strong><span>Dancers reached</span></div>
           <div class="ex-stat"><strong>2022</strong><span>Events since</span></div>
           <div class="ex-stat is-berlin"><strong>Berlin</strong><span>Made here</span></div>
-          <div class="ex-stat"><strong>1</strong><span>Explosion family</span></div>
+          <div class="ex-stat is-tagline"><strong>By dancers</strong><span>For dancers</span></div>
         </div>
       </div>
     </section>
