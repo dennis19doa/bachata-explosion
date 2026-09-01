@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "../styles/explosion-original-modern.css";
 import "../styles/explosion-premium-berlin.css";
+import "../styles/explosion-berlin-unified.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -57,7 +58,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
 
       <nav class="desktop-nav" aria-label="Main navigation">
         <a class:list={[{ "nav-section-current": festivalActive }]} href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Festival</a>
-        <details class:list={["nav-group", { "is-current": eventsActive }]}> 
+        <details class:list={["nav-group", { "is-current": eventsActive }]}>
           <summary>Events</summary>
           <div class="nav-popover">
             <span>Explosion events</span>
