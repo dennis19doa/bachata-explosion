@@ -8,6 +8,7 @@ import "../styles/explosion-feedback-density.css";
 import "../styles/explosion-feedback-round2.css";
 import "../styles/explosion-feedback-round2-controls.css";
 import "../styles/explosion-feedback-screens.css";
+import "../styles/explosion-feedback-sept2.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -29,7 +30,7 @@ const socialImage = new URL("/og.png", Astro.site);
 const currentPath = Astro.url.pathname;
 const current = (path: string) => currentPath === path || (path !== "/" && currentPath.startsWith(path));
 const festivalActive = current("/bbf-2026/") || current("/jj/");
-const eventsActive = current("/archive/") || current("/role-rotation") || current("/elite-dance");
+const archiveActive = current("/archive/") || current("/role-rotation") || current("/elite-dance");
 ---
 
 <!doctype html>
@@ -57,9 +58,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
-      <a class="brand" href="/" aria-label="Bachata Explosion home">
-        <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
-      </a>
+      <a class="brand" href="/" aria-label="Bachata Explosion home"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
         <details class:list={["nav-group", { "is-current": festivalActive }]}>
@@ -76,20 +75,11 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
           </div>
         </details>
 
-        <details class:list={["nav-group", { "is-current": eventsActive }]}>
-          <summary>Events</summary>
-          <div class="nav-popover">
-            <span>Explosion events</span>
-            <a href="/archive/role-rotation-2026/"><b>Role Rotation</b><small>Connection from both sides</small></a>
-            <a href="/archive/elite-dance-3/"><b>Elite Dance</b><small>A focused, intimate edition</small></a>
-            <a href="/archive/"><b>Past events</b><small>Every Explosion since 2022</small></a>
-          </div>
-        </details>
-
         <a href="/bbf-2026/#travel">Berlin</a>
         <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
         <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
         <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
+        <a href="/archive/" aria-current={archiveActive ? "page" : undefined}>Past Events</a>
         <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
 
@@ -109,18 +99,11 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
                 <a href="/bbf-2026/#faq">FAQ</a>
               </div>
             </details>
-            <details class="mobile-nav-group">
-              <summary><span>Events</span><i aria-hidden="true"></i></summary>
-              <div>
-                <a href="/archive/role-rotation-2026/">Role Rotation</a>
-                <a href="/archive/elite-dance-3/">Elite Dance</a>
-                <a href="/archive/">Past events</a>
-              </div>
-            </details>
             <a href="/bbf-2026/#travel">Berlin</a>
             <a href="/explosion-history/">Our Story</a>
             <a href="/ambassadors/">Ambassadors</a>
             <a href="/volunteers/">Volunteers</a>
+            <a href="/archive/">Past Events</a>
             <a href="/contact/">Contact</a>
           </nav>
           <div class="mobile-nav-meta">
@@ -139,28 +122,11 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
 
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div class="footer-brand-block">
-          <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
-          <p>Berlin dance experiences built by dancers, for dancers.</p>
-        </div>
+        <div class="footer-brand-block"><a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a><p>Berlin dance experiences built by dancers, for dancers.</p></div>
         <nav aria-label="Footer navigation">
-          <a href="/bbf-2026/">Festival</a>
-          <a href="/bbf-2026/#travel">Berlin & travel</a>
-          <a href="/archive/">Past events</a>
-          <a href="/explosion-history/">Our Story</a>
-          <a href="/ambassadors/">Ambassadors</a>
-          <a href="/volunteers/">Volunteers</a>
-          <a href="/contact/">Contact</a>
-          <a href="/imprint/">Imprint</a>
-          <a href="/privacy/">Privacy</a>
-          <a href="/terms-conditions/">Terms</a>
+          <a href="/bbf-2026/">Festival</a><a href="/bbf-2026/#travel">Berlin & travel</a><a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><a href="/contact/">Contact</a><a href="/imprint/">Imprint</a><a href="/privacy/">Privacy</a><a href="/terms-conditions/">Terms</a>
         </nav>
-        <address>
-          <strong>Elena &amp; Dennis Events UG</strong><br />
-          Berlin, Germany<br />
-          <a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a><br />
-          <a href={whatsappUrl}>Festival WhatsApp ↗</a>
-        </address>
+        <address><strong>Elena &amp; Dennis Events UG</strong><br />Berlin, Germany<br /><a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a><br /><a href={whatsappUrl}>Festival WhatsApp ↗</a></address>
       </div>
     </footer>
 
@@ -175,46 +141,17 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
       const backToTop = document.querySelector<HTMLButtonElement>(".back-to-top");
 
       heroVideos.forEach((video) => video.play().catch(() => undefined));
-
       dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("toggle", () => {
-          if (!dropdown.open) return;
-          dropdowns.forEach((candidate) => { if (candidate !== dropdown) candidate.open = false; });
-        });
+        dropdown.addEventListener("toggle", () => { if (!dropdown.open) return; dropdowns.forEach((candidate) => { if (candidate !== dropdown) candidate.open = false; }); });
         dropdown.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { dropdown.open = false; }));
       });
-
-      document.addEventListener("click", (event) => {
-        const target = event.target as Node;
-        dropdowns.forEach((dropdown) => { if (!dropdown.contains(target)) dropdown.open = false; });
-      });
-
-      siteMenu?.addEventListener("toggle", () => {
-        document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open));
-        if (!siteMenu.open) mobileGroups.forEach((group) => { group.open = false; });
-      });
-
-      mobileGroups.forEach((group) => group.addEventListener("toggle", () => {
-        if (!group.open) return;
-        mobileGroups.forEach((candidate) => { if (candidate !== group) candidate.open = false; });
-      }));
-
+      document.addEventListener("click", (event) => { const target = event.target as Node; dropdowns.forEach((dropdown) => { if (!dropdown.contains(target)) dropdown.open = false; }); });
+      siteMenu?.addEventListener("toggle", () => { document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open)); if (!siteMenu.open) mobileGroups.forEach((group) => { group.open = false; }); });
+      mobileGroups.forEach((group) => group.addEventListener("toggle", () => { if (!group.open) return; mobileGroups.forEach((candidate) => { if (candidate !== group) candidate.open = false; }); }));
       siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { siteMenu.open = false; }));
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        dropdowns.forEach((dropdown) => { dropdown.open = false; });
-        if (siteMenu) siteMenu.open = false;
-      });
-
-      const syncBackToTop = () => {
-        if (!backToTop) return;
-        backToTop.dataset.visible = window.scrollY > 720 ? "true" : "false";
-      };
-
-      syncBackToTop();
-      window.addEventListener("scroll", syncBackToTop, { passive: true });
-      backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+      document.addEventListener("keydown", (event) => { if (event.key !== "Escape") return; dropdowns.forEach((dropdown) => { dropdown.open = false; }); if (siteMenu) siteMenu.open = false; });
+      const syncBackToTop = () => { if (!backToTop) return; backToTop.dataset.visible = window.scrollY > 720 ? "true" : "false"; };
+      syncBackToTop(); window.addEventListener("scroll", syncBackToTop, { passive: true }); backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     </script>
   </body>
 </html>
