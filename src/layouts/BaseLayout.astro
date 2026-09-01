@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "../styles/explosion-original-modern.css";
 import "../styles/explosion-premium-berlin.css";
 import "../styles/explosion-berlin-unified.css";
+import "../styles/explosion-feedback-sept1.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -69,6 +70,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
         </details>
         <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
         <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
+        <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
         <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
 
@@ -87,11 +89,11 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
             </details>
             <a href="/explosion-history/">Our Story</a>
             <a href="/ambassadors/">Ambassadors</a>
+            <a href="/volunteers/">Volunteers</a>
             <a href="/contact/">Contact</a>
           </nav>
           <div class="mobile-nav-meta">
             <span>By dancers, for dancers · Berlin</span>
-            <a href="/volunteers/">Volunteer</a>
             <a href="/insider/">Explosion Insider</a>
             <a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a>
             <a href={whatsappUrl}>WhatsApp ↗</a>
@@ -131,12 +133,14 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
     </footer>
 
     <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
 
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
       const heroVideos = Array.from(document.querySelectorAll<HTMLVideoElement>(".home-hero-video,.impact-hero-video,.bbf-hero-video,.ex-hero video"));
+      const backToTop = document.querySelector<HTMLButtonElement>(".back-to-top");
 
       heroVideos.forEach((video) => video.play().catch(() => undefined));
 
@@ -170,6 +174,15 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
         dropdowns.forEach((dropdown) => { dropdown.open = false; });
         if (siteMenu) siteMenu.open = false;
       });
+
+      const syncBackToTop = () => {
+        if (!backToTop) return;
+        backToTop.dataset.visible = window.scrollY > 720 ? "true" : "false";
+      };
+
+      syncBackToTop();
+      window.addEventListener("scroll", syncBackToTop, { passive: true });
+      backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     </script>
   </body>
 </html>
