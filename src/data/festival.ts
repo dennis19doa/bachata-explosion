@@ -24,8 +24,8 @@ export const festivalFaqs = [
     answer: "The Full Pass includes the regular festival workshops and parties unless a ticket or add-on is explicitly marked separately in Ticket Tailor.",
   },
   {
-    question: "Can I transfer my ticket?",
-    answer: "Ticket conditions can vary by edition. Check the terms shown during checkout or contact the team before arranging a transfer.",
+    question: "Can I resell or transfer my ticket?",
+    answer: "Yes. You can resell or transfer your BBF 2026 ticket until 10 October 2026. Please complete the name change or contact the Bachata Explosion team before the deadline so the ticket can be updated correctly. After 10 October, ticket resales and transfers are no longer accepted.",
   },
   {
     question: "When will the full schedule be published?",
