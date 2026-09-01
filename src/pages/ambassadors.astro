@@ -16,38 +16,28 @@ const benefits = [
   description="Join the Bachata Explosion Ambassador Crew, represent your dance community and unlock promo codes, media support, festival benefits and visibility."
   headerStyle="solid"
 >
-  <article class="ambassador-2026" data-wordpress-source="ambassadors">
-    <section class="ambassador-hero" aria-labelledby="ambassador-title">
-      <img class="ambassador-hero-bg" src="/media/bbf/atmosphere/saturday-62.jpg" alt="The Bachata Explosion community celebrating together" width="1800" height="1200" />
-      <div class="ambassador-hero-shade" aria-hidden="true"></div>
-      <div class="ambassador-hero-type" aria-hidden="true">CREW</div>
-      <div class="shell ambassador-hero-grid">
+  <article class="ambassador-2026 ambassador-round2" data-wordpress-source="ambassadors">
+    <section class="ambassador-hero ambassador-hero-round2" aria-labelledby="ambassador-title">
+      <div class="shell ambassador-hero-grid ambassador-hero-grid-round2">
         <div class="ambassador-hero-copy">
           <p class="eyebrow"><span></span>Official ambassador crew</p>
           <h1 id="ambassador-title">Carry the<br /><em>Explosion.</em></h1>
           <p>Bring your community into a Berlin-born festival, share the story in your own voice and grow with the people behind the event.</p>
           <div class="hero-actions"><a class="button button-gold" href="#ambassador-application">Apply now</a><a class="button button-glass" href="#ambassador-benefits">See the benefits</a></div>
         </div>
-        <div class="ambassador-photo-stack" aria-label="Bachata Explosion community moments">
-          <figure><img src="/media/bbf/atmosphere/party-143.jpg" alt="Dancers celebrating a Bachata Explosion competition result" width="1200" height="1800" /><figcaption>Community first</figcaption></figure>
-          <figure><img src="/media/bbf/atmosphere/party-141.jpg" alt="Two Bachata Explosion dancers celebrating together" width="1800" height="1200" /><figcaption>Berlin energy</figcaption></figure>
+        <div class="ambassador-hero-media" aria-label="Bachata Explosion community moments">
+          <figure class="ambassador-community-photo"><img src="/media/bbf/atmosphere/saturday-62.jpg" alt="The Bachata Explosion community celebrating together" width="1800" height="1200" /><figcaption>One community · many scenes</figcaption></figure>
+          <figure class="ambassador-award-photo"><img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata Explosion competition celebration" width="1200" height="1800" /><figcaption>Berlin energy</figcaption></figure>
         </div>
       </div>
     </section>
 
-    <section class="ambassador-statement section-pad">
-      <div class="shell ambassador-statement-grid">
-        <p class="section-label">More than reposting</p>
-        <h2>Be the connection<br /><em>between scenes.</em></h2>
-        <p>Ambassadors are trusted dancers who understand their local community. You do not need the largest following—you need a real voice, reliability and the desire to bring people together.</p>
-      </div>
-    </section>
-
-    <section class="ambassador-benefits section-pad" id="ambassador-benefits" aria-labelledby="ambassador-benefits-title">
-      <div class="shell">
-        <div class="split-heading ambassador-heading">
-          <div><p class="section-label">What the crew receives</p><h2 id="ambassador-benefits-title">Support that grows<br /><em>with your impact.</em></h2></div>
-          <p>Clear tools for promotion, useful benefits for your dancers and recognition for the community work you already do.</p>
+    <section class="ambassador-core section-pad" id="ambassador-benefits" aria-labelledby="ambassador-benefits-title">
+      <div class="shell ambassador-core-grid">
+        <div class="ambassador-core-intro">
+          <p class="section-label">More than reposting</p>
+          <h2 id="ambassador-benefits-title">Be the connection<br /><em>between scenes.</em></h2>
+          <p>Ambassadors are trusted dancers who understand their local community. You do not need the largest following—you need a real voice, reliability and the desire to bring people together.</p>
         </div>
         <div class="ambassador-benefit-grid">
           {benefits.map((benefit) => <article><span>{benefit.label}</span><h3>{benefit.title}</h3><p>{benefit.text}</p></article>)}
@@ -55,7 +45,7 @@ const benefits = [
       </div>
     </section>
 
-    <section class="ambassador-role section-pad">
+    <section class="ambassador-role ambassador-role-round2 section-pad">
       <div class="shell ambassador-role-grid">
         <figure>
           <img src="/media/bbf/atmosphere/party-141.jpg" alt="A crowded Bachata Explosion dance floor" width="1200" height="800" loading="lazy" />
@@ -70,24 +60,21 @@ const benefits = [
             <p><strong>Stay in contact</strong><span>Keep communication clear, use your personal code and tell us what your community needs.</span></p>
           </div>
           <div class="ambassador-tags"><span>Personal promo code</span><span>Media kit</span><span>Exclusive content</span></div>
+          <div class="ambassador-group-inline">
+            <div><strong>Coming with a full crew?</strong><p>Groups of 10 or more can request a direct group arrangement, with group discounts of up to €20 per person.</p></div>
+            <a class="button button-gold" href="mailto:info@bachataexplosion.com?subject=Bachata%20Explosion%20group%20discount">Ask about group rates</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="ambassador-group section-pad">
-      <div class="shell ambassador-group-card">
-        <div><p class="section-label">Coming with a full crew?</p><h2>Group discounts<br /><em>up to €20 per person.</em></h2></div>
-        <div><p>Groups of 10 or more can request a direct group arrangement. Tell us your city, school or community and how many dancers want to join.</p><a class="button button-dark" href="mailto:info@bachataexplosion.com?subject=Bachata%20Explosion%20group%20discount">Request a group discount</a></div>
-      </div>
-    </section>
-
-    <section class="ambassador-application section-pad" id="ambassador-application" aria-labelledby="ambassador-form-title">
+    <section class="ambassador-application ambassador-application-round2 section-pad" id="ambassador-application" aria-labelledby="ambassador-form-title">
       <div class="shell ambassador-application-grid">
         <aside>
           <p class="section-label">Ambassador application</p>
           <h2 id="ambassador-form-title">Tell us about<br /><em>your scene.</em></h2>
           <p>We review your community, communication style and motivation. The strongest applications are specific, personal and honest.</p>
-          <div class="ambassador-application-note"><span>What happens next</span><p>We contact selected applicants with their promo code, media kit and onboarding details.</p></div>
+          <div class="ambassador-application-note"><span>What happens next</span><p>Selected applicants receive their promo code, media kit and onboarding details directly from the team.</p></div>
         </aside>
         <form class="ambassador-form" method="POST" action={ambassadorFormEndpoint || undefined} data-ambassador-form data-ambassador-endpoint={ambassadorFormEndpoint}>
           <input type="hidden" name="topic" value="Ambassador application" />
@@ -95,7 +82,7 @@ const benefits = [
           <label><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="180" required /></label>
           <label><span>Instagram *</span><input type="text" name="instagram" maxlength="120" placeholder="@youraccount" required /></label>
           <label><span>Country / city *</span><input type="text" name="community" maxlength="160" placeholder="Where is your community?" required /></label>
-          <label class="full-field"><span>Tell us about your community and how you would help *</span><textarea name="message" rows="7" maxlength="2000" placeholder="Who do you dance with, how do you communicate with them, and why does Explosion fit your scene?" required></textarea></label>
+          <label class="full-field"><span>Tell us about your community and how you would help *</span><textarea name="message" rows="6" maxlength="2000" placeholder="Who do you dance with, how do you communicate with them, and why does Explosion fit your scene?" required></textarea></label>
           <label class="form-trap" aria-hidden="true"><span>Leave empty</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
           <label class="ambassador-consent full-field"><input type="checkbox" name="privacy_consent" value="yes" required /><span>I agree that my details may be used to review this application and contact me. See the <a href="/privacy/">privacy policy</a>.</span></label>
           <div class="ambassador-submit full-field"><button class="button button-gold" type="submit" data-ambassador-submit>Apply to the crew</button><small>{formConnected ? "Secure application delivery is connected." : "Preview mode: no application is transmitted yet."}</small></div>

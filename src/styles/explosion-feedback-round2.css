@@ -1,0 +1,187 @@
+/* Sept 1 feedback round 2 — remove decorative dead space and unify utility pages. */
+
+/* CONTACT — content first, no ornamental orbit. */
+.contact-round2{background:transparent!important;overflow:visible!important}
+.contact-command{position:relative;padding:clamp(42px,5vw,66px) 0 clamp(48px,5vw,70px);background:linear-gradient(110deg,rgba(10,3,7,.92),rgba(64,12,34,.76) 56%,rgba(10,3,7,.88)),url('/media/brand/berlin-brandenburg-gold.png') center 42%/cover no-repeat;border-bottom:1px solid rgba(227,183,95,.25)}
+.contact-command::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 65%,rgba(8,2,5,.58))}
+.contact-command>.shell{position:relative;z-index:1}
+.contact-command-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.48fr);gap:clamp(36px,7vw,94px);align-items:end;margin-bottom:34px}
+.contact-command h1{margin:0;color:#fff;font-size:clamp(4rem,7.4vw,7.3rem)!important;line-height:.86!important}
+.contact-command h1 em{color:#f7ddb0;font-style:normal}
+.contact-command-side{border-left:1px solid rgba(227,183,95,.45);padding-left:26px}
+.contact-command-side>p{color:#d3c1c8;margin:0 0 22px;line-height:1.65}
+.contact-direct-round2{display:grid;gap:5px;color:inherit;text-decoration:none;border-top:1px solid rgba(227,183,95,.28);padding-top:16px}
+.contact-direct-round2 span{color:#e3b75f;letter-spacing:.12em;text-transform:uppercase;font-size:.58rem;font-weight:900}
+.contact-direct-round2 strong{color:#fff;text-transform:uppercase;font-family:Oswald,sans-serif;font-size:clamp(1.05rem,1.8vw,1.45rem);overflow-wrap:anywhere}
+.contact-round2 .contact-route-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;border:1px solid rgba(227,183,95,.3)!important;background:rgba(8,2,5,.3)}
+.contact-round2 .contact-route{min-height:148px!important;padding:20px!important;border:0!important;border-right:1px solid rgba(227,183,95,.22)!important;border-bottom:1px solid rgba(227,183,95,.22)!important;background:linear-gradient(145deg,rgba(39,15,26,.86),rgba(17,6,11,.86))!important;color:#fff!important;display:grid!important;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr auto;gap:8px 14px;align-content:stretch!important;overflow:hidden}
+.contact-round2 .contact-route:nth-child(3n){border-right:0!important}
+.contact-round2 .contact-route:nth-child(n+4){border-bottom:0!important}
+.contact-round2 .contact-route>span{position:static!important;color:#e3b75f!important;letter-spacing:.1em;font-size:.58rem;font-weight:900;align-self:start}
+.contact-round2 .contact-route strong{margin:0!important;color:#fff!important;font-size:clamp(1.45rem,2.2vw,2rem)!important;line-height:1!important;align-self:start}
+.contact-round2 .contact-route small{grid-column:1/-1;color:#bfaeb5!important;font-size:.7rem!important;line-height:1.5;max-width:270px;align-self:end}
+.contact-round2 .contact-route i{position:static!important;grid-column:1/-1;justify-self:end;color:#e3b75f!important;font-size:.62rem!important;font-style:normal;text-transform:uppercase;letter-spacing:.1em;font-weight:900}
+.contact-round2 .contact-route:nth-child(2),.contact-round2 .contact-route:nth-child(5){box-shadow:inset 0 3px #8b274a!important}
+.contact-round2 .contact-route:nth-child(3),.contact-round2 .contact-route:nth-child(6){box-shadow:inset 0 3px #ef4c89!important}
+.contact-round2 .contact-route:nth-child(1),.contact-round2 .contact-route:nth-child(4){box-shadow:inset 0 3px #e3b75f!important}
+.contact-round2 .contact-route:hover{background:linear-gradient(145deg,rgba(77,20,44,.96),rgba(26,7,15,.96))!important;border-color:rgba(227,183,95,.58)!important;transform:none!important}
+.contact-round2 .contact-route[aria-pressed=true]{background:linear-gradient(135deg,#76203f,#431126)!important;outline:1px solid #e3b75f;outline-offset:-1px}
+.contact-workbench-round2{padding-block:clamp(50px,5.7vw,78px)!important;background:rgba(11,3,7,.8)!important}
+.contact-workbench-round2 .contact-workbench-grid{display:grid!important;grid-template-columns:minmax(280px,.54fr) minmax(0,1fr)!important;gap:clamp(42px,6vw,80px)!important}
+.contact-workbench-round2 .contact-workbench-intro{position:sticky!important;top:106px!important}
+.contact-workbench-round2 .contact-workbench-intro h2{font-size:clamp(3rem,5vw,5rem)!important;line-height:.94!important}
+.contact-delivery-card strong,.contact-form-2026 label,.contact-form-2026 input,.contact-form-2026 select,.contact-form-2026 textarea{min-width:0!important;max-width:100%!important}
+.contact-delivery-card strong{overflow-wrap:anywhere;word-break:normal;font-size:clamp(1rem,1.7vw,1.32rem)!important}
+.contact-form-2026{overflow:hidden;padding:28px!important;gap:14px!important}
+.contact-form-2026 textarea{min-height:135px!important}
+.contact-form-action{flex-wrap:wrap}
+.contact-next-compact{padding-block:42px!important;background:rgba(8,2,5,.86)!important}
+.contact-next-compact .contact-next-grid{grid-template-columns:.72fr 1fr 1fr!important}
+.contact-next-compact .contact-next-grid>a{min-height:150px!important;padding:24px!important}
+.contact-next-compact .contact-next-grid>div{padding:16px 28px 16px 0}
+.contact-next-compact h2{font-size:clamp(2.2rem,3.6vw,3.5rem)!important}
+
+/* VOLUNTEERS — keep the fast step flow, make it visibly part of Explosion. */
+.tf-native{padding-top:0!important;color:#fff5ee!important;background:linear-gradient(115deg,rgba(9,2,6,.86),rgba(62,12,34,.72)),url('/media/brand/berlin-brandenburg-gold.png') center 30%/cover fixed no-repeat!important;font-family:DM Sans,system-ui,sans-serif!important}
+.tf-topbar{position:sticky!important;top:92px!important;left:auto!important;right:auto!important;width:min(920px,calc(100% - 40px));height:48px!important;margin:0 auto!important;padding:0 16px!important;grid-template-columns:1fr!important;background:linear-gradient(90deg,rgba(18,6,11,.96),rgba(54,13,30,.94))!important;border:1px solid rgba(227,183,95,.42)!important;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.34);z-index:25!important}
+.tf-wordmark,.tf-location{display:none!important}
+.tf-progress-wrap{grid-template-columns:auto 1fr!important;gap:14px!important}
+.tf-progress-wrap>span{color:#f7ddb0!important;font-size:.61rem!important}
+.tf-progress{background:rgba(255,255,255,.12)!important}
+.tf-progress i{background:linear-gradient(90deg,#8b274a,#ef4c89,#e3b75f)!important}
+.tf-form{min-height:calc(100svh - 110px)!important;padding-bottom:94px}
+.tf-step{place-items:start center!important;padding:30px 20px 100px!important}
+.tf-question{width:min(920px,100%)!important;background:linear-gradient(145deg,rgba(34,12,22,.93),rgba(14,5,9,.94))!important;border:1px solid rgba(227,183,95,.32);padding:clamp(26px,4vw,40px);box-shadow:0 26px 70px rgba(0,0,0,.34)}
+.tf-kicker{color:#e3b75f!important;font-size:.62rem!important}
+.tf-question h1,.tf-question h2{color:#fff!important;font-family:Oswald,Impact,sans-serif!important;text-transform:uppercase!important;letter-spacing:-.035em!important;line-height:.92!important}
+.tf-question h1{font-size:clamp(3.4rem,6vw,5.5rem)!important}
+.tf-question h2{font-size:clamp(3rem,5.2vw,4.8rem)!important}
+.tf-help{color:#c9b6bd!important;margin:16px 0 24px!important;font-size:.94rem!important}
+.tf-choice-list{max-width:none!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px!important}
+.tf-single-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.tf-choice span{min-height:62px!important;color:#f8eef1!important;background:rgba(255,255,255,.045)!important;border:1px solid rgba(227,183,95,.25)!important;padding:10px 13px!important}
+.tf-choice b{border-color:rgba(227,183,95,.55)!important;color:#f7ddb0!important}
+.tf-choice:hover span{border-color:#e3b75f!important;background:rgba(139,39,74,.18)!important}
+.tf-choice input:checked+span{color:#fff!important;background:linear-gradient(135deg,rgba(139,39,74,.9),rgba(79,16,42,.94))!important;border-color:#e3b75f!important;box-shadow:inset 0 0 0 1px rgba(227,183,95,.28)!important}
+.tf-choice input:checked+span b{background:#e3b75f!important;color:#281019!important;border-color:#e3b75f!important}
+.tf-question textarea,.tf-contact-grid input{color:#fff5ee!important;border-bottom:2px solid rgba(227,183,95,.45)!important;background:transparent!important}
+.tf-field-label,.tf-contact-grid label>span{color:#f7ddb0!important}
+.tf-confirmations label{color:#e9dce1!important;background:rgba(255,255,255,.04)!important;border-color:rgba(227,183,95,.25)!important}
+.tf-controls{left:50%!important;right:auto!important;bottom:16px!important;transform:translateX(-50%);width:min(920px,calc(100% - 40px));min-height:62px!important;padding:9px 12px!important;background:rgba(15,5,10,.95)!important;border:1px solid rgba(227,183,95,.4);border-radius:10px;box-shadow:0 14px 44px rgba(0,0,0,.42)}
+.tf-next{min-width:116px!important;height:44px!important;background:#8b274a!important;color:#fff!important;border:1px solid #e3b75f!important;font-family:DM Sans,system-ui,sans-serif!important;letter-spacing:.06em;text-transform:uppercase}
+.tf-next:hover{background:#a42e58!important}
+.tf-back{color:#e4d4da!important}
+.tf-enter-hint{color:#a9959d!important}
+.tf-status{bottom:86px!important;max-width:760px!important;color:#b9a8af!important;background:rgba(10,3,7,.84);padding:5px 9px;border-radius:6px}
+
+/* AMBASSADORS — four dense chapters instead of six tall screens. */
+.ambassador-round2{overflow:visible!important;background:transparent!important}
+.ambassador-hero-round2{min-height:610px!important;background:linear-gradient(110deg,rgba(9,2,6,.93),rgba(65,13,34,.74)),url('/media/brand/berlin-brandenburg-gold.png') center 38%/cover no-repeat!important}
+.ambassador-hero-round2::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 80% 35%,rgba(239,76,137,.12),transparent 33%)}
+.ambassador-hero-grid-round2{min-height:610px!important;padding:42px 0 56px!important;grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr)!important;gap:clamp(40px,6vw,78px)!important}
+.ambassador-hero-copy{z-index:1;position:relative}
+.ambassador-hero-copy h1{font-size:clamp(4.3rem,7.3vw,7rem)!important}
+.ambassador-hero-copy>p:not(.eyebrow){font-size:.98rem!important;line-height:1.65!important;margin:24px 0 28px!important}
+.ambassador-hero-media{position:relative;min-height:470px;z-index:1}
+.ambassador-community-photo{position:absolute;inset:0 8% 0 0;margin:0;border:1px solid rgba(227,183,95,.42);background:#100609;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,.42)}
+.ambassador-community-photo img{width:100%;height:100%;object-fit:cover;object-position:center 46%;filter:saturate(.96) contrast(1.03)}
+.ambassador-community-photo figcaption,.ambassador-award-photo figcaption{position:absolute;left:14px;bottom:14px;background:rgba(10,3,7,.82);border:1px solid rgba(227,183,95,.4);color:#f7ddb0;padding:7px 9px;text-transform:uppercase;letter-spacing:.1em;font-size:.54rem;font-weight:900}
+.ambassador-award-photo{position:absolute;width:34%;aspect-ratio:4/5;right:0;bottom:-18px;margin:0;border:1px solid rgba(239,76,137,.55);background:#12060b;overflow:hidden;box-shadow:0 22px 58px rgba(0,0,0,.5)}
+.ambassador-award-photo img{width:100%;height:100%;object-fit:cover;object-position:center 32%;filter:saturate(1.02)}
+.ambassador-core{padding-block:clamp(48px,5.5vw,76px)!important;background:rgba(12,4,8,.82)!important;border-top:1px solid rgba(227,183,95,.2)}
+.ambassador-core-grid{display:grid;grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr);gap:clamp(42px,6vw,80px);align-items:start}
+.ambassador-core-intro h2{font-size:clamp(3.1rem,5.4vw,5.3rem)!important;line-height:.94!important}
+.ambassador-core-intro>p:last-child{color:#c8b5bc;line-height:1.7;max-width:510px}
+.ambassador-round2 .ambassador-benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;background:transparent!important;border:1px solid rgba(227,183,95,.28)!important}
+.ambassador-round2 .ambassador-benefit-grid article{min-height:170px!important;padding:22px!important;background:linear-gradient(145deg,rgba(35,13,23,.9),rgba(15,5,10,.9))!important;border-color:rgba(227,183,95,.22)!important}
+.ambassador-round2 .ambassador-benefit-grid h3{margin:28px 0 9px!important;font-size:1.45rem!important}
+.ambassador-round2 .ambassador-benefit-grid p{margin:0;color:#bdaab1!important;font-size:.74rem!important;line-height:1.55!important}
+.ambassador-role-round2{padding-block:clamp(48px,5.5vw,74px)!important;background:rgba(20,6,12,.82)!important}
+.ambassador-role-round2 .ambassador-role-grid{grid-template-columns:minmax(360px,.85fr) minmax(0,1.15fr)!important;gap:clamp(38px,6vw,74px)!important;align-items:center}
+.ambassador-role-round2 figure,.ambassador-role-round2 figure img{height:410px!important;min-height:0!important}
+.ambassador-role-round2 figure img{object-fit:cover!important;object-position:center 40%!important;filter:saturate(.96) contrast(1.04)!important}
+.ambassador-role-round2 h2{font-size:clamp(3rem,5vw,5rem)!important}
+.ambassador-role-notes{margin-block:20px 15px!important}
+.ambassador-role-notes p{padding-block:12px!important}
+.ambassador-group-inline{margin-top:22px;padding:20px;border:1px solid rgba(227,183,95,.35);background:linear-gradient(135deg,rgba(139,39,74,.34),rgba(31,8,17,.7));display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.ambassador-group-inline strong{display:block;color:#fff;text-transform:uppercase;font:700 1.35rem/1.05 Oswald,sans-serif;margin-bottom:6px}
+.ambassador-group-inline p{margin:0;color:#c7b5bb;font-size:.75rem;line-height:1.55}
+.ambassador-group-inline .button{white-space:nowrap;min-height:42px;padding-inline:16px;font-size:.62rem}
+.ambassador-application-round2{padding-block:clamp(50px,5.7vw,78px)!important;background:rgba(9,3,6,.88)!important}
+.ambassador-application-round2 .ambassador-application-grid{grid-template-columns:minmax(280px,.55fr) minmax(0,1fr)!important;gap:clamp(42px,6vw,78px)!important}
+.ambassador-application-round2 aside{top:106px!important}
+.ambassador-application-round2 h2{font-size:clamp(3rem,5vw,4.8rem)!important}
+.ambassador-application-round2 .ambassador-form{padding:28px!important;gap:14px!important;overflow:hidden}
+.ambassador-application-round2 textarea{min-height:130px!important}
+
+/* HISTORY — sticky was being defeated by preserved WordPress ancestor overflow. */
+.wp-preserved-page[data-wordpress-source="explosion-history"],
+.wp-preserved-page[data-wordpress-source="explosion-history"] .wp-source-content,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .elementor,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .elementor-element,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .elementor-widget,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .elementor-widget-container,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history{overflow:visible!important}
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history{gap:clamp(24px,3vw,42px)!important;padding-block:48px!important}
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__timeline{gap:clamp(28px,4vw,48px)!important}
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar{position:sticky!important;top:104px!important;align-self:start!important;max-height:calc(100vh - 124px)!important;min-height:0!important;overflow-y:auto!important}
+
+/* ARCHIVE — keep the dark gallery, bring back Berlin and real event color. */
+.archive-hero{background:linear-gradient(100deg,rgba(8,2,5,.94),rgba(72,14,38,.70) 56%,rgba(8,2,5,.82)),url('/media/brand/berlin-brandenburg-gold.png') center 35%/cover no-repeat!important}
+.archive-library{position:relative;background:linear-gradient(180deg,rgba(9,3,6,.82),rgba(27,7,15,.84)),url('/media/brand/berlin-brandenburg-gold.png') center top/cover fixed no-repeat!important}
+.archive-library::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 80% 12%,rgba(239,76,137,.12),transparent 28%)}
+.archive-library>.shell{position:relative}
+.archive-toolbar button{border-color:rgba(227,183,95,.4)!important;color:#e8d9df!important;background:rgba(15,5,10,.65)!important;border-radius:2px!important}
+.archive-toolbar button.active,.archive-toolbar button:hover{background:#8b274a!important;color:#fff!important;border-color:#e3b75f!important}
+.migration-note{max-width:900px!important;background:rgba(139,39,74,.16)!important;border-left-color:#ef4c89!important;color:#d5c4ca!important}
+.archive-years{gap:clamp(48px,6vw,70px)!important}
+.archive-year{border-top-color:rgba(227,183,95,.34)!important}
+.archive-year>header span{color:#f7ddb0!important;text-shadow:0 8px 30px rgba(139,39,74,.34)}
+.archive-year:nth-child(even)>header span{color:#f1a7c2!important}
+.library-card>a{border:1px solid rgba(227,183,95,.36)!important;background:#17080e!important;box-shadow:0 18px 50px rgba(0,0,0,.32)!important}
+.library-card img{filter:saturate(.98) contrast(1.03)!important}
+.library-card a:hover img{filter:saturate(1.12) contrast(1.02)!important;transform:scale(1.025)!important}
+.library-overlay{background:linear-gradient(transparent,rgba(70,15,38,.92))!important}
+.album-number{background:#8b274a!important;color:#fff!important;border:1px solid rgba(227,183,95,.75)!important}
+.library-card>p{color:#e3b75f!important}
+.library-card>h2{color:#fff!important}
+.archive-original-index{border-top-color:rgba(227,183,95,.34)!important;margin-top:clamp(58px,7vw,90px)!important;padding-top:clamp(44px,5vw,68px)!important}
+
+@media(max-width:980px){
+  .contact-command-head,.contact-workbench-round2 .contact-workbench-grid,.ambassador-core-grid,.ambassador-hero-grid-round2,.ambassador-role-round2 .ambassador-role-grid,.ambassador-application-round2 .ambassador-application-grid{grid-template-columns:1fr!important}
+  .contact-workbench-round2 .contact-workbench-intro,.ambassador-application-round2 aside{position:static!important}
+  .ambassador-hero-media{min-height:430px;width:min(100%,760px)}
+  .ambassador-group-inline{grid-template-columns:1fr}
+  .ambassador-group-inline .button{justify-self:start}
+}
+@media(max-width:760px){
+  .contact-round2 .contact-route-grid{grid-template-columns:1fr 1fr!important}
+  .contact-round2 .contact-route{border-right:1px solid rgba(227,183,95,.22)!important;border-bottom:1px solid rgba(227,183,95,.22)!important}
+  .contact-round2 .contact-route:nth-child(2n){border-right:0!important}
+  .contact-round2 .contact-route:nth-child(n+5){border-bottom:0!important}
+  .contact-next-compact .contact-next-grid{grid-template-columns:1fr!important}
+  .tf-topbar{top:82px!important;width:calc(100% - 24px)}
+  .tf-choice-list,.tf-single-list{grid-template-columns:1fr!important}
+  .tf-controls{width:calc(100% - 24px)}
+  .tf-status{display:none!important}
+  .ambassador-hero-round2{min-height:auto!important}
+  .ambassador-hero-grid-round2{min-height:0!important;padding:34px 0 54px!important}
+  .ambassador-hero-media{min-height:380px}
+  .ambassador-round2 .ambassador-benefit-grid{grid-template-columns:1fr!important}
+  .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar{position:static!important;max-height:none!important}
+}
+@media(max-width:520px){
+  .contact-command{padding-top:32px}
+  .contact-command-side{padding-left:0;border-left:0;border-top:1px solid rgba(227,183,95,.28);padding-top:18px}
+  .contact-round2 .contact-route-grid{grid-template-columns:1fr!important}
+  .contact-round2 .contact-route{border-right:0!important;border-bottom:1px solid rgba(227,183,95,.22)!important}
+  .contact-round2 .contact-route:last-child{border-bottom:0!important}
+  .contact-form-2026{padding:22px!important}
+  .tf-question{padding:24px 18px}
+  .tf-question h1{font-size:clamp(3rem,15vw,4.4rem)!important}
+  .tf-question h2{font-size:clamp(2.7rem,13vw,4rem)!important}
+  .tf-controls{bottom:10px!important}
+  .ambassador-hero-media{min-height:330px}
+  .ambassador-community-photo{right:0}
+  .ambassador-award-photo{width:38%;right:-4px;bottom:-12px}
+}

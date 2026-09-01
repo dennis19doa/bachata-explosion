@@ -1,0 +1,5 @@
+/* Small control-label override kept separate so the existing native volunteer flow does not need to be rewritten. */
+.tf-next[data-next]{font-size:0!important}
+.tf-next[data-next]::after{content:"Next →";font-size:.78rem;letter-spacing:.07em;text-transform:uppercase}
+.tf-enter-hint[data-enter-hint]{font-size:0!important}
+.tf-enter-hint[data-enter-hint]::after{content:"Enter = next";font-size:.68rem;letter-spacing:.04em}

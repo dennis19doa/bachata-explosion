@@ -22,54 +22,46 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
   description="Contact the Bachata Explosion team about tickets, groups, partnerships, media, volunteering or a general question."
   headerStyle="solid"
 >
-  <article class="contact-2026" data-wordpress-source="contact">
-    <section class="contact-hero" aria-labelledby="contact-title">
-      <div class="urban-hero-word" aria-hidden="true">CONNECT</div>
-      <div class="contact-hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="shell contact-hero-grid">
-        <div>
-          <p class="eyebrow"><span></span>Talk to the Explosion team</p>
-          <h1 id="contact-title">Tell us<br /><em>what you need.</em></h1>
-        </div>
-        <div class="contact-hero-copy">
-          <p>Choose a topic and give us the details we need to answer properly.</p>
-          <a class="contact-direct" href="mailto:info@bachataexplosion.com">
-            <span>Prefer your email app?</span>
-            <strong>info@bachataexplosion.com ↗</strong>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact-routing section-pad" aria-labelledby="contact-routing-title">
+  <article class="contact-2026 contact-round2" data-wordpress-source="contact">
+    <section class="contact-command" aria-labelledby="contact-title">
       <div class="shell">
-        <div class="contact-section-heading">
-          <div><p class="section-label">Step 01 · Choose a topic</p><h2 id="contact-routing-title">What can we<br /><em>help with?</em></h2></div>
-          <p>One simple form, routed to the right part of the team.</p>
+        <div class="contact-command-head">
+          <div>
+            <p class="eyebrow"><span></span>Talk to the Explosion team</p>
+            <h1 id="contact-title">What can we<br /><em>help with?</em></h1>
+          </div>
+          <div class="contact-command-side">
+            <p>Pick the closest topic. We route the same simple form to the right part of the team, so you do not have to search for the right contact.</p>
+            <a class="contact-direct-round2" href="mailto:info@bachataexplosion.com">
+              <span>Prefer your email app?</span>
+              <strong>info@bachataexplosion.com ↗</strong>
+            </a>
+          </div>
         </div>
-        <div class="contact-route-grid">
+
+        <div class="contact-route-grid" aria-label="Choose a contact topic">
           {routes.map((route, index) => (
             <button type="button" class="contact-route" data-contact-topic={route.value} aria-pressed={index === 0 ? "true" : "false"}>
               <span>{route.number}</span>
               <strong>{route.label}</strong>
               <small>{route.detail}</small>
-              <i aria-hidden="true">↘</i>
+              <i aria-hidden="true">Choose →</i>
             </button>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="contact-workbench section-pad" id="message" aria-labelledby="contact-form-title">
+    <section class="contact-workbench contact-workbench-round2 section-pad" id="message" aria-labelledby="contact-form-title">
       <div class="shell contact-workbench-grid">
         <div class="contact-workbench-intro">
-          <p class="section-label">Step 02 · Add the details</p>
-          <h2 id="contact-form-title">Make it easy<br /><em>to answer.</em></h2>
-          <p>For ticket questions, use the same email address you used at checkout.</p>
+          <p class="section-label">Send us the details</p>
+          <h2 id="contact-form-title">One message.<br /><em>The right inbox.</em></h2>
+          <p>Tell us what happened or what you need. For ticket questions, use the same email address you used at checkout.</p>
           <div class="contact-delivery-card">
-            <span>Message route</span>
+            <span>Currently routing to</span>
             <strong data-contact-destination>{initialRoute.alias}</strong>
-            <p>The selected topic determines the form endpoint and the role address used for sorting and replies.</p>
+            <p>Your chosen topic determines the team inbox used for sorting and replies.</p>
           </div>
         </div>
 
@@ -111,7 +103,7 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
           </label>
           <label class="full-field">
             <span>Message *</span>
-            <textarea name="message" rows="7" required maxlength="2000" placeholder="What would you like us to know?"></textarea>
+            <textarea name="message" rows="6" required maxlength="2000" placeholder="What would you like us to know?"></textarea>
           </label>
           <label class="form-trap" aria-hidden="true">
             <span>Leave this field empty</span>
@@ -132,9 +124,9 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
       </div>
     </section>
 
-    <section class="contact-next section-pad">
+    <section class="contact-next contact-next-compact section-pad">
       <div class="shell contact-next-grid">
-        <div><p class="section-label">Other doors</p><h2>Join the<br /><em>team.</em></h2></div>
+        <div><p class="section-label">Want to join in?</p><h2>More ways<br /><em>to help.</em></h2></div>
         <a href="/volunteers/"><span>Volunteer applications</span><strong>Help make the weekend happen</strong><i>↗</i></a>
         <a href="/ambassadors/"><span>Ambassador program</span><strong>Bring your community into the Explosion</strong><i>↗</i></a>
       </div>
