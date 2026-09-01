@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import "../styles/explosion-modern.css";
+import "../styles/explosion-original-modern.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -31,7 +31,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f4f0e8" />
+    <meta name="theme-color" content="#f8f1e8" />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -134,7 +134,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
-      const heroVideos = Array.from(document.querySelectorAll<HTMLVideoElement>(".home-hero-video,.impact-hero-video,.bbf-hero-video"));
+      const heroVideos = Array.from(document.querySelectorAll<HTMLVideoElement>(".home-hero-video,.impact-hero-video,.bbf-hero-video,.ex-hero video"));
 
       heroVideos.forEach((video) => video.play().catch(() => undefined));
 
