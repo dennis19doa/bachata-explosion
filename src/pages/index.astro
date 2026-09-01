@@ -3,18 +3,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { ticketUrl } from "../data/festival";
 import "../styles/home-modern.css";
 
-const lineup = [
-  ["Victor & Alba", "/media/bbf/artists/victor-alba.jpg"],
-  ["David & Laura", "/media/bbf/artists/david-laura.jpg"],
-  ["Diego & Ola", "/media/bbf/artists/diego-ola.jpg"],
-  ["Emilien & Tehina", "/media/bbf/artists/emilien-tehina.jpg"],
-  ["Felipe & Tiago", "/media/bbf/artists/felipe-taigo.jpg"],
-  ["Liza & Chicho", "/media/bbf/artists/liza-chicho.jpg"],
+const founders = [
+  {
+    name: "Dennis",
+    role: "Owner · Founder",
+    since: "Since 2021",
+    image: "/media/team/dennis.jpg",
+    note: "Event vision, community growth and the operational details behind every Explosion.",
+  },
+  {
+    name: "Elena",
+    role: "Owner · Founder",
+    since: "Since 2021",
+    image: "/media/team/elena.jpg",
+    note: "Dancer experience, team culture and the warm atmosphere that holds the weekend together.",
+  },
 ] as const;
 
 const team = [
-  { name: "Dennis", role: "Owner · Founder", since: "Since 2021", image: "/media/team/dennis.jpg" },
-  { name: "Elena", role: "Owner · Founder", since: "Since 2021", image: "/media/team/elena.jpg" },
   { name: "Laura", role: "Explosion Team", since: "Since 2023", image: "/media/team/laura.jpg" },
   { name: "Lucy", role: "Physiotherapist", since: "Since 2023", image: "/media/team/lucy.jpg" },
   { name: "Mircea", role: "Chef", since: "Since 2023", image: "/media/team/mircea.jpg" },
@@ -62,21 +68,6 @@ const historyImages = [
           <span class="ex-hero-mark">Berlin · 2026</span>
           <figure class="ex-hero-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" /></figure>
         </div>
-      </div>
-    </section>
-
-    <section class="ex-lineup" aria-label="Berlin Bachata Festival lineup preview">
-      <div class="ex-shell ex-lineup-inner">
-        <div class="ex-lineup-label"><span>Coming to Berlin</span><strong>Lineup preview</strong></div>
-        <div class="ex-lineup-people">
-          {lineup.map(([name, image]) => (
-            <a class="ex-lineup-person" href="/bbf-2026/#artists">
-              <img src={image} alt={`${name} at Berlin Bachata Festival 2026`} width="90" height="90" loading="lazy" />
-              <span>{name}</span>
-            </a>
-          ))}
-        </div>
-        <a class="ex-lineup-all" href="/bbf-2026/#artists">Full lineup →</a>
       </div>
     </section>
 
@@ -130,12 +121,32 @@ const historyImages = [
       <div class="ex-shell">
         <div class="ex-team-head">
           <div><p class="ex-kicker">The people behind Explosion</p><h2 class="ex-display" id="ex-team-title">Meet the people who make it <em>happen.</em></h2></div>
-          <p class="ex-copy">Explosion is not a faceless festival. These are the people planning, welcoming, driving, promoting, supporting and shaping the weekend.</p>
+          <p class="ex-copy">Explosion is not a faceless festival. It starts with the founders and works because a collaborative team takes care of the details around every dancer, artist and weekend.</p>
         </div>
-        <div class="ex-team-grid">
+
+        <div class="ex-team-founders" aria-label="Bachata Explosion founders">
+          {founders.map((person) => (
+            <article class="ex-founder-card">
+              <div class="ex-founder-frame">
+                <img src={person.image} alt={`${person.name}, ${person.role} at Bachata Explosion`} width="700" height="900" loading="lazy" />
+              </div>
+              <div class="ex-founder-copy">
+                <small>{person.since}</small>
+                <h3>{person.name}</h3>
+                <span>{person.role}</span>
+                <p>{person.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="ex-team-collab-label"><strong>One collaborative team</strong><span>Different roles · one Explosion</span></div>
+        <div class="ex-team-collab" aria-label="Bachata Explosion team">
           {team.map((person) => (
-            <article class="ex-person">
-              <img src={person.image} alt={`${person.name}, ${person.role} at Bachata Explosion`} width="700" height="900" loading="lazy" />
+            <article class="ex-team-card">
+              <div class="ex-team-frame">
+                <img src={person.image} alt={`${person.name}, ${person.role} at Bachata Explosion`} width="700" height="900" loading="lazy" />
+              </div>
               <div class="ex-person-info"><small>{person.since}</small><h3>{person.name}</h3><span>{person.role}</span></div>
             </article>
           ))}
