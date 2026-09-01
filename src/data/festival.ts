@@ -1,10 +1,9 @@
 export const ticketBoxOffice = "bachataexplosionbyelenadennis";
 export const ticketEventPublicId = 1902213;
 
-// Direct BBF 2026 checkout fallback. The global ticket buttons should open the
-// Ticket Tailor event widget/modal when JavaScript is available; this URL keeps
-// the buyer at ticket selection if the widget cannot load.
-export const ticketUrl = "https://www.tickettailor.com/checkout/view-event/id/6988740/chk/fe78/?modal_widget=true&widget=true";
+// Direct BBF 2026 checkout. Keep this as a normal full-page checkout URL so
+// ticket buttons work consistently on desktop and mobile without a modal layer.
+export const ticketUrl = "https://www.tickettailor.com/checkout/view-event/id/6988740/chk/fe78/";
 export const ticketEventUrl = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/1902213";
 
 export const festivalFaqs = [
