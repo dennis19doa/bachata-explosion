@@ -15,6 +15,9 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      PREVIEW_BRANCH: preview-${{ github.sha }}
+      PREVIEW_BASE_URL: https://raw.githack.com/dennis19doa/bachata-explosion/preview-${{ github.sha }}/
     steps:
       - name: Check out migration branch
         uses: actions/checkout@v4
@@ -43,7 +46,7 @@ jobs:
           const { readdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs');
           const { join, extname, relative } = require('node:path');
           const root = 'dist/client';
-          const base = 'https://raw.githack.com/dennis19doa/bachata-explosion/public-preview/';
+          const base = process.env.PREVIEW_BASE_URL;
           const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
             const path = join(dir, entry.name);
             return entry.isDirectory() ? walk(path) : [path];
@@ -86,7 +89,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Publish public-preview branch
+      - name: Publish immutable review branch and latest alias
         shell: bash
         run: |
           rm -rf /tmp/bachata-public-preview
@@ -94,12 +97,13 @@ jobs:
           cp -a dist/client/. /tmp/bachata-public-preview/
           cd /tmp/bachata-public-preview
           git init
-          git checkout -b public-preview
+          git checkout -b "${PREVIEW_BRANCH}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add -A
           git commit -m "Publish modernization preview ${GITHUB_SHA}"
-          git push --force origin public-preview
+          git push --force origin "${PREVIEW_BRANCH}"
+          git push --force origin "${PREVIEW_BRANCH}:public-preview"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
