@@ -1,0 +1,344 @@
+/* BACHATA EXPLOSION — SITE-WIDE POLISH
+   Final shared layer. Loaded after all legacy/route styles so every page
+   inherits the same navigation, spacing, typography, cards and form language. */
+
+:root{
+  --sp-bg:#070707;
+  --sp-bg-2:#0d0d0c;
+  --sp-panel:#12110f;
+  --sp-panel-2:#181713;
+  --sp-gold:#d3ab4d;
+  --sp-gold-bright:#e8c773;
+  --sp-white:#f5efe5;
+  --sp-muted:#aaa39a;
+  --sp-line:rgba(211,171,77,.28);
+  --sp-soft-line:rgba(245,239,229,.12);
+  --sp-shadow:0 26px 70px rgba(0,0,0,.34);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{background:var(--sp-bg);color:var(--sp-white)}
+main{min-height:60vh;background:var(--sp-bg)}
+.shell{width:min(1240px,calc(100% - 48px));margin-inline:auto}
+
+:where(a,button,input,textarea,select,summary):focus-visible{
+  outline:2px solid var(--sp-gold-bright)!important;
+  outline-offset:3px!important;
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL NAVIGATION — attached to the site rather than floating like a pill
+   -------------------------------------------------------------------------- */
+.site-header,.site-header-solid{
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
+  height:76px!important;
+  min-height:76px!important;
+  transform:none!important;
+  grid-template-columns:minmax(150px,190px) minmax(0,1fr) auto!important;
+  padding:10px max(18px,calc((100vw - 1240px)/2))!important;
+  border:0!important;
+  border-bottom:1px solid var(--sp-line)!important;
+  border-radius:0!important;
+  background:rgba(7,7,7,.94)!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(18px) saturate(.9)!important;
+}
+.site-header::before,.site-header-solid::before{
+  opacity:.035!important;
+  border-radius:0!important;
+  background:url('/media/brand/berlin-graffiti-mask.svg') 72% 54%/360px auto no-repeat!important;
+}
+.site-header::after,.site-header-solid::after{
+  left:0!important;right:0!important;bottom:-1px!important;height:1px!important;
+  background:linear-gradient(90deg,transparent 4%,var(--sp-gold) 42%,rgba(211,171,77,.2) 72%,transparent 96%)!important;
+}
+.site-header .brand,.site-header-solid .brand{width:158px!important}
+.site-header .brand img,.site-header-solid .brand img{width:154px!important;max-height:50px!important}
+.desktop-nav{gap:clamp(15px,1.7vw,28px)!important}
+.desktop-nav>a,.nav-group>summary{font-size:.74rem!important;letter-spacing:.065em!important}
+.site-header>.button,.site-header-solid>.button{
+  min-height:46px!important;
+  padding:0 21px!important;
+  border-radius:0!important;
+  background:var(--sp-gold)!important;
+  color:#080808!important;
+}
+.nav-popover,.nav-popover-right{
+  top:calc(100% + 12px)!important;
+  border-radius:0!important;
+  border-color:var(--sp-line)!important;
+  background:rgba(10,10,9,.98)!important;
+  box-shadow:var(--sp-shadow)!important;
+}
+.nav-popover a{border-radius:0!important}
+
+/* --------------------------------------------------------------------------
+   UNIVERSAL CONTENT RHYTHM
+   -------------------------------------------------------------------------- */
+.section-pad,.bbf-pad{padding-top:clamp(78px,8vw,116px)!important;padding-bottom:clamp(78px,8vw,116px)!important}
+.section-label,.eyebrow{font-size:.68rem!important;letter-spacing:.15em!important}
+.hero-lead{max-width:680px;line-height:1.7!important}
+
+:where(.page-hero,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.bbf-hero){
+  position:relative;
+  isolation:isolate;
+}
+:where(.page-hero,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header)::after{
+  content:'';
+  position:absolute;
+  z-index:4;
+  left:0;right:0;bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--sp-gold),transparent);
+  opacity:.72;
+  pointer-events:none;
+}
+
+:where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero){
+  min-height:clamp(430px,58vh,650px)!important;
+  display:grid!important;
+  align-items:end!important;
+  padding-top:128px!important;
+  padding-bottom:clamp(54px,7vw,90px)!important;
+}
+
+:where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero) h1{
+  margin-top:16px!important;
+  color:var(--sp-white)!important;
+  font-size:clamp(4rem,8vw,8rem)!important;
+  line-height:.82!important;
+  letter-spacing:-.035em!important;
+  text-transform:uppercase;
+}
+:where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero) h1 em{
+  color:var(--sp-gold-bright)!important;
+  font-style:normal!important;
+}
+
+:where(.contact-section-heading,.ambassador-heading,.volunteer-heading,.jj-section-head,.bbf-heading,.split-heading,.archive-gallery-heading){
+  align-items:end!important;
+  padding-bottom:24px!important;
+  border-bottom:1px solid var(--sp-line)!important;
+}
+:where(.contact-section-heading,.ambassador-heading,.volunteer-heading,.jj-section-head,.bbf-heading,.split-heading,.archive-gallery-heading) h2{
+  letter-spacing:-.025em!important;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTONS + ACTIONS
+   -------------------------------------------------------------------------- */
+.button{
+  border-radius:0!important;
+  min-height:50px!important;
+  padding-inline:22px!important;
+  font-weight:850!important;
+  letter-spacing:.07em!important;
+  box-shadow:none!important;
+}
+.button.button-gold{
+  border:1px solid var(--sp-gold)!important;
+  background:var(--sp-gold)!important;
+  color:#080808!important;
+}
+.button.button-gold:hover{background:var(--sp-gold-bright)!important;border-color:var(--sp-gold-bright)!important;transform:translateY(-2px)}
+.button.button-outline,.button.button-dark,.button.button-glass{
+  border:1px solid rgba(211,171,77,.5)!important;
+  background:transparent!important;
+  color:var(--sp-white)!important;
+}
+.button.button-outline:hover,.button.button-dark:hover,.button.button-glass:hover{
+  background:rgba(211,171,77,.10)!important;
+  border-color:var(--sp-gold)!important;
+  color:var(--sp-gold-bright)!important;
+}
+.text-link{font-weight:800!important;text-underline-offset:5px!important}
+
+/* --------------------------------------------------------------------------
+   CONTACT / AMBASSADORS / VOLUNTEERS / JACK & JILL / INSIDER
+   -------------------------------------------------------------------------- */
+:where(.contact-route,.contact-delivery-card,.ambassador-benefit-grid article,.ambassador-application-note,.volunteer-promise-cards article,.volunteer-role-grid a,.volunteer-form-note,.jj-flow-grid li,.jj-podium article,.jj-bracket-board,.insider-hero aside,.bbf-travel-grid article,.bbf-whatsapp,.bbf-hotel-deal,.bbf-schedule-panel,.bbf-pass-grid article,.bbf-faq-list details){
+  border:1px solid var(--sp-line)!important;
+  border-radius:0!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.012))!important;
+  box-shadow:none!important;
+}
+:where(.contact-route,.ambassador-benefit-grid article,.volunteer-promise-cards article,.volunteer-role-grid a,.jj-flow-grid li,.jj-podium article,.bbf-pass-grid article){
+  transition:transform .2s ease,border-color .2s ease,background .2s ease!important;
+}
+:where(.contact-route,.ambassador-benefit-grid article,.volunteer-promise-cards article,.volunteer-role-grid a,.jj-flow-grid li,.jj-podium article,.bbf-pass-grid article):hover{
+  transform:translateY(-3px);
+  border-color:rgba(211,171,77,.68)!important;
+  background:rgba(211,171,77,.055)!important;
+}
+.contact-route[aria-pressed='true']{box-shadow:inset 3px 0 0 var(--sp-gold)!important}
+
+:where(.contact-form,.ambassador-form,.volunteer-form,.jj-register-form,.insider-form){
+  padding:clamp(24px,4vw,42px)!important;
+  border-radius:0!important;
+  border:1px solid var(--sp-line)!important;
+  background:#0d0d0c!important;
+  box-shadow:var(--sp-shadow)!important;
+}
+:where(.contact-form,.ambassador-form,.volunteer-form,.jj-register-form,.insider-form) :where(input,textarea,select){
+  min-height:48px!important;
+  border-radius:0!important;
+  border:1px solid rgba(211,171,77,.30)!important;
+  background:#151412!important;
+  color:var(--sp-white)!important;
+}
+:where(.contact-form,.ambassador-form,.volunteer-form,.jj-register-form,.insider-form) textarea{min-height:150px!important}
+
+/* --------------------------------------------------------------------------
+   FESTIVAL — clearer cards and less visual noise
+   -------------------------------------------------------------------------- */
+.bbf-premium{background:var(--sp-bg)!important}
+.bbf-hero{border-bottom:1px solid var(--sp-line)!important}
+.bbf-heading{margin-bottom:40px!important}
+.bbf-artist-card,.bbf-film,.bbf-cinema,.bbf-venue-card,.bbf-hotel-panel{
+  border-radius:0!important;
+  border-color:var(--sp-line)!important;
+  box-shadow:none!important;
+}
+.bbf-artist-card{overflow:hidden!important}
+.bbf-artist-card img{transition:transform .28s ease,filter .28s ease!important}
+.bbf-artist-card:hover img{transform:scale(1.025);filter:saturate(.95) contrast(1.05)!important}
+.bbf-hotel-tabs button,.bbf-schedule-tabs button{border-radius:0!important}
+
+/* --------------------------------------------------------------------------
+   ARCHIVE + EVENT DETAIL
+   -------------------------------------------------------------------------- */
+.archive-library{padding-top:clamp(68px,7vw,100px)!important}
+.archive-toolbar{padding-bottom:22px!important;margin-bottom:56px!important}
+.archive-toolbar button{min-height:42px!important;border-radius:0!important}
+.archive-year{padding-top:44px!important;margin-top:52px!important}
+.archive-year>header{margin-bottom:28px!important}
+.library-grid{gap:clamp(18px,2vw,28px)!important}
+.library-card>a{
+  overflow:hidden!important;
+  border-radius:0!important;
+  transition:transform .22s ease,border-color .22s ease!important;
+}
+.library-card>a:hover{transform:translateY(-4px);border-color:rgba(211,171,77,.68)!important}
+.library-card img{transition:transform .3s ease,filter .3s ease!important;filter:saturate(.88) contrast(1.02)!important}
+.library-card>a:hover img{transform:scale(1.025);filter:saturate(1) contrast(1.04)!important}
+
+.archive-detail-grid{align-items:center!important;gap:clamp(46px,7vw,90px)!important}
+.archive-cover{border-radius:0!important;box-shadow:18px 20px 0 rgba(211,171,77,.08)!important}
+.archive-gallery-section{border-top:0!important}
+.album-tabs{gap:8px!important;padding:10px 0!important}
+.album-tabs button{border-radius:0!important;min-height:42px!important;padding-inline:15px!important}
+.album-mosaic{gap:12px!important}
+.album-mosaic figure,.nas-gallery-grid figure{border-radius:0!important;overflow:hidden!important}
+.archive-fallback{margin-top:52px!important;padding:28px!important;border-radius:0!important}
+
+/* --------------------------------------------------------------------------
+   PRESERVED WORDPRESS / HISTORY / LEGAL
+   -------------------------------------------------------------------------- */
+.wp-preserved-page{background:var(--sp-bg)!important}
+.wp-source-header>.shell{position:relative;z-index:2}
+.wp-source-header>.shell>p:last-child{max-width:620px;margin-top:20px!important}
+.wp-source-content{
+  width:min(1240px,calc(100% - 48px))!important;
+  margin-inline:auto!important;
+  padding:clamp(64px,8vw,110px) 0!important;
+  background:transparent!important;
+}
+.wp-source-content :where(h1,h2,h3,h4,h5,h6){
+  max-width:920px;
+  margin-top:1.25em!important;
+  margin-bottom:.55em!important;
+  color:var(--sp-white)!important;
+  line-height:.95!important;
+}
+.wp-source-content :where(h2,h3){font-family:var(--display)!important;text-transform:uppercase!important;letter-spacing:-.018em!important}
+.wp-source-content :where(p,li,td,th,figcaption){color:var(--sp-muted)!important;line-height:1.7!important}
+.wp-source-content :where(p,ul,ol){max-width:900px}
+.wp-source-content a{color:var(--sp-gold-bright)!important;text-underline-offset:4px}
+.wp-source-content :where(img,video){border:1px solid var(--sp-line);background:#0c0c0b}
+.wp-source-content :where(table){width:100%;border-collapse:collapse;background:#0d0d0c}
+.wp-source-content :where(td,th){padding:12px 14px;border:1px solid var(--sp-soft-line)!important}
+.wp-source-content blockquote{margin:30px 0;padding:20px 24px;border-left:3px solid var(--sp-gold);background:#0d0d0c;color:var(--sp-white)}
+
+.be-history{gap:clamp(26px,4vw,48px)!important}
+.be-history__sidebar{border-radius:0!important;box-shadow:none!important}
+.be-year{border-radius:0!important}
+.be-event{margin-bottom:34px!important}
+.be-event__content,.be-event__media{border-radius:0!important}
+.be-event__content{padding:clamp(22px,3vw,34px)!important}
+.be-event__media{overflow:hidden!important}
+
+.legal-page.page-hero{background:linear-gradient(90deg,rgba(5,5,5,.96),rgba(5,5,5,.74)),url('/media/brand/live-explosion-background.png') center/cover!important}
+.legal-copy{position:relative;z-index:2}
+
+/* --------------------------------------------------------------------------
+   FOOTER — consistent end to every route
+   -------------------------------------------------------------------------- */
+.site-footer{padding:72px 0 58px!important}
+.site-footer .footer-grid{
+  position:relative;
+  z-index:2;
+  display:grid!important;
+  grid-template-columns:minmax(180px,.8fr) minmax(320px,1.45fr) minmax(220px,.8fr)!important;
+  gap:clamp(34px,6vw,84px)!important;
+  align-items:start!important;
+}
+.site-footer .footer-brand img{width:178px!important;height:auto!important}
+.site-footer nav{display:grid!important;grid-template-columns:repeat(2,minmax(110px,1fr))!important;gap:12px 28px!important}
+.site-footer nav a{font-size:.78rem!important;font-weight:700!important;letter-spacing:.035em!important}
+.site-footer address{font-style:normal!important;line-height:1.75!important;font-size:.82rem!important}
+.site-footer address strong{color:var(--sp-white)!important}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media(max-width:1280px){
+  .site-header,.site-header-solid{
+    height:68px!important;min-height:68px!important;
+    grid-template-columns:1fr auto auto!important;
+    padding:8px 18px!important;
+  }
+  html{scroll-padding-top:78px}
+  :where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero){padding-top:112px!important}
+}
+
+@media(max-width:900px){
+  .site-footer .footer-grid{grid-template-columns:1fr 1fr!important}
+  .site-footer address{grid-column:1/-1;padding-top:24px;border-top:1px solid var(--sp-soft-line)}
+  .archive-detail-grid{grid-template-columns:1fr!important}
+  .archive-cover{max-width:520px!important;margin-inline:auto!important}
+}
+
+@media(max-width:700px){
+  .shell,.wp-source-content{width:min(100% - 30px,1240px)!important}
+  .section-pad,.bbf-pad{padding-top:68px!important;padding-bottom:68px!important}
+  :where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero){
+    min-height:410px!important;
+    padding-top:102px!important;
+    padding-bottom:48px!important;
+  }
+  :where(.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero,.archive-hero,.archive-detail-hero,.wp-source-header,.legal-page.page-hero) h1{
+    font-size:clamp(3.45rem,18vw,5.8rem)!important;
+  }
+  .site-footer{padding:58px 0 92px!important}
+  .site-footer .footer-grid{grid-template-columns:1fr!important}
+  .site-footer address{grid-column:auto!important}
+  .site-footer nav{grid-template-columns:1fr 1fr!important}
+  .wp-source-content{padding-top:58px!important;padding-bottom:78px!important}
+  .archive-year{padding-top:28px!important;margin-top:36px!important}
+}
+
+@media(max-width:640px){
+  .site-header,.site-header-solid{top:0!important;width:100%!important;padding:7px 12px!important;border-radius:0!important}
+  .site-header .brand img,.site-header-solid .brand img{width:136px!important}
+  .mobile-nav>summary{border-radius:0!important}
+  .mobile-nav-panel{padding-top:92px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  :where(.library-card>a,.library-card img,.bbf-artist-card img,.contact-route,.ambassador-benefit-grid article,.volunteer-promise-cards article,.volunteer-role-grid a,.jj-flow-grid li,.jj-podium article,.bbf-pass-grid article){transition:none!important}
+}
