@@ -4,6 +4,7 @@ import "../styles/explosion-original-modern.css";
 import "../styles/explosion-premium-berlin.css";
 import "../styles/explosion-berlin-unified.css";
 import "../styles/explosion-feedback-sept1.css";
+import "../styles/explosion-feedback-density.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -58,7 +59,20 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a class:list={[{ "nav-section-current": festivalActive }]} href="/bbf-2026/" aria-current={current("/bbf-2026/") ? "page" : undefined}>Festival</a>
+        <details class:list={["nav-group", { "is-current": festivalActive }]}>
+          <summary>Festival</summary>
+          <div class="nav-popover">
+            <span>Berlin Bachata Festival 2026</span>
+            <a href="/bbf-2026/"><b>Festival overview</b><small>16–18 October · MOA Berlin</small></a>
+            <a href="/bbf-2026/#venue"><b>Venue & hotel</b><small>MOA Berlin and official room deal</small></a>
+            <a href="/bbf-2026/#artists"><b>Artists</b><small>International lineup and DJs</small></a>
+            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Friday to Sunday</small></a>
+            <a href="/bbf-2026/#jj"><b>Jack & Jill</b><small>Competition and registration</small></a>
+            <a href="/bbf-2026/#passes"><b>Passes</b><small>Full, Gold and Party</small></a>
+            <a href="/bbf-2026/#faq"><b>FAQ</b><small>Practical festival answers</small></a>
+          </div>
+        </details>
+
         <details class:list={["nav-group", { "is-current": eventsActive }]}>
           <summary>Events</summary>
           <div class="nav-popover">
@@ -68,6 +82,8 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
             <a href="/archive/"><b>Past events</b><small>Every Explosion since 2022</small></a>
           </div>
         </details>
+
+        <a href="/bbf-2026/#travel">Berlin</a>
         <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
         <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
         <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
@@ -78,7 +94,18 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <div class="mobile-nav-panel">
           <nav aria-label="Mobile navigation">
-            <a href="/bbf-2026/">Festival</a>
+            <details class="mobile-nav-group">
+              <summary><span>Festival</span><i aria-hidden="true"></i></summary>
+              <div>
+                <a href="/bbf-2026/">Festival overview</a>
+                <a href="/bbf-2026/#venue">Venue & hotel</a>
+                <a href="/bbf-2026/#artists">Artists</a>
+                <a href="/bbf-2026/#schedule">Schedule</a>
+                <a href="/bbf-2026/#jj">Jack & Jill</a>
+                <a href="/bbf-2026/#passes">Passes</a>
+                <a href="/bbf-2026/#faq">FAQ</a>
+              </div>
+            </details>
             <details class="mobile-nav-group">
               <summary><span>Events</span><i aria-hidden="true"></i></summary>
               <div>
@@ -87,6 +114,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
                 <a href="/archive/">Past events</a>
               </div>
             </details>
+            <a href="/bbf-2026/#travel">Berlin</a>
             <a href="/explosion-history/">Our Story</a>
             <a href="/ambassadors/">Ambassadors</a>
             <a href="/volunteers/">Volunteers</a>
@@ -114,6 +142,7 @@ const eventsActive = current("/archive/") || current("/role-rotation") || curren
         </div>
         <nav aria-label="Footer navigation">
           <a href="/bbf-2026/">Festival</a>
+          <a href="/bbf-2026/#travel">Berlin & travel</a>
           <a href="/archive/">Past events</a>
           <a href="/explosion-history/">Our Story</a>
           <a href="/ambassadors/">Ambassadors</a>
