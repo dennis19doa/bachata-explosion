@@ -1,0 +1,208 @@
+/*
+ * BACHATA EXPLOSION — UNIFIED BERLIN PREMIUM SYSTEM
+ * Shared atmosphere and scale pass. Keeps content/route structure intact.
+ */
+
+:root{
+  --berlin-night:#100609;
+  --berlin-panel:rgba(24,9,15,.82);
+  --berlin-panel-strong:rgba(20,7,13,.93);
+  --berlin-wine:#8b274a;
+  --berlin-pink:#ef4c89;
+  --berlin-gold:#e3b75f;
+  --berlin-gold-soft:#f7ddb0;
+  --berlin-ink:#fff6ef;
+  --berlin-muted:#cdb9c0;
+  --berlin-line:rgba(247,221,176,.18);
+}
+
+/* One Berlin atmosphere behind the complete site. */
+html{background:var(--berlin-night)!important}
+body{
+  position:relative;
+  isolation:isolate;
+  background:transparent!important;
+  color:var(--berlin-ink)!important;
+}
+body::before{
+  position:fixed;
+  inset:74px 0 0;
+  z-index:-2;
+  display:block;
+  background:
+    linear-gradient(180deg,rgba(9,3,6,.48),rgba(9,3,6,.73)),
+    linear-gradient(90deg,rgba(76,13,39,.27),rgba(8,3,5,.08) 52%,rgba(66,14,36,.18)),
+    url('/media/brand/berlin-brandenburg-gold.png') center 34%/cover no-repeat;
+  content:"";
+  pointer-events:none;
+}
+body::after{
+  position:fixed;
+  inset:74px 0 0;
+  z-index:-1;
+  background:radial-gradient(circle at 50% 22%,transparent 0 24%,rgba(8,3,5,.18) 58%,rgba(8,3,5,.48) 100%);
+  content:"";
+  pointer-events:none;
+}
+main{background:transparent!important}
+:where(.ex-home,.bbf-premium,.contact-2026,.ambassador-2026,.archive-index,.archive-page,.archive-event,.wp-source-page,.insider-page,.tf-native){background:transparent!important}
+
+/* Let Berlin remain visible between information blocks instead of painting every page opaque. */
+:where(.contact-routing,.contact-workbench,.contact-next,.ambassador-statement,.ambassador-benefits,.ambassador-role,.ambassador-group,.ambassador-application,.archive-year,.wp-source-content,.be-history){
+  background:rgba(16,6,10,.78)!important;
+  backdrop-filter:blur(2px);
+}
+:where(.page-hero,.archive-hero,.wp-source-header,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero){
+  border-bottom:1px solid var(--berlin-line)!important;
+  background:rgba(12,4,8,.70)!important;
+}
+:where(.page-hero,.archive-hero,.wp-source-header,.contact-hero,.volunteer-hero,.jj-hero,.insider-hero)::after{
+  opacity:.52!important;
+  background:
+    linear-gradient(90deg,rgba(10,3,6,.92),rgba(10,3,6,.44)),
+    url('/media/brand/berlin-brandenburg-gold.png') center 38%/cover no-repeat!important;
+}
+
+/* Premium framing language used across cards/forms/pages. */
+:where(.contact-route,.contact-delivery-card,.contact-form,.ambassador-benefit-grid article,.ambassador-role-notes p,.ambassador-group-card,.ambassador-form,.archive-card,.wp-source-content,.bbf-film,.bbf-venue-card,.bbf-hotel-deal,.bbf-hotel-panel,.bbf-schedule-panel,.bbf-pass-grid article,.bbf-travel-grid article,.bbf-whatsapp,.bbf-faq-list details){
+  border:1px solid var(--berlin-line)!important;
+  background:linear-gradient(145deg,rgba(37,16,25,.92),rgba(21,8,14,.94))!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.025)!important;
+}
+:where(.contact-route,.ambassador-benefit-grid article,.archive-card,.bbf-pass-grid article,.bbf-travel-grid article):hover{
+  border-color:rgba(227,183,95,.50)!important;
+}
+:where(.button,.ex-btn,.tf-next){border-radius:2px!important}
+
+/* Larger shared page scale. */
+:where(.page-hero,.archive-hero,.wp-source-header,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero) h1{
+  font-size:clamp(4.5rem,8.4vw,8.7rem)!important;
+  line-height:.84!important;
+}
+:where(.section-pad,.bbf-pad){padding-top:clamp(86px,9vw,138px)!important;padding-bottom:clamp(86px,9vw,138px)!important}
+:where(.contact-section-heading,.split-heading,.bbf-heading) h2{font-size:clamp(3.6rem,6.4vw,6.5rem)!important}
+
+/* Homepage — same information, much more presence. */
+html body .ex-home{position:relative;isolation:isolate;color:var(--berlin-ink)!important}
+html body .ex-shell{width:min(1380px,calc(100% - 56px))!important}
+html body .ex-section{padding:clamp(96px,9.5vw,150px) 0!important}
+html body .ex-hero{background:rgba(17,6,11,.78)!important;backdrop-filter:blur(1px)}
+html body .ex-hero-grid{grid-template-columns:minmax(0,.84fr) minmax(520px,1.16fr)!important;min-height:820px!important}
+html body .ex-hero-copy{padding-top:clamp(84px,9vw,132px)!important;padding-bottom:clamp(74px,8vw,118px)!important}
+html body .ex-hero h1{max-width:790px!important;font-size:clamp(5.5rem,9.3vw,10rem)!important;line-height:.77!important}
+html body .ex-hero-lead{max-width:670px!important;font-size:clamp(1.08rem,1.5vw,1.25rem)!important;line-height:1.72!important}
+html body .ex-hero-meta{font-size:.84rem!important}
+html body .ex-btn{min-height:56px!important;padding-inline:28px!important;font-size:.77rem!important}
+html body .ex-hero-media{min-height:820px!important}
+html body .ex-hero-media video{filter:saturate(.93) contrast(1.07) brightness(.83)!important}
+html body .ex-hero-poster{width:min(35%,270px)!important;border:1px solid rgba(227,183,95,.30);box-shadow:22px 22px 0 rgba(227,183,95,.18),0 32px 78px rgba(0,0,0,.40)!important}
+
+html body .ex-lineup{background:rgba(19,8,13,.92)!important;backdrop-filter:blur(10px)}
+html body .ex-lineup-inner{grid-template-columns:210px minmax(0,1fr) auto!important;padding:30px 0!important}
+html body .ex-lineup-label strong{font-size:1.6rem!important}
+html body .ex-lineup-person{grid-template-columns:58px 1fr!important;gap:12px!important}
+html body .ex-lineup-person img{width:58px!important;height:58px!important}
+html body .ex-lineup-person span{font-size:.78rem!important}
+
+html body .ex-events{background:linear-gradient(135deg,rgba(92,18,48,.93),rgba(139,39,74,.92) 52%,rgba(55,11,30,.94))!important;backdrop-filter:blur(2px)}
+html body .ex-events-head,html body .ex-team-head{margin-bottom:54px!important}
+html body .ex-display{font-size:clamp(4rem,7.3vw,7.4rem)!important}
+html body .ex-event-grid{gap:clamp(24px,3vw,42px)!important}
+html body .ex-event-card h3{font-size:clamp(2.5rem,3.4vw,3.8rem)!important}
+html body .ex-event-card p{font-size:.96rem!important}
+html body .ex-event-poster{border:1px solid rgba(247,221,176,.17);box-shadow:0 28px 70px rgba(25,5,14,.30)!important}
+
+html body .ex-proof{background:rgba(15,5,10,.78)!important;backdrop-filter:blur(2px)}
+html body .ex-proof-layout{gap:clamp(64px,8vw,126px)!important}
+html body .ex-stat{min-height:200px!important;padding:30px!important;background:rgba(33,16,24,.88)!important}
+html body .ex-stat strong{font-size:clamp(3.8rem,6vw,6.2rem)!important}
+html body .ex-stat span{font-size:.75rem!important}
+html body .ex-proof-photos{grid-template-rows:260px 190px!important;gap:12px!important}
+
+/* Team wall: editorial magazine hierarchy instead of founders vs tiny cards. */
+html body .ex-team{background:rgba(17,7,12,.84)!important;backdrop-filter:blur(3px)}
+html body .ex-team-grid{grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:16px!important;align-items:stretch}
+html body .ex-person{
+  position:relative!important;
+  grid-column:span 3!important;
+  min-height:365px!important;
+  border:1px solid rgba(227,183,95,.34)!important;
+  background:#180a11!important;
+  box-shadow:0 24px 60px rgba(0,0,0,.25),inset 0 0 0 5px rgba(255,255,255,.025)!important;
+}
+html body .ex-person::before{
+  position:absolute;
+  z-index:3;
+  top:12px;
+  left:12px;
+  padding:6px 8px;
+  border:1px solid rgba(247,221,176,.24);
+  background:rgba(10,3,6,.72);
+  color:var(--berlin-gold-soft);
+  font-size:.55rem;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  content:"EXPLOSION / TEAM";
+  backdrop-filter:blur(8px);
+}
+html body .ex-person:nth-child(1),html body .ex-person:nth-child(2){grid-column:span 4!important;min-height:520px!important;border-color:rgba(227,183,95,.55)!important}
+html body .ex-person:nth-child(3){grid-column:span 4!important;min-height:465px!important;border-color:rgba(239,76,137,.46)!important;align-self:end}
+html body .ex-person:nth-child(4),html body .ex-person:nth-child(5),html body .ex-person:nth-child(6),html body .ex-person:nth-child(7){grid-column:span 3!important;min-height:365px!important}
+html body .ex-person:nth-child(8),html body .ex-person:nth-child(9){grid-column:span 6!important;min-height:340px!important}
+html body .ex-person:nth-child(8) img,html body .ex-person:nth-child(9) img{object-position:center 32%!important}
+html body .ex-person-info{left:22px!important;right:22px!important;bottom:22px!important}
+html body .ex-person-info h3{font-size:clamp(1.8rem,2.7vw,3rem)!important}
+html body .ex-person:nth-child(1) .ex-person-info h3,html body .ex-person:nth-child(2) .ex-person-info h3{font-size:clamp(2.5rem,3.5vw,4rem)!important}
+
+html body .ex-story{background:rgba(10,3,7,.88)!important;backdrop-filter:blur(3px)}
+html body .ex-history-wall{gap:10px!important}
+html body .ex-history-wall figure{border:1px solid rgba(227,183,95,.20)!important;outline:0!important;box-shadow:0 14px 40px rgba(0,0,0,.22)}
+html body .ex-final{background:linear-gradient(110deg,rgba(139,39,74,.96),rgba(95,18,47,.95) 55%,rgba(22,7,13,.96))!important}
+
+/* BBF remains the strongest expression of the visual system. */
+.bbf-premium::before{opacity:.96!important}
+.bbf-intro,.bbf-venue,.bbf-schedule,.bbf-passes,.bbf-faq,.bbf-travel{backdrop-filter:blur(3px)}
+.bbf-heading h2{font-size:clamp(4rem,7vw,7rem)!important}
+.bbf-artist-card{outline:1px solid rgba(227,183,95,.10);outline-offset:-6px}
+
+/* History keeps its carefully built composition, only the surrounding atmosphere changes. */
+.be-history{background:rgba(13,5,9,.84)!important;backdrop-filter:blur(3px)}
+.be-event{background:rgba(27,12,19,.82)!important}
+.be-event__media img{box-shadow:0 20px 55px rgba(0,0,0,.25)}
+
+/* Footer belongs to the same city/night environment. */
+.site-footer{background:rgba(10,3,7,.97)!important;backdrop-filter:blur(12px)}
+
+@media(max-width:1100px){
+  html body .ex-shell{width:min(100% - 42px,1380px)!important}
+  html body .ex-hero-grid{grid-template-columns:1fr 1fr!important}
+  html body .ex-lineup-inner{grid-template-columns:170px 1fr!important}
+  html body .ex-lineup-all{grid-column:2!important}
+  html body .ex-person:nth-child(1),html body .ex-person:nth-child(2),html body .ex-person:nth-child(3){grid-column:span 4!important}
+  html body .ex-person:nth-child(n+4){grid-column:span 4!important}
+}
+@media(max-width:840px){
+  body::before,body::after{inset:68px 0 0}
+  html body .ex-shell{width:calc(100% - 34px)!important}
+  html body .ex-hero-grid{grid-template-columns:1fr!important;min-height:auto!important}
+  html body .ex-hero-media{min-height:590px!important}
+  html body .ex-lineup-inner{grid-template-columns:1fr!important}
+  html body .ex-lineup-all{grid-column:auto!important}
+  html body .ex-team-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body .ex-person,html body .ex-person:nth-child(n){grid-column:auto!important;min-height:350px!important}
+  html body .ex-person:nth-child(1),html body .ex-person:nth-child(2){min-height:460px!important}
+  html body .ex-person:nth-child(3){min-height:420px!important}
+}
+@media(max-width:560px){
+  body::before{background-position:54% top}
+  html body .ex-shell{width:calc(100% - 28px)!important}
+  html body .ex-hero h1{font-size:clamp(4.4rem,19vw,6.7rem)!important}
+  html body .ex-hero-media{min-height:500px!important}
+  html body .ex-display{font-size:clamp(3.3rem,15vw,5.4rem)!important}
+  html body .ex-team-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  html body .ex-person,html body .ex-person:nth-child(n){min-height:285px!important}
+  html body .ex-person:nth-child(1),html body .ex-person:nth-child(2),html body .ex-person:nth-child(3){grid-column:1/-1!important;min-height:420px!important}
+  html body .ex-person:nth-child(8),html body .ex-person:nth-child(9){grid-column:1/-1!important;min-height:330px!important}
+  :where(.page-hero,.archive-hero,.wp-source-header,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero) h1{font-size:clamp(3.6rem,16vw,5.7rem)!important}
+}
