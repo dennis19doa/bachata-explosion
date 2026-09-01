@@ -28,8 +28,8 @@ const artists = [
 
 const venueStories = [
   { kicker: "Sleep", title: "Stay at Hotel MOA Berlin", text: "Rooms, breakfast, workshops and parties—all without crossing the city.", image: "/media/bbf/venue/location.png" },
-  { kicker: "Dance", title: "1,200 m² main floor", text: "Space for focused workshops, shows, competitions and long social nights.", image: "/media/bbf/venue/architecture.png" },
-  { kicker: "Everything nearby", title: "MOA Bogen & EDEKA", text: "EDEKA is downstairs and open Monday–Saturday, 07:00–22:00.", image: "/media/bbf/venue/connectivity.png" },
+  { kicker: "Dance", title: "About 2,000 m² of event space", text: "Multiple rooms for workshops, shows, competition moments and long social nights across the festival setup.", image: "/media/bbf/venue/architecture.png" },
+  { kicker: "Shopping & essentials", title: "MOA Bogen shopping mall", text: "A supermarket and everyday shops are inside the complex. The supermarket is open Monday–Saturday, 07:00–22:00.", image: "/media/bbf/venue/connectivity.png" },
 ] as const;
 
 const hotelBookingUrl = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/1902213";
@@ -38,9 +38,9 @@ const routePlannerUrl = "https://www.bvg.de/en/connections/connection-search";
 const moaDirectionsUrl = "https://moa.de/anfahrt/";
 
 const hotelRooms = [
-  { id: "single", tab: "Single room", price: "€129 / night", title: "Your own room inside the festival", text: "Private comfort for one dancer. Breakfast is included; your festival pass is booked separately.", points: ["1 guest", "Breakfast included", "No commute to the festival floor"], action: "Book single room" },
-  { id: "double", tab: "Double room", price: "€149 / night", title: "Share the weekend", text: "A double room for two dancers, friends or partners who want the complete on-site experience together.", points: ["2 guests", "Breakfast included", "Hotel and venue connected"], action: "Book double room" },
-  { id: "triple", tab: "3-person room", price: "On request", title: "Bring your festival crew", text: "The practical option for three friends who want to stay together. Availability is confirmed by the event team.", points: ["3 guests", "Breakfast included", "Request subject to availability"], action: "Request 3-person room" },
+  { id: "single", tab: "Single room", price: "€129 / night", title: "Your own room inside the festival", text: "Private comfort for one dancer. Breakfast is included; your festival pass is booked separately.", points: ["1 guest", "Breakfast included", "No commute to the festival floor"], action: "Book single room", image: "/media/bbf/venue/location.png" },
+  { id: "double", tab: "Double room", price: "€149 / night", title: "Share the weekend", text: "A double room for two dancers, friends or partners who want the complete on-site experience together.", points: ["2 guests", "Breakfast included", "Hotel and venue connected"], action: "Book double room", image: "/media/bbf/venue/hotel.png" },
+  { id: "triple", tab: "3-person room", price: "On request", title: "Bring your festival crew", text: "The practical option for three friends who want to stay together. Availability is confirmed by the event team.", points: ["3 guests", "Breakfast included", "Request subject to availability"], action: "Request 3-person room", image: "/media/bbf/venue/lounge.png" },
 ] as const;
 
 const workshopSlots = {
@@ -103,7 +103,7 @@ const expandedFaqs = [
       <div class="shell bbf-hero-grid">
         <div class="bbf-hero-copy">
           <p class="bbf-meta"><span>16–18 October 2026</span><span>MOA Berlin</span></p>
-          <p class="eyebrow"><span></span>The flagship Explosion</p>
+          <p class="eyebrow"><span></span>The flagship Explosion · 4th edition</p>
           <h1 id="bbf-title">Berlin<br />Bachata<br /><em>Festival</em></h1>
           <p class="bbf-hero-lead">Three days of world-class learning, electric nights and the warmth of a community built by dancers.</p>
           <div class="hero-actions">
@@ -135,7 +135,7 @@ const expandedFaqs = [
       <div class="shell bbf-stats-grid">
         <div><strong>3</strong><span>Festival days</span></div>
         <div><strong>20+</strong><span>International artists</span></div>
-        <div><strong>1,200 m²</strong><span>Main dance floor</span></div>
+        <div><strong>≈2,000 m²</strong><span>Event space</span></div>
         <div><strong>3</strong><span>Party nights</span></div>
       </div>
     </section>
@@ -143,14 +143,14 @@ const expandedFaqs = [
     <section class="bbf-intro bbf-pad">
       <div class="shell bbf-overview-compact">
         <div class="bbf-overview-copy">
-          <p class="section-label">Made in Berlin · open to the world</p>
-          <h2>Serious dancing.<br /><em>A human festival.</em></h2>
-          <p>International artists and ambitious workshops without losing the part that matters: a room that still feels personal, social and easy to belong in.</p>
+          <p class="section-label">Why dancers choose Explosion</p>
+          <h2>Built around the<br /><em>dance experience.</em></h2>
+          <p>Strong teaching, serious social dancing and a personal Berlin atmosphere—without turning the weekend into an anonymous convention.</p>
         </div>
         <div class="bbf-overview-points">
-          <article><span>01</span><h3>Learn with purpose.</h3><p>Technique, musicality and ideas you can actually take back to your dancing.</p></article>
-          <article><span>02</span><h3>Dance all night.</h3><p>Three nights built around the social floor, not around filler between workshops.</p></article>
-          <article><span>03</span><h3>Feel at home.</h3><p>A Berlin-born team, one connected venue and a community you can actually talk to.</p></article>
+          <article><span>Teaching</span><h3>World-class learning.</h3><p>International instructors, structured workshops and ideas you can actually take back to your dancing.</p></article>
+          <article><span>Social</span><h3>The floor matters.</h3><p>Three long party nights designed around social dancing, connection and the music—not filler between workshops.</p></article>
+          <article><span>Community</span><h3>Personal, even when it grows.</h3><p>A dancer-built Berlin team, a connected venue and a community where you can still speak to the people behind the event.</p></article>
         </div>
       </div>
     </section>
@@ -158,8 +158,8 @@ const expandedFaqs = [
     <section class="bbf-venue bbf-pad" id="venue" aria-labelledby="venue-title">
       <div class="shell">
         <div class="bbf-heading">
-          <div><p class="section-label">Official festival hotel & venue</p><h2 id="venue-title">MOA Berlin is your<br /><em>festival home base.</em></h2></div>
-          <p>Sleep, breakfast, workshops, socials, parties and everyday essentials are connected around the same MOA Bogen complex.</p>
+          <div><p class="section-label">Official festival hotel & venue</p><h2 id="venue-title">Your whole festival.<br /><em>One address.</em></h2></div>
+          <p>Sleep, breakfast, workshops, socials, parties, shopping and everyday essentials are connected around the same MOA Bogen complex.</p>
         </div>
 
         <div class="bbf-venue-dense">
@@ -184,11 +184,12 @@ const expandedFaqs = [
         <div class="bbf-stay-compact">
           <div class="bbf-stay-head">
             <div><p class="section-label">Official BBF room deal</p><h3>The best way to stay at Explosion.</h3></div>
-            <p>Breakfast is included. Festival passes and the optional €10-per-day drink flatrate are booked separately.</p>
+            <p>See the rooms, compare the options and stay directly inside the festival. Breakfast is included; festival passes and the optional €10-per-day drink flatrate are booked separately.</p>
           </div>
           <div class="bbf-room-grid">
             {hotelRooms.map((room) => (
               <article class="bbf-room-card">
+                <figure class="bbf-room-media"><img src={room.image} alt={`${room.tab} at Hotel MOA Berlin`} width="900" height="650" loading="lazy" /></figure>
                 <span>{room.tab}</span>
                 <strong>{room.price}</strong>
                 <h4>{room.title}</h4>
@@ -207,15 +208,15 @@ const expandedFaqs = [
       <div class="shell">
         <div class="bbf-artist-backdrop" aria-hidden="true">BERLIN 2026</div>
         <div class="bbf-heading">
-          <div><p class="section-label">International lineup</p><h2 id="artists-title">People you came<br /><em>to learn from.</em></h2></div>
-          <p>The first eight are shown immediately. Open the full lineup when you want it instead of scrolling through twenty-one identical cards.</p>
+          <div><p class="section-label">International lineup</p><h2 id="artists-title">The people who shape<br /><em>the weekend.</em></h2></div>
+          <p>The first eight are shown immediately. The order reshuffles when you visit, then you can open the full lineup whenever you want it.</p>
         </div>
 
-        <div class="bbf-artist-grid" aria-label="Berlin Bachata Festival 2026 artists">
+        <div class="bbf-artist-grid" aria-label="Berlin Bachata Festival 2026 artists" data-artist-grid>
           {artists.map(([name, image], index) => (
-            <article class="bbf-artist-card" hidden={index >= 8} data-extra-artist={index >= 8 ? "true" : undefined} aria-label={`${name}, Berlin Bachata Festival 2026`}>
+            <article class="bbf-artist-card" hidden={index >= 8} data-artist-card aria-label={`${name}, Berlin Bachata Festival 2026`}>
               <img src={image} alt={`${name}, Berlin Bachata Festival 2026 artist`} width="800" height="1000" loading={index < 8 ? "eager" : "lazy"} />
-              <div class="bbf-artist-name"><span>{index < 10 ? `0${index + 1}` : index + 1}</span><h3>{name}</h3></div>
+              <div class="bbf-artist-name"><span data-artist-number>{index < 10 ? `0${index + 1}` : index + 1}</span><h3>{name}</h3></div>
             </article>
           ))}
         </div>
@@ -286,8 +287,8 @@ const expandedFaqs = [
     <section class="bbf-passes bbf-pad" id="passes" aria-labelledby="passes-title">
       <div class="shell">
         <div class="bbf-heading">
-          <div><p class="section-label">Choose your pass</p><h2 id="passes-title">Pick the weekend<br /><em>you actually want.</em></h2></div>
-          <p>No animated sales cards. Compare the access, choose once and continue to the official checkout.</p>
+          <div><p class="section-label">Choose your pass</p><h2 id="passes-title">Choose your way<br /><em>into Explosion.</em></h2></div>
+          <p>Compare the access, choose once and continue to the official checkout.</p>
         </div>
         <div class="bbf-pass-grid">
           <article class="bbf-pass-full"><span>Everything essential</span><h3>Full Pass</h3><p>Regular festival workshops, socials and parties across the weekend.</p><ul><li>Friday–Sunday workshops</li><li>All three festival parties</li><li>Jack & Jill eligibility</li></ul><a href={ticketUrl}>See current price ↗</a></article>
@@ -383,10 +384,25 @@ const expandedFaqs = [
     });
 
     const artistToggle = document.querySelector<HTMLButtonElement>("[data-artist-toggle]");
-    const extraArtists = Array.from(document.querySelectorAll<HTMLElement>("[data-extra-artist='true']"));
+    const artistGrid = document.querySelector<HTMLElement>("[data-artist-grid]");
+    const artistCards = Array.from(document.querySelectorAll<HTMLElement>("[data-artist-card]"));
+    for (let i = artistCards.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const cardI = artistCards[i];
+      const cardJ = artistCards[j];
+      if (!cardI || !cardJ) continue;
+      artistCards[i] = cardJ;
+      artistCards[j] = cardI;
+    }
+    artistCards.forEach((artist, index) => {
+      artistGrid?.appendChild(artist);
+      artist.hidden = index >= 8;
+      const number = artist.querySelector<HTMLElement>("[data-artist-number]");
+      if (number) number.textContent = String(index + 1).padStart(2, "0");
+    });
     artistToggle?.addEventListener("click", () => {
       const expanded = artistToggle.getAttribute("aria-expanded") === "true";
-      extraArtists.forEach((artist) => { artist.hidden = expanded; });
+      artistCards.forEach((artist, index) => { artist.hidden = expanded ? index >= 8 : false; });
       artistToggle.setAttribute("aria-expanded", String(!expanded));
       artistToggle.textContent = expanded ? "Show full lineup · +13" : "Show less";
     });
