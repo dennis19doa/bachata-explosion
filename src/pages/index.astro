@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { ticketUrl } from "../data/festival";
-import "../styles/home-impact.css";
+import "../styles/home-modern.css";
 
 const lineup = [
   ["Victor & Alba", "/media/bbf/artists/victor-alba.jpg"],
@@ -39,7 +39,7 @@ const storyImages = [
 >
   <div class="impact-home" data-wordpress-source="home">
     <section class="impact-hero" aria-labelledby="impact-hero-title">
-      <video class="impact-hero-video ug-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-label="Bachata Explosion festival atmosphere">
+      <video class="impact-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-label="Bachata Explosion festival atmosphere">
         <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
       </video>
       <div class="impact-hero-wash" aria-hidden="true"></div>
@@ -50,7 +50,7 @@ const storyImages = [
           <div class="impact-hero-meta"><strong>16–18 October 2026</strong><span>MOA Berlin · Stephanstraße 41</span></div>
           <p class="impact-hero-lead">International artists, high-quality workshops, competition energy and three nights of social dancing in Berlin.</p>
           <div class="impact-actions">
-            <a class="impact-button" href={ticketUrl} data-ticket-checkout>Get festival tickets</a>
+            <a class="impact-button" href={ticketUrl}>Get festival tickets</a>
             <a class="impact-button ghost" href="/bbf-2026/">Festival details</a>
           </div>
         </div>
@@ -78,36 +78,36 @@ const storyImages = [
 
     <section class="impact-formats impact-section" aria-labelledby="impact-formats-title">
       <div class="impact-shell impact-section-heading">
-        <p class="impact-kicker">Explosion formats</p>
-        <h2 class="impact-title" id="impact-formats-title">Three concepts.<br /><em>One Explosion.</em></h2>
-        <p class="impact-copy">Each format has its own purpose, but they all come from the same idea: dancers first.</p>
+        <p class="impact-kicker">Explosion events</p>
+        <h2 class="impact-title" id="impact-formats-title">Three formats.<br /><em>One community.</em></h2>
+        <p class="impact-copy">Different weekends for different kinds of dancers — always built with the same Explosion attention to people, learning and atmosphere.</p>
       </div>
       <div class="impact-shell impact-format-grid">
         <a class="impact-format-card" href="/archive/role-rotation-2026/">
           <figure><img src="/media/events/role-rotation-2026.webp" alt="Role Rotation 2026 poster" width="900" height="1100" loading="lazy" /></figure>
-          <div><span>01 · Role Rotation</span><h3>Change perspective.</h3><p>Lead, follow and switch roles to understand connection from both sides. A focused concept built around technique, empathy and freedom on the dance floor.</p><b>Explore Role Rotation →</b></div>
+          <div><span>01 · Role Rotation</span><h3>Switch perspective.</h3><p>Lead, follow and change roles. A focused Berlin weekend around connection, technique and understanding both sides of the dance.</p><b>Explore Role Rotation →</b></div>
         </a>
         <a class="impact-format-card" href="/archive/elite-dance-3/">
           <figure><img src="/media/events/elite-dance-3.webp" alt="Elite Dance 3 poster" width="900" height="1100" loading="lazy" /></figure>
-          <div><span>02 · Elite Dance</span><h3>Go deeper.</h3><p>A smaller, more intimate Explosion format with selected artists, concentrated learning and a closer community atmosphere.</p><b>Explore Elite Dance →</b></div>
+          <div><span>02 · Elite Dance</span><h3>Go deeper.</h3><p>A smaller Explosion experience with selected artists, concentrated learning and a closer community atmosphere.</p><b>Explore Elite Dance →</b></div>
         </a>
         <a class="impact-format-card" href="/bbf-2026/">
           <figure><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 poster" width="1080" height="1350" loading="lazy" /></figure>
-          <div><span>03 · Berlin Bachata Festival</span><h3>The flagship.</h3><p>Our biggest Berlin weekend: international artists, workshops, parties, competition and the full Explosion community under one roof.</p><b>Explore BBF 2026 →</b></div>
+          <div><span>03 · Berlin Bachata Festival</span><h3>The flagship.</h3><p>Our biggest weekend: international artists, workshops, parties, competitions and the full Explosion community under one roof.</p><b>Explore BBF 2026 →</b></div>
         </a>
       </div>
     </section>
 
     <section class="impact-stats impact-section" aria-labelledby="impact-stats-title">
       <div class="impact-shell impact-stats-heading">
-        <div><p class="impact-kicker">We are all about you</p><h2 class="impact-title" id="impact-stats-title">Built around the dancers<br />who make the room <em>alive.</em></h2></div>
-        <p class="impact-copy">Explosion has grown because dancers keep coming back, bringing friends and becoming part of the story. These numbers are about people, not scale for the sake of scale.</p>
+        <div><p class="impact-kicker">We are all about you</p><h2 class="impact-title" id="impact-stats-title">Explosion grows because<br />dancers make it <em>theirs.</em></h2></div>
+        <p class="impact-copy">The numbers matter because every one of them represents people who taught, danced, travelled, volunteered, returned and became part of the story.</p>
       </div>
       <div class="impact-shell impact-stat-grid">
         <div><strong>20+</strong><span>Events organised</span></div>
-        <div><strong>500+</strong><span>Artists & DJs worked with</span></div>
+        <div><strong>500+</strong><span>Artists & DJs</span></div>
         <div><strong>6,000+</strong><span>Dancers reached</span></div>
-        <div><strong>2022</strong><span>Explosion began</span></div>
+        <div><strong>2022</strong><span>Growing since</span></div>
         <div><strong>Berlin</strong><span>Made here</span></div>
       </div>
       <div class="impact-shell impact-stat-photo-row" aria-label="Bachata Explosion atmosphere">
@@ -119,8 +119,8 @@ const storyImages = [
 
     <section class="impact-people impact-section" aria-labelledby="impact-people-title">
       <div class="impact-shell impact-people-heading">
-        <div><p class="impact-kicker">The people behind Explosion</p><h2 class="impact-title" id="impact-people-title">We are not a faceless<br /><em>festival brand.</em></h2></div>
-        <p class="impact-copy">These are the people who plan, drive, welcome, promote, support and shape the events. They are a visible part of Explosion because they are a real part of the experience.</p>
+        <div><p class="impact-kicker">The people behind Explosion</p><h2 class="impact-title" id="impact-people-title">We are<br /><em>Explosion.</em></h2></div>
+        <p class="impact-copy">The people who plan, welcome, drive, support, promote and shape the weekends are part of the identity — so they should be visible.</p>
       </div>
       <div class="impact-shell impact-team-grid">
         {team.map((person, index) => (
@@ -135,10 +135,9 @@ const storyImages = [
     <section class="impact-story impact-section" aria-labelledby="impact-story-title">
       <div class="impact-shell impact-story-layout">
         <div class="impact-story-copy">
-          <p class="impact-kicker">We are Explosion</p>
-          <h2 class="impact-title" id="impact-story-title">What started as a dream<br />became a <em>community.</em></h2>
-          <p class="impact-copy">Explosion began in Berlin in 2022 with Elena and Dennis and a simple goal: create events where dancers feel challenged, welcomed and excited to come back. Since then, every edition has added another chapter, another room full of people and another reason to keep building.</p>
-          <p class="impact-copy">The history matters because the event did not appear overnight. The photos, posters and people from every edition are part of what Explosion is today.</p>
+          <p class="impact-kicker">Our story</p>
+          <h2 class="impact-title" id="impact-story-title">Different editions.<br />One <em>Explosion.</em></h2>
+          <p class="impact-copy">Explosion started in Berlin in 2022 with a simple idea: build the dance weekends we would want to attend ourselves. Every edition since then has added another chapter, another room full of people and another memory worth keeping.</p>
           <a class="impact-text-link" href="/explosion-history/">Explore the complete history →</a>
         </div>
         <div class="impact-history-collage" aria-label="Bachata Explosion editions from 2022 to 2026">
@@ -149,8 +148,8 @@ const storyImages = [
 
     <section class="impact-join">
       <div class="impact-shell impact-join-inner">
-        <div><p class="impact-kicker impact-kicker-light">Your next chapter</p><h2>Are you ready to be part of it?</h2><p>Join us at the next Explosion in Berlin.</p></div>
-        <div class="impact-actions"><a class="impact-button" href={ticketUrl} data-ticket-checkout>Get tickets</a><a class="impact-button ghost" href="/bbf-2026/">Explore BBF 2026</a></div>
+        <div><p class="impact-kicker impact-kicker-light">The next Explosion</p><h2>Are you ready to be part of it?</h2><p>Berlin Bachata Festival · 16–18 October 2026.</p></div>
+        <div class="impact-actions"><a class="impact-button" href={ticketUrl}>Get tickets</a><a class="impact-button ghost" href="/bbf-2026/">Explore festival</a></div>
       </div>
     </section>
   </div>
