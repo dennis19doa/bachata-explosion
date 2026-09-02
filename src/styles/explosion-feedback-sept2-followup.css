@@ -1,0 +1,68 @@
+/* Follow-up from the September 2 screenshot review. Loaded last on purpose. */
+
+/* VOLUNTEERS — give the hero copy breathing room without changing the image frame. */
+.volunteer-hero-copy{
+  box-sizing:border-box!important;
+  min-height:690px!important;
+  padding:clamp(112px,12vh,150px) clamp(42px,4.4vw,66px) clamp(104px,11vh,138px)!important;
+}
+.volunteer-hero-copy .button{
+  margin-top:clamp(24px,2.2vw,34px)!important;
+}
+
+/* HISTORY — match the live page: the chapter menu remains beside the story while scrolling. */
+@media (min-width:761px){
+  .wp-preserved-page[data-wordpress-source="explosion-history"],
+  .wp-preserved-page[data-wordpress-source="explosion-history"] :where(
+    .wp-source-content,
+    .elementor,
+    .e-con,
+    .e-con-inner,
+    .elementor-element,
+    .elementor-widget,
+    .elementor-widget-container,
+    .be-history,
+    .be-history__layout,
+    .be-history__grid,
+    .be-history__content
+  ){
+    overflow:visible!important;
+    contain:none!important;
+    transform:none!important;
+  }
+  .wp-preserved-page[data-wordpress-source="explosion-history"] :where(.be-history__layout,.be-history__grid){
+    align-items:start!important;
+  }
+  .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar{
+    position:sticky!important;
+    top:104px!important;
+    align-self:start!important;
+    height:max-content!important;
+    min-height:0!important;
+    max-height:calc(100vh - 124px)!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    scrollbar-width:thin;
+    z-index:30!important;
+  }
+}
+
+/* First story photograph: reproduce the higher live-site crop instead of centering too low. */
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history .be-event:first-of-type img,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-hero img{
+  object-position:center 24%!important;
+}
+
+@media (max-width:760px){
+  .volunteer-hero-copy{
+    min-height:610px!important;
+    padding:88px 22px 96px!important;
+  }
+  .volunteer-hero-copy .button{margin-top:22px!important}
+  .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar{
+    position:static!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}
