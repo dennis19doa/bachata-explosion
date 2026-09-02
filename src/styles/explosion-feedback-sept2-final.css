@@ -40,3 +40,26 @@
 
 @media(max-width:900px){.bbf-pass-grid .bbf-pass-featured{transform:none!important}.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar{position:static!important;max-height:none!important;overflow:visible!important}.bbf-overview-points{grid-template-columns:1fr!important}.bbf-overview-points article{min-height:0!important}.bbf-overview-points h3,.bbf-overview-points p{min-height:0!important}}
 @media(max-width:760px){.volunteer-slideshow,.volunteer-hero-copy{min-height:610px!important}.bbf-room-media{aspect-ratio:16/9!important;min-height:0!important}.bbf-jj-photo{aspect-ratio:16/10!important}}
+
+/* Screenshot corrections — exact September 2 review set. */
+/* Ambassador: move only the photograph inside its frame, keeping the frame fixed. */
+.ambassador-role figure img{object-position:center 30%!important}
+
+/* Volunteers: restore the slideshow controls and guarantee the first frame uses a known-good local event photo. */
+.volunteer-slider-ui{display:flex!important}
+.volunteer-slide:first-child img{content:url('/media/bbf/atmosphere/saturday-62.jpg')!important}
+.volunteer-slide img{visibility:visible!important}
+
+/* BBF quick navigation: centered as one deliberate row on desktop. */
+.bbf-quicknav .shell{justify-content:center!important}
+
+/* BBF value cards: prevent narrow-column word breaking and give the copy natural rhythm. */
+.bbf-overview-points article{min-width:0!important;min-height:270px!important;justify-content:center!important;padding:30px 26px!important}
+.bbf-overview-points article>span{display:none!important}
+.bbf-overview-points h3{display:block!important;min-height:0!important;margin:0 0 14px!important;font-size:clamp(1.32rem,1.65vw,1.72rem)!important;line-height:1.08!important;overflow-wrap:normal!important;word-break:keep-all!important;hyphens:none!important}
+.bbf-overview-points p{min-height:0!important;margin:0!important;line-height:1.58!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+
+/* BBF J&J feature: use the Saturday Party award photo mirrored from the live-site gallery set. */
+.bbf-jj-photo img{content:url('/media/bbf/atmosphere/saturday-62.jpg')!important;object-position:center 44%!important;filter:saturate(.96) contrast(1.04) brightness(.86)!important}
+
+@media(max-width:900px){.bbf-quicknav .shell{justify-content:flex-start!important}.bbf-overview-points article{min-height:0!important}.bbf-overview-points h3{font-size:1.55rem!important}}
