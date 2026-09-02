@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ticketUrl } from "../../data/festival";
+
+const judging = [
+  { number: "01", title: "Basic step, timing & hips", text: "Show a clear basic, reliable timing, controlled hip movement and stability throughout the dance." },
+  { number: "02", title: "Posture, connection & technique", text: "Create a readable connection with an unknown partner, adapt quickly and keep the technique clean." },
+  { number: "03", title: "Musicality, creativity & entertainment", text: "Interpret the music, bring personality and make the dance interesting without sacrificing the partnership." },
+] as const;
+
+const registrationChecklist = [
+  "Hold a valid BBF 2026 Full Pass before your competition slot can be confirmed.",
+  "Use your correct name, email and WhatsApp details.",
+  "Enter your Full Pass code, ticket reference or purchase email.",
+  "Upload a clear competition photo.",
+  "Keep your confirmation email available for event check-in.",
+] as const;
+---
+
+<BaseLayout
+  title="BBF 2026 Jack & Jill Rules & Competition Guide | Bachata Explosion"
+  description="The complete BBF 2026 Jack & Jill guide: eligibility, judging criteria, music, rounds, awards, public bracket and registration information."
+>
+  <article class="jjr-page">
+    <section class="jjr-hero" aria-labelledby="jjr-title">
+      <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata Explosion social dance competition atmosphere" width="1800" height="1200" />
+      <div class="jjr-shade" aria-hidden="true"></div>
+      <div class="jjr-word" aria-hidden="true">RULES</div>
+      <div class="shell jjr-hero-grid">
+        <div>
+          <div class="jjr-pills"><span>BBF 2026</span><span>Jack & Jill</span><span>Full Pass required</span></div>
+          <p class="eyebrow"><span></span>Complete competition guide</p>
+          <h1 id="jjr-title">Know the rules.<br /><em>Own the floor.</em></h1>
+          <p class="jjr-lead">Everything competitors need in one place: eligibility, judging, music, the public bracket, awards and what to prepare before registration.</p>
+          <div class="hero-actions"><a class="button button-gold" href="/jj/#registration">Register now</a><a class="button button-glass" href="/jj/">Back to J&amp;J overview</a></div>
+        </div>
+        <aside class="jjr-summary">
+          <span>Official essentials</span>
+          <div><small>Format</small><strong>Social-dance Jack & Jill</strong></div>
+          <div><small>Competition day</small><strong>Saturday</strong></div>
+          <div><small>Entry</small><strong>Verified Full Pass</strong></div>
+          <div><small>Music</small><strong>100-song playlist</strong></div>
+          <div><small>Champion</small><strong>€100 + trophy + passes</strong></div>
+        </aside>
+      </div>
+    </section>
+
+    <nav class="jjr-nav" aria-label="Competition guide sections">
+      <div class="shell"><a href="#format">Format</a><a href="#judging">Judging</a><a href="#rules">Rules</a><a href="#music">Music & rounds</a><a href="#bracket">Bracket</a><a href="#prizes">Prizes</a><a href="#register">Register</a></div>
+    </nav>
+
+    <section class="jjr-section jjr-format" id="format" aria-labelledby="format-title">
+      <div class="shell">
+        <div class="jjr-heading">
+          <div><p class="section-label">Competition format</p><h2 id="format-title">From the cypher<br /><em>to centre stage.</em></h2></div>
+          <p>The competition is built around real social dancing: an unknown partner, music selected by the event and the ability to adapt while keeping connection and technique visible.</p>
+        </div>
+        <div class="jjr-route">
+          <article><span>01</span><h3>Register</h3><p>Your name enters the competition only after your BBF 2026 Full Pass has been verified.</p></article>
+          <article><span>02</span><h3>Cypher</h3><p>Dance with the assigned partners, adapt quickly and show genuine social-dance quality.</p></article>
+          <article><span>03</span><h3>Rounds</h3><p>Judges evaluate the announced criteria and the strongest dancers continue toward the final.</p></article>
+          <article><span>04</span><h3>Final</h3><p>The finalists face the final round and a surprise challenge announced at the event.</p></article>
+          <article><span>05</span><h3>Champion</h3><p>The winning pair takes the centre-stage reveal and the complete first-place package.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-judging" id="judging" aria-labelledby="judging-title">
+      <div class="shell jjr-judging-grid">
+        <div class="jjr-sticky-intro"><p class="section-label">Judging focus</p><h2 id="judging-title">What earns<br /><em>the next round.</em></h2><p>The focus stays on social-dance quality rather than choreography. Judges are looking for control, partnership and a convincing response to the music.</p></div>
+        <div class="jjr-judge-list">{judging.map((item) => <article><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-rules" id="rules" aria-labelledby="rules-title">
+      <div class="shell">
+        <div class="jjr-heading"><div><p class="section-label">Core rulebook</p><h2 id="rules-title">Clear rules.<br /><em>Real dancing.</em></h2></div><p>These are the key rules currently published for the BBF 2026 Jack & Jill. Event announcements and the final official rulebook remain authoritative.</p></div>
+        <div class="jjr-rule-grid">
+          <article><b>01</b><h3>Social dance first</h3><p>This is a social-dance competition. Competitors should show real social-dance quality, control and respect for the music.</p></article>
+          <article><b>02</b><h3>Full Pass mandatory</h3><p>A valid BBF 2026 Full Pass is required. Registration alone does not secure a competition slot.</p></article>
+          <article><b>03</b><h3>No acrobatics</h3><p>Acrobatics are not allowed, neither solo nor with a partner.</p></article>
+          <article><b>04</b><h3>Partner adaptability</h3><p>Your quality should remain visible with the partner you receive rather than depending on a prepared routine.</p></article>
+          <article><b>05</b><h3>Immediate decisions</h3><p>Competition decisions are announced directly after each round.</p></article>
+          <article><b>06</b><h3>Final surprise</h3><p>The final includes a surprise challenge that is announced at the event.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-music" id="music" aria-labelledby="music-title">
+      <div class="shell jjr-music-grid">
+        <div><p class="section-label">Music & rounds</p><h2 id="music-title">Prepare broadly.<br /><em>React in the moment.</em></h2></div>
+        <div class="jjr-music-card">
+          <span>100 possible songs</span>
+          <h3>Playlist one week before the event.</h3>
+          <p>A Spotify playlist containing 100 possible competition songs is planned for publication one week before BBF 2026. The point is not to choreograph 100 songs—it is to arrive musically prepared and still dance socially in the moment.</p>
+          <div><strong>Unknown partner</strong><strong>Event-selected music</strong><strong>Surprise final challenge</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-bracket" id="bracket" aria-labelledby="bracket-title">
+      <div class="shell">
+        <div class="jjr-heading"><div><p class="section-label">Public competition board</p><h2 id="bracket-title">Every round.<br /><em>Visible.</em></h2></div><p>The public bracket is updated with confirmed competitors, heats and results. Until registrations are verified, the positions remain open.</p></div>
+        <div class="jjr-board">
+          <div class="jjr-side"><header><span>Cypher A</span><strong>Left side</strong></header><p><b>Heat 01</b><small>Dancers TBA · Advancers TBA</small></p><p><b>Heat 02</b><small>Dancers TBA · Advancers TBA</small></p><footer>First round A</footer></div>
+          <div class="jjr-center"><span>Saturday final</span><strong>Champion</strong><p>Winner TBA</p><small>€100 · trophy · partner passes · BBF 2027</small></div>
+          <div class="jjr-side"><header><span>Cypher B</span><strong>Right side</strong></header><p><b>Heat 03</b><small>Dancers TBA · Advancers TBA</small></p><p><b>Heat 04</b><small>Dancers TBA · Advancers TBA</small></p><footer>First round B</footer></div>
+        </div>
+        <div class="jjr-bracket-action"><a class="button button-outline" href="/jj/#bracket">Open the J&amp;J overview bracket</a></div>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-prizes" id="prizes" aria-labelledby="prizes-title">
+      <div class="shell">
+        <div class="jjr-heading"><div><p class="section-label">Official prize package</p><h2 id="prizes-title">The podium<br /><em>has weight.</em></h2></div><p>Every confirmed competitor receives a medal. Podium placements add partner-event Full Passes, and first place unlocks the complete champion package.</p></div>
+        <div class="jjr-podium">
+          <article><span>02 · Finalist</span><h3>Second place</h3><strong>3 Full Passes</strong><p>Three Full Passes chosen from the final partner-event list.</p></article>
+          <article class="is-first"><span>01 · Champion</span><h3>€100 + trophy</h3><strong>5 Full Passes</strong><p>€100 for the winning pair, paid as €50 each, plus a trophy, five partner-event Full Passes and a BBF 2027 teaching opportunity.</p><b>Complete winner package</b></article>
+          <article><span>03 · Podium</span><h3>Third place</h3><strong>2 Full Passes</strong><p>Two Full Passes chosen from the final partner-event list.</p></article>
+        </div>
+        <p class="jjr-medal">Every confirmed competitor receives a medal for competing.</p>
+      </div>
+    </section>
+
+    <section class="jjr-section jjr-register" id="register" aria-labelledby="register-title">
+      <div class="shell jjr-register-grid">
+        <div><p class="section-label">Before you register</p><h2 id="register-title">Be ready.<br /><em>Then claim your spot.</em></h2><p>Registration is only the first step. Your competition place becomes valid after the team verifies the Full Pass attached to your details.</p></div>
+        <div class="jjr-checklist">{registrationChecklist.map((item, index) => <p><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></p>)}<div class="jjr-actions"><a class="button button-gold" href="/jj/#registration">Go to registration</a><a class="button button-outline" href={ticketUrl}>Get a Full Pass</a></div></div>
+      </div>
+    </section>
+  </article>
+
+  <style>
+    .jjr-page{--gold:#e3b75f;--gold2:#f7ddb0;--pink:#ef4c89;--wine:#8b274a;--line:rgba(227,183,95,.34);color:#fff;background:#0b0307;overflow:hidden}.jjr-page h1,.jjr-page h2,.jjr-page h3{font-family:Oswald,Impact,sans-serif;text-transform:uppercase}.jjr-page h2{margin:0;color:#fff;font-size:clamp(3.6rem,6.7vw,6.9rem);line-height:.88;letter-spacing:-.045em}.jjr-page h2 em{color:var(--gold2);font-style:normal}.jjr-section{padding:clamp(82px,9vw,130px) 0}.jjr-hero{isolation:isolate;min-height:760px;display:grid;align-items:center;position:relative;overflow:hidden;background:#12060b}.jjr-hero>img{z-index:-3;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;filter:saturate(.88) contrast(1.07) brightness(.76)}.jjr-shade{z-index:-2;position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,2,5,.97),rgba(70,14,38,.78) 54%,rgba(8,2,5,.58)),linear-gradient(0deg,#0b0307,transparent 42%)}.jjr-word{z-index:-1;position:absolute;right:-.04em;bottom:-.18em;color:rgba(247,221,176,.055);font:800 clamp(12rem,32vw,34rem)/.72 Oswald,sans-serif;letter-spacing:-.08em}.jjr-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.5fr);align-items:center;gap:clamp(60px,9vw,130px);padding:145px 0 88px}.jjr-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}.jjr-pills span{padding:8px 11px;border:1px solid rgba(247,221,176,.36);background:rgba(8,2,5,.56);color:var(--gold2);font-size:.58rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.jjr-hero h1{max-width:920px;margin:0;color:#fff;font-size:clamp(5rem,9.4vw,9.8rem);line-height:.79;letter-spacing:-.055em}.jjr-hero h1 em{color:var(--gold2);font-style:normal}.jjr-lead{max-width:690px;margin:30px 0 34px;color:#ddcbd2;font-size:clamp(1rem,1.35vw,1.14rem);line-height:1.7}.jjr-summary{border:1px solid rgba(247,221,176,.5);background:linear-gradient(150deg,rgba(70,18,40,.9),rgba(10,3,7,.92));backdrop-filter:blur(16px);box-shadow:0 34px 90px rgba(0,0,0,.45)}.jjr-summary>span{display:block;padding:15px 20px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#241019;font-size:.59rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.jjr-summary div{padding:17px 20px;border-bottom:1px solid rgba(227,183,95,.2)}.jjr-summary div:last-child{border-bottom:0}.jjr-summary small{display:block;margin-bottom:5px;color:#a8919a;font-size:.55rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.jjr-summary strong{color:#fff;font:700 1.22rem/1.05 Oswald,sans-serif;text-transform:uppercase}.jjr-nav{position:sticky;z-index:850;top:92px;background:rgba(11,3,7,.93);border-block:1px solid rgba(227,183,95,.23);backdrop-filter:blur(16px)}.jjr-nav .shell{display:flex;justify-content:center;gap:5px;overflow-x:auto;padding-block:10px;scrollbar-width:none}.jjr-nav a{flex:none;padding:10px 14px;color:#c7b2ba;font-size:.61rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid transparent}.jjr-nav a:hover{color:var(--gold2);border-color:var(--line);background:rgba(139,39,74,.2)}.jjr-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.5fr);align-items:end;gap:clamp(48px,8vw,105px);margin-bottom:50px}.jjr-heading>p{max-width:500px;margin:0;color:#c6b2ba;line-height:1.7}.jjr-format{background:radial-gradient(circle at 80% 10%,rgba(239,76,137,.12),transparent 28%),#100609}.jjr-route{display:grid;grid-template-columns:repeat(5,1fr);border:solid var(--line);border-width:1px 0 0 1px}.jjr-route article{min-height:290px;padding:26px;border:solid var(--line);border-width:0 1px 1px 0;background:linear-gradient(145deg,rgba(44,14,28,.72),rgba(12,4,8,.84));display:flex;flex-direction:column}.jjr-route span{color:var(--gold);font:700 1rem Oswald,sans-serif}.jjr-route h3{margin:auto 0 12px;color:#fff;font-size:1.65rem;line-height:1}.jjr-route p{margin:0;color:#bba6af;font-size:.76rem;line-height:1.58}.jjr-judging{background:linear-gradient(110deg,rgba(8,2,5,.94),rgba(61,13,35,.8)),url('/media/brand/berlin-brandenburg-gold.png') center/cover fixed}.jjr-judging-grid{display:grid;grid-template-columns:minmax(280px,.54fr) minmax(0,1fr);gap:clamp(55px,8vw,110px);align-items:start}.jjr-sticky-intro{position:sticky;top:150px}.jjr-sticky-intro>p:not(.section-label){max-width:520px;color:#c4b0b8;line-height:1.7}.jjr-judge-list{border-top:1px solid var(--line)}.jjr-judge-list article{display:grid;grid-template-columns:65px 1fr;gap:22px;padding:28px 0;border-bottom:1px solid var(--line)}.jjr-judge-list span{color:var(--gold);font:700 1rem Oswald,sans-serif}.jjr-judge-list h3{margin:0 0 9px;color:#fff;font-size:clamp(1.7rem,2.8vw,2.55rem)}.jjr-judge-list p{max-width:650px;margin:0;color:#c1adb5;line-height:1.65}.jjr-rules{background:#0d0508}.jjr-rule-grid{display:grid;grid-template-columns:repeat(3,1fr);border:solid var(--line);border-width:1px 0 0 1px}.jjr-rule-grid article{min-height:300px;padding:28px;border:solid var(--line);border-width:0 1px 1px 0;background:rgba(31,12,21,.72);display:flex;flex-direction:column}.jjr-rule-grid b{color:var(--gold);font:700 1rem Oswald,sans-serif}.jjr-rule-grid h3{margin:auto 0 12px;color:#fff;font-size:1.75rem;line-height:1}.jjr-rule-grid p{margin:0;color:#baa7af;font-size:.78rem;line-height:1.62}.jjr-music{background:radial-gradient(circle at 78% 30%,rgba(227,183,95,.13),transparent 30%),#14070c}.jjr-music-grid{display:grid;grid-template-columns:minmax(280px,.62fr) minmax(0,1fr);align-items:center;gap:clamp(50px,8vw,100px)}.jjr-music-card{padding:clamp(32px,5vw,58px);border:1px solid rgba(247,221,176,.52);background:linear-gradient(150deg,rgba(91,22,50,.88),rgba(14,5,9,.93));box-shadow:0 30px 90px rgba(0,0,0,.35)}.jjr-music-card>span{color:var(--gold);font-size:.58rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.jjr-music-card h3{margin:12px 0 16px;color:#fff;font-size:clamp(2.2rem,4vw,4.2rem);line-height:.96}.jjr-music-card>p{color:#c8b5bc;line-height:1.7}.jjr-music-card>div{display:flex;flex-wrap:wrap;gap:8px;margin-top:25px}.jjr-music-card strong{padding:8px 10px;border:1px solid var(--line);color:var(--gold2);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase}.jjr-bracket{background:#0b0307}.jjr-board{display:grid;grid-template-columns:1fr minmax(230px,.54fr) 1fr;gap:14px}.jjr-side,.jjr-center{border:1px solid var(--line);background:rgba(28,10,18,.85)}.jjr-side header{display:flex;justify-content:space-between;gap:20px;padding:17px 20px;border-bottom:1px solid var(--line);color:var(--gold2);font-size:.59rem;letter-spacing:.1em;text-transform:uppercase}.jjr-side p{display:grid;gap:7px;margin:0;padding:23px 20px;border-bottom:1px solid rgba(227,183,95,.18)}.jjr-side p b{color:#fff;font:700 1.25rem Oswald,sans-serif;text-transform:uppercase}.jjr-side p small{color:#a9959d}.jjr-side footer{padding:15px 20px;color:var(--gold);font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.jjr-center{min-height:330px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:26px;border-color:rgba(247,221,176,.72);background:radial-gradient(circle,rgba(139,39,74,.55),rgba(22,6,13,.94) 68%)}.jjr-center>span{color:var(--gold2);font-size:.58rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.jjr-center strong{margin:14px 0 7px;color:#fff;font:700 clamp(2.8rem,4.7vw,4.8rem)/.9 Oswald,sans-serif;text-transform:uppercase}.jjr-center p{margin:0 0 13px;color:#eadce1}.jjr-center small{color:var(--gold);font-size:.57rem;letter-spacing:.07em;text-transform:uppercase}.jjr-bracket-action{display:flex;justify-content:center;margin-top:28px}.jjr-prizes{background:linear-gradient(130deg,rgba(74,15,40,.55),rgba(10,3,7,.97)),url('/media/brand/live-explosion-background.png') center/cover}.jjr-podium{display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:15px}.jjr-podium article{position:relative;min-height:370px;padding:30px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(48,14,29,.9),rgba(12,4,8,.94));display:flex;flex-direction:column;justify-content:flex-end}.jjr-podium article>span{position:absolute;top:26px;left:28px;color:var(--gold);font-size:.58rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.jjr-podium h3{margin:0 0 8px;color:#fff;font-size:2rem}.jjr-podium article>strong{color:var(--gold2);font:700 clamp(2rem,3.5vw,3.5rem)/1 Oswald,sans-serif;text-transform:uppercase}.jjr-podium p{color:#c1adb5;line-height:1.6}.jjr-podium .is-first{min-height:455px;border-color:rgba(247,221,176,.85);background:radial-gradient(circle at 82% 12%,rgba(227,183,95,.25),transparent 34%),linear-gradient(150deg,rgba(106,27,59,.96),rgba(25,7,15,.97));box-shadow:0 30px 85px rgba(0,0,0,.4)}.jjr-podium .is-first>b{position:absolute;top:0;right:0;padding:8px 11px;background:var(--gold);color:#241019;font-size:.53rem;letter-spacing:.1em;text-transform:uppercase}.jjr-medal{text-align:center;margin:28px 0 0;color:var(--gold2);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.jjr-register{background:#0d0508}.jjr-register-grid{display:grid;grid-template-columns:minmax(300px,.6fr) minmax(0,1fr);align-items:start;gap:clamp(55px,8vw,110px)}.jjr-register-grid>div:first-child>p:not(.section-label){max-width:520px;color:#c6b2ba;line-height:1.7}.jjr-checklist{border-top:1px solid var(--line)}.jjr-checklist>p{display:grid;grid-template-columns:55px 1fr;gap:18px;margin:0;padding:21px 0;border-bottom:1px solid var(--line)}.jjr-checklist span{color:var(--gold);font:700 1rem Oswald,sans-serif}.jjr-checklist strong{color:#efe3e7;font-size:.84rem;line-height:1.55}.jjr-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+    @media(max-width:1050px){.jjr-route{grid-template-columns:repeat(3,1fr)}.jjr-rule-grid{grid-template-columns:1fr 1fr}.jjr-podium{grid-template-columns:1fr}.jjr-podium article,.jjr-podium .is-first{min-height:320px}.jjr-board{grid-template-columns:1fr}.jjr-center{order:-1;min-height:285px}}
+    @media(max-width:820px){.jjr-hero-grid,.jjr-heading,.jjr-judging-grid,.jjr-music-grid,.jjr-register-grid{grid-template-columns:1fr}.jjr-hero-grid{padding-top:140px}.jjr-summary{max-width:600px}.jjr-nav{top:82px}.jjr-nav .shell{justify-content:flex-start}.jjr-sticky-intro{position:static}.jjr-heading{gap:24px}.jjr-route{grid-template-columns:1fr 1fr}.jjr-rule-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.jjr-section{padding:70px 0}.jjr-hero h1{font-size:clamp(4.4rem,19vw,6.2rem)}.jjr-hero-grid{gap:42px;padding-bottom:70px}.jjr-route,.jjr-rule-grid{grid-template-columns:1fr}.jjr-route article,.jjr-rule-grid article{min-height:220px}.jjr-podium{gap:10px}.jjr-checklist>p{grid-template-columns:42px 1fr}.jjr-page h2{font-size:clamp(3.2rem,14vw,4.8rem)}}
+  </style>
+</BaseLayout>
