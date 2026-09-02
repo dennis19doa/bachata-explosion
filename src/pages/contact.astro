@@ -2,13 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { contactTopicEndpoints } from "../lib/forms";
 
+const inbox = "info@bachataexplosion.com";
 const routes = [
-  { value: "Ticket question", number: "01", label: "Tickets", alias: "tickets@bachataexplosion.com", subject: "[Bachata Explosion] Ticket question", detail: "Passes, payments, confirmations or name changes" },
-  { value: "Group discount", number: "02", label: "Groups", alias: "groups@bachataexplosion.com", subject: "[Bachata Explosion] Group discount", detail: "Promo codes and bringing your dance community" },
-  { value: "Partnership or ambassador", number: "03", label: "Partners", alias: "partners@bachataexplosion.com", subject: "[Bachata Explosion] Partnership", detail: "Ambassadors, studios, brands and collaborations" },
-  { value: "Media or photographer", number: "04", label: "Media", alias: "media@bachataexplosion.com", subject: "[Bachata Explosion] Media request", detail: "Press, photographers, video and content requests" },
-  { value: "Volunteer", number: "05", label: "Volunteer", alias: "volunteers@bachataexplosion.com", subject: "[Bachata Explosion] Volunteer inquiry", detail: "Help the team before or during an event" },
-  { value: "General question", number: "06", label: "General", alias: "info@bachataexplosion.com", subject: "[Bachata Explosion] General contact", detail: "Anything that does not fit the other routes" },
+  { value: "Ticket question", number: "01", label: "Tickets", alias: inbox, subject: "[Bachata Explosion] Ticket question", detail: "Passes, payments, confirmations or name changes" },
+  { value: "Group discount", number: "02", label: "Groups", alias: inbox, subject: "[Bachata Explosion] Group discount", detail: "Promo codes and bringing your dance community" },
+  { value: "Partnership or ambassador", number: "03", label: "Partners", alias: inbox, subject: "[Bachata Explosion] Partnership", detail: "Ambassadors, studios, brands and collaborations" },
+  { value: "Media or photographer", number: "04", label: "Media", alias: inbox, subject: "[Bachata Explosion] Media request", detail: "Press, photographers, video and content requests" },
+  { value: "Volunteer", number: "05", label: "Volunteer", alias: inbox, subject: "[Bachata Explosion] Volunteer inquiry", detail: "Help the team before or during an event" },
+  { value: "General question", number: "06", label: "General", alias: inbox, subject: "[Bachata Explosion] General contact", detail: "Anything that does not fit the other routes" },
 ] as const;
 
 const events = ["Berlin Bachata Festival 2026", "Role Rotation", "Elite Dance #3", "Jack & Jill", "Past event / photo archive", "Not event-specific"];
@@ -31,7 +32,7 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
             <h1 id="contact-title">What can we<br /><em>help with?</em></h1>
           </div>
           <div class="contact-command-side">
-            <p>Pick the closest topic. We route the same simple form to the right part of the team, so you do not have to search for the right contact.</p>
+            <p>Pick the closest topic. We route the same simple form with the correct subject and event details, so you do not have to search for the right contact.</p>
             <a class="contact-direct-round2" href="mailto:info@bachataexplosion.com">
               <span>Prefer your email app?</span>
               <strong>info@bachataexplosion.com ↗</strong>
@@ -61,7 +62,7 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
           <div class="contact-delivery-card">
             <span>Currently routing to</span>
             <strong data-contact-destination>{initialRoute.alias}</strong>
-            <p>Your chosen topic determines the team inbox used for sorting and replies.</p>
+            <p>Your chosen topic is included automatically so the message can be sorted and answered quickly.</p>
           </div>
         </div>
 
@@ -143,13 +144,14 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
     const aliasInput = form?.querySelector<HTMLInputElement>("[data-contact-alias]");
     const destination = document.querySelector<HTMLElement>("[data-contact-destination]");
 
+    const inbox = "info@bachataexplosion.com";
     const routing: Record<string, { alias: string; subject: string }> = {
-      "Ticket question": { alias: "tickets@bachataexplosion.com", subject: "[Bachata Explosion] Ticket question" },
-      "Group discount": { alias: "groups@bachataexplosion.com", subject: "[Bachata Explosion] Group discount" },
-      "Partnership or ambassador": { alias: "partners@bachataexplosion.com", subject: "[Bachata Explosion] Partnership" },
-      "Media or photographer": { alias: "media@bachataexplosion.com", subject: "[Bachata Explosion] Media request" },
-      Volunteer: { alias: "volunteers@bachataexplosion.com", subject: "[Bachata Explosion] Volunteer inquiry" },
-      "General question": { alias: "info@bachataexplosion.com", subject: "[Bachata Explosion] General contact" },
+      "Ticket question": { alias: inbox, subject: "[Bachata Explosion] Ticket question" },
+      "Group discount": { alias: inbox, subject: "[Bachata Explosion] Group discount" },
+      "Partnership or ambassador": { alias: inbox, subject: "[Bachata Explosion] Partnership" },
+      "Media or photographer": { alias: inbox, subject: "[Bachata Explosion] Media request" },
+      Volunteer: { alias: inbox, subject: "[Bachata Explosion] Volunteer inquiry" },
+      "General question": { alias: inbox, subject: "[Bachata Explosion] General contact" },
     };
 
     let endpoints: Record<string, string> = {};
@@ -209,13 +211,13 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
         if (status) {
           status.classList.remove("is-error");
           status.classList.add("is-success");
-          status.textContent = "Message received. Thank you—your request was routed with its topic and event details.";
+          status.textContent = "Message received. Thank you—your request was sent to info@bachataexplosion.com with its topic and event details.";
         }
       } catch {
         if (status) {
           status.classList.remove("is-success");
           status.classList.add("is-error");
-          status.textContent = `The message could not be delivered. Please try again or email ${route.alias} directly.`;
+          status.textContent = "The message could not be delivered. Please try again or email info@bachataexplosion.com directly.";
         }
       } finally {
         if (submitButton) {
