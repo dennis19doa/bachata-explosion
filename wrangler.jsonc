@@ -4,6 +4,10 @@
   "main": "./src/worker.ts",
   "compatibility_date": "2026-08-29",
   "keep_vars": true,
+  "vars": {
+    "ZOHO_SMTP_USER": "info@elitedancestudio.de",
+    "ZOHO_SMTP_FROM": "info@bachataexplosion.com"
+  },
   "observability": {
     "enabled": true,
     "logs": {
