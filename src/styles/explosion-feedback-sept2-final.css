@@ -1,0 +1,179 @@
+/* Final screenshot refinement pass — 2026-09-02 */
+
+/* Homepage: use a different, community-led closing image. */
+.ex-final::before {
+  background:
+    linear-gradient(90deg, rgba(12,3,8,.92), rgba(82,16,45,.78) 48%, rgba(17,5,11,.66)),
+    url('/media/atmosphere/explosion-community.jpg') center 48% / cover no-repeat !important;
+}
+
+/* BBF: keep Berlin visibly present rather than burying the Gate under opaque blocks. */
+.bbf-premium::before {
+  opacity: 1 !important;
+  background:
+    linear-gradient(rgba(7,2,5,.34), rgba(7,2,5,.62)),
+    linear-gradient(100deg, rgba(93,18,50,.22), rgba(8,2,5,.06) 52%, rgba(57,12,31,.18)),
+    url('/media/brand/berlin-brandenburg-gold.png') center 30% / cover no-repeat fixed !important;
+}
+
+.bbf-venue,
+.bbf-passes,
+.bbf-faq,
+.bbf-travel,
+.bbf-schedule,
+.bbf-intro {
+  background: rgba(12,4,8,.64) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.bbf-stay-compact,
+.bbf-overview-points,
+.bbf-travel-guide {
+  background: rgba(16,6,11,.70) !important;
+  border-color: rgba(227,183,95,.48) !important;
+  box-shadow: 0 26px 80px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Hotel: every option must sell the actual room, not an event hall or atrium. */
+.bbf-room-card {
+  background: linear-gradient(160deg, rgba(42,13,27,.82), rgba(12,4,8,.86)) !important;
+}
+.bbf-room-media {
+  aspect-ratio: 16 / 10 !important;
+  background: #0d0509 !important;
+}
+.bbf-room-media img {
+  object-fit: cover !important;
+  object-position: center 48% !important;
+  filter: saturate(.98) contrast(1.02) !important;
+}
+.bbf-room-card:nth-child(2) .bbf-room-media img { object-position: 58% 48% !important; transform: scale(1.035); }
+.bbf-room-card:nth-child(3) .bbf-room-media img { object-position: 35% 48% !important; transform: scale(1.035); }
+.bbf-room-card:hover .bbf-room-media img { transform: scale(1.055) !important; }
+
+/* Passes: richer hierarchy, static premium execution, no cheap floating animation. */
+.bbf-pass-grid {
+  align-items: stretch !important;
+  gap: 18px !important;
+}
+.bbf-pass-grid article,
+.bbf-pass-grid .bbf-pass-featured {
+  isolation: isolate;
+  min-height: 430px !important;
+  padding: 36px 32px !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(150deg, rgba(49,16,31,.92), rgba(13,5,9,.94)) !important;
+  border: 1px solid rgba(227,183,95,.42) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.05) !important;
+  transform: none !important;
+  transition: border-color .24s ease, box-shadow .24s ease, background .24s ease !important;
+}
+.bbf-pass-grid article::after {
+  content: "" !important;
+  display: block !important;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 86% 12%, rgba(227,183,95,.14), transparent 31%);
+}
+.bbf-pass-grid article:hover {
+  border-color: rgba(227,183,95,.88) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,.44), inset 0 1px rgba(255,255,255,.07) !important;
+  transform: none !important;
+}
+.bbf-pass-grid .bbf-pass-featured {
+  border-color: rgba(247,221,176,.94) !important;
+  background:
+    radial-gradient(circle at 82% 10%, rgba(227,183,95,.24), transparent 34%),
+    linear-gradient(145deg, rgba(108,27,58,.98), rgba(29,8,17,.96)) !important;
+  box-shadow: 0 32px 90px rgba(0,0,0,.46), inset 0 0 0 1px rgba(247,221,176,.16) !important;
+}
+.bbf-pass-grid .bbf-pass-featured::before {
+  content: "MOST COMPLETE" !important;
+  display: inline-flex !important;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto !important;
+  height: auto !important;
+  padding: 9px 13px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #e3b75f !important;
+  color: #241019 !important;
+  font: 900 .56rem/1 'DM Sans', system-ui, sans-serif !important;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.bbf-pass-grid article > span { color: #e3b75f !important; }
+.bbf-pass-grid article h3 { color: #fff !important; }
+.bbf-pass-grid article p,
+.bbf-pass-grid article li { color: #d2c0c7 !important; }
+.bbf-pass-grid article a {
+  width: fit-content;
+  color: #f7ddb0 !important;
+  text-decoration-color: rgba(227,183,95,.62);
+}
+
+/* FAQ: let Berlin remain visible through a premium glass panel. */
+.bbf-faq-list {
+  border: 1px solid rgba(227,183,95,.45) !important;
+  background: rgba(16,6,11,.62) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.28) !important;
+  backdrop-filter: blur(10px) !important;
+}
+.bbf-faq-list details {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Volunteer hero: slideshow is automatic and visual only. */
+.volunteer-we-are,
+.volunteer-slider-ui {
+  display: none !important;
+}
+.volunteer-slideshow {
+  min-height: 690px !important;
+}
+.volunteer-hero-copy {
+  min-height: 690px !important;
+  padding-block: 84px !important;
+}
+.volunteer-slide img {
+  object-position: center 46% !important;
+  filter: saturate(.98) contrast(1.035) !important;
+}
+.volunteer-slide {
+  transition: opacity 1.15s ease !important;
+}
+
+/* History: match the live crop and support the JS fixed-follow clone. */
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history .be-event:first-of-type img {
+  object-position: center 50% !important;
+}
+.history-floating-nav {
+  z-index: 1150 !important;
+  display: none;
+  position: fixed !important;
+  top: 102px !important;
+  margin: 0 !important;
+  max-height: calc(100vh - 122px) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  box-shadow: 0 24px 70px rgba(0,0,0,.38);
+}
+
+@media (max-width: 900px) {
+  .bbf-pass-grid .bbf-pass-featured { transform: none !important; }
+  .history-floating-nav { display: none !important; }
+}
+
+@media (max-width: 760px) {
+  .volunteer-slideshow,
+  .volunteer-hero-copy { min-height: 610px !important; }
+  .bbf-room-media { aspect-ratio: 16 / 9 !important; }
+}
