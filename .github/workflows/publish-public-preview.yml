@@ -1,0 +1,109 @@
+name: Publish isolated public preview
+
+on:
+  push:
+    branches: [modernize-cloudflare-migration]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bachata-public-preview
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      PREVIEW_BRANCH: preview-${{ github.sha }}
+      PREVIEW_BASE_URL: https://raw.githack.com/dennis19doa/bachata-explosion/preview-${{ github.sha }}/
+    steps:
+      - name: Check out migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build static site
+        run: pnpm build
+
+      - name: Prepare renderer-safe preview
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { readdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs');
+          const { join, extname, relative } = require('node:path');
+          const root = 'dist/client';
+          const base = process.env.PREVIEW_BASE_URL;
+          const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+            const path = join(dir, entry.name);
+            return entry.isDirectory() ? walk(path) : [path];
+          });
+          const files = walk(root);
+
+          for (const file of files.filter((file) => extname(file) === '.css')) {
+            let text = readFileSync(file, 'utf8');
+            text = text.replace(/url\((['"]?)\/(?!\/)/g, (_, quote) => `url(${quote}${base}`);
+            writeFileSync(file, text);
+          }
+
+          for (const file of files.filter((file) => extname(file) === '.html')) {
+            let text = readFileSync(file, 'utf8');
+            text = text
+              .replace(/(href|src|poster|action)=(['"])\/(?!\/)/g, (_, attr, quote) => `${attr}=${quote}${base}`)
+              .replace(/srcset=(['"])(.*?)\1/g, (_, quote, value) => `srcset=${quote}${value.replace(/(^|,\s*)\/(?!\/)/g, `$1${base}`)}${quote}`);
+
+            text = text.replace(/<link\s+rel=(['"])stylesheet\1\s+href=(['"])(.*?)\2\s*\/?>/gi, (tag, _relQuote, _hrefQuote, href) => {
+              const rawPath = href.startsWith(base) ? href.slice(base.length) : href.replace(/^\//, '');
+              if (!rawPath.endsWith('.css')) return tag;
+              const cssPath = join(root, rawPath);
+              if (!existsSync(cssPath)) return tag;
+              const css = readFileSync(cssPath, 'utf8');
+              return `<style data-preview-bundle="${relative(root, cssPath)}">${css}</style>`;
+            });
+
+            if (!/<meta\s+name=(['"])robots\1/i.test(text)) {
+              text = text.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
+            }
+            writeFileSync(file, text);
+          }
+          NODE
+
+      - name: Upload exact preview bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bachata-explosion-preview-${{ github.sha }}
+          path: dist/client
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish immutable review branch and latest alias
+        shell: bash
+        run: |
+          rm -rf /tmp/bachata-public-preview
+          mkdir -p /tmp/bachata-public-preview
+          cp -a dist/client/. /tmp/bachata-public-preview/
+          cd /tmp/bachata-public-preview
+          git init
+          git checkout -b "${PREVIEW_BRANCH}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git add -A
+          git commit -m "Publish modernization preview ${GITHUB_SHA}"
+          git push --force origin "${PREVIEW_BRANCH}"
+          git push --force origin "${PREVIEW_BRANCH}:public-preview"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

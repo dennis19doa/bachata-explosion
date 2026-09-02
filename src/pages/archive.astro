@@ -6,47 +6,55 @@ const archiveYears = [2026, 2025, 2024, 2023, 2022].map((year) => ({ year, event
 ---
 
 <BaseLayout title="Event Archive | Bachata Explosion" description="Browse Bachata Explosion event photos from Berlin and Hamburg, from 2022 to today." headerStyle="solid">
-  <section class="archive-hero page-hero">
-    <div class="urban-hero-word" aria-hidden="true">ARCHIVE</div>
-    <div class="shell">
-      <p class="eyebrow"><span></span> Since 2022</p>
-      <h1>Explosion<br /><em>Archive</em></h1>
-      <p class="hero-lead">The people, workshops and nights that built the Explosion community—organized by event, not buried in an endless media library.</p>
-      <div class="archive-stats"><div><b>16</b><span>Event collections</span></div><div><b>5</b><span>Years of memories</span></div><div><b>12k+</b><span>Media items to migrate</span></div></div>
-    </div>
-  </section>
+  <div class="archive-unified">
+    <section class="archive-hero page-hero">
+      <div class="urban-hero-word" aria-hidden="true">ARCHIVE</div>
+      <div class="shell">
+        <p class="eyebrow"><span></span> Since 2022</p>
+        <h1>Explosion<br /><em>Archive</em></h1>
+        <p class="hero-lead">The people, workshops and nights that built Bachata Explosion—organized by event so you can find each edition quickly.</p>
+        <div class="archive-stats"><div><b>16</b><span>Event collections</span></div><div><b>5</b><span>Years of memories</span></div><div><b>12k+</b><span>Photos & moments preserved</span></div></div>
+      </div>
+    </section>
 
-  <section class="archive-library section-pad">
-    <div class="shell">
-      <div class="archive-toolbar" aria-label="Filter archive by year">
-        {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
+    <section class="archive-library section-pad">
+      <div class="shell">
+        <div class="archive-toolbar" aria-label="Filter archive by year">
+          {years.map((year) => <button class:list={[year === "All" && "active"]} type="button" data-year={year}>{year}</button>)}
+        </div>
+        <p class="migration-note"><strong>Every edition stays part of the story.</strong> Browse the event collections below and open an edition to see its photos, artwork and preserved event page.</p>
+        <div class="archive-years">
+          {archiveYears.map((group) => (
+            <section class="archive-year" data-year-group={group.year}>
+              <header><span>{group.year}</span><p>{group.events.length} {group.events.length === 1 ? "collection" : "collections"}</p></header>
+              <div class="archive-year-events">
+                {group.events.map((event, index) => (
+                  <article class="library-card" data-event-year={event.year}>
+                    <a href={`/archive/${event.slug}/`} aria-label={`Open ${event.title} ${event.year} photos`}>
+                      <img src={event.cover} alt={`${event.title} ${event.year} dancers`} width="900" height="1100" loading="lazy" />
+                      <span class="album-number">Album {String(index + 1).padStart(2, "0")}</span>
+                      <div class="library-overlay"><span>{event.category}</span><b>View collection →</b></div>
+                    </a>
+                    <p>{event.year}</p><h2>{event.title}</h2>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+        <div class="archive-original-index">
+          <div><p class="section-label">Looking for something specific?</p><h2>Open the complete<br /><em>event index.</em></h2></div>
+          <div><p>The original event index is still available for older links and editions while the visual archive above gives you the fastest way to browse by year.</p><a class="button button-outline" href="/past-events/">Open full event index</a></div>
+        </div>
       </div>
-      <p class="migration-note"><strong>The archive stays with Bachata Explosion.</strong> Every original event page remains available while the high-resolution galleries are reconnected to our independent media library.</p>
-      <div class="archive-years">
-        {archiveYears.map((group) => (
-          <section class="archive-year" data-year-group={group.year}>
-            <header><span>{group.year}</span><p>{group.events.length} {group.events.length === 1 ? "collection" : "collections"}</p></header>
-            <div class="archive-year-events">
-              {group.events.map((event, index) => (
-                <article class="library-card" data-event-year={event.year}>
-                  <a href={`/archive/${event.slug}/`} aria-label={`Open ${event.title} ${event.year} photos`}>
-                    <img src={event.cover} alt={`${event.title} ${event.year} dancers`} width="900" height="1100" loading="lazy" />
-                    <span class="album-number">Album {String(index + 1).padStart(2, "0")}</span>
-                    <div class="library-overlay"><span>{event.category}</span><b>View collection →</b></div>
-                  </a>
-                  <p>{event.year}</p><h2>{event.title}</h2>
-                </article>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-      <div class="archive-original-index">
-        <div><p class="section-label">Nothing disappears</p><h2>Looking for the<br /><em>original index?</em></h2></div>
-        <div><p>The former Past Events page is preserved as part of the transition, including its original structure and links.</p><a class="button button-outline" href="/past-events/">Open preserved archive index</a></div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
+
+  <style>
+    .archive-unified{color:#fff5ee;background:#0b0307;position:relative;isolation:isolate}.archive-unified:before{content:"";position:fixed;z-index:-2;inset:0;background:linear-gradient(rgba(8,2,5,.72),rgba(8,2,5,.9)),url('/media/brand/berlin-brandenburg-gold.png') center 30%/cover no-repeat;pointer-events:none}.archive-unified .archive-hero{background:linear-gradient(100deg,rgba(8,2,5,.94),rgba(72,14,38,.72) 56%,rgba(8,2,5,.82)),url('/media/brand/berlin-brandenburg-gold.png') center 35%/cover no-repeat!important;border-bottom:1px solid rgba(227,183,95,.28)}.archive-unified .archive-hero h1,.archive-unified .archive-hero .hero-lead{color:#fff}.archive-unified .archive-stats>div{border-color:rgba(227,183,95,.22)}.archive-unified .archive-stats b{color:#f7ddb0}.archive-unified .archive-stats span{color:#c8b5bc}.archive-unified .archive-library{color:#fff5ee;background:rgba(11,3,7,.78)!important;backdrop-filter:blur(3px)}.archive-unified .archive-toolbar{gap:8px;margin-bottom:22px}.archive-unified .archive-toolbar button{color:#eadce1;background:#16080e;border:1px solid rgba(227,183,95,.36);border-radius:2px;padding:11px 19px}.archive-unified .archive-toolbar button:hover,.archive-unified .archive-toolbar button.active{color:#fff;background:#8b274a;border-color:#e3b75f}.archive-unified .migration-note{color:#d4c4ca;background:rgba(139,39,74,.18);border-left:2px solid #e3b75f;box-shadow:none}.archive-unified .migration-note strong{color:#fff}.archive-unified .archive-years{gap:42px}.archive-unified .archive-year{color:#fff;background:linear-gradient(145deg,rgba(37,16,25,.88),rgba(15,6,10,.92))!important;border:1px solid rgba(227,183,95,.24)!important;padding:28px!important;box-shadow:0 18px 52px rgba(0,0,0,.28)!important}.archive-unified .archive-year>header span{color:#f7ddb0!important;text-shadow:none!important}.archive-unified .archive-year>header p{color:#bdaab1!important}.archive-unified .library-card>a{background:#16070d!important;border:1px solid rgba(227,183,95,.28)!important;box-shadow:0 16px 42px rgba(0,0,0,.34)!important}.archive-unified .library-card img{filter:saturate(.94) contrast(1.03)!important}.archive-unified .library-overlay{color:#fff;background:linear-gradient(transparent,#260c19f4)!important}.archive-unified .library-overlay span{color:#f7ddb0}.archive-unified .album-number{color:#fff;background:#8b274a;border:1px solid #e3b75f}.archive-unified .library-card>p{color:#e3b75f!important}.archive-unified .library-card>h2{color:#fff!important}.archive-unified .archive-original-index{color:#fff;background:linear-gradient(135deg,#6f1738,#3e0d22)!important;border:1px solid rgba(227,183,95,.5)!important;padding:36px!important}.archive-unified .archive-original-index h2,.archive-unified .archive-original-index .section-label{color:#fff!important}.archive-unified .archive-original-index p{color:#e7d8de!important}.archive-unified .archive-original-index .button-outline{color:#fff;border-color:#e3b75f}.archive-unified .library-card a:hover img{transform:scale(1.02);filter:saturate(1.08)!important}
+    @media(max-width:760px){.archive-unified .archive-year{grid-template-columns:1fr!important;padding:20px!important}.archive-unified .archive-year>header{position:static!important}.archive-unified .archive-original-index{padding:26px 20px!important}}
+  </style>
+
   <script>
     const buttons = document.querySelectorAll("[data-year]");
     const groups = document.querySelectorAll("[data-year-group]");

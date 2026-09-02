@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Permanent+Marker&display=swap');
+
+/* BACHATA EXPLOSION — URBAN IMPACT GOLD
+   Shared site language: black concrete, warm gold, chalk white, real imagery.
+   Berlin is atmosphere, not decoration. */
+:root {
+  --ug-black: #070707;
+  --ug-ink: #0f0f0f;
+  --ug-panel: #11110f;
+  --ug-panel-2: #181714;
+  --ug-gold: #d0a84a;
+  --ug-gold-bright: #e2bf67;
+  --ug-gold-soft: #b58a34;
+  --ug-paper: #e9e1d1;
+  --ug-paper-2: #d9cebb;
+  --ug-white: #f4efe5;
+  --ug-muted: #aaa297;
+  --ug-line: rgba(208, 168, 74, .25);
+  --ug-line-soft: rgba(244,239,229,.12);
+  --ug-shadow: 0 28px 70px rgba(0,0,0,.38);
+  --display: 'Barlow Condensed', Impact, sans-serif;
+  --body: 'Manrope', system-ui, sans-serif;
+  --marker: 'Permanent Marker', cursive;
+}
+
+html { background: var(--ug-black); }
+body {
+  background:
+    linear-gradient(rgba(7,7,7,.94), rgba(7,7,7,.94)),
+    url('/media/brand/berlin-wall.svg') center top / 760px repeat;
+  color: var(--ug-white);
+  font-family: var(--body);
+}
+main { overflow: clip; }
+::selection { color: var(--ug-black); background: var(--ug-gold); }
+
+/* fixed city atmosphere */
+.site-city-atmosphere {
+  position: fixed !important;
+  z-index: -1 !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  background: var(--ug-black) !important;
+}
+.site-city-atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .18;
+  background: url('/media/brand/live-explosion-background.png') center / cover fixed no-repeat;
+  filter: grayscale(1) contrast(1.2);
+}
+.site-city-atmosphere .city-graffiti {
+  position: absolute !important;
+  width: min(46vw, 680px) !important;
+  aspect-ratio: 1.45 !important;
+  right: -7vw !important;
+  top: 18vh !important;
+  background: var(--ug-gold) !important;
+  opacity: .055 !important;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  transform: rotate(-7deg) !important;
+}
+.site-city-atmosphere .city-gate {
+  position: absolute !important;
+  width: min(48vw, 760px) !important;
+  height: 360px !important;
+  left: -100px !important;
+  bottom: -90px !important;
+  opacity: .035 !important;
+  background: url('/media/brand/berlin-brandenburg-gold.png') left bottom / contain no-repeat !important;
+  filter: grayscale(1) sepia(.5) !important;
+}
+
+/* shared typography */
+h1,h2,h3,h4,.desktop-nav,.mobile-nav { font-family: var(--display); }
+.section-label,.eyebrow {
+  color: var(--ug-gold-bright) !important;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* navigation — one design on every route */
+.site-header,
+.site-header-solid {
+  position: fixed !important;
+  z-index: 1200 !important;
+  top: 14px !important;
+  left: 50% !important;
+  right: auto !important;
+  width: min(1240px, calc(100% - 28px)) !important;
+  min-height: 68px !important;
+  height: 68px !important;
+  transform: translateX(-50%) !important;
+  display: grid !important;
+  grid-template-columns: 158px minmax(0,1fr) auto !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 8px 10px 8px 16px !important;
+  overflow: visible !important;
+  border: 1px solid rgba(208,168,74,.35) !important;
+  border-radius: 7px !important;
+  background:
+    linear-gradient(rgba(8,8,8,.87), rgba(8,8,8,.93)),
+    url('/media/brand/live-explosion-background.png') center 42% / cover no-repeat !important;
+  color: var(--ug-white) !important;
+  box-shadow: 0 18px 46px rgba(0,0,0,.35) !important;
+  backdrop-filter: blur(16px) saturate(.9) !important;
+  isolation: isolate !important;
+}
+.site-header::before,.site-header-solid::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: 0 !important;
+  opacity: .08 !important;
+  border-radius: inherit !important;
+  background: url('/media/brand/berlin-graffiti-mask.svg') 78% 50% / 300px auto no-repeat !important;
+  filter: sepia(1) saturate(1.2) !important;
+  pointer-events: none !important;
+}
+.site-header::after,.site-header-solid::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 18px !important;
+  right: 18px !important;
+  bottom: -4px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, var(--ug-gold), transparent) !important;
+  pointer-events: none !important;
+}
+.site-header .brand,.site-header-solid .brand { width: 144px !important; display:flex !important; align-items:center !important; }
+.site-header .brand img,.site-header-solid .brand img { width: 144px !important; height:auto !important; max-height:48px !important; object-fit:contain !important; filter: brightness(1.18) contrast(1.05); }
+.desktop-nav { width:100% !important; display:flex !important; justify-content:center !important; align-items:center !important; gap:clamp(10px,1.35vw,21px) !important; overflow:visible !important; }
+.desktop-nav > a,.nav-group > summary {
+  min-height: 40px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  padding:0 !important;
+  color:var(--ug-white) !important;
+  font-family:var(--body) !important;
+  font-size:.73rem !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:.055em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+.nav-group { position:relative !important; }
+.nav-group > summary { list-style:none !important; cursor:pointer !important; }
+.nav-group > summary::-webkit-details-marker { display:none !important; }
+.nav-group > summary::after { content:'+' !important; margin-left:7px !important; color:var(--ug-gold) !important; font-size:.9rem !important; }
+.nav-group[open] > summary::after { content:'−' !important; }
+.desktop-nav > a:hover,.nav-group > summary:hover,.nav-group[open] > summary,
+.desktop-nav [aria-current='page'],.desktop-nav .nav-group.is-current > summary { color:var(--ug-gold-bright) !important; }
+.desktop-nav [aria-current='page']::before,.desktop-nav .nav-group.is-current > summary::before {
+  content:'' !important; position:absolute !important; left:0 !important; right:0 !important; bottom:1px !important; height:2px !important; background:var(--ug-gold) !important;
+}
+.nav-group.is-current > summary::before { right:18px !important; }
+
+.nav-popover,.nav-popover-right {
+  position:absolute !important;
+  z-index:1250 !important;
+  top:calc(100% + 15px) !important;
+  left:-18px !important;
+  right:auto !important;
+  width:min(350px,calc(100vw - 32px)) !important;
+  display:grid !important;
+  padding:12px !important;
+  border:1px solid rgba(208,168,74,.32) !important;
+  border-radius:6px !important;
+  color:var(--ug-white) !important;
+  background:
+    linear-gradient(rgba(10,10,9,.94),rgba(10,10,9,.97)),
+    url('/media/brand/live-explosion-background.png') center / cover no-repeat !important;
+  box-shadow:var(--ug-shadow) !important;
+}
+.nav-popover-right { left:auto !important; right:-18px !important; }
+.nav-popover::before { content:'' !important; position:absolute !important; top:-18px !important; left:0 !important; right:0 !important; height:19px !important; }
+.nav-popover > span { padding:8px 10px 10px !important; color:var(--ug-gold) !important; font:800 .62rem/1.4 var(--body) !important; letter-spacing:.08em !important; text-transform:uppercase !important; }
+.nav-popover a { min-height:58px !important; display:grid !important; align-content:center !important; gap:3px !important; padding:11px 12px !important; border-top:1px solid var(--ug-line-soft) !important; border-radius:2px !important; color:var(--ug-white) !important; background:transparent !important; }
+.nav-popover a:hover { background:rgba(208,168,74,.11) !important; }
+.nav-popover a b { color:var(--ug-white) !important; font:800 .83rem/1.25 var(--body) !important; text-transform:none !important; }
+.nav-popover a small { color:var(--ug-muted) !important; font:600 .68rem/1.4 var(--body) !important; text-transform:none !important; white-space:normal !important; }
+.site-header > .button,.site-header-solid > .button {
+  min-height:46px !important; padding:0 19px !important; border:1px solid var(--ug-gold) !important; border-radius:2px !important; background:var(--ug-gold) !important; color:var(--ug-black) !important; box-shadow:none !important; white-space:nowrap !important; font-weight:900 !important;
+}
+.site-header > .button:hover,.site-header-solid > .button:hover { background:var(--ug-gold-bright) !important; transform:translateY(-2px) !important; }
+
+/* mobile menu */
+@media (max-width:1280px) {
+  .site-header,.site-header-solid { height:64px !important; grid-template-columns:1fr auto auto !important; }
+  .desktop-nav { display:none !important; }
+  .mobile-nav { display:block !important; position:static !important; }
+  .mobile-nav > summary {
+    position:relative !important; z-index:1300 !important; min-width:74px !important; min-height:42px !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; padding:0 12px !important; border:1px solid rgba(208,168,74,.42) !important; border-radius:2px !important; background:rgba(0,0,0,.38) !important; color:var(--ug-white) !important; font:800 .7rem/1 var(--body) !important; text-transform:uppercase !important; list-style:none !important;
+  }
+  .mobile-nav > summary::-webkit-details-marker { display:none !important; }
+  .mobile-nav > summary i { width:15px !important; height:10px !important; margin-left:8px !important; border-top:2px solid var(--ug-gold) !important; border-bottom:2px solid var(--ug-gold) !important; }
+  .mobile-nav-panel {
+    position:fixed !important; z-index:1200 !important; inset:0 !important; overflow-y:auto !important; padding:104px 24px 34px !important; background:
+      linear-gradient(rgba(6,6,6,.90),rgba(6,6,6,.96)),
+      url('/media/brand/live-explosion-background.png') center / cover no-repeat !important; color:var(--ug-white) !important;
+  }
+  .mobile-nav-panel::before { content:'BERLIN'; position:fixed; right:-35px; bottom:50px; opacity:.08; color:var(--ug-gold); font:900 clamp(7rem,34vw,15rem)/.75 var(--display); transform:rotate(-90deg) translateX(24%); pointer-events:none; }
+  .mobile-nav-panel::after { content:''; position:fixed; left:8vw; bottom:6vh; width:min(54vw,520px); aspect-ratio:1.45; opacity:.11; background:var(--ug-gold); -webkit-mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat; mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat; pointer-events:none; }
+  .mobile-nav-panel nav { position:relative; z-index:2; display:grid !important; gap:8px !important; }
+  .mobile-nav-panel nav > a,.mobile-nav-group > summary { color:var(--ug-white) !important; font:800 clamp(2.2rem,8vw,4.8rem)/.95 var(--display) !important; text-transform:uppercase !important; }
+  .mobile-nav a[aria-current='page'] { color:var(--ug-gold-bright) !important; }
+  .mobile-nav-group { border-top:1px solid var(--ug-line-soft) !important; }
+  .mobile-nav-group > summary { padding:16px 0 !important; list-style:none !important; }
+  .mobile-nav-group > div { display:grid !important; padding:0 0 14px 16px !important; }
+  .mobile-nav-group > div a { padding:9px 0 !important; color:var(--ug-muted) !important; font:700 .86rem/1.35 var(--body) !important; }
+  .mobile-nav-meta { position:relative; z-index:2; margin-top:34px; padding-top:18px; border-top:1px solid var(--ug-line-soft); color:var(--ug-muted) !important; }
+}
+@media (max-width:640px) {
+  .site-header,.site-header-solid { width:calc(100% - 18px) !important; top:9px !important; grid-template-columns:1fr auto !important; padding:7px 8px 7px 12px !important; }
+  .site-header > .button,.site-header-solid > .button { display:none !important; }
+  .site-header .brand img,.site-header-solid .brand img { width:128px !important; }
+}
+
+/* shared content + forms */
+:where(input,textarea,select) { font-family:var(--body); }
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) input,
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) textarea,
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) select {
+  border-color:rgba(208,168,74,.28) !important;
+  background:rgba(255,255,255,.035) !important;
+  color:var(--ug-white) !important;
+}
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) input:focus,
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) textarea:focus,
+:where(.contact-form,.application-form,.newsletter-form,.form-panel) select:focus { outline:2px solid rgba(208,168,74,.35) !important; border-color:var(--ug-gold) !important; }
+
+/* footer */
+.site-footer {
+  position:relative !important;
+  overflow:hidden !important;
+  border-top:1px solid var(--ug-line) !important;
+  background:
+    linear-gradient(rgba(5,5,5,.78),rgba(5,5,5,.92)),
+    url('/media/brand/live-explosion-background.png') center / cover no-repeat !important;
+  color:var(--ug-white) !important;
+}
+.site-footer::after { content:'EXPLOSION'; position:absolute; right:-.04em; bottom:-.16em; color:rgba(208,168,74,.06); font:900 clamp(7rem,18vw,18rem)/.7 var(--display); pointer-events:none; }
+.site-footer a { color:var(--ug-white) !important; }
+.site-footer a:hover { color:var(--ug-gold-bright) !important; }
+.site-footer address { color:var(--ug-muted) !important; }
+
+.mobile-ticket-dock { background:var(--ug-gold) !important; color:var(--ug-black) !important; border-top-color:var(--ug-gold-bright) !important; }
+
+/* universal media safety */
+:where(img,video,iframe,svg) { max-width:100%; }
+:where(img,video) { height:auto; }
+:where(main,section,article,aside,div,nav,form,figure,fieldset) { min-width:0; }
+:where(h1,h2,h3,h4,h5,h6,p,li,dd,dt,figcaption,label,button,summary) { word-break:normal !important; overflow-wrap:normal !important; hyphens:none !important; }
+:where(time,[class*='date'],[class*='year'],.archive-year > header span) { white-space:nowrap !important; word-break:keep-all !important; }

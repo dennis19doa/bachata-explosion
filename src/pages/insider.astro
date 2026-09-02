@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { newsletterFormEndpoint } from "../lib/forms";
+
+const formConnected = Boolean(newsletterFormEndpoint);
+---
+
+<BaseLayout
+  title="Bachata Explosion Insider — early access and festival news"
+  description="Join the Bachata Explosion Insider list for ticket updates, artist announcements, timetable news and selected early-access information."
+>
+  <article class="insider-page">
+    <section class="insider-hero" aria-labelledby="insider-title">
+      <video autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-hidden="true">
+        <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+      </video>
+      <div class="insider-shade" aria-hidden="true"></div>
+      <div class="insider-explosion" aria-hidden="true"></div>
+      <div class="shell insider-hero-grid">
+        <div>
+          <p class="eyebrow"><span></span>Bachata Explosion Insider</p>
+          <h1 id="insider-title">Be inside<br /><em>before it drops.</em></h1>
+          <p>Get the useful things first: ticket changes, artist announcements, schedule releases and selected community news from Berlin.</p>
+        </div>
+        <aside>
+          <span>What you get</span>
+          <ul>
+            <li>Early ticket & price-change information</li>
+            <li>Artist and timetable announcements</li>
+            <li>Selected partner and community news</li>
+            <li>No daily spam</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="insider-form-section section-pad" aria-labelledby="insider-form-title">
+      <div class="shell insider-form-grid">
+        <div class="insider-copy">
+          <p class="section-label">From Berlin to your inbox</p>
+          <h2 id="insider-form-title">Stay close to<br /><em>the next Explosion.</em></h2>
+          <p>The list is for people who actually want event information. You can leave at any time.</p>
+          <div class="insider-berlin" aria-hidden="true">
+            <img src="/media/brand/berlin-brandenburg-gold.png" alt="" width="1200" height="800" loading="lazy" />
+            <span>BERLIN</span>
+          </div>
+        </div>
+
+        <form class="insider-form" method="POST" action={newsletterFormEndpoint || undefined} data-insider-form data-insider-endpoint={newsletterFormEndpoint}>
+          <input type="hidden" name="topic" value="Bachata Explosion Insider signup" />
+          <input type="hidden" name="source_page" value="/insider/" />
+          <input type="hidden" name="_email.subject" value="[Bachata Explosion] New Insider signup" />
+
+          <label>
+            <span>First name</span>
+            <input type="text" name="first_name" autocomplete="given-name" maxlength="80" placeholder="Your name" />
+          </label>
+          <label>
+            <span>Email *</span>
+            <input type="email" name="email" autocomplete="email" maxlength="180" required placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>City / country</span>
+            <input type="text" name="city_country" maxlength="140" placeholder="Where are you dancing?" />
+          </label>
+          <label>
+            <span>What interests you most?</span>
+            <select name="interest">
+              <option value="All Explosion events">All Explosion events</option>
+              <option value="Berlin Bachata Festival">Berlin Bachata Festival</option>
+              <option value="Role Rotation">Role Rotation</option>
+              <option value="Elite Dance">Elite Dance</option>
+              <option value="Community news">Community news</option>
+            </select>
+          </label>
+
+          <label class="form-trap" aria-hidden="true"><span>Leave empty</span><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+          <label class="insider-consent full-field">
+            <input type="checkbox" name="privacy_consent" value="yes" required />
+            <span>I agree to receive Bachata Explosion event emails and understand I can unsubscribe. See the <a href="/privacy/">privacy policy</a>.</span>
+          </label>
+
+          <div class="insider-submit full-field">
+            <button class="button button-gold" type="submit" data-insider-submit>Join the Insider list</button>
+            <small>{formConnected ? "Secure signup delivery is connected." : "Preview mode: the form is complete; delivery will activate when the protected endpoint is connected."}</small>
+          </div>
+          <p class="insider-status full-field" role="status" aria-live="polite" data-insider-status>{formConnected ? "Ready when you are." : "Nothing is transmitted in preview mode."}</p>
+        </form>
+      </div>
+    </section>
+  </article>
+
+  <script>
+    const insiderForm = document.querySelector<HTMLFormElement>("[data-insider-form]");
+    const insiderStatus = insiderForm?.querySelector<HTMLElement>("[data-insider-status]");
+    const insiderSubmit = insiderForm?.querySelector<HTMLButtonElement>("[data-insider-submit]");
+
+    insiderForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const endpoint = insiderForm.dataset.insiderEndpoint?.trim();
+      if (!endpoint) {
+        if (insiderStatus) insiderStatus.textContent = "The Insider form is ready, but delivery is still in preview mode.";
+        return;
+      }
+      if (insiderSubmit) { insiderSubmit.disabled = true; insiderSubmit.textContent = "Joining…"; }
+      if (insiderStatus) insiderStatus.textContent = "Adding you to the Insider list…";
+      try {
+        const response = await fetch(endpoint, { method: "POST", body: new FormData(insiderForm), headers: { Accept: "application/json" } });
+        if (!response.ok) throw new Error("Signup failed");
+        insiderForm.reset();
+        if (insiderStatus) { insiderStatus.classList.remove("is-error"); insiderStatus.classList.add("is-success"); insiderStatus.textContent = "You’re on the list. Welcome to the Explosion Insider."; }
+      } catch {
+        if (insiderStatus) { insiderStatus.classList.remove("is-success"); insiderStatus.classList.add("is-error"); insiderStatus.textContent = "Signup could not be delivered. Please try again later."; }
+      } finally {
+        if (insiderSubmit) { insiderSubmit.disabled = false; insiderSubmit.textContent = "Join the Insider list"; }
+      }
+    });
+  </script>
+
+  <style>
+    .insider-page{background:#fff8ec;color:#171318;overflow:hidden}
+    .insider-hero{position:relative;isolation:isolate;min-height:680px;display:grid;align-items:end;overflow:hidden;color:white;background:#181116}
+    .insider-hero video{position:absolute;z-index:-4;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.86) contrast(1.03)}
+    .insider-shade{position:absolute;z-index:-3;inset:0;background:linear-gradient(90deg,rgba(15,7,11,.93),rgba(15,7,11,.68) 50%,rgba(15,7,11,.18)),linear-gradient(0deg,rgba(24,17,22,.9),transparent 45%)}
+    .insider-explosion{position:absolute;z-index:-2;inset:0;opacity:.12;background:url('/media/brand/live-explosion-background.png') center/cover;mix-blend-mode:screen}
+    .insider-hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.55fr);gap:clamp(44px,8vw,110px);align-items:end;padding:170px 0 74px}
+    .insider-hero h1{font-size:clamp(4.8rem,9vw,8.5rem);line-height:.84;margin:0;text-transform:uppercase}
+    .insider-hero h1 em{color:#ffd84a;font-style:normal}
+    .insider-hero p:not(.eyebrow){max-width:650px;font-size:1.05rem;line-height:1.7;color:#f6ece7}
+    .insider-hero aside{padding:26px;border-radius:18px;background:rgba(255,248,236,.92);color:#171318;box-shadow:0 22px 70px rgba(0,0,0,.26);backdrop-filter:blur(12px)}
+    .insider-hero aside>span{display:block;margin-bottom:16px;color:#7d1732;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem}
+    .insider-hero ul{margin:0;padding-left:20px;display:grid;gap:10px;line-height:1.5}
+    .insider-form-section{position:relative;background:linear-gradient(135deg,#99cfff 0 28%,#fff8ec 28% 100%)}
+    .insider-form-section::before{content:"";position:absolute;right:-4vw;top:8%;width:min(38vw,520px);aspect-ratio:1.45;background:#7d1732;opacity:.055;-webkit-mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;mask:url('/media/brand/berlin-graffiti-mask.svg') center/contain no-repeat;transform:rotate(-8deg);pointer-events:none}
+    .insider-form-grid{position:relative;display:grid;grid-template-columns:minmax(0,.8fr) minmax(420px,1fr);gap:clamp(48px,8vw,110px);align-items:start}
+    .insider-copy{position:sticky;top:120px}
+    .insider-copy h2{font-size:clamp(3.7rem,6vw,6.5rem);line-height:.9;margin:0 0 24px}
+    .insider-copy>p:not(.section-label){max-width:470px;color:#5d5558;line-height:1.75}
+    .insider-berlin{position:relative;margin-top:34px;min-height:220px;display:flex;align-items:flex-end;overflow:hidden;border-radius:18px;background:#ffd84a}
+    .insider-berlin img{position:absolute;left:-4%;bottom:-12%;width:106%;opacity:.72}
+    .insider-berlin span{position:relative;z-index:2;padding:18px 22px;font:800 clamp(3.4rem,7vw,6.4rem)/.8 'Barlow Condensed','Oswald',sans-serif;letter-spacing:-.05em;color:#171318}
+    .insider-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:clamp(24px,4vw,42px);border:1px solid rgba(23,19,24,.13);border-radius:22px;background:rgba(255,255,255,.88);box-shadow:0 24px 70px rgba(65,35,39,.15);backdrop-filter:blur(12px)}
+    .insider-form label:not(.insider-consent){display:grid;gap:8px}
+    .insider-form label>span{font-size:.74rem;font-weight:800;letter-spacing:.04em;color:#7d1732}
+    .insider-form input,.insider-form select{width:100%;min-height:52px;padding:0 14px;border:1px solid rgba(23,19,24,.16);border-radius:11px;background:#fffdf9;color:#171318;font:600 .9rem/1.3 'Manrope','DM Sans',system-ui,sans-serif}
+    .insider-form input:focus,.insider-form select:focus{outline:2px solid rgba(125,23,50,.15);outline-offset:2px;border-color:#7d1732}
+    .full-field{grid-column:1/-1}
+    .form-trap{position:absolute!important;left:-9999px!important}
+    .insider-consent{display:flex;gap:12px;align-items:flex-start;color:#5f5759;font-size:.82rem;line-height:1.55}
+    .insider-consent input{width:18px;height:18px;min-height:0;margin-top:3px;flex:0 0 auto}
+    .insider-consent a{color:#7d1732}
+    .insider-submit{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .insider-submit small{color:#71696b;max-width:330px;line-height:1.45}
+    .insider-status{margin:0;padding:12px 14px;border-left:4px solid #7d1732;background:rgba(255,216,74,.2);font-size:.82rem;color:#655522}
+    .insider-status.is-success{border-left-color:#26724a;background:rgba(95,190,132,.16);color:#245b3d}
+    .insider-status.is-error{border-left-color:#a72832;background:rgba(210,66,76,.13);color:#7b242b}
+    @media(max-width:900px){.insider-hero-grid,.insider-form-grid{grid-template-columns:1fr}.insider-copy{position:static}.insider-form-section{background:linear-gradient(#99cfff 0 18%,#fff8ec 18%)}.insider-hero{min-height:auto}.insider-hero-grid{padding:140px 0 64px}}
+    @media(max-width:620px){.insider-form{grid-template-columns:1fr;padding:20px}.insider-form>*{grid-column:1}.insider-hero h1{font-size:clamp(4rem,18vw,6.2rem)}.insider-hero-grid{padding-top:120px}.insider-berlin{min-height:180px}}
+  </style>
+</BaseLayout>

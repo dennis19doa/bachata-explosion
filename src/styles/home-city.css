@@ -1,0 +1,185 @@
+.home-city-intro {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(72px, 8vw, 120px) 0;
+  background: linear-gradient(135deg, #99cfff 0%, #cfe8ff 58%, #fff8ec 58%, #fff8ec 100%);
+  color: #171318;
+}
+
+.home-city-intro::before {
+  content: '';
+  position: absolute;
+  width: min(34vw, 420px);
+  aspect-ratio: 1.45;
+  right: 2vw;
+  top: 3vw;
+  background: #7d1732;
+  opacity: .10;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.home-city-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .85fr);
+  grid-template-areas:
+    'landmark copy'
+    'community night';
+  gap: clamp(22px, 3.2vw, 46px);
+  align-items: stretch;
+}
+
+.home-city-landmark {
+  grid-area: landmark;
+  position: relative;
+  min-height: 410px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 38px 34px 0;
+  border-radius: 24px;
+  background: #ffd84a;
+  overflow: hidden;
+  box-shadow: 0 22px 55px rgba(53, 50, 28, .10);
+}
+
+.home-city-landmark img {
+  position: relative;
+  z-index: 2;
+  width: min(92%, 720px);
+  height: auto;
+  object-fit: contain;
+  filter: saturate(.95) contrast(1.03);
+}
+
+.home-city-landmark > span {
+  position: absolute;
+  z-index: 1;
+  left: 18px;
+  top: 8px;
+  color: rgba(23, 19, 24, .10);
+  font: 800 clamp(6rem, 12vw, 12rem)/.8 var(--display, sans-serif);
+  letter-spacing: -.055em;
+}
+
+.home-city-copy {
+  grid-area: copy;
+  align-self: center;
+  max-width: 570px;
+  padding: 20px 0;
+}
+
+.home-city-copy h2 {
+  color: #171318;
+  margin-bottom: 26px;
+}
+
+.home-city-copy h2 em { color: #7d1732; }
+
+.home-city-copy > p:not(.section-label) {
+  max-width: 550px;
+  color: #534c50;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.home-city-route {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 13px 15px;
+  border: 1px solid rgba(23,19,24,.13);
+  border-radius: 12px;
+  background: rgba(255,248,236,.70);
+}
+
+.home-city-route span {
+  font: 800 .68rem/1 var(--body, sans-serif);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.home-city-route i {
+  width: 28px;
+  height: 4px;
+  border-radius: 999px;
+  background: #f17864;
+}
+.home-city-route i:nth-of-type(2) { background: #7d1732; }
+
+.home-city-community,
+.home-city-night {
+  position: relative;
+  margin: 0;
+  min-height: 350px;
+  padding: 9px;
+  border-radius: 9px;
+  background: #fff8ec;
+  overflow: hidden;
+  box-shadow: 10px 13px 0 rgba(125,23,50,.15);
+}
+.home-city-community { grid-area: community; transform: rotate(-.8deg); }
+.home-city-night { grid-area: night; transform: rotate(.8deg); }
+
+.home-city-community img,
+.home-city-night img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.home-city-community figcaption,
+.home-city-night figcaption {
+  position: absolute;
+  left: 19px;
+  bottom: 18px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #fff8ec;
+  color: #171318;
+  font: 800 .72rem/1 var(--body, sans-serif);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.home-city-night::after {
+  content: 'Berlin after dark →';
+  position: absolute;
+  right: 22px;
+  top: 20px;
+  color: #ffd84a;
+  font: 400 1.08rem/1 'Permanent Marker', cursive;
+  transform: rotate(-6deg);
+  text-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+@media (max-width: 850px) {
+  .home-city-intro {
+    background: linear-gradient(180deg, #b8ddff 0%, #dceeff 44%, #fff8ec 44%, #fff8ec 100%);
+  }
+  .home-city-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'landmark' 'copy' 'community' 'night';
+  }
+  .home-city-landmark { min-height: 320px; }
+  .home-city-copy { padding: 12px 0 22px; }
+}
+
+@media (max-width: 560px) {
+  .home-city-intro { padding: 64px 0; }
+  .home-city-landmark { min-height: 255px; padding: 24px 18px 0; border-radius: 18px; }
+  .home-city-community,
+  .home-city-night { min-height: 290px; }
+  .home-city-community img,
+  .home-city-night img { min-height: 270px; }
+  .home-city-route { gap: 7px; }
+  .home-city-route i { width: 18px; }
+}

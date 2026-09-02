@@ -1,0 +1,739 @@
+/*
+  Bachata Explosion / BERLIN 030 signature layer
+  This file intentionally sits last. It gives every page one recognisable identity
+  while keeping the migrated content, routes and practical information intact.
+*/
+
+:root {
+  --be-black: #070708;
+  --be-black-2: #0d0c0d;
+  --be-paper: #e9dfcf;
+  --be-paper-2: #d8ccba;
+  --be-red: #74172b;
+  --be-red-hot: #a62042;
+  --be-pink: #da317e;
+  --be-gold: #efc45f;
+  --be-white: #f4efe8;
+  --be-muted: #aaa0a3;
+  --be-grid: rgba(239,196,95,.12);
+  --be-rule: rgba(239,196,95,.24);
+  --be-poster-shadow: 14px 15px 0 rgba(0,0,0,.42);
+}
+
+/* --------------------------------------------------------------------------
+   SITE MATERIAL: one continuous Berlin night / poster-wall environment
+   -------------------------------------------------------------------------- */
+
+body {
+  background-color: var(--be-black) !important;
+  background-image:
+    linear-gradient(rgba(7,7,8,.84), rgba(7,7,8,.84)),
+    url("/media/brand/berlin-wall.svg") !important;
+  background-size: auto, 720px auto !important;
+}
+
+main {
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, transparent calc(50% - .5px), rgba(239,196,95,.035) 50%, transparent calc(50% + .5px)),
+    linear-gradient(rgba(255,255,255,.012), rgba(255,255,255,.012));
+}
+
+main::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  right: -42px;
+  top: 18vh;
+  width: 250px;
+  aspect-ratio: 1;
+  background: var(--be-gold);
+  -webkit-mask: url("/media/brand/berlin-030-stamp.svg") center / contain no-repeat;
+  mask: url("/media/brand/berlin-030-stamp.svg") center / contain no-repeat;
+  opacity: .055;
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.section-pad,
+.bbf-pad,
+.archive-gallery-section,
+.contact-routing,
+.contact-workbench,
+.contact-next,
+.ambassador-statement,
+.ambassador-benefits,
+.ambassador-role,
+.ambassador-group,
+.ambassador-application,
+.volunteer-promise,
+.volunteer-roles,
+.volunteer-application {
+  background-color: transparent !important;
+}
+
+.section-pad:nth-of-type(even),
+.bbf-premium > section:nth-of-type(even),
+.contact-2026 > section:nth-of-type(even),
+.ambassador-2026 > section:nth-of-type(even),
+.volunteer-2026 > section:nth-of-type(even) {
+  background-image: linear-gradient(rgba(255,255,255,.018), rgba(255,255,255,.018)) !important;
+}
+
+/* A recognisable numbered flyer label on all editorial sections. */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .36rem .54rem .34rem;
+  margin-bottom: 1.25rem;
+  background: var(--be-paper);
+  color: #141113 !important;
+  box-shadow: 5px 5px 0 rgba(116,23,43,.52);
+  font-size: .62rem !important;
+  line-height: 1 !important;
+  letter-spacing: .13em !important;
+  transform: rotate(-.45deg);
+}
+
+.section-label::before {
+  content: "BE//030" !important;
+  margin: 0 !important;
+  color: var(--be-red) !important;
+  font-weight: 900;
+}
+
+.eyebrow {
+  letter-spacing: .13em !important;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER: club-flyer masthead instead of generic navigation
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  width: min(1260px, calc(100% - 34px));
+  padding: 18px 0 17px !important;
+  border-top: 3px solid var(--be-gold);
+  border-bottom: 1px solid rgba(244,239,232,.18) !important;
+}
+
+.site-header::before {
+  content: "BE // 030";
+  position: absolute;
+  left: 0;
+  bottom: -26px;
+  padding: 5px 8px 4px;
+  background: var(--be-red);
+  color: var(--be-white);
+  font: 900 .54rem/1 var(--body);
+  letter-spacing: .14em;
+  transform: rotate(-1.2deg);
+}
+
+.site-header::after {
+  content: "52.5200 N / 13.4050 E / BERLIN" !important;
+  bottom: -25px !important;
+  color: var(--be-gold) !important;
+  opacity: .72;
+}
+
+.brand {
+  position: relative;
+  padding: 6px 9px;
+  background: rgba(233,223,207,.94);
+  transform: rotate(-1.25deg);
+  box-shadow: 6px 7px 0 rgba(116,23,43,.48);
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 12px;
+  top: -7px;
+  right: 13px;
+  background: rgba(239,196,95,.78);
+  transform: rotate(5deg);
+}
+
+.desktop-nav > a,
+.nav-group > summary {
+  font-size: .72rem !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  letter-spacing: .075em !important;
+}
+
+.nav-popover {
+  background-color: rgba(8,8,9,.98) !important;
+  background-image:
+    linear-gradient(rgba(8,8,9,.86), rgba(8,8,9,.86)),
+    url("/media/brand/berlin-wall.svg") !important;
+  border: 1px solid var(--be-rule) !important;
+  border-top: 4px solid var(--be-red-hot) !important;
+  box-shadow: var(--be-poster-shadow) !important;
+}
+
+.button {
+  border-radius: 0 !important;
+  box-shadow: 6px 7px 0 rgba(0,0,0,.32) !important;
+  transition: transform .14s ease, box-shadow .14s ease !important;
+}
+
+.button:hover {
+  transform: translate(-2px,-2px) rotate(-.35deg);
+  box-shadow: 9px 10px 0 rgba(0,0,0,.38) !important;
+}
+
+.button-gold {
+  background: var(--be-gold) !important;
+  color: #151113 !important;
+}
+
+/* --------------------------------------------------------------------------
+   HERO DNA: oversized photocopy type + stamped Berlin identity
+   -------------------------------------------------------------------------- */
+
+.home-hero,
+.bbf-hero,
+.page-hero,
+.contact-hero,
+.ambassador-hero,
+.volunteer-hero,
+.wp-source-header {
+  border-bottom: 5px solid var(--be-red) !important;
+}
+
+.home-hero::before,
+.bbf-hero::before,
+.page-hero::after,
+.contact-hero::after,
+.ambassador-hero::after,
+.volunteer-hero::after,
+.wp-source-header::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  width: clamp(105px, 12vw, 175px);
+  aspect-ratio: 1;
+  right: clamp(16px, 4vw, 62px);
+  top: clamp(112px, 16vh, 176px);
+  background: var(--be-gold);
+  -webkit-mask: url("/media/brand/berlin-030-stamp.svg") center / contain no-repeat;
+  mask: url("/media/brand/berlin-030-stamp.svg") center / contain no-repeat;
+  opacity: .78;
+  transform: rotate(10deg);
+  pointer-events: none;
+}
+
+.home-hero h1,
+.bbf-hero h1,
+.page-hero h1,
+.contact-hero h1,
+.ambassador-hero h1,
+.volunteer-hero h1,
+.wp-source-header h1,
+.wp-source-display-title {
+  text-shadow: 4px 4px 0 rgba(116,23,43,.72);
+}
+
+/* Photo/video treatment: less polished advertising, more photocopied club flyer. */
+.home-hero-video,
+.bbf-hero-video,
+.ambassador-hero-bg,
+.volunteer-hero > img {
+  filter: saturate(.65) contrast(1.18) brightness(.75) !important;
+}
+
+.home-hero-shade,
+.bbf-hero-wash,
+.ambassador-hero-shade,
+.volunteer-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(5,5,6,.96), rgba(5,5,6,.77) 47%, rgba(5,5,6,.35) 75%, rgba(5,5,6,.74)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   BBF: festival page as a stack of Berlin flyers / tickets, not premium cards
+   -------------------------------------------------------------------------- */
+
+.bbf-premium {
+  background: transparent !important;
+}
+
+.bbf-meta span:first-child {
+  background: var(--be-paper);
+  color: #111;
+  padding: 7px 10px;
+  transform: rotate(-1deg);
+}
+
+.bbf-meta span:last-child {
+  background: var(--be-red);
+  color: var(--be-white);
+  padding: 7px 10px;
+  transform: rotate(1deg);
+}
+
+.bbf-hero-poster {
+  transform: rotate(2.2deg) translateY(8px) !important;
+  border: 8px solid var(--be-paper) !important;
+  box-shadow: 18px 20px 0 rgba(116,23,43,.54), 26px 29px 0 rgba(0,0,0,.35) !important;
+}
+
+.bbf-hero-poster::after {
+  content: "NEXT EXPLOSION →";
+  position: absolute;
+  z-index: 7;
+  right: -42px;
+  top: 24%;
+  padding: 8px 10px;
+  background: var(--be-gold);
+  color: #101010;
+  font: 900 .58rem/1 var(--body);
+  letter-spacing: .12em;
+  transform: rotate(88deg);
+}
+
+.bbf-stats-grid > div {
+  border-right: 1px dashed rgba(239,196,95,.28) !important;
+}
+
+.bbf-city-proof {
+  gap: clamp(14px,2vw,24px) !important;
+}
+
+.bbf-city-proof article {
+  position: relative;
+  border-radius: 0 !important;
+  border: 0 !important;
+  min-height: 230px;
+  padding: clamp(24px,3vw,38px) !important;
+  background: var(--be-paper) !important;
+  color: #161315 !important;
+  box-shadow: var(--be-poster-shadow) !important;
+}
+
+.bbf-city-proof article:nth-child(1) { transform: rotate(-1deg); }
+.bbf-city-proof article:nth-child(2) { transform: translateY(13px) rotate(.7deg); background: var(--be-red) !important; color: var(--be-white) !important; }
+.bbf-city-proof article:nth-child(3) { transform: rotate(-.5deg); }
+.bbf-city-proof article p { color: currentColor !important; opacity: .78; }
+.bbf-city-proof article span { color: var(--be-red-hot) !important; font-weight: 900; }
+.bbf-city-proof article:nth-child(2) span { color: var(--be-gold) !important; }
+
+.bbf-venue-card,
+.bbf-hotel-deal,
+.bbf-cinema,
+.bbf-schedule-day,
+.bbf-travel-grid > article,
+.bbf-whatsapp,
+.bbf-jj-card {
+  border-radius: 0 !important;
+  border: 1px solid rgba(239,196,95,.18) !important;
+  background-color: rgba(13,12,13,.86) !important;
+  box-shadow: 10px 12px 0 rgba(0,0,0,.35) !important;
+}
+
+.bbf-venue-card:nth-child(2),
+.bbf-travel-grid > article:nth-child(2),
+.bbf-travel-grid > article:nth-child(4) {
+  transform: rotate(.45deg);
+}
+
+.bbf-venue-card:nth-child(3),
+.bbf-travel-grid > article:nth-child(1) {
+  transform: rotate(-.45deg);
+}
+
+.bbf-artist-rail > * {
+  border-radius: 0 !important;
+  background: var(--be-paper) !important;
+  padding: 8px !important;
+  box-shadow: 8px 9px 0 rgba(116,23,43,.38) !important;
+}
+
+.bbf-artist-rail > *:nth-child(3n+1) { transform: rotate(-.5deg); }
+.bbf-artist-rail > *:nth-child(3n+2) { transform: translateY(7px) rotate(.4deg); }
+.bbf-artist-rail > *:nth-child(3n+3) { transform: rotate(.25deg); }
+
+.bbf-schedule-tabs button,
+.bbf-hotel-tabs button,
+.album-tabs button {
+  border-radius: 0 !important;
+  border: 1px solid rgba(239,196,95,.2) !important;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.bbf-schedule-tabs button[aria-selected="true"],
+.bbf-hotel-tabs button[aria-selected="true"],
+.album-tabs button.active {
+  background: var(--be-paper) !important;
+  color: #151214 !important;
+  box-shadow: 5px 6px 0 rgba(116,23,43,.55);
+  transform: rotate(-.45deg);
+}
+
+.bbf-workshop-row {
+  border-bottom-style: dashed !important;
+}
+
+/* Passes become physical tickets: different pieces from the same wall. */
+.bbf-pass-grid > article {
+  position: relative;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: 12px 14px 0 rgba(0,0,0,.38) !important;
+  overflow: visible !important;
+}
+
+.bbf-pass-grid > article::before,
+.bbf-pass-grid > article::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 52%;
+  border-radius: 50%;
+  background: var(--be-black);
+}
+
+.bbf-pass-grid > article::before { left: -11px; }
+.bbf-pass-grid > article::after { right: -11px; }
+
+.bbf-pass-full { background: var(--be-paper) !important; color: #141113 !important; transform: rotate(-.65deg); }
+.bbf-pass-featured { background: var(--be-red) !important; color: var(--be-white) !important; transform: translateY(-14px) rotate(.45deg); }
+.bbf-pass-party { background: #121113 !important; transform: rotate(.55deg); }
+.bbf-pass-grid > article p,
+.bbf-pass-grid > article li { color: currentColor !important; opacity: .78; }
+
+.bbf-jj-impact {
+  background: var(--be-red) !important;
+  border-block: 3px solid var(--be-gold);
+  transform: rotate(-.35deg) scale(1.01);
+}
+
+/* --------------------------------------------------------------------------
+   ARCHIVE: event history as a real fly-poster wall
+   -------------------------------------------------------------------------- */
+
+.archive-hero,
+.archive-detail-hero {
+  background:
+    radial-gradient(circle at 76% 28%, rgba(166,32,66,.2), transparent 30rem),
+    rgba(7,7,8,.92) !important;
+}
+
+.archive-toolbar button {
+  border-radius: 0 !important;
+}
+
+.archive-toolbar button.active {
+  background: var(--be-gold) !important;
+  color: #111 !important;
+  box-shadow: 5px 6px 0 rgba(116,23,43,.55);
+  transform: rotate(-.7deg);
+}
+
+.archive-year > header {
+  border-top: 4px solid var(--be-red) !important;
+}
+
+.archive-year > header > span {
+  color: var(--be-paper) !important;
+  text-shadow: 5px 5px 0 var(--be-red);
+}
+
+.library-card > a,
+.archive-cover,
+.album-mosaic figure,
+.nas-gallery-grid figure {
+  border-radius: 0 !important;
+  border: 7px solid var(--be-paper) !important;
+  box-shadow: 9px 11px 0 rgba(0,0,0,.4) !important;
+  background: var(--be-paper) !important;
+}
+
+.library-card:nth-child(4n+1) > a { transform: rotate(-1deg); }
+.library-card:nth-child(4n+2) > a { transform: translateY(9px) rotate(.65deg); }
+.library-card:nth-child(4n+3) > a { transform: rotate(.35deg); }
+.library-card:nth-child(4n+4) > a { transform: translateY(-5px) rotate(-.5deg); }
+
+.library-card h2 { text-shadow: 3px 3px 0 rgba(116,23,43,.42); }
+
+.archive-cover {
+  transform: rotate(1.3deg);
+}
+
+.archive-cover figcaption,
+.album-mosaic figcaption {
+  color: #171315 !important;
+}
+
+.album-preview-note,
+.archive-fallback,
+.migration-note,
+.archive-original-index {
+  border-radius: 0 !important;
+  border-left: 5px solid var(--be-red) !important;
+  background: rgba(13,12,13,.88) !important;
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT: backstage production board, not SaaS form UI
+   -------------------------------------------------------------------------- */
+
+.contact-route-grid {
+  gap: clamp(12px,1.6vw,20px) !important;
+}
+
+.contact-route {
+  position: relative;
+  border-radius: 0 !important;
+  border: 0 !important;
+  background: var(--be-paper) !important;
+  color: #151214 !important;
+  box-shadow: 8px 9px 0 rgba(0,0,0,.35) !important;
+}
+
+.contact-route:nth-child(even) {
+  background: var(--be-red) !important;
+  color: var(--be-white) !important;
+  transform: translateY(6px) rotate(.45deg);
+}
+
+.contact-route:nth-child(odd) { transform: rotate(-.45deg); }
+.contact-route small { color: currentColor !important; opacity: .7; }
+.contact-route[aria-pressed="true"] { box-shadow: 8px 9px 0 var(--be-gold) !important; }
+
+.contact-form,
+.contact-delivery-card,
+.contact-next-grid > a {
+  border-radius: 0 !important;
+  background: rgba(12,11,12,.9) !important;
+  border-color: rgba(239,196,95,.2) !important;
+}
+
+.contact-form {
+  border-top: 5px solid var(--be-red) !important;
+  box-shadow: 14px 16px 0 rgba(0,0,0,.38);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+.ambassador-form input,
+.ambassador-form textarea,
+.volunteer-form input,
+.volunteer-form select,
+.volunteer-form textarea {
+  border-radius: 0 !important;
+  border: 1px solid rgba(239,196,95,.24) !important;
+  background: #09090a !important;
+}
+
+/* --------------------------------------------------------------------------
+   CREW PAGES: photocopied backstage passes / zine pages
+   -------------------------------------------------------------------------- */
+
+.ambassador-photo-stack figure,
+.ambassador-benefit-grid article,
+.ambassador-role figure,
+.ambassador-group-card,
+.ambassador-form,
+.volunteer-promise-cards article,
+.volunteer-role-grid > a,
+.volunteer-form,
+.volunteer-form-section {
+  border-radius: 0 !important;
+}
+
+.ambassador-photo-stack figure,
+.ambassador-role figure {
+  border: 8px solid var(--be-paper) !important;
+  background: var(--be-paper) !important;
+  box-shadow: var(--be-poster-shadow) !important;
+}
+
+.ambassador-photo-stack figure:first-child { transform: rotate(-2deg); }
+.ambassador-photo-stack figure:last-child { transform: translate(10px,-12px) rotate(2deg); }
+
+.ambassador-photo-stack img,
+.ambassador-role img {
+  filter: grayscale(.42) saturate(.62) contrast(1.16) !important;
+}
+
+.ambassador-photo-stack figcaption,
+.ambassador-role figcaption { color: #151214 !important; }
+
+.ambassador-benefit-grid article,
+.volunteer-promise-cards article,
+.volunteer-role-grid > a {
+  background: var(--be-paper) !important;
+  color: #151214 !important;
+  border: 0 !important;
+  box-shadow: 8px 9px 0 rgba(0,0,0,.34) !important;
+}
+
+.ambassador-benefit-grid article:nth-child(even),
+.volunteer-role-grid > a:nth-child(even) {
+  background: var(--be-red) !important;
+  color: var(--be-white) !important;
+  transform: translateY(7px) rotate(.4deg);
+}
+
+.ambassador-benefit-grid article p,
+.volunteer-promise-cards article p,
+.volunteer-role-grid > a p { color: currentColor !important; opacity: .72; }
+
+.ambassador-form,
+.volunteer-form {
+  border-top: 5px solid var(--be-red) !important;
+  background: rgba(12,11,12,.9) !important;
+  box-shadow: 14px 16px 0 rgba(0,0,0,.38);
+}
+
+/* --------------------------------------------------------------------------
+   PRESERVED WORDPRESS CONTENT: preserve the data, replace the visual shell
+   -------------------------------------------------------------------------- */
+
+.wp-preserved-page {
+  background: transparent !important;
+}
+
+.wp-source-header {
+  min-height: clamp(420px,58vh,650px);
+  display: grid;
+  align-items: end;
+  padding-block: clamp(130px,17vh,190px) clamp(60px,8vw,100px) !important;
+}
+
+.wp-source-content {
+  width: min(1120px, calc(100% - 40px));
+  margin-inline: auto;
+  padding-block: clamp(48px,7vw,96px) !important;
+  color: var(--be-white) !important;
+}
+
+.wp-source-content > * {
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.wp-source-content h2,
+.wp-source-content h3 {
+  color: var(--be-white) !important;
+  text-shadow: 3px 3px 0 rgba(116,23,43,.45);
+}
+
+.wp-source-content a { color: var(--be-gold) !important; }
+
+.wp-source-content img {
+  border: 7px solid var(--be-paper) !important;
+  border-radius: 0 !important;
+  box-shadow: 9px 10px 0 rgba(0,0,0,.4) !important;
+}
+
+.wp-source-content figure:nth-of-type(odd) img { transform: rotate(-.45deg); }
+.wp-source-content figure:nth-of-type(even) img { transform: rotate(.45deg); }
+
+.wp-source-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(10,9,10,.9) !important;
+  color: var(--be-white) !important;
+}
+
+.wp-source-content th {
+  background: var(--be-paper) !important;
+  color: #151214 !important;
+}
+
+.wp-source-content th,
+.wp-source-content td {
+  border: 1px solid rgba(239,196,95,.22) !important;
+  padding: 12px !important;
+}
+
+.wp-source-content input,
+.wp-source-content select,
+.wp-source-content textarea,
+.wp-source-content button {
+  border-radius: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER: pasted final poster strip
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  position: relative;
+  border-top: 5px solid var(--be-red) !important;
+  background:
+    linear-gradient(rgba(7,7,8,.88), rgba(7,7,8,.88)),
+    url("/media/brand/berlin-wall.svg") !important;
+}
+
+.site-footer::before {
+  content: "BACHATA EXPLOSION / BERLIN / SINCE 2022";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-.4deg);
+  white-space: nowrap;
+  padding: 8px 13px;
+  background: var(--be-gold);
+  color: #111;
+  font: 900 .58rem/1 var(--body);
+  letter-spacing: .13em;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE: keep the collage identity without sacrificing readability
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  main::after { display: none; }
+  .site-header::after { display: none; }
+  .home-hero::before,
+  .bbf-hero::before,
+  .page-hero::after,
+  .contact-hero::after,
+  .ambassador-hero::after,
+  .volunteer-hero::after,
+  .wp-source-header::after {
+    width: 92px;
+    top: 110px;
+    right: 14px;
+    opacity: .45;
+  }
+  .bbf-city-proof article,
+  .library-card > a,
+  .contact-route,
+  .ambassador-benefit-grid article,
+  .volunteer-role-grid > a { transform: none !important; }
+}
+
+@media (max-width: 620px) {
+  body { background-attachment: scroll !important; }
+  .site-header { width: min(100% - 22px, 1260px); }
+  .brand { padding: 4px 6px; box-shadow: 4px 5px 0 rgba(116,23,43,.48); }
+  .section-label { transform: none; }
+  .bbf-hero-poster { transform: rotate(1deg) !important; }
+  .bbf-pass-grid > article { transform: none !important; }
+  .site-footer::before { max-width: calc(100% - 24px); overflow: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .brand,
+  .section-label,
+  .bbf-hero-poster,
+  .library-card > a,
+  .contact-route,
+  .ambassador-photo-stack figure,
+  .bbf-city-proof article,
+  .bbf-pass-grid > article { transform: none !important; }
+}

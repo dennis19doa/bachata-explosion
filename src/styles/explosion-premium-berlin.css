@@ -1,0 +1,183 @@
+/*
+ * BACHATA EXPLOSION — PREMIUM BERLIN LAYER
+ * Darker, more cinematic and more Berlin-focused without changing preserved content.
+ */
+
+:root{
+  --ex-bg:#14080e;
+  --ex-surface:#211018;
+  --ex-surface-2:#2b1420;
+  --ex-ink:#fff5ee;
+  --ex-muted:#c9b6bd;
+  --ex-wine:#8b274a;
+  --ex-wine-dark:#5d152e;
+  --ex-pink:#ef4c89;
+  --ex-gold:#e3b75f;
+  --ex-gold-soft:#f7ddb0;
+  --ex-line:rgba(247,221,176,.16);
+  --ex-dark-line:rgba(255,255,255,.14);
+}
+
+html,body{background:#11070b;color:var(--ex-ink)}
+body{overflow-x:hidden}
+main{overflow:visible;background:#11070b}
+:where(main,section,article,div,nav,form,figure){min-width:0}
+:where(h1,h2,h3){text-wrap:balance}
+:where(a,button,input,select,textarea){max-width:100%}
+
+/* Header: darker, more premium, less detached from the page */
+.site-header,.site-header-solid{
+  border-bottom:1px solid rgba(227,183,95,.18)!important;
+  background:rgba(17,7,11,.965)!important;
+  color:#fff5ee!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.25)!important;
+}
+.site-header::after,.site-header-solid::after{
+  background:linear-gradient(90deg,var(--ex-wine) 0 48%,var(--ex-pink) 48% 72%,var(--ex-gold) 72%)!important;
+}
+.desktop-nav>a,.nav-group>summary{color:#eadde1!important}
+.desktop-nav>a:hover,.nav-group>summary:hover,.desktop-nav [aria-current=page],.desktop-nav .nav-section-current,.nav-group.is-current>summary{color:var(--ex-gold-soft)!important}
+.desktop-nav [aria-current=page]::after,.desktop-nav .nav-section-current::after,.nav-group.is-current>summary::before{background:var(--ex-pink)!important}
+.nav-popover{border-color:rgba(227,183,95,.24)!important;background:rgba(21,8,13,.99)!important;color:#fff!important;box-shadow:0 28px 70px rgba(0,0,0,.46)!important}
+.nav-popover>span{color:var(--ex-gold-soft)!important}.nav-popover a{border-color:rgba(255,255,255,.10)!important;color:#fff!important}.nav-popover a:hover{background:rgba(139,39,74,.22)!important}.nav-popover a small{color:#bdaab1!important}
+.site-header>.button,.site-header-solid>.button{border-color:var(--ex-gold)!important;background:var(--ex-wine)!important;color:#fff!important}.site-header>.button:hover,.site-header-solid>.button:hover{background:#a02c56!important}
+
+/* Shared darker surfaces */
+.page-hero,.archive-hero,.wp-source-header,.contact-hero,.ambassador-hero,.volunteer-hero,.jj-hero,.insider-hero{
+  background:#1a0a11!important;
+  color:#fff!important;
+}
+.page-hero::after,.archive-hero::after,.wp-source-header::after,.contact-hero::after,.ambassador-hero::after,.volunteer-hero::after{
+  opacity:.34!important;
+  background:linear-gradient(90deg,rgba(11,4,7,.9),rgba(11,4,7,.45)),url('/media/brand/berlin-brandenburg-gold.png') center/cover no-repeat!important;
+}
+:where(.contact-2026,.ambassador-2026,.archive-index,.archive-page,.archive-event,.wp-source-page,.insider-page){background:#14080e!important;color:var(--ex-ink)!important}
+:where(.contact-routing,.contact-workbench,.contact-next,.ambassador-statement,.ambassador-role,.ambassador-group,.ambassador-application){background:transparent!important;color:var(--ex-ink)!important}
+:where(.contact-route,.contact-delivery-card,.contact-form,.ambassador-benefit-grid article,.ambassador-role-notes p,.ambassador-group-card,.ambassador-form,.archive-card,.wp-source-content){border-color:var(--ex-line)!important;background:rgba(34,16,24,.88)!important;color:var(--ex-ink)!important;box-shadow:none!important}
+:where(.contact-route,.ambassador-benefit-grid article,.archive-card):hover{border-color:rgba(227,183,95,.42)!important}
+:where(.contact-2026,.ambassador-2026,.archive-index,.archive-page,.archive-event,.wp-source-page) p{color:var(--ex-muted)}
+:where(input,textarea,select){border:1px solid rgba(247,221,176,.2)!important;background:#180b11!important;color:#fff5ee!important}
+:where(input,textarea,select)::placeholder{color:#927f86!important}
+:where(input,textarea,select):focus{border-color:var(--ex-gold)!important;outline:2px solid rgba(227,183,95,.15)!important}
+
+/* Homepage: same structure, darker and more explosive */
+html body .ex-home{background:#13080d!important;color:#fff5ee!important}
+html body .ex-hero{background:#180a11!important;border-bottom-color:rgba(227,183,95,.14)!important}
+html body .ex-hero::after{position:absolute;inset:0 52% 0 0;background:radial-gradient(circle at 15% 25%,rgba(239,76,137,.11),transparent 48%);content:"";pointer-events:none}
+html body .ex-hero-copy{position:relative;z-index:1}
+html body .ex-hero h1{color:#fff4ed!important}
+html body .ex-hero h1 em{color:var(--ex-gold-soft)!important}
+html body .ex-kicker{color:var(--ex-gold)!important}
+html body .ex-hero-meta{color:#f0d8df!important}.ex-hero-meta span:last-child{color:#c7b3ba!important}
+html body .ex-hero-lead,.ex-copy{color:#cbb8bf!important}
+html body .ex-btn{border-color:var(--ex-gold)!important;background:var(--ex-wine)!important;color:#fff!important}
+html body .ex-btn:hover{background:#a02c56!important}
+html body .ex-btn-secondary{background:transparent!important;color:var(--ex-gold-soft)!important}
+html body .ex-btn-secondary:hover{background:rgba(227,183,95,.08)!important}
+html body .ex-lineup{border-color:rgba(227,183,95,.14)!important;background:#1b0c12!important}
+html body .ex-lineup-label span{color:#a9959d!important}.ex-lineup-label strong,.ex-lineup-all{color:var(--ex-gold-soft)!important}.ex-lineup-person span{color:#f2e5e9!important}.ex-lineup-person img{box-shadow:0 0 0 2px rgba(227,183,95,.28)!important}
+html body .ex-events{background:linear-gradient(135deg,#6b1836 0%,#8b274a 52%,#54132b 100%)!important}
+html body .ex-proof{background:#15090e!important}.ex-stat-grid{border-color:var(--ex-line)!important}.ex-stat{border-color:var(--ex-line)!important;background:#211018!important}.ex-stat strong{color:var(--ex-gold-soft)!important}.ex-stat span{color:#c8b6bd!important}.ex-stat.is-berlin{background:linear-gradient(135deg,#8b274a,#ef4c89)!important}
+html body .ex-team{border-color:var(--ex-line)!important;background:#1a0b12!important}
+html body .ex-story{background:#100609!important}
+html body .ex-history-wall figure{outline:1px solid rgba(227,183,95,.12);background:#211018!important}
+html body .ex-final{background:linear-gradient(110deg,#8b274a 0%,#671632 55%,#2a101b 100%)!important;color:#fff!important}.ex-final h2{color:#fff!important}.ex-final p{color:#ead8df!important}.ex-final::after{color:rgba(227,183,95,.07)!important}
+
+/* BBF: Brandenburg Gate stays present from top to bottom */
+.bbf-premium{
+  position:relative!important;
+  isolation:isolate;
+  background:#100609!important;
+  color:#fff5ee!important;
+}
+.bbf-premium::before{
+  position:fixed!important;
+  inset:74px 0 0!important;
+  z-index:0!important;
+  display:block!important;
+  opacity:1!important;
+  background:
+    linear-gradient(180deg,rgba(8,3,5,.44),rgba(8,3,5,.66)),
+    linear-gradient(90deg,rgba(50,9,27,.30),rgba(12,4,8,.08)),
+    url('/media/brand/berlin-brandenburg-gold.png') center 40%/cover no-repeat!important;
+  content:""!important;
+  pointer-events:none!important;
+}
+.bbf-premium>*{position:relative;z-index:1}
+.bbf-hero{background:rgba(13,5,9,.78)!important;border-bottom:1px solid rgba(227,183,95,.18)}
+.bbf-hero-video{opacity:.68;filter:saturate(.9) contrast(1.08) brightness(.62)!important}
+.bbf-hero-wash{background:linear-gradient(90deg,rgba(18,6,12,.96),rgba(63,13,34,.73) 53%,rgba(10,4,7,.28)),linear-gradient(0deg,rgba(11,4,7,.76),transparent 58%)!important}
+.bbf-hero h1{color:#fff!important;text-shadow:0 14px 45px rgba(0,0,0,.28)}.bbf-hero h1 em{color:var(--ex-gold-soft)!important}.bbf-meta,.bbf-hero-lead{color:#eadde1!important}
+.bbf-hero-poster{border:1px solid rgba(227,183,95,.24)!important;background:#190a11!important;box-shadow:20px 20px 0 rgba(227,183,95,.16),0 34px 80px rgba(0,0,0,.42)!important}
+
+.bbf-quicknav{top:74px!important;border-color:rgba(227,183,95,.18)!important;background:rgba(15,6,10,.94)!important;box-shadow:0 10px 28px rgba(0,0,0,.22)}
+.bbf-quicknav a{color:#cbb7be!important}.bbf-quicknav a:hover{background:rgba(139,39,74,.22)!important;color:var(--ex-gold-soft)!important}
+.bbf-stats{border-color:rgba(227,183,95,.18)!important;background:rgba(13,5,9,.86)!important}.bbf-stats-grid>div{border-color:rgba(227,183,95,.14)!important}.bbf-stats strong{color:var(--ex-gold-soft)!important}.bbf-stats span{color:#bdaab1!important}
+
+.bbf-intro,.bbf-venue,.bbf-schedule,.bbf-passes,.bbf-faq,.bbf-travel{
+  background:rgba(14,6,10,.76)!important;
+  color:#fff5ee!important;
+  border-top:1px solid rgba(227,183,95,.08);
+}
+.bbf-venue,.bbf-schedule{background:rgba(25,9,16,.83)!important}
+.bbf-intro{background:rgba(13,5,9,.69)!important}
+.bbf-heading{border-color:rgba(227,183,95,.15)!important}
+.bbf-heading h2,.bbf-city-copy h2,.bbf-faq-intro h2{color:#fff!important}.bbf-heading h2 em,.bbf-city-copy h2 em,.bbf-faq-intro h2 em{color:var(--ex-gold-soft)!important}.bbf-heading>p,.bbf-city-copy>p,.bbf-faq-intro>p{color:#cbb8bf!important}
+.bbf-city-proof article{border-color:rgba(227,183,95,.16)!important;background:rgba(28,12,19,.82)!important}.bbf-city-proof article>span{color:var(--ex-gold)!important}.bbf-city-proof h3{color:#fff!important}.bbf-city-proof p{color:#c7b4bb!important}
+
+.bbf-film,.bbf-venue-card,.bbf-hotel-deal,.bbf-hotel-panel,.bbf-schedule-panel,.bbf-pass-grid article,.bbf-travel-grid article,.bbf-whatsapp,.bbf-faq-list details{
+  border-color:rgba(227,183,95,.16)!important;
+  background:rgba(30,13,20,.9)!important;
+  color:#fff5ee!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.14)!important;
+}
+.bbf-venue-card h3,.bbf-hotel-panel h4,.bbf-pass-grid h3,.bbf-travel-grid h3,.bbf-whatsapp h3{color:#fff!important}.bbf-venue-card p,.bbf-hotel-panel p,.bbf-hotel-panel li,.bbf-pass-grid p,.bbf-pass-grid li,.bbf-travel-grid p,.bbf-faq-list p{color:#c8b5bc!important}
+.bbf-hotel-tabs button,.bbf-schedule-tabs button{border-color:rgba(227,183,95,.18)!important;background:rgba(13,5,9,.5)!important;color:#cbb8bf!important}.bbf-hotel-tabs button[aria-selected=true],.bbf-schedule-tabs button[aria-selected=true]{border-color:var(--ex-gold)!important;background:var(--ex-wine)!important;color:#fff!important}
+.bbf-cinema{background:#090306!important}.bbf-cinema-label{background:rgba(12,4,8,.84)!important;color:#fff!important}
+
+.bbf-artists{background:rgba(74,17,39,.88)!important}.bbf-artists::before{opacity:.2!important;background:linear-gradient(rgba(48,9,27,.28),rgba(48,9,27,.55)),url('/media/brand/berlin-brandenburg-gold.png') center/cover!important}.bbf-artists .bbf-heading h2{color:#fff!important}.bbf-artists .bbf-heading h2 em{color:var(--ex-gold-soft)!important}.bbf-artists .bbf-heading>p{color:#ead8df!important}.bbf-artist-card{border:1px solid rgba(227,183,95,.16)!important;background:#180a11!important;box-shadow:0 18px 42px rgba(0,0,0,.24)!important}.bbf-artist-card:hover{border-color:rgba(227,183,95,.55)!important;transform:translateY(-6px) scale(1.01)!important}.bbf-artist-rail{overflow-x:auto!important;padding-bottom:16px!important}.bbf-rail-note{color:#d6c3c9!important}
+.bbf-jj{background:linear-gradient(120deg,rgba(111,23,56,.94),rgba(177,39,83,.91))!important}.bbf-jj-card{border-color:rgba(247,221,176,.22)!important;background:rgba(36,10,21,.52)!important}.bbf-jj-burst{background:var(--ex-gold)!important;color:#2a1019!important}
+
+/* General content + forms: reduce the "broken" feeling on narrower screens */
+.contact-route-grid{grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr))!important}
+.contact-workbench-grid,.contact-hero-grid,.contact-next-grid,.ambassador-application-grid,.ambassador-role-grid{min-width:0}
+.contact-form,.ambassador-form{min-width:0}.contact-form>* ,.ambassador-form>*{min-width:0}
+.archive-grid{grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))!important}
+:where(.contact-hero-copy,.contact-workbench-intro,.ambassador-hero-copy,.bbf-heading>*,.bbf-city-copy,.bbf-faq-intro){min-width:0}
+
+/* The native volunteer application had a bright standalone theme; bring it back into Explosion. */
+.tf-native{
+  --bg:#13080d!important;--ink:#fff5ee!important;--muted:#c5b2b9!important;--accent:#e3b75f!important;--line:rgba(247,221,176,.18)!important;
+  background:#13080d!important;color:#fff5ee!important;
+}
+.tf-topbar{border-color:rgba(227,183,95,.18)!important;background:rgba(17,7,11,.96)!important}.tf-wordmark,.tf-location,.tf-progress-wrap>span{color:#fff5ee!important}.tf-progress{background:#38202a!important}.tf-progress i{background:linear-gradient(90deg,var(--ex-pink),var(--ex-gold))!important}
+.tf-kicker{color:var(--ex-gold)!important}.tf-question h1,.tf-question h2{color:#fff5ee!important}.tf-help,.tf-summary-note p{color:#c5b2b9!important}
+.tf-choice span,.tf-confirmations label{border-color:rgba(227,183,95,.2)!important;background:rgba(35,16,24,.88)!important;color:#fff5ee!important}.tf-choice input:checked+span{border-color:var(--ex-gold)!important;background:rgba(139,39,74,.42)!important;box-shadow:0 0 0 1px var(--ex-gold)!important}.tf-choice b{border-color:rgba(227,183,95,.5)!important}.tf-choice input:checked+span b{border-color:var(--ex-gold)!important;background:var(--ex-gold)!important;color:#2a1019!important}.tf-choice:hover span{border-color:var(--ex-gold)!important}
+.tf-question textarea,.tf-contact-grid input{border:0!important;border-bottom:2px solid rgba(227,183,95,.35)!important;background:transparent!important;color:#fff5ee!important}.tf-question textarea:focus,.tf-contact-grid input:focus{border-bottom-color:var(--ex-gold)!important;outline:none!important}.tf-controls{background:linear-gradient(0deg,#13080d 70%,rgba(19,8,13,.88),rgba(19,8,13,0))!important}.tf-next{background:var(--ex-wine)!important;color:#fff!important}.tf-back{color:#d4c0c6!important}.tf-enter-hint,.tf-status{color:#a9959d!important}
+
+.site-footer{border-top:1px solid rgba(227,183,95,.14)!important;background:#0e0509!important}.site-footer::after{color:rgba(227,183,95,.045)!important}
+.mobile-ticket-dock{border-color:var(--ex-gold)!important;background:#7d2142!important;color:#fff!important}.mobile-ticket-dock span{color:var(--ex-gold-soft)!important}
+
+@media(max-width:1050px){
+  .mobile-nav-panel{background:#11070b!important;color:#fff!important}
+  .mobile-nav-panel a,.mobile-nav-group>summary{color:#fff!important}
+}
+@media(max-width:760px){
+  main{overflow:visible}
+  .site-header,.site-header-solid{height:68px!important;padding-inline:16px!important}
+  .bbf-premium::before{inset:68px 0 0!important;background-position:center top!important}
+  .bbf-quicknav{top:68px!important}
+  .bbf-pad,.section-pad{padding-top:64px!important;padding-bottom:64px!important}
+  .bbf-heading,.bbf-city-editorial,.bbf-hotel-panel,.contact-hero-grid,.contact-workbench-grid,.contact-next-grid,.ambassador-role-grid,.ambassador-application-grid{grid-template-columns:1fr!important}
+  .bbf-artist-rail{scroll-snap-type:x proximity}
+  .bbf-artist-card{scroll-snap-align:start}
+  .contact-route-grid{grid-template-columns:1fr!important}
+  .contact-form,.ambassador-form{grid-template-columns:1fr!important}
+  .contact-form .full-field,.ambassador-form .full-field{grid-column:auto!important}
+}
+@media(max-width:560px){
+  .bbf-premium::before{opacity:.82!important;background-position:52% top!important}
+  .bbf-hero h1{font-size:clamp(3.9rem,17vw,6.2rem)!important}
+  html body .ex-hero::after{inset:0!important}
+  .tf-step{padding-inline:18px!important}
+}

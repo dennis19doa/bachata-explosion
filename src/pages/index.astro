@@ -1,271 +1,191 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { archiveEvents } from "../data/archive";
 import { ticketUrl } from "../data/festival";
+import "../styles/home-modern.css";
+
+const founders = [
+  {
+    name: "Dennis",
+    role: "Owner · Founder",
+    since: "Since 2021",
+    image: "/media/team/dennis.jpg",
+    note: "Event vision, community growth and the operational details behind every Explosion.",
+  },
+  {
+    name: "Elena",
+    role: "Owner · Founder",
+    since: "Since 2021",
+    image: "/media/team/elena.jpg",
+    note: "Dancer experience, team culture and the warm atmosphere that holds the weekend together.",
+  },
+] as const;
 
 const team = [
-  { name: "Dennis", role: "Owner · Founder", since: "Since 2021", image: "/media/team/dennis.jpg", bio: "Event vision, community growth and the details that make every Explosion ambitious and personal." },
-  { name: "Elena", role: "Owner · Founder", since: "Since 2021", image: "/media/team/elena.jpg", bio: "Dancer experience, team culture and the warm atmosphere behind the Explosion community." },
-  { name: "Laura", role: "Explosion Team", since: "Since 2023", image: "/media/team/laura.jpg", bio: "Event flow and the welcoming community feeling on site." },
-  { name: "Lucy", role: "Physiotherapist", since: "Since 2023", image: "/media/team/lucy.jpg", bio: "Body awareness, care and dancer-friendly support." },
-  { name: "Mircea", role: "Chef", since: "Since 2023", image: "/media/team/mircea.jpg", bio: "Comfort, care and behind-the-scenes support throughout the weekend." },
-  { name: "Roberto", role: "Promoter", since: "Since 2023", image: "/media/team/roberto.jpg", bio: "Connecting dancers with the events and helping the community grow." },
-  { name: "Jenn", role: "Explosion Team", since: "Since 2023", image: "/media/team/jenn.jpg", bio: "Supporting the people-first atmosphere that makes dancers feel at home." },
-  { name: "Milo", role: "Driver", since: "Since 2023", image: "/media/team/milo.jpg", bio: "The logistics that help a festival weekend run smoothly." },
-  { name: "Blanca", role: "Research & Planning", since: "Since 2024", image: "/media/team/blanca.jpg", bio: "Planning, ideas and preparation that keep the brand moving forward." },
-];
+  { name: "Laura", role: "Explosion Team", since: "Since 2023", image: "/media/team/laura.jpg" },
+  { name: "Lucy", role: "Physiotherapist", since: "Since 2023", image: "/media/team/lucy.jpg" },
+  { name: "Mircea", role: "Chef", since: "Since 2023", image: "/media/team/mircea.jpg" },
+  { name: "Roberto", role: "Promoter", since: "Since 2023", image: "/media/team/roberto.jpg" },
+  { name: "Jenn", role: "Explosion Team", since: "Since 2023", image: "/media/team/jenn.jpg" },
+  { name: "Milo", role: "Driver", since: "Since 2023", image: "/media/team/milo.jpg" },
+  { name: "Blanca", role: "Research & Planning", since: "Since 2024", image: "/media/team/blanca.jpg" },
+] as const;
+
+const historyImages = [
+  ["/media/archive/gold-2022.jpg", "Bachata Explosion Gold Edition 2022"],
+  ["/media/archive/bbf-2023.jpg", "Berlin Bachata Festival 2023"],
+  ["/media/archive/role-rotation-2024.jpg", "Role Rotation 2024"],
+  ["/media/archive/bbf-2024.jpg", "Berlin Bachata Festival 2024"],
+  ["/media/archive/elite-dance-1-2025.jpg", "Elite Dance 2025"],
+  ["/media/archive/role-rotation-2025.jpg", "Role Rotation 2025"],
+  ["/media/archive/elite-dance-2-2025.jpg", "Elite Dance second edition 2025"],
+  ["/media/archive/bbf-2025.jpg", "Berlin Bachata Festival 2025"],
+  ["/media/archive/role-rotation-2026.jpg", "Role Rotation 2026"],
+] as const;
+
+const memoryStrip = [
+  ["/media/archive/gold-2022.jpg", "2022 · where it started"],
+  ["/media/archive/bbf-2023.jpg", "2023 · Berlin Bachata Festival"],
+  ["/media/archive/role-rotation-2024.jpg", "2024 · new ideas"],
+  ["/media/archive/bbf-2025.jpg", "2025 · growing together"],
+  ["/media/archive/role-rotation-2026.jpg", "2026 · the story continues"],
+] as const;
 ---
 
 <BaseLayout
   title="Bachata Explosion — Berlin Bachata events by dancers, for dancers"
-  description="Meet the next Bachata Explosion in Berlin: Berlin Bachata Festival 2026 at Hotel MOA Berlin, plus the complete event history and photo archive."
+  description="Discover Bachata Explosion in Berlin: Berlin Bachata Festival, Role Rotation, Elite Dance and the community behind every edition."
 >
-  <div data-wordpress-source="home">
-  <section class="home-hero" aria-labelledby="home-hero-title">
-    <div class="home-hero-live-texture" aria-hidden="true"></div>
-    <video class="home-hero-video" autoplay muted loop playsinline preload="metadata" poster="/media/atmosphere/party-crowd.webp" aria-hidden="true">
-      <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
-    </video>
-    <div class="home-hero-shade" aria-hidden="true"></div>
-    <div class="home-hero-content shell">
-      <div class="home-hero-copy">
-        <p class="home-urban-sticker">21 events · dancer built · since 2022</p>
-        <p class="home-hero-meta"><span>October 16–18, 2026</span><span>MOA Berlin</span></p>
-        <p class="eyebrow"><span></span>Next Explosion</p>
-        <h1 id="home-hero-title">Berlin<br />Bachata<br /><em>Festival</em></h1>
-        <p class="home-hero-lead">Berlin’s flagship bachata weekend: international artists, focused workshops and parties until sunrise.</p>
-        <div class="hero-actions">
-          <a class="button button-gold" href={ticketUrl}>Secure your pass</a>
-          <a class="button button-glass" href="/bbf-2026/">Discover the festival</a>
+  <div class="ex-home" data-wordpress-source="home">
+    <section class="ex-hero" aria-labelledby="ex-home-title">
+      <div class="ex-shell ex-hero-grid">
+        <div class="ex-hero-copy">
+          <span class="ex-edition">Next Explosion · 4th edition</span>
+          <p class="ex-kicker">Berlin · by dancers, for dancers</p>
+          <h1 id="ex-home-title">Berlin Bachata <em>Festival</em></h1>
+          <div class="ex-hero-meta"><strong>16–18 October 2026</strong><span>MOA Berlin · Stephanstraße 41</span></div>
+          <p class="ex-hero-lead">Our biggest Explosion of the year: international artists, high-quality workshops, competition energy and three nights of social dancing in Berlin.</p>
+          <div class="ex-actions">
+            <a class="ex-btn" href={ticketUrl}>Get festival tickets →</a>
+            <a class="ex-btn ex-btn-secondary" href="/bbf-2026/">Festival information</a>
+          </div>
         </div>
-        <div class="home-countdown" data-countdown="2026-10-16T18:00:00+02:00" aria-label="Countdown to Berlin Bachata Festival 2026">
-          <div><strong data-days>—</strong><span>Days</span></div>
-          <div><strong data-hours>—</strong><span>Hours</span></div>
-          <div><strong data-minutes>—</strong><span>Minutes</span></div>
+        <div class="ex-hero-media">
+          <video autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" aria-label="Bachata Explosion festival atmosphere">
+            <source src="/media/video/bbf-2026-recap.mp4" type="video/mp4" />
+          </video>
+          <span class="ex-hero-mark">Berlin · 2026</span>
+          <figure class="ex-hero-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" /></figure>
         </div>
       </div>
-      <a class="home-hero-poster" href="/bbf-2026/" aria-label="Explore Berlin Bachata Festival 2026">
-        <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" />
-        <span><b>BBF 2026</b> Festival dossier ↗</span>
-      </a>
-    </div>
-    <a class="home-scroll-cue" href="#choose-event"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
-  </section>
+    </section>
 
-  <section class="home-signal" aria-label="Bachata Explosion essentials">
-    <div class="home-signal-beam" aria-hidden="true"></div>
-    <div class="shell home-stat-grid">
-      <div><strong>Made in Berlin</strong><span>Born here</span></div>
-      <div><strong data-home-count="2022">0</strong><span>Events since</span></div>
-      <div><strong data-home-count="21">0</strong><span>Events created</span></div>
-      <div><strong>By dancers</strong><span>For dancers</span></div>
-      <div><strong data-home-count="6010">0</strong><span>Attendees in total</span></div>
-      <div><strong data-home-count="500" data-home-suffix="+">0</strong><span>Artists worked with</span></div>
-    </div>
-  </section>
+    <section class="ex-events ex-section" aria-labelledby="ex-events-title">
+      <div class="ex-shell">
+        <div class="ex-events-head">
+          <div><p class="ex-kicker">Explosion · 2026 editions</p><h2 class="ex-display" id="ex-events-title">Three chapters.<br /><em>One year of Explosion.</em></h2></div>
+          <p class="ex-copy">The events change from year to year. In 2026, Role Rotation, Elite Dance and Berlin Bachata Festival each bring a different kind of weekend to the same dancer-built community.</p>
+        </div>
+        <div class="ex-event-grid">
+          <a class="ex-event-card" href="/archive/role-rotation-2026/">
+            <figure class="ex-event-poster"><img src="/media/events/role-rotation-2026.webp" alt="Role Rotation 2026 poster" width="900" height="1100" loading="lazy" /></figure>
+            <div class="ex-event-card-body"><small>01 · 2026 chapter</small><h3>Role Rotation.</h3><p>Lead, follow and switch roles. A focused Explosion weekend built around connection, technique, musicality and freedom.</p><span class="ex-event-link">See the edition →</span></div>
+          </a>
+          <a class="ex-event-card" href="/archive/elite-dance-3/">
+            <figure class="ex-event-poster"><img src="/media/events/elite-dance-3.webp" alt="Elite Dance third edition poster" width="900" height="1100" loading="lazy" /></figure>
+            <div class="ex-event-card-body"><small>02 · 2026 chapter</small><h3>Elite Dance.</h3><p>A smaller, intimate edition with selected artists, concentrated learning and a close community atmosphere.</p><span class="ex-event-link">See the edition →</span></div>
+          </a>
+          <a class="ex-event-card" href="/bbf-2026/">
+            <figure class="ex-event-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 poster" width="1080" height="1350" loading="lazy" /></figure>
+            <div class="ex-event-card-body"><small>03 · 2026 chapter</small><h3>Berlin Bachata Festival.</h3><p>The full Explosion experience with international artists, workshops, parties, competition and the whole community under one roof.</p><span class="ex-event-link">Explore BBF 2026 →</span></div>
+          </a>
+        </div>
+        <div class="ex-event-memory-strip" aria-label="Previous Bachata Explosion editions">
+          {memoryStrip.map(([src, caption]) => <figure><img src={src} alt={caption} loading="lazy" /><figcaption>{caption}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
 
-  <div class="home-impact-marquee" aria-hidden="true">
-    <span>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin · </span>
-    <span>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin · </span>
-  </div>
+    <section class="ex-proof ex-section" aria-labelledby="ex-proof-title">
+      <div class="ex-shell ex-proof-layout">
+        <div class="ex-proof-copy">
+          <p class="ex-kicker">We are all about you</p>
+          <h2 class="ex-display" id="ex-proof-title">The dancers make the <em>Explosion.</em></h2>
+          <p class="ex-copy">Our events are designed by dancers, for dancers. From the first workshop to the last song, we focus on connection, growth and the family feeling that makes people feel at home in Berlin.</p>
+          <p class="ex-copy">Come to improve, stay for the community, and leave with memories that keep you dancing long after the weekend is over.</p>
+          <div class="ex-proof-photos" aria-label="Bachata Explosion community">
+            <img src="/media/bbf/atmosphere/party-141.jpg" alt="Bachata Explosion dancers at a Berlin party" loading="lazy" />
+            <img src="/media/bbf/atmosphere/saturday-60.jpg" alt="Bachata Explosion festival atmosphere" loading="lazy" />
+            <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata Explosion social dance floor" loading="lazy" />
+          </div>
+        </div>
+        <div class="ex-stat-grid">
+          <div class="ex-stat"><strong>20+</strong><span>Events organised</span></div>
+          <div class="ex-stat"><strong>500+</strong><span>Artists & DJs worked with</span></div>
+          <div class="ex-stat"><strong>6,000+</strong><span>Dancers reached</span></div>
+          <div class="ex-stat"><strong>2022</strong><span>Events since</span></div>
+          <div class="ex-stat is-berlin"><strong>Berlin</strong><span>Made here</span></div>
+          <div class="ex-stat is-tagline"><strong>By dancers</strong><span>For dancers</span></div>
+        </div>
+      </div>
+    </section>
 
-  <section class="home-manifesto section-pad">
-    <span class="home-manifesto-city" aria-hidden="true">52.5200° N · 13.4050° E</span>
-    <div class="shell home-manifesto-grid">
-      <p class="section-label">21 events · one Berlin community</p>
-      <h2>Built in Berlin.<br /><em>Made to move you.</em></h2>
-      <p>Dancer-led weekends with clear teaching, ambitious production and genuine warmth.</p>
-    </div>
-  </section>
+    <section class="ex-team ex-section" aria-labelledby="ex-team-title">
+      <div class="ex-shell">
+        <div class="ex-team-head">
+          <div><p class="ex-kicker">The people behind Explosion</p><h2 class="ex-display" id="ex-team-title">Meet the people who make it <em>happen.</em></h2></div>
+          <p class="ex-copy">Explosion is not a faceless festival. It starts with the founders and works because a collaborative team takes care of the details around every dancer, artist and weekend.</p>
+        </div>
 
-  <section class="event-switcher section-pad" id="choose-event" aria-labelledby="event-switcher-title">
-    <div class="shell">
-      <div class="event-switcher-heading">
+        <div class="ex-team-founders" aria-label="Bachata Explosion founders">
+          {founders.map((person) => (
+            <article class="ex-founder-card">
+              <div class="ex-founder-frame">
+                <img src={person.image} alt={`${person.name}, ${person.role} at Bachata Explosion`} width="700" height="900" loading="lazy" />
+              </div>
+              <div class="ex-founder-copy">
+                <small>{person.since}</small>
+                <h3>{person.name}</h3>
+                <span>{person.role}</span>
+                <p>{person.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="ex-team-collab-label"><strong>One collaborative team</strong><span>Different roles · one Explosion</span></div>
+        <div class="ex-team-collab" aria-label="Bachata Explosion team">
+          {team.map((person) => (
+            <article class="ex-team-card">
+              <div class="ex-team-frame">
+                <img src={person.image} alt={`${person.name}, ${person.role} at Bachata Explosion`} width="700" height="900" loading="lazy" />
+              </div>
+              <div class="ex-person-info"><small>{person.since}</small><h3>{person.name}</h3><span>{person.role}</span></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ex-story ex-section" aria-labelledby="ex-story-title">
+      <div class="ex-shell ex-story-layout">
         <div>
-          <p class="section-label">The next Explosion</p>
-          <h2 id="event-switcher-title">One weekend.<br /><em>The full experience.</em></h2>
+          <p class="ex-kicker">We are Explosion</p>
+          <h2 class="ex-display" id="ex-story-title">Every edition leaves a <em>mark.</em></h2>
+          <p class="ex-copy">Explosion started in Berlin in 2022 with a simple idea: create the events we wanted to attend ourselves. Every edition since then has added new dancers, artists, friendships and memories to the story.</p>
+          <p class="ex-copy">We keep those chapters visible because they are part of what the next Explosion becomes.</p>
+          <a class="ex-btn ex-btn-secondary" href="/explosion-history/">Explore our complete story →</a>
         </div>
-        <p>Past editions live in the archive. BBF 2026 now takes centre stage.</p>
+        <div class="ex-history-wall" aria-label="Bachata Explosion editions from 2022 to 2026">
+          {historyImages.map(([src, alt]) => <figure><img src={src} alt={alt} loading="lazy" /></figure>)}
+        </div>
       </div>
-      <article class="home-next-event">
-        <a class="home-next-poster" href="/bbf-2026/">
-          <img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 event artwork" width="1080" height="1350" loading="lazy" />
-          <span>Official BBF 2026 artwork</span>
-        </a>
-        <div class="home-next-copy">
-          <p>October 16–18, 2026 · Hotel MOA Berlin</p>
-          <h3>Berlin<br />Bachata<br />Festival</h3>
-          <ul><li>International artist lineup</li><li>Workshops, parties & shows</li><li>Hotel and venue under one roof</li></ul>
-          <div class="home-next-actions"><a class="button button-gold" href="/bbf-2026/">Explore the festival</a><a class="button button-outline" href={ticketUrl}>Get tickets</a></div>
-        </div>
-        <div class="home-next-history">
-          <span>The latest chapters</span>
-          <a href="/archive/role-rotation-2026/"><b>Role Rotation 2026</b><small>Past event · photos & memories ↗</small></a>
-          <a href="/archive/elite-dance-3/"><b>Elite Dance #3</b><small>Past event · photos & memories ↗</small></a>
-          <div><a href="/archive/">Past events</a><a href="/explosion-history/">History</a></div>
-        </div>
-      </article>
-    </div>
-  </section>
+    </section>
 
-  <section class="home-feeling section-pad">
-    <div class="shell home-feeling-grid">
-      <figure>
-        <img src="/media/bbf/atmosphere/party-141.jpg" alt="Bachata Explosion crowd dancing at a Berlin party" width="1200" height="800" loading="lazy" />
-        <figcaption>Real people. Real connection. Berlin.</figcaption>
-      </figure>
-      <div>
-        <p class="section-label">The Explosion feeling</p>
-        <h2>Not generic.<br /><em>Not anonymous.</em></h2>
-        <p>We build the kind of weekend we want to dance ourselves.</p>
-        <div class="home-editorial-notes">
-          <p>Learn something you can feel.</p>
-          <p>Meet people you want to see again.</p>
-          <p>Dance until the room becomes a memory.</p>
-        </div>
+    <section class="ex-final">
+      <div class="ex-shell ex-final-inner">
+        <div><p class="ex-kicker">Your next Explosion</p><h2>Are you ready to be part of it?</h2><p>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin</p></div>
+        <a class="ex-btn" href={ticketUrl}>Get tickets →</a>
       </div>
-    </div>
-  </section>
-
-  <section class="home-team section-pad" aria-labelledby="home-team-title">
-    <div class="shell">
-      <div class="section-heading split-heading">
-        <div><p class="section-label">The people behind the weekend</p><h2 id="home-team-title">Dancer-built.<br /><em>Human-led.</em></h2></div>
-        <p>The people making every weekend personal, welcoming and unmistakably Explosion.</p>
-      </div>
-      <p class="team-rail-instruction">Move across a portrait to pause the team story.</p>
-      <div class="team-marquee" aria-label="Bachata Explosion team">
-        <div class="team-track">
-          {[0, 1].map((loop) => (
-            <div class="team-group" aria-hidden={loop === 1 ? "true" : undefined}>
-              {team.map((member) => (
-                <article class="team-card" tabindex={loop === 0 ? "0" : "-1"}>
-                  <img src={member.image} alt={loop === 0 ? `${member.name}, ${member.role} at Bachata Explosion` : ""} width="600" height="600" loading="lazy" />
-                  <div>
-                    <span>{member.since}</span>
-                    <h3>{member.name}</h3>
-                    <b>{member.role}</b>
-                    <p>{member.bio}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="archive-preview home-archive section-pad">
-    <div class="shell">
-      <div class="section-heading split-heading">
-        <div><p class="section-label">The living archive</p><h2>Every edition<br /><em>still matters.</em></h2></div>
-        <div><p>Choose an edition and relive the floor. Every original event page remains available.</p><a class="text-link" href="/archive/">Browse the complete archive <span aria-hidden="true">↗</span></a></div>
-      </div>
-      <div class="home-archive-label"><span>Complete archive rotation</span><b>{archiveEvents.length} editions · 2022–2026</b></div>
-      <div class="archive-marquee" aria-label="Every Bachata Explosion edition">
-        <div class="archive-track">
-          {[0, 1].map((loop) => (
-            <div class="archive-group" aria-hidden={loop === 1 ? "true" : undefined}>
-              {archiveEvents.map((event) => (
-                <a class="archive-card" href={`/archive/${event.slug}/`} tabindex={loop === 0 ? undefined : "-1"}>
-                  <img src={event.cover} alt={loop === 0 ? `${event.title} ${event.year} event cover` : ""} width="900" height="1100" loading="lazy" />
-                  <div><span>{event.category} · {event.year}</span><h3>{event.title}</h3><b>View collection →</b></div>
-                </a>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-berlin section-pad" id="berlin" aria-labelledby="home-berlin-title">
-    <div class="shell home-berlin-grid">
-      <div class="home-berlin-intro">
-        <p class="section-label">The city beyond the dance floor</p>
-        <h2 id="home-berlin-title">Come for Explosion.<br /><em>Stay for Berlin.</em></h2>
-        <p>The festival gives you a reason to book the weekend. Berlin turns it into a trip: music, history, late nights and neighbourhoods that never feel interchangeable.</p>
-        <div class="home-berlin-stamp"><span>Made in</span><strong>Berlin</strong><small>Open to everywhere</small></div>
-      </div>
-      <div class="home-berlin-reasons">
-        <article>
-          <span>Freedom</span>
-          <h3>A city that lets you be yourself.</h3>
-          <p>Berlin rewards individuality. Come dressed up, dressed down or entirely as yourself—the city’s creative energy makes room for difference.</p>
-        </article>
-        <article>
-          <span>After dark</span>
-          <h3>The weekend does not end at the venue door.</h3>
-          <p>When the last festival song fades, Berlin is still moving: bars, art spaces, food and a nightlife culture famous for carrying on until morning.</p>
-        </article>
-        <article>
-          <span>Explore</span>
-          <h3>Twelve boroughs. Hundreds of different moods.</h3>
-          <p>Every Kiez has its own rhythm—from alternative Kreuzberg to elegant City West. Add one free afternoon and find the version of Berlin that feels like yours.</p>
-        </article>
-        <div class="home-berlin-actions">
-          <a class="button button-gold" href="/bbf-2026/">Make it your festival weekend</a>
-          <a class="text-link" href="https://www.visitberlin.de/en/neighbourhoods-berlin">Explore Berlin’s neighbourhoods <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="home-berlin-kiez" aria-hidden="true"><span>Kreuzberg</span><span>Schöneberg</span><span>Neukölln</span><span>Mitte</span><span>Charlottenburg</span><span>Friedrichshain</span></div>
-  </section>
-
-  <section class="home-social section-pad">
-    <div class="shell home-social-card">
-      <div>
-        <p class="section-label">Between the editions</p>
-        <h2>The story continues<br /><em>on Instagram.</em></h2>
-      </div>
-      <div>
-        <p>Artist drops, timetable news and moments that cannot wait.</p>
-        <a class="button button-dark" href="https://instagram.com/bachataexplosion_official">Follow @bachataexplosion_official ↗</a>
-      </div>
-    </div>
-  </section>
+    </section>
   </div>
-
-  <script>
-    const countdown = document.querySelector<HTMLElement>("[data-countdown]");
-    const updateCountdown = () => {
-      if (!countdown) return;
-      const target = new Date(countdown.dataset.countdown ?? "").getTime();
-      const remaining = Math.max(0, target - Date.now());
-      const day = 86_400_000;
-      const hour = 3_600_000;
-      const minute = 60_000;
-      const values = {
-        days: Math.floor(remaining / day),
-        hours: Math.floor((remaining % day) / hour),
-        minutes: Math.floor((remaining % hour) / minute),
-      };
-      Object.entries(values).forEach(([key, value]) => {
-        const element = countdown.querySelector<HTMLElement>(`[data-${key}]`);
-        if (element) element.textContent = String(value).padStart(2, "0");
-      });
-    };
-    updateCountdown();
-    window.setInterval(updateCountdown, 60_000);
-
-    const homeStatObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const element = entry.target as HTMLElement;
-        const target = Number(element.dataset.homeCount ?? 0);
-        const suffix = element.dataset.homeSuffix ?? "";
-        const started = performance.now();
-        const animate = (now: number) => {
-          const progress = Math.min(1, (now - started) / 1650);
-          const eased = 1 - Math.pow(1 - progress, 4);
-          element.textContent = `${Math.round(target * eased).toLocaleString("en-US")}${suffix}`;
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-        homeStatObserver.unobserve(element);
-      });
-    }, { threshold: 0.45 });
-    document.querySelectorAll<HTMLElement>("[data-home-count]").forEach((element) => homeStatObserver.observe(element));
-  </script>
 </BaseLayout>

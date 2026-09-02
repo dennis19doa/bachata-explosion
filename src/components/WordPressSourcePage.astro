@@ -17,6 +17,7 @@ const { page, home = false, label = "Original Bachata Explosion page" } = Astro.
 const title = decodeWordPressText(page.title.rendered);
 const content = prepareWordPressHtml(page.content.rendered);
 const sourceHasHeading = /<h1\b/i.test(page.content.rendered);
+const isExplosionHistory = page.slug === "explosion-history";
 ---
 
 <BaseLayout
@@ -39,6 +40,37 @@ const sourceHasHeading = /<h1\b/i.test(page.content.rendered);
     )}
     <div class="wp-source-content" set:html={content}></div>
   </article>
+
+  {isExplosionHistory && (
+    <style is:global>
+      @media (min-width: 761px) {
+        .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history,
+        .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__layout,
+        .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__grid {
+          overflow: visible !important;
+          align-items: start !important;
+        }
+        .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar,
+        .wp-preserved-page[data-wordpress-source="explosion-history"] aside:first-child {
+          position: sticky !important;
+          top: 104px !important;
+          align-self: start !important;
+          max-height: calc(100vh - 126px) !important;
+          overflow-y: auto !important;
+          overscroll-behavior: contain;
+          scrollbar-width: thin;
+          z-index: 12;
+        }
+        .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar a.is-current,
+        .wp-preserved-page[data-wordpress-source="explosion-history"] aside:first-child a.is-current {
+          background: linear-gradient(90deg, #e3b75f, #f7ddb0) !important;
+          color: #24120e !important;
+          border-color: #f7ddb0 !important;
+        }
+      }
+    </style>
+  )}
+
   <script>
     document.querySelectorAll<HTMLFormElement>(".wp-preserved-page form").forEach((form) => {
       form.addEventListener("submit", (event) => {
@@ -52,5 +84,37 @@ const sourceHasHeading = /<h1\b/i.test(page.content.rendered);
         status.textContent = "This is the preserved preview form. It will be connected to the new form provider before launch.";
       });
     });
+
+    const historyRoot = document.querySelector<HTMLElement>('[data-wordpress-source="explosion-history"]');
+    if (historyRoot) {
+      const sidebar = historyRoot.querySelector<HTMLElement>(".be-history__sidebar") || historyRoot.querySelector<HTMLElement>("aside:first-child");
+      const links = sidebar ? Array.from(sidebar.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) : [];
+      const sections = links
+        .map((link) => {
+          const id = decodeURIComponent(link.hash.slice(1));
+          const target = id ? document.getElementById(id) : null;
+          return target ? { link, target } : null;
+        })
+        .filter((item): item is { link: HTMLAnchorElement; target: HTMLElement } => Boolean(item));
+
+      const setCurrent = (link: HTMLAnchorElement) => {
+        links.forEach((candidate) => candidate.classList.toggle("is-current", candidate === link));
+      };
+
+      if (sections.length) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => Math.abs(a.boundingClientRect.top - 150) - Math.abs(b.boundingClientRect.top - 150));
+          const match = visible[0];
+          if (!match) return;
+          const item = sections.find((section) => section.target === match.target);
+          if (item) setCurrent(item.link);
+        }, { rootMargin: "-110px 0px -62% 0px", threshold: [0, 0.01, 0.2] });
+
+        sections.forEach(({ target }) => observer.observe(target));
+        setCurrent(sections[0].link);
+      }
+    }
   </script>
 </BaseLayout>

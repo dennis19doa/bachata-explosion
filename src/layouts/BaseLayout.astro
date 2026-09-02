@@ -1,5 +1,16 @@
 ---
 import "../styles/global.css";
+import "../styles/explosion-original-modern.css";
+import "../styles/explosion-premium-berlin.css";
+import "../styles/explosion-berlin-unified.css";
+import "../styles/explosion-feedback-sept1.css";
+import "../styles/explosion-feedback-density.css";
+import "../styles/explosion-feedback-round2.css";
+import "../styles/explosion-feedback-round2-controls.css";
+import "../styles/explosion-feedback-screens.css";
+import "../styles/explosion-feedback-sept2.css";
+import "../styles/explosion-feedback-sept2-final.css";
+import "../styles/explosion-feedback-sept2-followup.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -13,11 +24,15 @@ interface Props {
 const {
   title = "Bachata Explosion — By dancers, for dancers",
   description = "Berlin bachata festivals, workshops, socials and a growing event archive — built by dancers, for dancers.",
-  headerStyle = "overlay",
+  headerStyle = "solid",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL("/og.png", Astro.site);
+const currentPath = Astro.url.pathname;
+const current = (path: string) => currentPath === path || (path !== "/" && currentPath.startsWith(path));
+const festivalActive = current("/bbf-2026/") || current("/jj/");
+const archiveActive = current("/archive/") || current("/role-rotation") || current("/elite-dance");
 ---
 
 <!doctype html>
@@ -26,7 +41,7 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#100609" />
+    <meta name="theme-color" content="#11070b" />
     <link rel="icon" href="/media/brand/explosion-logo.webp" type="image/webp" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -40,186 +55,134 @@ const socialImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
-    <script is:inline>
-      (() => {
-        const concept = new URLSearchParams(window.location.search).get("concept");
-        if (concept === "explosion-underground") document.documentElement.dataset.siteConcept = concept;
-      })();
-    </script>
   </head>
   <body>
-    <script is:inline>
-      if (document.documentElement.dataset.siteConcept === "explosion-underground") document.body.classList.add("urban-site");
-    </script>
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class:list={["site-header", headerStyle === "solid" && "site-header-solid"]}>
-      <a class="brand" href="/" aria-label="Bachata Explosion home">
-        <img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" />
-      </a>
+      <a class="brand" href="/" aria-label="Bachata Explosion home"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
+
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a class="nav-home" href="/">Home</a>
-        <details class="nav-group">
+        <details class:list={["nav-group", { "is-current": festivalActive }]}>
           <summary>Festival</summary>
           <div class="nav-popover">
-            <span>BBF · October 16–18, 2026</span>
-            <a href="/bbf-2026/"><b>Festival overview</b><small>Venue, artists, program & passes</small></a>
-            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Three days of workshops & parties</small></a>
-            <a href="/jj/"><b>Jack &amp; Jill</b><small>Competition, rules & registration</small></a>
+            <span>Berlin Bachata Festival 2026</span>
+            <a href="/bbf-2026/"><b>Festival overview</b><small>16–18 October · MOA Berlin</small></a>
+            <a href="/bbf-2026/#venue"><b>Venue & hotel</b><small>MOA Berlin and official room deal</small></a>
+            <a href="/bbf-2026/#artists"><b>Artists</b><small>International lineup and DJs</small></a>
+            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Friday to Sunday</small></a>
+            <a href="/jj/"><b>Jack & Jill overview</b><small>Competition, bracket and registration</small></a>
+            <a href="/jj/rules/"><b>J&J rules & guide</b><small>Eligibility, judging, music and prizes</small></a>
+            <a href="/bbf-2026/#passes"><b>Passes</b><small>Full, Gold and Party</small></a>
+            <a href="/bbf-2026/#travel"><b>Berlin & travel</b><small>Airport, train and local arrival</small></a>
+            <a href="/bbf-2026/#faq"><b>FAQ</b><small>Practical festival answers</small></a>
           </div>
         </details>
-        <details class="nav-group">
-          <summary>Travel</summary>
-          <div class="nav-popover">
-            <span>Arrive in Berlin without the guesswork</span>
-            <a href="/bbf-2026/#venue"><b>Hotel & venue</b><small>Stay and dance at MOA Berlin</small></a>
-            <a href="/bbf-2026/#travel"><b>Getting to MOA</b><small>Airport, Hauptbahnhof & local tickets</small></a>
-            <a href={whatsappUrl}><b>Festival WhatsApp ↗</b><small>Updates and community before arrival</small></a>
-          </div>
-        </details>
-        <a href="/archive/">Past events</a>
-        <details class="nav-group">
-          <summary>About</summary>
-          <div class="nav-popover nav-popover-right">
-            <span>The people and story behind Explosion</span>
-            <a href="/explosion-history/"><b>Our history</b><small>Every chapter since 2022</small></a>
-            <a href="/ambassadors/"><b>Ambassadors</b><small>Carry the Explosion into your city</small></a>
-            <a href="/volunteers/"><b>Volunteers</b><small>Help make the weekend happen</small></a>
-          </div>
-        </details>
-        <a href="/contact/">Contact</a>
+
+        <a href="/explosion-history/" aria-current={current("/explosion-history/") ? "page" : undefined}>Our Story</a>
+        <a href="/ambassadors/" aria-current={current("/ambassadors/") ? "page" : undefined}>Ambassadors</a>
+        <a href="/volunteers/" aria-current={current("/volunteers/") ? "page" : undefined}>Volunteers</a>
+        <a href="/archive/" aria-current={archiveActive ? "page" : undefined}>Past Events</a>
+        <a href="/contact/" aria-current={current("/contact/") ? "page" : undefined}>Contact</a>
       </nav>
+
       <details class="mobile-nav" data-site-menu>
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true"></i></summary>
         <div class="mobile-nav-panel">
-          <video class="mobile-nav-video" autoplay muted loop playsinline preload="metadata" poster="/media/motion/explosion-particles-poster.webp" aria-hidden="true">
-            <source src="/media/video/explosion-menu.mp4" type="video/mp4" />
-          </video>
-          <div class="mobile-nav-shade" aria-hidden="true"></div>
           <nav aria-label="Mobile navigation">
-            <a class="mobile-nav-home" href="/">Home</a>
             <details class="mobile-nav-group">
               <summary><span>Festival</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/bbf-2026/">Berlin Bachata Festival</a>
-                <a href="/bbf-2026/#schedule">Schedule</a>
-                <a href="/jj/">Jack &amp; Jill</a>
+                <a href="/bbf-2026/">Festival overview</a><a href="/bbf-2026/#venue">Venue & hotel</a><a href="/bbf-2026/#artists">Artists</a><a href="/bbf-2026/#schedule">Schedule</a><a href="/jj/">Jack & Jill overview</a><a href="/jj/rules/">J&amp;J rules & guide</a><a href="/bbf-2026/#passes">Passes</a><a href="/bbf-2026/#travel">Berlin & travel</a><a href="/bbf-2026/#faq">FAQ</a>
               </div>
             </details>
-            <details class="mobile-nav-group">
-              <summary><span>Travel &amp; community</span><i aria-hidden="true"></i></summary>
-              <div>
-                <a href="/bbf-2026/#venue">Hotel &amp; venue</a>
-                <a href="/bbf-2026/#travel">Getting to MOA</a>
-                <a href={whatsappUrl}>Festival WhatsApp ↗</a>
-              </div>
-            </details>
-            <details class="mobile-nav-group">
-              <summary><span>About Explosion</span><i aria-hidden="true"></i></summary>
-              <div>
-                <a href="/archive/">Past events</a>
-                <a href="/explosion-history/">History</a>
-                <a href="/ambassadors/">Ambassadors</a>
-                <a href="/volunteers/">Volunteers</a>
-                <a href="/contact/">Contact</a>
-              </div>
-            </details>
+            <a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><a href="/contact/">Contact</a>
           </nav>
-          <div class="mobile-nav-meta">
-            <span>Berlin · by dancers, for dancers</span>
-            <a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a>
-          </div>
+          <div class="mobile-nav-meta"><span>By dancers, for dancers · Berlin</span><a href="/insider/">Explosion Insider</a><a href="https://instagram.com/bachataexplosion_official">Instagram ↗</a><a href={whatsappUrl}>WhatsApp ↗</a></div>
         </div>
       </details>
+
       <a class="button button-small button-gold" href={ticketUrl}>Get tickets</a>
     </header>
-    <main id="main">
-      <slot />
-    </main>
-    <aside class="site-concept-toolbar" aria-label="Active design concept">
-      <span>Full-site concept</span>
-      <strong>Explosion Underground</strong>
-      <a href="/">Exit concept</a>
-    </aside>
+
+    <main id="main"><slot /></main>
+
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a>
-        <nav aria-label="Legal navigation">
-          <a href="/archive/">Past events</a>
-          <a href="/explosion-history/">History</a>
-          <a href="/imprint/">Imprint</a>
-          <a href="/privacy/">Privacy</a>
-          <a href="/terms-conditions/">Terms</a>
-          <a href="/contact/">Contact</a>
-          <a href={whatsappUrl}>WhatsApp</a>
-        </nav>
-        <address>
-          <strong>Elena & Dennis Events UG</strong><br />
-          C/O Dennis Boronowski · Berlin<br />
-          <a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a>
-        </address>
+        <div class="footer-brand-block"><a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a><p>Berlin dance experiences built by dancers, for dancers.</p></div>
+        <nav aria-label="Footer navigation"><a href="/bbf-2026/">Festival</a><a href="/bbf-2026/#travel">Berlin & travel</a><a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><a href="/contact/">Contact</a><a href="/imprint/">Imprint</a><a href="/privacy/">Privacy</a><a href="/terms-conditions/">Terms</a></nav>
+        <address><strong>Elena &amp; Dennis Events UG</strong><br />Berlin, Germany<br /><a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a><br /><a href={whatsappUrl}>Festival WhatsApp ↗</a></address>
       </div>
     </footer>
+
     <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+
     <script>
       const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>(".nav-group"));
       const siteMenu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
       const mobileGroups = Array.from(document.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group"));
-      const menuVideo = siteMenu?.querySelector<HTMLVideoElement>(".mobile-nav-video");
-      const heroVideo = document.querySelector<HTMLVideoElement>(".home-hero-video");
-      const activeConcept = document.documentElement.dataset.siteConcept;
+      const heroVideos = Array.from(document.querySelectorAll<HTMLVideoElement>(".home-hero-video,.impact-hero-video,.bbf-hero-video,.ex-hero video"));
+      const backToTop = document.querySelector<HTMLButtonElement>(".back-to-top");
 
-      heroVideo?.play().catch(() => undefined);
-
-      if (activeConcept) {
-        document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((link) => {
-          if (link.closest(".site-concept-toolbar")) return;
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set("concept", activeConcept);
-          link.href = `${url.pathname}${url.search}${url.hash}`;
-        });
-      }
-
+      heroVideos.forEach((video) => video.play().catch(() => undefined));
       dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("toggle", () => {
-          if (!dropdown.open) return;
-          dropdowns.forEach((candidate) => {
-            if (candidate !== dropdown) candidate.open = false;
-          });
-        });
+        dropdown.addEventListener("toggle", () => { if (!dropdown.open) return; dropdowns.forEach((candidate) => { if (candidate !== dropdown) candidate.open = false; }); });
         dropdown.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { dropdown.open = false; }));
       });
+      document.addEventListener("click", (event) => { const target = event.target as Node; dropdowns.forEach((dropdown) => { if (!dropdown.contains(target)) dropdown.open = false; }); });
+      siteMenu?.addEventListener("toggle", () => { document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open)); if (!siteMenu.open) mobileGroups.forEach((group) => { group.open = false; }); });
+      mobileGroups.forEach((group) => group.addEventListener("toggle", () => { if (!group.open) return; mobileGroups.forEach((candidate) => { if (candidate !== group) candidate.open = false; }); }));
+      siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { siteMenu.open = false; }));
+      document.addEventListener("keydown", (event) => { if (event.key !== "Escape") return; dropdowns.forEach((dropdown) => { dropdown.open = false; }); if (siteMenu) siteMenu.open = false; });
+      const syncBackToTop = () => { if (!backToTop) return; backToTop.dataset.visible = window.scrollY > 720 ? "true" : "false"; };
+      syncBackToTop();
+      window.addEventListener("scroll", syncBackToTop, { passive: true });
+      backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-      document.addEventListener("click", (event) => {
-        const target = event.target as Node;
-        dropdowns.forEach((dropdown) => {
-          if (!dropdown.contains(target)) dropdown.open = false;
-        });
-      });
-
-      siteMenu?.addEventListener("toggle", () => {
-        document.documentElement.classList.toggle("menu-is-open", Boolean(siteMenu.open));
-        if (siteMenu.open) {
-          dropdowns.forEach((dropdown) => { dropdown.open = false; });
-          menuVideo?.play().catch(() => undefined);
-        } else {
-          menuVideo?.pause();
-          mobileGroups.forEach((group) => { group.open = false; });
+      window.addEventListener("DOMContentLoaded", () => {
+        const volunteerHero = document.querySelector<HTMLElement>("[data-volunteer-hero]");
+        const volunteerTrack = volunteerHero?.querySelector<HTMLElement>("[data-volunteer-track]");
+        if (volunteerHero && volunteerTrack) {
+          volunteerHero.querySelector(".volunteer-we-are")?.remove();
+          volunteerHero.querySelector(".volunteer-slider-ui")?.remove();
+          const groupPhotos = [
+            ["/media/atmosphere/explosion-community.jpg", "Bachata Explosion community group"],
+            ["/media/bbf/atmosphere/saturday-62.jpg", "Bachata Explosion festival group"],
+            ["/media/bbf/atmosphere/saturday-60.jpg", "Bachata Explosion dancers together"],
+            ["/media/atmosphere/party-crowd.webp", "Bachata Explosion social community"],
+            ["/media/bbf/atmosphere/party-141.jpg", "Bachata Explosion event crowd"],
+            ["/media/bbf/atmosphere/party-143.jpg", "Bachata Explosion party community"],
+          ];
+          volunteerTrack.innerHTML = groupPhotos.map(([src, alt], index) => `<figure class="volunteer-slide${index === 0 ? " is-active" : ""}" data-auto-volunteer-slide><img src="${src}" alt="${alt}" width="1600" height="1000" ${index === 0 ? "" : "loading=\"lazy\""}></figure>`).join("");
+          const slides = Array.from(volunteerTrack.querySelectorAll<HTMLElement>("[data-auto-volunteer-slide]"));
+          let active = 0;
+          if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            window.setInterval(() => { slides[active]?.classList.remove("is-active"); active = (active + 1) % slides.length; slides[active]?.classList.add("is-active"); }, 4300);
+          }
         }
-      });
-      mobileGroups.forEach((group) => group.addEventListener("toggle", () => {
-        if (!group.open) return;
-        mobileGroups.forEach((candidate) => {
-          if (candidate !== group) candidate.open = false;
-        });
-      }));
-      siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-        siteMenu.open = false;
-      }));
 
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        dropdowns.forEach((dropdown) => { dropdown.open = false; });
-        if (siteMenu) siteMenu.open = false;
+        const historySidebar = document.querySelector<HTMLElement>('.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar');
+        const historySection = historySidebar?.closest<HTMLElement>(".be-history");
+        if (historySidebar && historySection) {
+          const links = Array.from(historySidebar.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
+          const targets = links.map((link) => ({ link, target: document.querySelector<HTMLElement>(link.getAttribute("href") || "") })).filter((item): item is { link: HTMLAnchorElement; target: HTMLElement } => Boolean(item.target));
+          const syncHistoryProgress = () => {
+            let currentTarget: HTMLElement | undefined;
+            for (const { target } of targets) {
+              if (target.getBoundingClientRect().top <= 210) currentTarget = target;
+            }
+            if (!currentTarget && targets[0]) currentTarget = targets[0].target;
+            links.forEach((link) => {
+              const isActive = Boolean(currentTarget && link.getAttribute("href") === `#${currentTarget.id}`);
+              link.classList.toggle("is-active", isActive);
+              if (isActive) link.setAttribute("aria-current", "true"); else link.removeAttribute("aria-current");
+            });
+          };
+          syncHistoryProgress();
+          window.addEventListener("scroll", syncHistoryProgress, { passive: true });
+          window.addEventListener("resize", syncHistoryProgress);
+        }
       });
     </script>
   </body>

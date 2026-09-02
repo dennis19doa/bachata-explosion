@@ -1,0 +1,605 @@
+/*
+  Bachata Explosion — Berlin identity replan
+  Final visual layer. The goal is not "030-themed" decoration; it is a varied Berlin
+  material system: concrete, fly-posters, graffiti, club print, real photography.
+*/
+
+:root {
+  --city-black: #080809;
+  --city-charcoal: #121214;
+  --city-paper: #ede5d7;
+  --city-paper-dim: #d7c9b7;
+  --city-red: #72152d;
+  --city-blue: #2345ff;
+  --city-blue-deep: #14216d;
+  --city-acid: #c7ff36;
+  --city-pink: #ed3e93;
+  --city-white: #f5f0e8;
+  --city-muted: #aaa2a3;
+  --city-line: rgba(245,240,232,.16);
+  --city-shadow: 11px 12px 0 rgba(0,0,0,.38);
+}
+
+/* Stop using 030 as the main Berlin signifier. */
+main::after { display: none !important; }
+.home-hero::before,
+.bbf-hero::before,
+.page-hero::after,
+.contact-hero::after,
+.ambassador-hero::after,
+.volunteer-hero::after,
+.wp-source-header::after { display: none !important; }
+
+.section-label::before {
+  content: "EXP//" !important;
+  color: var(--city-blue) !important;
+}
+
+.site-header::before {
+  content: "BERLIN / BACHATA EXPLOSION" !important;
+  background: var(--city-blue) !important;
+  color: #fff !important;
+}
+
+.site-header::after {
+  content: "BY DANCERS / FOR DANCERS" !important;
+  color: var(--city-acid) !important;
+  opacity: .82 !important;
+}
+
+/* --------------------------------------------------------------------------
+   BACKGROUND SYSTEM — recognisably related, intentionally not identical
+   -------------------------------------------------------------------------- */
+
+body {
+  background-color: var(--city-black) !important;
+  background-image:
+    linear-gradient(rgba(8,8,9,.9), rgba(8,8,9,.9)),
+    url("/media/brand/berlin-wall.svg") !important;
+}
+
+main {
+  background: transparent !important;
+}
+
+/* Concrete / black sections */
+.event-switcher,
+.home-team,
+.bbf-venue,
+.bbf-schedule,
+.bbf-travel,
+.archive-gallery-section,
+.contact-workbench,
+.ambassador-role,
+.ambassador-application,
+.volunteer-roles,
+.volunteer-application {
+  background:
+    linear-gradient(rgba(8,8,9,.91), rgba(8,8,9,.91)),
+    url("/media/brand/berlin-wall.svg") !important;
+}
+
+/* Electric blue fly-poster sections */
+.home-manifesto,
+.bbf-intro,
+.contact-routing,
+.volunteer-promise {
+  position: relative;
+  isolation: isolate;
+  background: var(--city-blue) !important;
+  color: #fff !important;
+}
+
+.home-manifesto::before,
+.bbf-intro::before,
+.contact-routing::before,
+.volunteer-promise::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: .22;
+  background: var(--city-acid);
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") 80% 50% / min(760px, 70vw) auto no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") 80% 50% / min(760px, 70vw) auto no-repeat;
+  pointer-events: none;
+}
+
+.home-manifesto .section-label,
+.bbf-intro .section-label,
+.contact-routing .section-label,
+.volunteer-promise .section-label {
+  background: var(--city-acid) !important;
+  color: #0b0b0c !important;
+  box-shadow: 5px 5px 0 rgba(0,0,0,.32) !important;
+}
+
+.home-manifesto h2,
+.bbf-intro h2,
+.contact-routing h2,
+.volunteer-promise h2,
+.home-manifesto p,
+.bbf-intro p,
+.contact-routing p,
+.volunteer-promise p { color: #fff !important; }
+
+.home-manifesto h2 em,
+.bbf-intro h2 em,
+.contact-routing h2 em,
+.volunteer-promise h2 em { color: var(--city-acid) !important; }
+
+/* Oxblood club-poster sections */
+.home-archive,
+.bbf-passes,
+.ambassador-group,
+.contact-next {
+  position: relative;
+  background: var(--city-red) !important;
+  color: var(--city-white) !important;
+}
+
+.home-archive::after,
+.bbf-passes::after,
+.ambassador-group::after,
+.contact-next::after {
+  content: "BERLIN";
+  position: absolute;
+  right: clamp(-10px, 2vw, 30px);
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  color: rgba(255,255,255,.07);
+  font: 900 clamp(5rem, 12vw, 11rem)/.8 var(--display, Impact, sans-serif);
+  letter-spacing: -.05em;
+  pointer-events: none;
+}
+
+/* Paper / zine sections */
+.home-community,
+.bbf-artists,
+.ambassador-benefits {
+  position: relative;
+  background: var(--city-paper) !important;
+  color: #151315 !important;
+}
+
+.home-community h2,
+.home-community h3,
+.home-community p,
+.bbf-artists h2,
+.bbf-artists h3,
+.bbf-artists p,
+.ambassador-benefits h2,
+.ambassador-benefits h3,
+.ambassador-benefits p { color: #151315 !important; }
+
+.home-community .section-label,
+.bbf-artists .section-label,
+.ambassador-benefits .section-label {
+  background: var(--city-blue) !important;
+  color: #fff !important;
+  box-shadow: 5px 5px 0 var(--city-red) !important;
+}
+
+/* --------------------------------------------------------------------------
+   GRAFFITI / STREET ELEMENTS — obvious Berlin energy without insider codes
+   -------------------------------------------------------------------------- */
+
+.home-hero,
+.bbf-hero,
+.page-hero,
+.contact-hero,
+.ambassador-hero,
+.volunteer-hero,
+.wp-source-header {
+  position: relative;
+}
+
+.home-hero::after,
+.bbf-hero::after,
+.page-hero::before,
+.contact-hero::before,
+.ambassador-hero::before,
+.volunteer-hero::before,
+.wp-source-header::before {
+  content: "" !important;
+  position: absolute;
+  z-index: 4;
+  width: clamp(180px, 24vw, 390px);
+  aspect-ratio: 1.45;
+  right: clamp(-38px, 3vw, 44px);
+  bottom: clamp(28px, 7vh, 92px);
+  background: var(--city-acid);
+  opacity: .62;
+  -webkit-mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
+  mask: url("/media/brand/berlin-graffiti-mask.svg") center / contain no-repeat;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+.home-hero-copy::after,
+.bbf-hero-copy::after,
+.contact-hero-grid > div:first-child::after,
+.ambassador-hero-copy::after,
+.volunteer-hero-content::after {
+  content: "BERLIN AFTER DARK";
+  display: inline-block;
+  margin-top: 24px;
+  padding: 7px 10px 6px;
+  background: var(--city-blue);
+  color: #fff;
+  font: 900 .65rem/1 var(--body, system-ui, sans-serif);
+  letter-spacing: .15em;
+  transform: rotate(-2deg);
+  box-shadow: 5px 6px 0 rgba(0,0,0,.34);
+}
+
+.home-hero h1,
+.bbf-hero h1,
+.page-hero h1,
+.contact-hero h1,
+.ambassador-hero h1,
+.volunteer-hero h1,
+.wp-source-header h1,
+.wp-source-display-title {
+  text-shadow: 5px 5px 0 var(--city-red) !important;
+}
+
+/* Handwritten interventions — small, not everywhere. */
+.home-next-event::before,
+.bbf-hotel-deal::before,
+.archive-original-index::before,
+.contact-delivery-card::before {
+  content: "→ keep moving";
+  position: absolute;
+  z-index: 3;
+  top: -18px;
+  right: 18px;
+  color: var(--city-acid);
+  font: 400 1rem/1 "Permanent Marker", cursive;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   MENU — cleaner, more premium and more memorable
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: fixed !important;
+  top: 12px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%);
+  width: min(1280px, calc(100% - 28px)) !important;
+  padding: 11px 12px !important;
+  background: rgba(7,7,8,.88) !important;
+  border: 1px solid rgba(245,240,232,.18) !important;
+  border-top: 3px solid var(--city-blue) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 55px rgba(0,0,0,.34);
+}
+
+.brand {
+  background: transparent !important;
+  padding: 2px 4px !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.brand::after { display: none !important; }
+.brand img { max-width: 150px; }
+
+.desktop-nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(4px, .8vw, 10px) !important;
+  padding: 0 8px;
+}
+
+.desktop-nav > a,
+.nav-group > summary {
+  min-height: 42px;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+  padding: 0 11px;
+  border: 1px solid transparent;
+  color: var(--city-white) !important;
+  font-size: .68rem !important;
+  font-weight: 850 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase;
+}
+
+.desktop-nav > a:hover,
+.nav-group > summary:hover,
+.nav-group[open] > summary {
+  background: var(--city-paper);
+  color: #111 !important;
+  border-color: var(--city-paper);
+}
+
+.desktop-nav > a::after,
+.nav-group > summary::after { display: none !important; }
+
+.nav-group > summary::before {
+  color: var(--city-acid);
+  font-size: .54rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.nav-group:nth-of-type(1) > summary::before { content: "01"; }
+.nav-group:nth-of-type(2) > summary::before { content: "02"; }
+.nav-group:nth-of-type(3) > summary::before { content: "04"; }
+
+.desktop-nav > a[href="/archive/"]::before { content: "03"; color: var(--city-acid); font-size: .54rem; }
+.desktop-nav > a[href="/contact/"]::before { content: "05"; color: var(--city-acid); font-size: .54rem; }
+
+.nav-popover {
+  top: calc(100% + 17px) !important;
+  width: min(350px, 86vw) !important;
+  padding: 8px !important;
+  background: var(--city-paper) !important;
+  color: #121113 !important;
+  border: 0 !important;
+  border-top: 7px solid var(--city-blue) !important;
+  box-shadow: 13px 15px 0 rgba(0,0,0,.42) !important;
+}
+
+.nav-popover::before {
+  width: 72px !important;
+  height: 17px !important;
+  background: var(--city-acid) !important;
+}
+
+.nav-popover > span {
+  color: var(--city-red) !important;
+  padding: 9px 11px 13px !important;
+}
+
+.nav-popover a {
+  color: #111 !important;
+  border-top: 1px solid rgba(0,0,0,.14) !important;
+  padding: 13px 11px !important;
+}
+.nav-popover a:hover { background: var(--city-acid) !important; }
+.nav-popover a small { color: #514b4b !important; }
+
+.site-header > .button-gold {
+  background: var(--city-acid) !important;
+  color: #101011 !important;
+  min-height: 42px !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   HISTORY — stabilise the preserved timeline and turn it into a zine timeline
+   -------------------------------------------------------------------------- */
+
+.wp-preserved-page[data-wordpress-source="explosion-history"] .wp-source-content {
+  width: min(1280px, calc(100% - 32px)) !important;
+  max-width: none !important;
+  padding-top: 38px !important;
+}
+
+.wp-preserved-page[data-wordpress-source="explosion-history"] .wp-source-content > * {
+  max-width: none !important;
+}
+
+.be-history {
+  --beH-radius: 0px !important;
+  width: min(1220px, 100%) !important;
+  margin-inline: auto !important;
+  padding: clamp(46px, 7vw, 90px) clamp(14px, 2vw, 28px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(230px, 290px) minmax(0, 1fr) !important;
+  gap: clamp(26px, 4vw, 58px) !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+.be-history__sidebar {
+  min-width: 0 !important;
+  overflow: visible !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  border-top: 7px solid var(--city-blue) !important;
+  background: var(--city-paper) !important;
+  color: #141214 !important;
+  box-shadow: var(--city-shadow) !important;
+  padding: 20px !important;
+}
+
+.be-history__sidebar::before { display: none !important; }
+.be-headline {
+  color: #141214 !important;
+  font-size: clamp(2.3rem, 4vw, 4rem) !important;
+  line-height: .86 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.be-years-wrap {
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.be-years {
+  gap: 7px !important;
+}
+
+.be-year-highlight {
+  border-radius: 0 !important;
+  background: var(--city-acid) !important;
+}
+
+.be-year {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 46px !important;
+  height: auto !important;
+  padding: 10px 12px !important;
+  border-radius: 0 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.15 !important;
+  font-size: .77rem !important;
+  color: #171416 !important;
+}
+
+.be-year.is-active { color: #111 !important; }
+
+.be-history__timeline {
+  min-width: 0 !important;
+  gap: clamp(34px, 5vw, 62px) !important;
+}
+
+.be-event {
+  min-width: 0 !important;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .82fr) !important;
+  gap: clamp(20px, 3vw, 42px) !important;
+  align-items: center !important;
+}
+
+.be-event:nth-of-type(even) .be-event__media { order: 2; }
+.be-event:nth-of-type(even) .be-event__content { order: 1; }
+
+.be-event__media {
+  min-width: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  border: 7px solid var(--city-paper) !important;
+  border-radius: 0 !important;
+  background: var(--city-paper) !important;
+  box-shadow: var(--city-shadow) !important;
+  transform: rotate(-.7deg);
+}
+.be-event:nth-of-type(even) .be-event__media { transform: rotate(.65deg); }
+.be-event__media img { border: 0 !important; box-shadow: none !important; transform: none !important; }
+
+.be-event__content {
+  min-width: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  padding: clamp(20px, 3vw, 34px) !important;
+  border-radius: 0 !important;
+  background: var(--city-charcoal) !important;
+  border-left: 5px solid var(--city-red) !important;
+}
+
+.be-event__chapter {
+  white-space: nowrap !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  border-radius: 0 !important;
+  background: var(--city-blue) !important;
+  color: #fff !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.be-event__title {
+  color: var(--city-white) !important;
+  font-size: clamp(2rem, 4vw, 4.4rem) !important;
+  line-height: .9 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+.be-event__text { color: #d4ccca !important; }
+.be-trail { opacity: .24 !important; }
+
+/* Archive year/date headings: prevent years/dates from splitting into individual digits. */
+.archive-year > header {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  min-width: 0 !important;
+}
+.archive-year > header > span,
+.archive-detail-hero time,
+.archive-detail-hero .eyebrow {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+.archive-year > header > span {
+  font-size: clamp(3.6rem, 9vw, 8.2rem) !important;
+  line-height: .76 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile — keep the identity, remove the breakage
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .desktop-nav { display: none !important; }
+  .mobile-nav { display: block !important; }
+  .site-header::before,
+  .site-header::after { display: none !important; }
+}
+
+@media (max-width: 900px) {
+  .be-history {
+    grid-template-columns: 1fr !important;
+    padding-inline: 0 !important;
+  }
+  .be-history__sidebar {
+    position: relative !important;
+    top: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 8px !important;
+  }
+  .be-years-wrap { display: block !important; }
+  .be-years {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    display: grid !important;
+  }
+  .be-year-highlight { display: none !important; }
+  .be-year {
+    border: 1px solid rgba(0,0,0,.16) !important;
+    background: rgba(255,255,255,.3) !important;
+  }
+  .be-year.is-active { background: var(--city-acid) !important; }
+  .be-event,
+  .be-event:nth-of-type(even) {
+    grid-template-columns: 1fr !important;
+  }
+  .be-event:nth-of-type(even) .be-event__media,
+  .be-event:nth-of-type(even) .be-event__content { order: initial; }
+  .home-hero::after,
+  .bbf-hero::after,
+  .page-hero::before,
+  .contact-hero::before,
+  .ambassador-hero::before,
+  .volunteer-hero::before,
+  .wp-source-header::before { opacity: .3; width: 180px; }
+}
+
+@media (max-width: 620px) {
+  .site-header {
+    top: 7px !important;
+    width: calc(100% - 14px) !important;
+    padding: 8px 9px !important;
+  }
+  .brand img { max-width: 122px; }
+  .site-header > .button-gold { display: none !important; }
+  .be-years { grid-template-columns: 1fr 1fr !important; }
+  .be-year { font-size: .7rem !important; }
+  .archive-year > header {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+  .archive-year > header > span { font-size: clamp(3.5rem, 20vw, 6.6rem) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .be-event__media,
+  .home-next-event::before,
+  .bbf-hotel-deal::before,
+  .archive-original-index::before,
+  .contact-delivery-card::before { transform: none !important; }
+}

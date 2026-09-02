@@ -14,6 +14,18 @@ for (const entry of readdirSync(dist)) {
   renameSync(join(dist, entry), join(client, entry));
 }
 
+// WordPress historically published and linked both lowercase and uppercase
+// variants of the BBF route. Linux/Cloudflare paths are case-sensitive, so
+// preserve the old uppercase path as a real static alias during migration.
+const legacyAliases = [
+  ["bbf-2026", "BBF-2026"],
+];
+for (const [source, alias] of legacyAliases) {
+  const sourcePath = join(client, source);
+  const aliasPath = join(client, alias);
+  if (existsSync(sourcePath) && !existsSync(aliasPath)) cpSync(sourcePath, aliasPath, { recursive: true });
+}
+
 mkdirSync(server, { recursive: true });
 writeFileSync(
   join(server, "index.js"),

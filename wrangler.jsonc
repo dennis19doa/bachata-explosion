@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bachata-explosion",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-08-29",
+  "assets": {
+    "directory": "./dist/client/",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

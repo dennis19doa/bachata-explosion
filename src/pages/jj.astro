@@ -6,93 +6,159 @@ import { jjFormEndpoint } from "../lib/forms";
 const registrationConnected = Boolean(jjFormEndpoint);
 const competitionSteps = [
   ["01", "Register", "Submit your details and a valid BBF 2026 Full Pass reference."],
-  ["02", "Enter the cypher", "Meet new partners, adapt quickly and show genuine social-dance quality."],
-  ["03", "Reach the rounds", "Timing, connection, technique and musicality decide who advances."],
-  ["04", "Own the final", "The last challenge is revealed on stage and the champions take the centre."],
+  ["02", "Survive the cypher", "Meet new partners, adapt quickly and show genuine social-dance quality."],
+  ["03", "Reach the final", "Timing, connection, technique and musicality decide who advances."],
+  ["04", "Become champion", "Own the final challenge and take the centre-stage reveal."],
+] as const;
+const judging = [
+  ["01", "Timing & basics", "Clean basic step, timing, hip movement and control under pressure."],
+  ["02", "Connection & technique", "Posture, partner connection, adaptability and clear social-dance technique."],
+  ["03", "Musicality & presence", "Creativity, musical interpretation and entertainment without losing the partner."],
 ] as const;
 ---
 
-<BaseLayout title="BBF 2026 Jack & Jill Competition | Bachata Explosion" description="Register for the Berlin Bachata Festival 2026 Jack & Jill: Saturday competition, cash prize, trophies, partner passes and a BBF 2027 teaching opportunity.">
-  <article class="jj-arena" data-wordpress-source="jj">
-    <section class="jj-hero" aria-labelledby="jj-title">
-      <img src="/media/bbf/atmosphere/party-143.jpg" alt="Bachata dancers performing under the lights at Bachata Explosion" width="1800" height="1200" />
-      <div class="jj-hero-shade" aria-hidden="true"></div>
-      <div class="jj-hero-type" aria-hidden="true">J&J</div>
-      <div class="shell jj-hero-grid">
-        <div>
-          <p class="eyebrow"><span></span>Berlin Bachata Festival 2026</p>
-          <h1 id="jj-title">Jack <em>&</em><br />Jill.</h1>
-          <p>Unknown partner. Unknown song. One Saturday stage built for connection, musicality and real social-dance quality.</p>
-          <div class="hero-actions"><a class="button button-gold" href="#registration">Register now</a><a class="button button-glass" href="#rulebook">Read the rules</a></div>
+<BaseLayout title="BBF 2026 Jack & Jill Competition | Bachata Explosion" description="Register for the Berlin Bachata Festival 2026 Jack & Jill: social-dance competition, cash prize, trophies, partner passes and a BBF 2027 teaching opportunity.">
+  <article class="jj26-page" data-wordpress-source="jj">
+    <section class="jj26-hero" id="overview" aria-labelledby="jj-title">
+      <img class="jj26-hero-image" src="/media/bbf/atmosphere/saturday-62.jpg" alt="Bachata Explosion dancers celebrating at the festival" width="1800" height="1200" />
+      <div class="jj26-hero-shade" aria-hidden="true"></div>
+      <div class="jj26-hero-type" aria-hidden="true">J&J</div>
+      <div class="shell jj26-hero-grid">
+        <div class="jj26-hero-copy">
+          <div class="jj26-pills"><span>BBF 2026</span><span>Saturday</span><span>Full Pass required</span></div>
+          <p class="eyebrow"><span></span>Official social-dance competition</p>
+          <h1 id="jj-title">Your name.<br /><em>Your moment.</em></h1>
+          <p class="jj26-lead">Unknown partner. Unknown song. Real bachata. The BBF Jack & Jill rewards connection, musicality, technique and the ability to adapt when the spotlight is on.</p>
+          <div class="hero-actions"><a class="button button-gold" href="#registration">Register now</a><a class="button button-glass" href="#bracket">View the bracket</a></div>
         </div>
-        <aside class="jj-hero-prize">
-          <span>Champion package</span>
-          <strong>€100</strong>
-          <p>Cash prize · trophy · five partner-event Full Passes · BBF 2027 teaching opportunity</p>
+        <aside class="jj26-dossier" aria-label="Competition information">
+          <span class="jj26-dossier-label">Competition dossier</span>
+          <div><small>Status</small><strong>Registration open</strong></div>
+          <div><small>Competition day</small><strong>Saturday</strong></div>
+          <div><small>Format</small><strong>Jack & Jill · social dance</strong></div>
+          <div><small>Entry</small><strong>BBF Full Pass only</strong></div>
+          <div class="jj26-prize"><small>Champion package</small><strong>€100 + trophy</strong><p>Plus partner-event Full Passes and a BBF 2027 teaching opportunity.</p></div>
         </aside>
       </div>
-      <div class="jj-fact-bar"><div><b>Saturday</b><span>Competition day</span></div><div><b>Social dance</b><span>Competition format</span></div><div><b>Full Pass</b><span>Required to enter</span></div><div><b>Registration</b><span>Open</span></div></div>
     </section>
 
-    <section class="jj-flow section-pad" aria-labelledby="jj-flow-title">
+    <nav class="jj26-nav" aria-label="Jack and Jill sections">
+      <div class="shell"><a href="#overview">Overview</a><a href="#format">Format</a><a href="#prizes">Prizes</a><a href="#bracket">Bracket</a><a href="#rules">Rules</a><a href="#registration">Register</a></div>
+    </nav>
+
+    <section class="jj26-format jj26-pad" id="format" aria-labelledby="jj-format-title">
       <div class="shell">
-        <div class="jj-section-head"><div><p class="section-label">Your route to the final</p><h2 id="jj-flow-title">Enter the arena.<br /><em>Earn the centre.</em></h2></div><p>The competition story is simple and visible: register, survive the cypher, advance through the rounds and make the final yours.</p></div>
-        <ol class="jj-flow-grid">{competitionSteps.map(([number, title, text]) => <li><span>{number}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>
+        <div class="jj26-heading">
+          <div><p class="section-label">The road to centre stage</p><h2 id="jj-format-title">Enter the arena.<br /><em>Earn the centre.</em></h2></div>
+          <p>The live Explosion version makes the journey clear: register, enter the cypher, survive the rounds and reach the champion reveal. This redesign keeps that logic but gives it the visual language of the new BBF site.</p>
+        </div>
+        <ol class="jj26-flow">{competitionSteps.map(([number, title, text]) => <li><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol>
       </div>
     </section>
 
-    <section class="jj-prizes section-pad" aria-labelledby="jj-prizes-title">
+    <section class="jj26-judging jj26-pad" aria-labelledby="jj-judging-title">
+      <div class="shell jj26-judging-grid">
+        <div class="jj26-judging-intro"><p class="section-label">What the judges see</p><h2 id="jj-judging-title">Real dancing.<br /><em>Under pressure.</em></h2><p>This is not a choreography contest. The goal is to show social-dance quality with a partner you did not choose and music you cannot control.</p></div>
+        <div class="jj26-judge-cards">{judging.map(([number, title, text]) => <article><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+      </div>
+    </section>
+
+    <section class="jj26-prizes jj26-pad" id="prizes" aria-labelledby="jj-prizes-title">
       <div class="shell">
-        <div class="jj-section-head"><div><p class="section-label">Official winner rewards</p><h2 id="jj-prizes-title">The podium<br /><em>has real weight.</em></h2></div><p>Every confirmed competitor receives a medal. The podium adds partner passes, and first place unlocks the complete champion package.</p></div>
-        <div class="jj-podium">
-          <article class="jj-place-second"><span>02</span><h3>Finalists</h3><strong>3 Full Passes</strong><p>Choose three passes from the final partner-event list.</p></article>
-          <article class="jj-place-first"><span>01 · Champions</span><h3>€100 + trophy</h3><strong>5 Full Passes</strong><p>€50 per winner, a trophy, five partner-event Full Passes and a BBF 2027 teaching opportunity.</p></article>
-          <article class="jj-place-third"><span>03</span><h3>Podium</h3><strong>2 Full Passes</strong><p>Choose two passes from the final partner-event list.</p></article>
+        <div class="jj26-heading">
+          <div><p class="section-label">Official winner rewards</p><h2 id="jj-prizes-title">A podium worth<br /><em>fighting for.</em></h2></div>
+          <p>Every confirmed competitor receives a medal. Podium finishers unlock partner-event passes, while the winning pair receives the complete champion package.</p>
+        </div>
+        <div class="jj26-podium">
+          <article class="jj26-place jj26-second"><span>02 · Finalists</span><h3>Second place</h3><strong>3 Full Passes</strong><p>Choose three Full Passes from the final partner-event list.</p></article>
+          <article class="jj26-place jj26-first"><span>01 · Champions</span><h3>€100 + trophy</h3><strong>5 Full Passes</strong><p>€50 per winner, trophy, five partner-event Full Passes and a BBF 2027 teaching opportunity.</p><b>Champion package</b></article>
+          <article class="jj26-place jj26-third"><span>03 · Podium</span><h3>Third place</h3><strong>2 Full Passes</strong><p>Choose two Full Passes from the final partner-event list.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="jj-bracket section-pad" aria-labelledby="jj-bracket-title">
+    <section class="jj26-bracket jj26-pad" id="bracket" aria-labelledby="jj-bracket-title">
       <div class="shell">
-        <div class="jj-section-head"><div><p class="section-label">Public competition board</p><h2 id="jj-bracket-title">Two sides.<br /><em>One final.</em></h2></div><p>Dancer names and results will replace the open slots when registration is confirmed.</p></div>
-        <div class="jj-bracket-board">
-          <div class="jj-bracket-side"><span>Cypher A</span><div>Heat 01 · dancers TBA</div><div>Heat 02 · dancers TBA</div><strong>First round A</strong></div>
-          <div class="jj-bracket-final"><span>Saturday final</span><strong>Champion</strong><p>Winner TBA</p></div>
-          <div class="jj-bracket-side"><span>Cypher B</span><div>Heat 03 · dancers TBA</div><div>Heat 04 · dancers TBA</div><strong>First round B</strong></div>
+        <div class="jj26-heading">
+          <div><p class="section-label">Public competition board</p><h2 id="jj-bracket-title">Two sides.<br /><em>One champion.</em></h2></div>
+          <p>The board becomes the public source of truth once registrations are verified. Names and results replace the open slots as the competition moves forward.</p>
+        </div>
+        <div class="jj26-board">
+          <section class="jj26-side"><header><span>Cypher A</span><b>Left side</b></header><div><small>Heat 01</small><strong>Dancers TBA</strong><em>Advancers TBA</em></div><div><small>Heat 02</small><strong>Dancers TBA</strong><em>Advancers TBA</em></div><footer>First round A</footer></section>
+          <section class="jj26-final"><span>Saturday final</span><small>Centre stage</small><strong>Champion</strong><p>Winner TBA</p><i>€100 · trophy · passes · BBF 2027</i></section>
+          <section class="jj26-side"><header><span>Cypher B</span><b>Right side</b></header><div><small>Heat 03</small><strong>Dancers TBA</strong><em>Advancers TBA</em></div><div><small>Heat 04</small><strong>Dancers TBA</strong><em>Advancers TBA</em></div><footer>First round B</footer></section>
         </div>
       </div>
     </section>
 
-    <section class="jj-rules section-pad" id="rulebook" aria-labelledby="jj-rules-title">
-      <div class="shell jj-rules-grid">
-        <div><p class="section-label">Rulebook overview</p><h2 id="jj-rules-title">Clear rules.<br /><em>Real dancing.</em></h2><p>The official detailed rulebook remains the final authority. These are the essentials every competitor should understand before registering.</p></div>
-        <div class="jj-rule-list">
+    <section class="jj26-rules jj26-pad" id="rules" aria-labelledby="jj-rules-title">
+      <div class="shell jj26-rules-grid">
+        <div class="jj26-rules-intro"><p class="section-label">Rulebook overview</p><h2 id="jj-rules-title">Clear rules.<br /><em>Real dancing.</em></h2><p>The detailed event rulebook remains the final authority. These are the essentials competitors should understand before registering.</p><a class="text-link" href="#registration">Ready? Register below <span>↓</span></a></div>
+        <div class="jj26-rule-list">
           <details open><summary>Core rules <span>+</span></summary><ul><li>This is a social-dance competition.</li><li>A valid BBF 2026 Full Pass is required.</li><li>No acrobatics—solo or with a partner.</li><li>Show control, respect for the music and real partner connection.</li></ul></details>
-          <details><summary>Judging focus <span>+</span></summary><ol><li>Basic step, timing and hip movement</li><li>Posture, connection and technique</li><li>Musicality, creativity and entertainment</li></ol></details>
+          <details><summary>Judging focus <span>+</span></summary><ol><li>Basic step, timing and hip movement.</li><li>Posture, connection and technique.</li><li>Musicality, creativity and entertainment.</li></ol></details>
           <details><summary>Music & rounds <span>+</span></summary><ul><li>A playlist of 100 possible songs is planned one week before the event.</li><li>Decisions are announced directly after each round.</li><li>The final includes a surprise challenge announced at the event.</li></ul></details>
+          <details><summary>Eligibility & awards <span>+</span></summary><ul><li>No verified Full Pass means no competition slot.</li><li>First place receives the complete champion package and trophy.</li><li>Every confirmed competitor receives a medal.</li></ul></details>
         </div>
       </div>
     </section>
 
-    <section class="jj-register section-pad" id="registration" aria-labelledby="jj-register-title">
-      <div class="shell jj-register-grid">
-        <aside><p class="section-label">Competition sign-up</p><h2 id="jj-register-title">Put your name<br /><em>in the bracket.</em></h2><p>Your place is confirmed only after the team verifies your BBF 2026 Full Pass.</p><a class="text-link" href={ticketUrl}>Need a Full Pass? Get tickets <span>↗</span></a></aside>
-        <form class="jj-register-form" method="POST" action={jjFormEndpoint || undefined} enctype="multipart/form-data" data-jj-form data-jj-endpoint={jjFormEndpoint}>
+    <section class="jj26-register jj26-pad" id="registration" aria-labelledby="jj-register-title">
+      <div class="shell jj26-register-grid">
+        <aside>
+          <p class="section-label">Competition sign-up</p><h2 id="jj-register-title">Put your name<br /><em>in the bracket.</em></h2>
+          <p>Your registration is confirmed only after the team verifies your BBF 2026 Full Pass.</p>
+          <div class="jj26-before"><span>Before you register</span><ul><li>Have your Full Pass code or purchase email ready.</li><li>Use the contact details you actually check.</li><li>Upload a clear competition photo.</li><li>Keep your ticket confirmation for check-in.</li></ul></div>
+          <a class="text-link" href={ticketUrl}>Need a Full Pass? Get tickets <span>↗</span></a>
+        </aside>
+        <form class="jj26-form" method="POST" action={jjFormEndpoint || undefined} enctype="multipart/form-data" data-jj-form data-jj-endpoint={jjFormEndpoint}>
+          <div class="jj26-form-head"><span>BBF 2026 · Jack & Jill</span><strong>Competition registration</strong></div>
           <input type="hidden" name="topic" value="BBF 2026 Jack & Jill registration" />
           <label><span>Full name *</span><input type="text" name="full_name" autocomplete="name" required maxlength="140" /></label>
           <label><span>Email *</span><input type="email" name="email" autocomplete="email" required maxlength="180" /></label>
           <label><span>WhatsApp *</span><input type="tel" name="phone" autocomplete="tel" required maxlength="50" placeholder="Including country code" /></label>
           <label><span>Full Pass code or purchase email *</span><input type="text" name="full_pass_reference" required maxlength="180" /></label>
-          <label class="jj-photo-field"><span>Competition photo *</span><input type="file" name="competition_photo" accept="image/jpeg,image/png,image/webp" required /></label>
-          <label class="jj-consent"><input type="checkbox" name="competition_rules" value="agreed" required /><span>I have read the rules and understand that a verified Full Pass is required.</span></label>
-          <button class="button button-dark" type="submit" data-jj-submit>Submit registration</button>
-          <p class="jj-form-status" role="status" aria-live="polite" data-jj-status>{registrationConnected ? "Ready when you are." : "Preview mode: registration delivery will be activated with the protected email endpoint."}</p>
+          <label class="jj26-photo"><span>Competition photo *</span><input type="file" name="competition_photo" accept="image/jpeg,image/png,image/webp" required /></label>
+          <label class="jj26-consent"><input type="checkbox" name="competition_rules" value="agreed" required /><span>I have read the rules and understand that a verified Full Pass is required.</span></label>
+          <button class="button button-gold" type="submit" data-jj-submit>Submit registration</button>
+          <p class="jj26-status" role="status" aria-live="polite" data-jj-status>{registrationConnected ? "Ready when you are." : "Preview mode: registration delivery will be activated with the protected email endpoint."}</p>
         </form>
       </div>
     </section>
   </article>
 
+  <style>
+    .jj26-page{--jj-gold:#e3b75f;--jj-gold2:#f7ddb0;--jj-pink:#a72d59;--jj-line:rgba(227,183,95,.32);color:#fff;background:#0b0307;overflow:hidden}
+    .jj26-page h1,.jj26-page h2,.jj26-page h3{font-family:Oswald,Impact,sans-serif;text-transform:uppercase}
+    .jj26-page h2{margin:0;font-size:clamp(3.4rem,6.6vw,6.8rem);line-height:.88;letter-spacing:-.045em}.jj26-page h2 em{color:var(--jj-gold2);font-style:normal}
+    .jj26-pad{padding:clamp(84px,9vw,132px) 0}
+    .jj26-hero{position:relative;isolation:isolate;min-height:780px;display:grid;align-items:center;overflow:hidden;background:#100609}
+    .jj26-hero-image{position:absolute;z-index:-3;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 39%;filter:saturate(.88) contrast(1.06)}
+    .jj26-hero-shade{position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,rgba(8,2,5,.96) 0%,rgba(34,7,20,.82) 44%,rgba(9,3,7,.50) 100%),linear-gradient(0deg,#0b0307 0%,transparent 34%)}
+    .jj26-hero-type{position:absolute;z-index:-1;right:-.02em;bottom:-.2em;color:rgba(247,221,176,.055);font:800 clamp(14rem,37vw,40rem)/.72 Oswald,sans-serif;letter-spacing:-.1em;pointer-events:none}
+    .jj26-hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.55fr);align-items:center;gap:clamp(55px,8vw,120px);padding-top:150px;padding-bottom:90px}
+    .jj26-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.jj26-pills span{padding:8px 11px;border:1px solid rgba(247,221,176,.36);background:rgba(10,3,7,.62);color:#f7ddb0;font-size:.59rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .jj26-hero-copy h1{max-width:860px;margin:0;color:#fff;font-size:clamp(5.2rem,9.7vw,10.2rem);line-height:.78;letter-spacing:-.055em}.jj26-hero-copy h1 em{color:var(--jj-gold2);font-style:normal}.jj26-lead{max-width:660px;margin:30px 0 34px;color:#decfd4;font-size:clamp(1rem,1.35vw,1.13rem);line-height:1.72}
+    .jj26-dossier{border:1px solid rgba(247,221,176,.44);background:linear-gradient(155deg,rgba(60,15,35,.88),rgba(11,4,8,.89));backdrop-filter:blur(16px);box-shadow:0 34px 100px rgba(0,0,0,.48)}
+    .jj26-dossier-label{display:block;padding:16px 20px;border-bottom:1px solid var(--jj-line);color:#1d0a11;background:linear-gradient(135deg,var(--jj-gold2),var(--jj-gold));font-size:.62rem;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    .jj26-dossier>div{padding:18px 22px;border-bottom:1px solid rgba(227,183,95,.18)}.jj26-dossier>div:last-child{border-bottom:0}.jj26-dossier small{display:block;margin-bottom:5px;color:#aa929b;font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.jj26-dossier strong{display:block;color:#fff;font:700 1.3rem/1.05 Oswald,sans-serif;text-transform:uppercase}.jj26-dossier .jj26-prize{padding:24px 22px;background:radial-gradient(circle at 90% 0,rgba(227,183,95,.2),transparent 48%)}.jj26-prize strong{color:var(--jj-gold2);font-size:2.2rem}.jj26-prize p{margin:9px 0 0;color:#cdb8c0;font-size:.78rem;line-height:1.55}
+    .jj26-nav{position:sticky;z-index:850;top:94px;border-block:1px solid rgba(227,183,95,.22);background:rgba(10,3,7,.92);backdrop-filter:blur(16px)}.jj26-nav .shell{display:flex;justify-content:center;gap:5px;overflow-x:auto;padding-block:10px;scrollbar-width:none}.jj26-nav a{flex:0 0 auto;padding:10px 16px;color:#c7b7bd;font-size:.63rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;border:1px solid transparent}.jj26-nav a:hover{color:#f7ddb0;border-color:rgba(227,183,95,.38);background:rgba(227,183,95,.06)}
+    .jj26-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.52fr);align-items:end;gap:clamp(50px,8vw,110px);margin-bottom:52px}.jj26-heading>p{max-width:470px;margin:0;color:#c8b5bc;line-height:1.72}
+    .jj26-format{background:radial-gradient(circle at 80% 10%,rgba(167,45,89,.19),transparent 28%),#100609}.jj26-flow{counter-reset:none;display:grid;grid-template-columns:repeat(4,1fr);margin:0;padding:0;list-style:none;border-top:1px solid var(--jj-line);border-left:1px solid var(--jj-line)}.jj26-flow li{position:relative;min-height:300px;padding:28px;border-right:1px solid var(--jj-line);border-bottom:1px solid var(--jj-line);background:linear-gradient(145deg,rgba(43,12,27,.7),rgba(12,4,8,.82));overflow:hidden}.jj26-flow li:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 65%,rgba(227,183,95,.07));pointer-events:none}.jj26-flow li>span{color:var(--jj-gold);font:700 1.1rem Oswald,sans-serif}.jj26-flow li div{position:absolute;left:28px;right:28px;bottom:28px}.jj26-flow h3{margin:0 0 12px;color:#fff;font-size:clamp(1.55rem,2.1vw,2rem);line-height:1}.jj26-flow p{margin:0;color:#bda9b1;font-size:.82rem;line-height:1.58}
+    .jj26-judging{background:linear-gradient(110deg,rgba(9,3,7,.95),rgba(45,10,28,.82)),url('/media/brand/berlin-brandenburg-gold.png') center/cover fixed}.jj26-judging-grid{display:grid;grid-template-columns:minmax(280px,.55fr) minmax(0,1fr);align-items:center;gap:clamp(55px,8vw,110px)}.jj26-judging-intro p:not(.section-label){max-width:540px;color:#c8b5bc;line-height:1.7}.jj26-judge-cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--jj-line);background:rgba(10,3,7,.68);box-shadow:0 28px 80px rgba(0,0,0,.34)}.jj26-judge-cards article{min-height:340px;padding:28px;border-right:1px solid var(--jj-line);display:flex;flex-direction:column;justify-content:flex-end}.jj26-judge-cards article:last-child{border-right:0}.jj26-judge-cards span{margin-bottom:auto;color:var(--jj-gold);font:700 1rem Oswald,sans-serif}.jj26-judge-cards h3{margin:0 0 14px;color:#fff;font-size:1.75rem;line-height:1.02}.jj26-judge-cards p{margin:0;color:#c0abb3;font-size:.78rem;line-height:1.6}
+    .jj26-prizes{background:#0d0508}.jj26-podium{display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:16px}.jj26-place{position:relative;min-height:390px;padding:32px;border:1px solid rgba(227,183,95,.35);background:linear-gradient(155deg,rgba(45,14,27,.86),rgba(12,4,8,.92));display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 20px 60px rgba(0,0,0,.25)}.jj26-place>span{position:absolute;top:28px;left:30px;color:var(--jj-gold);font-size:.62rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.jj26-place h3{margin:0 0 8px;color:#fff;font-size:2.2rem;line-height:1}.jj26-place>strong{color:var(--jj-gold2);font:700 clamp(2rem,3.6vw,3.7rem)/1 Oswald,sans-serif;text-transform:uppercase}.jj26-place p{color:#c3afb7;line-height:1.6}.jj26-first{min-height:470px;border-color:rgba(247,221,176,.82);background:radial-gradient(circle at 82% 12%,rgba(227,183,95,.26),transparent 35%),linear-gradient(150deg,rgba(104,26,57,.94),rgba(25,7,15,.96));box-shadow:0 34px 90px rgba(0,0,0,.42)}.jj26-first b{position:absolute;top:0;right:0;padding:9px 12px;background:var(--jj-gold);color:#210b13;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase}
+    .jj26-bracket{background:radial-gradient(circle at 50% 35%,rgba(167,45,89,.19),transparent 38%),#110609}.jj26-board{display:grid;grid-template-columns:1fr minmax(230px,.55fr) 1fr;gap:14px;align-items:stretch}.jj26-side,.jj26-final{border:1px solid var(--jj-line);background:rgba(16,6,11,.83)}.jj26-side header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--jj-line);color:#f7ddb0}.jj26-side header span,.jj26-side header b{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}.jj26-side>div{display:grid;gap:6px;padding:24px 20px;border-bottom:1px solid rgba(227,183,95,.18)}.jj26-side small{color:#9e8992;text-transform:uppercase;letter-spacing:.1em}.jj26-side strong{color:#fff;font:700 1.35rem Oswald,sans-serif;text-transform:uppercase}.jj26-side em{color:#bca8b0;font-style:normal;font-size:.72rem}.jj26-side footer{padding:16px 20px;color:#e3b75f;font-size:.61rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.jj26-final{display:flex;min-height:360px;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;border-color:rgba(247,221,176,.72);background:radial-gradient(circle,rgba(167,45,89,.44),rgba(28,7,17,.92) 70%)}.jj26-final>span{color:#f7ddb0;font-size:.62rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.jj26-final small{margin:16px 0 4px;color:#aa929b;text-transform:uppercase;letter-spacing:.1em}.jj26-final strong{color:#fff;font:700 clamp(2.6rem,4.5vw,4.8rem)/.9 Oswald,sans-serif;text-transform:uppercase}.jj26-final p{margin:12px 0;color:#e7d8dd}.jj26-final i{color:#e3b75f;font-size:.65rem;font-style:normal;text-transform:uppercase;letter-spacing:.08em}
+    .jj26-rules{background:#0c0407}.jj26-rules-grid{display:grid;grid-template-columns:minmax(280px,.56fr) minmax(0,1fr);align-items:start;gap:clamp(55px,8vw,110px)}.jj26-rules-intro{position:sticky;top:150px}.jj26-rules-intro>p:not(.section-label){max-width:500px;color:#c8b5bc;line-height:1.7}.jj26-rule-list{border:1px solid var(--jj-line);background:rgba(26,8,16,.72)}.jj26-rule-list details{border-bottom:1px solid var(--jj-line)}.jj26-rule-list details:last-child{border-bottom:0}.jj26-rule-list summary{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:25px 26px;cursor:pointer;list-style:none;color:#fff;font:700 1.5rem Oswald,sans-serif;text-transform:uppercase}.jj26-rule-list summary::-webkit-details-marker{display:none}.jj26-rule-list summary span{color:#e3b75f;font-family:DM Sans,sans-serif;transition:transform .2s}.jj26-rule-list details[open] summary span{transform:rotate(45deg)}.jj26-rule-list ul,.jj26-rule-list ol{margin:0;padding:0 28px 27px 48px;color:#c7b4bc;display:grid;gap:10px;line-height:1.55}
+    .jj26-register{background:linear-gradient(125deg,rgba(76,16,42,.62),rgba(11,3,7,.95) 52%),url('/media/bbf/atmosphere/party-141.jpg') center/cover fixed}.jj26-register-grid{display:grid;grid-template-columns:minmax(300px,.52fr) minmax(0,1fr);align-items:start;gap:clamp(60px,8vw,110px)}.jj26-register aside>p:not(.section-label){max-width:500px;color:#d0bdc4;line-height:1.7}.jj26-before{margin:30px 0;padding:22px;border:1px solid rgba(227,183,95,.35);background:rgba(10,3,7,.68);backdrop-filter:blur(10px)}.jj26-before>span{color:#f7ddb0;font-size:.61rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.jj26-before ul{margin:14px 0 0;padding-left:18px;color:#cdb9c1;display:grid;gap:8px;font-size:.78rem;line-height:1.5}.jj26-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:clamp(26px,4vw,44px);border:1px solid rgba(247,221,176,.48);background:linear-gradient(150deg,rgba(42,12,26,.94),rgba(10,3,7,.96));box-shadow:0 34px 100px rgba(0,0,0,.45);backdrop-filter:blur(15px)}.jj26-form-head{grid-column:1/-1;display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:6px;padding-bottom:20px;border-bottom:1px solid var(--jj-line)}.jj26-form-head span{color:#e3b75f;font-size:.61rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.jj26-form-head strong{color:#fff;font:700 1.5rem Oswald,sans-serif;text-transform:uppercase}.jj26-form label{display:grid;gap:8px}.jj26-form label>span{color:#f7ddb0;font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.jj26-form input[type="text"],.jj26-form input[type="email"],.jj26-form input[type="tel"],.jj26-form input[type="file"]{width:100%;min-width:0;box-sizing:border-box;padding:14px;color:#fff;background:#12060c;border:1px solid rgba(227,183,95,.3);font:inherit}.jj26-form input:focus{outline:1px solid #e3b75f;border-color:#e3b75f}.jj26-photo,.jj26-consent,.jj26-form>button,.jj26-status{grid-column:1/-1}.jj26-consent{grid-template-columns:20px 1fr!important;align-items:start;gap:11px!important;padding:15px;border:1px solid rgba(227,183,95,.24);background:#16080f}.jj26-consent input{width:17px;height:17px;accent-color:#a72d59}.jj26-consent>span{color:#d0bdc4!important;text-transform:none!important;letter-spacing:0!important;font-weight:500!important;line-height:1.5}.jj26-status{margin:0;color:#a8929b;font-size:.72rem;line-height:1.5}
+    @media(max-width:1050px){.jj26-hero-grid{grid-template-columns:1fr .64fr}.jj26-flow{grid-template-columns:1fr 1fr}.jj26-judge-cards{grid-template-columns:1fr}.jj26-judge-cards article{min-height:210px;border-right:0;border-bottom:1px solid var(--jj-line)}.jj26-judge-cards article:last-child{border-bottom:0}.jj26-podium{grid-template-columns:1fr}.jj26-place,.jj26-first{min-height:330px}.jj26-board{grid-template-columns:1fr}.jj26-final{order:-1;min-height:300px}}
+    @media(max-width:860px){.jj26-hero{min-height:auto}.jj26-hero-grid,.jj26-heading,.jj26-judging-grid,.jj26-rules-grid,.jj26-register-grid{grid-template-columns:1fr}.jj26-hero-grid{padding-top:150px}.jj26-dossier{max-width:600px}.jj26-nav{top:80px}.jj26-nav .shell{justify-content:flex-start}.jj26-rules-intro{position:static}.jj26-heading{gap:24px}.jj26-judging-grid{gap:40px}}
+    @media(max-width:620px){.jj26-pad{padding:72px 0}.jj26-hero-copy h1{font-size:clamp(4.5rem,20vw,6.5rem)}.jj26-hero-grid{gap:42px;padding-bottom:70px}.jj26-flow{grid-template-columns:1fr}.jj26-flow li{min-height:230px}.jj26-podium{gap:10px}.jj26-form{grid-template-columns:1fr;padding:24px 18px}.jj26-form label,.jj26-form-head,.jj26-photo,.jj26-consent,.jj26-form>button,.jj26-status{grid-column:1}.jj26-form-head{align-items:start;flex-direction:column}.jj26-page h2{font-size:clamp(3.3rem,15vw,5rem)}}
+  </style>
+
   <script>
+    const jjRules = Array.from(document.querySelectorAll<HTMLDetailsElement>(".jj26-rule-list details"));
+    jjRules.forEach((rule) => rule.addEventListener("toggle", () => { if (!rule.open) return; jjRules.forEach((candidate) => { if (candidate !== rule) candidate.open = false; }); }));
+
     const jjForm = document.querySelector<HTMLFormElement>("[data-jj-form]");
     const jjStatus = jjForm?.querySelector<HTMLElement>("[data-jj-status]");
     const jjSubmit = jjForm?.querySelector<HTMLButtonElement>("[data-jj-submit]");

@@ -1,0 +1,792 @@
+/*
+ * BACHATA EXPLOSION — ROUTE CONSISTENCY V2
+ * Loaded last. Owns cross-route navigation, wrapping/media safety and
+ * the shared Berlin + Explosion visual atmosphere.
+ */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL SAFETY — no accidental split words, dates or overflowing media
+   -------------------------------------------------------------------------- */
+:where(main, section, article, aside, div, nav, form, figure, fieldset) {
+  min-width: 0;
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, li, dd, dt, figcaption, label, button, summary) {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+:where(h1, h2, .bbf-heading h2, .contact-hero h1) {
+  text-wrap: balance;
+}
+
+:where(
+  time,
+  [class*="date"],
+  [class*="year"],
+  .home-hero-meta span,
+  .bbf-meta span,
+  .archive-year > header span
+) {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+:where(a[href^="mailto:"], .contact-delivery-card strong, .site-footer address a) {
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+:where(img, video, iframe, svg) {
+  max-width: 100%;
+}
+
+/* Remove old coordinate/code decoration. Berlin is communicated explicitly. */
+.home-manifesto-city { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   2. ONE HEADER ON EVERY ROUTE
+   -------------------------------------------------------------------------- */
+.site-header,
+.site-header-solid {
+  position: fixed !important;
+  z-index: 1200 !important;
+  top: 14px !important;
+  left: 50% !important;
+  right: auto !important;
+  width: min(1220px, calc(100% - 28px)) !important;
+  height: 68px !important;
+  transform: translateX(-50%) !important;
+  display: grid !important;
+  grid-template-columns: 150px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 8px 10px 8px 16px !important;
+  border: 1px solid rgba(34, 18, 24, .14) !important;
+  border-radius: 18px !important;
+  color: #171318 !important;
+  background:
+    linear-gradient(rgba(255, 248, 236, .89), rgba(255, 248, 236, .94)),
+    url('/media/brand/live-explosion-background.png') center 46% / cover !important;
+  box-shadow: 0 14px 44px rgba(46, 24, 31, .16) !important;
+  backdrop-filter: blur(16px) saturate(1.08) !important;
+}
+
+.site-header::before,
+.site-header-solid::before { content: none !important; }
+
+.site-header::after,
+.site-header-solid::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 18px !important;
+  right: 18px !important;
+  bottom: -5px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #ffd84a 0 34%, #f17864 34% 58%, #99cfff 58% 78%, #7d1732 78%) !important;
+  pointer-events: none !important;
+}
+
+.site-header .brand,
+.site-header-solid .brand {
+  width: 138px !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.site-header .brand img,
+.site-header-solid .brand img {
+  width: 138px !important;
+  height: auto !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+}
+
+.desktop-nav {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(10px, 1.25vw, 20px) !important;
+  overflow: visible !important;
+}
+
+.desktop-nav > *,
+.nav-group {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+
+.desktop-nav > a,
+.nav-group > summary {
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #171318 !important;
+  font-family: 'Manrope', 'DM Sans', system-ui, sans-serif !important;
+  font-size: .75rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .03em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.nav-group { position: relative !important; }
+.nav-group > summary {
+  list-style: none !important;
+  cursor: pointer !important;
+}
+.nav-group > summary::-webkit-details-marker { display: none !important; }
+.nav-group > summary::after {
+  content: '↓' !important;
+  margin-left: 6px !important;
+  color: #7d1732 !important;
+  font-size: .68rem !important;
+}
+.nav-group[open] > summary::after { content: '↑' !important; }
+.desktop-nav > a:hover,
+.nav-group > summary:hover,
+.nav-group[open] > summary { color: #7d1732 !important; }
+
+.nav-popover,
+.nav-popover-right {
+  position: absolute !important;
+  z-index: 1250 !important;
+  top: calc(100% + 15px) !important;
+  left: -18px !important;
+  right: auto !important;
+  width: min(340px, calc(100vw - 32px)) !important;
+  display: grid !important;
+  padding: 12px !important;
+  overflow: visible !important;
+  border: 1px solid rgba(34, 18, 24, .14) !important;
+  border-radius: 16px !important;
+  color: #171318 !important;
+  background:
+    linear-gradient(rgba(255, 248, 236, .91), rgba(255, 248, 236, .97)),
+    url('/media/brand/live-explosion-background.png') center / cover !important;
+  box-shadow: 0 28px 65px rgba(32, 17, 22, .19) !important;
+}
+
+.nav-popover-right { left: auto !important; right: -18px !important; }
+.nav-popover::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -18px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 19px !important;
+}
+.nav-popover > span {
+  padding: 8px 10px 10px !important;
+  color: #7d1732 !important;
+  font: 800 .62rem/1.4 'Manrope', system-ui, sans-serif !important;
+  letter-spacing: .075em !important;
+  text-transform: uppercase !important;
+}
+.nav-popover a {
+  min-height: 58px !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 3px !important;
+  padding: 10px 12px !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(34, 18, 24, .12) !important;
+  border-radius: 10px !important;
+  color: #171318 !important;
+  background: transparent !important;
+  text-decoration: none !important;
+}
+.nav-popover a:hover { background: rgba(255, 216, 74, .38) !important; }
+.nav-popover a b {
+  color: #171318 !important;
+  font: 800 .82rem/1.25 'Manrope', system-ui, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+.nav-popover a small {
+  color: #746a6a !important;
+  font: 600 .68rem/1.38 'Manrope', system-ui, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: normal !important;
+}
+
+.site-header > .button,
+.site-header-solid > .button {
+  min-height: 46px !important;
+  padding: 0 18px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: #7d1732 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  white-space: nowrap !important;
+}
+.site-header > .button:hover,
+.site-header-solid > .button:hover {
+  background: #651127 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. MOBILE/TABLET MENU — own the SAME 1280px breakpoint as the base CSS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .site-header,
+  .site-header-solid {
+    height: 64px !important;
+    grid-template-columns: 1fr auto auto !important;
+    padding-left: 13px !important;
+  }
+
+  .desktop-nav { display: none !important; }
+  .mobile-nav { display: block !important; position: static !important; }
+
+  .mobile-nav > summary {
+    position: relative !important;
+    z-index: 1300 !important;
+    min-width: 74px !important;
+    min-height: 42px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 0 12px !important;
+    border: 1px solid rgba(23, 19, 24, .15) !important;
+    border-radius: 12px !important;
+    background: rgba(255,255,255,.72) !important;
+    color: #171318 !important;
+    font: 800 .7rem/1 'Manrope', system-ui, sans-serif !important;
+    letter-spacing: .05em !important;
+    text-transform: uppercase !important;
+    list-style: none !important;
+    backdrop-filter: blur(10px) !important;
+  }
+  .mobile-nav > summary::-webkit-details-marker { display: none !important; }
+  .mobile-nav > summary::before { content: none !important; }
+  .mobile-nav > summary i {
+    width: 15px !important;
+    height: 10px !important;
+    margin: 0 !important;
+    border-top: 2px solid currentColor !important;
+    border-bottom: 2px solid currentColor !important;
+    background: transparent !important;
+    transform: none !important;
+  }
+  .mobile-nav > summary i::after { content: none !important; }
+
+  .mobile-nav:not([open]) .mobile-nav-panel { display: none !important; }
+  .mobile-nav[open] .mobile-nav-panel {
+    position: fixed !important;
+    z-index: 1220 !important;
+    inset: 0 !important;
+    display: block !important;
+    overflow-y: auto !important;
+    padding: 104px 24px 34px !important;
+    color: #171318 !important;
+    background:
+      linear-gradient(135deg, rgba(255,248,236,.83), rgba(255,248,236,.95) 56%, rgba(153,207,255,.86)),
+      url('/media/brand/live-explosion-background.png') center / cover fixed !important;
+  }
+
+  .mobile-nav-panel::before {
+    content: 'BERLIN' !important;
+    position: fixed !important;
+    z-index: 0 !important;
+    right: -18px !important;
+    bottom: 62px !important;
+    color: rgba(125,23,50,.08) !important;
+    font: 800 clamp(7rem, 28vw, 14rem)/.78 'Barlow Condensed', 'Oswald', sans-serif !important;
+    letter-spacing: -.06em !important;
+    transform: rotate(-90deg) translateX(25%) !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-nav-panel::after {
+    content: '' !important;
+    position: fixed !important;
+    z-index: 0 !important;
+    width: min(62vw, 350px) !important;
+    aspect-ratio: 1.45 !important;
+    right: -7vw !important;
+    top: 17vh !important;
+    background: #7d1732 !important;
+    opacity: .13 !important;
+    -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+    mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+    transform: rotate(-10deg) !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-nav-panel nav,
+  .mobile-nav-meta {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(660px, 100%) !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-nav-home,
+  .mobile-nav-group > summary {
+    min-height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(23,19,24,.14) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #171318 !important;
+    font: 700 clamp(2rem, 5vw, 3.2rem)/1 'Barlow Condensed', 'Oswald', sans-serif !important;
+    letter-spacing: -.02em !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+    list-style: none !important;
+    box-shadow: none !important;
+  }
+  .mobile-nav-group > summary::-webkit-details-marker { display: none !important; }
+  .mobile-nav-group > summary i {
+    width: auto !important;
+    height: auto !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  .mobile-nav-group > summary i::after {
+    content: '+' !important;
+    font: 600 1.25rem/1 'Manrope', system-ui, sans-serif !important;
+  }
+  .mobile-nav-group[open] > summary i::after { content: '−' !important; }
+
+  .mobile-nav-group > div {
+    display: grid !important;
+    padding: 7px 0 13px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .mobile-nav nav .mobile-nav-group a {
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+    border: 0 !important;
+    border-left: 4px solid #ffd84a !important;
+    color: #171318 !important;
+    background: transparent !important;
+    font: 700 .82rem/1.25 'Manrope', system-ui, sans-serif !important;
+    letter-spacing: .01em !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+  }
+  .mobile-nav nav .mobile-nav-group a:hover { background: rgba(255,216,74,.26) !important; }
+
+  .mobile-nav-meta {
+    margin-top: 28px !important;
+    padding: 17px !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    background: rgba(153,207,255,.88) !important;
+    color: #171318 !important;
+    text-align: left !important;
+  }
+  .mobile-nav-meta a { color: #7d1732 !important; }
+}
+
+@media (max-width: 620px) {
+  .site-header,
+  .site-header-solid {
+    top: 8px !important;
+    width: calc(100% - 16px) !important;
+    grid-template-columns: 1fr auto !important;
+  }
+  .site-header .brand,
+  .site-header .brand img,
+  .site-header-solid .brand,
+  .site-header-solid .brand img { width: 116px !important; }
+  .site-header > .button,
+  .site-header-solid > .button { display: none !important; }
+  .mobile-nav[open] .mobile-nav-panel { padding: 94px 18px 30px !important; }
+  .mobile-nav-home,
+  .mobile-nav-group > summary { font-size: clamp(2rem, 10vw, 3rem) !important; }
+}
+
+/* --------------------------------------------------------------------------
+   4. CONTACT — target the REAL classes, not the obsolete .contact-page shell
+   -------------------------------------------------------------------------- */
+.contact-2026 {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #fff8ec !important;
+  color: #171318 !important;
+}
+
+.contact-2026 .contact-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  color: #171318 !important;
+  background:
+    linear-gradient(110deg, rgba(153,207,255,.93), rgba(255,248,236,.94) 57%, rgba(255,216,74,.82)),
+    url('/media/brand/berlin-wall.svg') center / cover !important;
+}
+
+.contact-2026 .contact-hero::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -2 !important;
+  inset: 0 !important;
+  opacity: .12 !important;
+  background: url('/media/brand/live-explosion-background.png') center / cover !important;
+  pointer-events: none !important;
+}
+
+.contact-2026 .contact-hero::after {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  width: min(44vw, 540px) !important;
+  aspect-ratio: 1.45 !important;
+  right: -5vw !important;
+  bottom: -8% !important;
+  background: #7d1732 !important;
+  opacity: .13 !important;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  transform: rotate(-8deg) !important;
+  pointer-events: none !important;
+}
+
+.contact-2026 .contact-hero h1,
+.contact-2026 .contact-hero p,
+.contact-2026 .contact-hero a,
+.contact-2026 .contact-hero strong { color: #171318 !important; }
+.contact-2026 .contact-hero .eyebrow { color: #7d1732 !important; }
+.contact-2026 .contact-hero-copy { border-left-color: rgba(125,23,50,.38) !important; }
+.contact-2026 .contact-direct span { color: #7d1732 !important; }
+.contact-2026 .contact-hero-orbit { display: none !important; }
+
+.contact-2026 .contact-routing {
+  position: relative !important;
+  color: #171318 !important;
+  background:
+    linear-gradient(rgba(255,248,236,.94), rgba(255,248,236,.97)),
+    url('/media/brand/berlin-wall.svg') center / cover !important;
+}
+.contact-2026 .contact-routing h2,
+.contact-2026 .contact-routing p { color: #171318 !important; }
+.contact-2026 .contact-section-heading > p { color: #746a6a !important; }
+
+.contact-2026 .contact-route-grid {
+  min-width: 0 !important;
+  border-color: rgba(23,19,24,.14) !important;
+}
+.contact-2026 .contact-route {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  border-color: rgba(23,19,24,.14) !important;
+  color: #171318 !important;
+  background: rgba(255,255,255,.72) !important;
+  box-shadow: none !important;
+}
+.contact-2026 .contact-route:nth-child(3n+2) { background: rgba(153,207,255,.30) !important; }
+.contact-2026 .contact-route:nth-child(3n+3) { background: rgba(255,216,74,.25) !important; }
+.contact-2026 .contact-route strong { color: #171318 !important; }
+.contact-2026 .contact-route small { color: #746a6a !important; }
+.contact-2026 .contact-route > span,
+.contact-2026 .contact-route i { color: #7d1732 !important; }
+.contact-2026 .contact-route:hover,
+.contact-2026 .contact-route[aria-pressed='true'] {
+  border-color: #7d1732 !important;
+  color: #171318 !important;
+  background: #ffd84a !important;
+  transform: translateY(-3px) !important;
+}
+.contact-2026 .contact-route:hover small,
+.contact-2026 .contact-route[aria-pressed='true'] small { color: #5d4d50 !important; }
+
+.contact-2026 .contact-workbench {
+  color: #171318 !important;
+  background:
+    linear-gradient(rgba(244,234,219,.94), rgba(244,234,219,.96)),
+    url('/media/brand/live-explosion-background.png') center / cover !important;
+}
+.contact-2026 .contact-workbench h2,
+.contact-2026 .contact-workbench h3,
+.contact-2026 .contact-workbench p { color: #171318 !important; }
+.contact-2026 .contact-workbench-intro > p:not(.section-label),
+.contact-2026 .contact-delivery-card p { color: #746a6a !important; }
+.contact-2026 .contact-delivery-card {
+  border-color: rgba(23,19,24,.14) !important;
+}
+.contact-2026 .contact-delivery-card span { color: #7d1732 !important; }
+
+.contact-2026 .contact-form-2026 {
+  color: #171318 !important;
+  background: rgba(255,255,255,.82) !important;
+  border: 1px solid rgba(23,19,24,.14) !important;
+  box-shadow: 0 22px 62px rgba(65,35,39,.13) !important;
+  backdrop-filter: blur(10px) !important;
+}
+.contact-2026 .contact-form-2026::before { background: #7d1732 !important; }
+.contact-2026 .contact-form-2026 label:not(.consent) > span { color: #7d1732 !important; }
+.contact-2026 .contact-form-2026 input,
+.contact-2026 .contact-form-2026 select,
+.contact-2026 .contact-form-2026 textarea {
+  color: #171318 !important;
+  background: #fffdf9 !important;
+  border: 1px solid rgba(23,19,24,.16) !important;
+  border-radius: 10px !important;
+}
+.contact-2026 .contact-form-2026 input:focus,
+.contact-2026 .contact-form-2026 select:focus,
+.contact-2026 .contact-form-2026 textarea:focus {
+  border-color: #7d1732 !important;
+  outline: 2px solid rgba(125,23,50,.15) !important;
+  outline-offset: 2px !important;
+}
+.contact-2026 .contact-form-2026 .consent { color: #746a6a !important; }
+.contact-2026 .contact-form-2026 .consent a { color: #7d1732 !important; }
+.contact-2026 .contact-form-action small { color: #746a6a !important; }
+.contact-2026 .contact-form-status {
+  color: #6b5421 !important;
+  background: rgba(255,216,74,.18) !important;
+  border-left-color: #7d1732 !important;
+}
+
+.contact-2026 .contact-next {
+  color: #171318 !important;
+  background: #99cfff !important;
+  border-color: rgba(23,19,24,.14) !important;
+}
+.contact-2026 .contact-next h2,
+.contact-2026 .contact-next p,
+.contact-2026 .contact-next a,
+.contact-2026 .contact-next strong { color: #171318 !important; }
+.contact-2026 .contact-next-grid {
+  background: rgba(23,19,24,.13) !important;
+}
+.contact-2026 .contact-next-grid > * {
+  background: rgba(255,255,255,.60) !important;
+}
+.contact-2026 .contact-next-grid > a:hover { background: rgba(255,216,74,.82) !important; }
+.contact-2026 .contact-next-grid a span,
+.contact-2026 .contact-next-grid a i { color: #7d1732 !important; }
+
+/* --------------------------------------------------------------------------
+   5. BBF / ARCHIVE / HISTORY MEDIA + TEXT SAFETY
+   -------------------------------------------------------------------------- */
+.bbf-venue-stories,
+.bbf-artist-rail,
+.bbf-pass-grid,
+.bbf-travel-grid,
+.bbf-schedule-panel,
+.bbf-hotel-panel { min-width: 0 !important; }
+
+.bbf-venue-card,
+.bbf-artist-card,
+.bbf-pass-grid article,
+.bbf-travel-grid article,
+.bbf-hotel-panel {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.bbf-hero-poster img,
+.home-hero-poster img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.bbf-venue-card img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: inherit !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.bbf-artist-card img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+
+.bbf-hotel-panel img,
+.bbf-why-mosaic img,
+.archive-card img,
+.library-card img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+}
+
+.bbf-workshop-row,
+.bbf-schedule-panel li {
+  min-width: 0 !important;
+}
+.bbf-workshop-row :where(span, small, strong),
+.bbf-schedule-panel li :where(span, p, h4) {
+  min-width: 0 !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+[data-wordpress-source='explosion-history'] {
+  position: relative !important;
+  isolation: isolate !important;
+  color: #171318 !important;
+  background:
+    linear-gradient(rgba(255,248,236,.93), rgba(255,248,236,.95)),
+    url('/media/brand/berlin-wall.svg') center / cover !important;
+}
+[data-wordpress-source='explosion-history']::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: 0 !important;
+  opacity: .07 !important;
+  background: url('/media/brand/live-explosion-background.png') center / cover fixed !important;
+  pointer-events: none !important;
+}
+[data-wordpress-source='explosion-history'] :where(h1,h2,h3,p,li,a,span,strong,time) {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+[data-wordpress-source='explosion-history'] :where([class*='year'],[class*='date'],time) {
+  width: auto !important;
+  min-width: max-content !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+}
+[data-wordpress-source='explosion-history'] img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. BERLIN + EXPLOSION ATMOSPHERE — supportive, not magazine-like
+   -------------------------------------------------------------------------- */
+.home-manifesto,
+.bbf-intro {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+}
+
+.home-manifesto::after,
+.bbf-intro::after {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(rgba(255,248,236,.90), rgba(255,248,236,.96)),
+    url('/media/brand/berlin-wall.svg') center / cover !important;
+}
+
+.home-manifesto::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  width: min(36vw, 460px) !important;
+  aspect-ratio: 1.45 !important;
+  left: -7vw !important;
+  bottom: -7% !important;
+  background: #f17864 !important;
+  opacity: .09 !important;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  transform: rotate(10deg) !important;
+  pointer-events: none !important;
+}
+.home-manifesto > * { position: relative !important; z-index: 1 !important; }
+
+.bbf-intro::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  width: min(36vw, 460px) !important;
+  aspect-ratio: 1.45 !important;
+  right: -4vw !important;
+  bottom: 1% !important;
+  background: #7d1732 !important;
+  opacity: .09 !important;
+  -webkit-mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  mask: url('/media/brand/berlin-graffiti-mask.svg') center / contain no-repeat !important;
+  transform: rotate(-8deg) !important;
+  pointer-events: none !important;
+}
+.bbf-intro > * { position: relative !important; z-index: 1 !important; }
+
+/* Bring Explosion artwork into more supporting areas without darkening them. */
+.home-team,
+.bbf-passes,
+.contact-2026 .contact-workbench {
+  background-blend-mode: normal !important;
+}
+.home-team::after,
+.bbf-passes::after {
+  content: '' !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  opacity: .035 !important;
+  background: url('/media/brand/live-explosion-background.png') center / cover !important;
+  pointer-events: none !important;
+}
+.home-team > *,
+.bbf-passes > * { position: relative !important; z-index: 1 !important; }
+
+.site-footer {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(rgba(20,8,13,.86), rgba(20,8,13,.94)),
+    url('/media/brand/live-explosion-background.png') center / cover !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. SMALL-SCREEN TYPE + MEDIA
+   -------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  :where(.bbf-premium h1, .contact-2026 h1, [data-wordpress-source='explosion-history'] h1) {
+    font-size: clamp(3.1rem, 15vw, 5.2rem) !important;
+    line-height: .9 !important;
+  }
+  :where(.bbf-premium h2, .contact-2026 h2, [data-wordpress-source='explosion-history'] h2) {
+    font-size: clamp(2.5rem, 12vw, 4.2rem) !important;
+    line-height: .94 !important;
+  }
+  .contact-2026 .contact-route-grid { grid-template-columns: 1fr !important; }
+  .contact-2026 .contact-hero::after { width: 78vw !important; opacity: .08 !important; }
+  .bbf-venue-card img { min-height: 0 !important; }
+  [data-wordpress-source='explosion-history'] :where([class*='year'],[class*='date'],time) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .nav-popover,
+  .mobile-nav-panel { backdrop-filter: none !important; }
+}
