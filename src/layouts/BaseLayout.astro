@@ -55,6 +55,14 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <style is:global>
+      #contact-form:not([data-submit-ready="true"]) [data-submit-label],
+      [data-volunteer-form]:not([data-submit-ready="true"]) [data-submit],
+      [data-ambassador-form]:not([data-submit-ready="true"]) [data-ambassador-submit],
+      [data-insider-form]:not([data-submit-ready="true"]) [data-insider-submit] {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -141,6 +149,24 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
       backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
       window.addEventListener("DOMContentLoaded", () => {
+        const gatedForms = Array.from(document.querySelectorAll<HTMLFormElement>("#contact-form,[data-volunteer-form],[data-ambassador-form],[data-insider-form]"));
+        const syncSubmitGate = (form: HTMLFormElement) => {
+          let complete = form.checkValidity();
+          if (form.matches("[data-volunteer-form]")) {
+            complete = complete
+              && Boolean(form.querySelector<HTMLInputElement>("[data-role]:checked"))
+              && Boolean(form.querySelector<HTMLInputElement>("[data-language]:checked"));
+          }
+          form.dataset.submitReady = String(complete);
+        };
+        gatedForms.forEach((form) => {
+          const sync = () => syncSubmitGate(form);
+          form.addEventListener("input", sync);
+          form.addEventListener("change", sync);
+          form.addEventListener("reset", () => window.setTimeout(sync, 0));
+          sync();
+        });
+
         const volunteerHero = document.querySelector<HTMLElement>("[data-volunteer-hero]");
         const volunteerTrack = volunteerHero?.querySelector<HTMLElement>("[data-volunteer-track]");
         if (volunteerHero && volunteerTrack) {
