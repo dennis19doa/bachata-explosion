@@ -6,25 +6,25 @@ type FormEndpointName =
   | "PUBLIC_NEWSLETTER_FORM_ENDPOINT";
 
 const value = (name: FormEndpointName) => (import.meta.env[name] ?? "").trim();
-const fallbackToContact = (name: FormEndpointName) => value(name) || contactFormEndpoint;
+const endpoint = (name: FormEndpointName, fallback: string) => value(name) || fallback;
 
-// One Formspree form can receive the site's simple submissions and deliver them
-// to info@bachataexplosion.com. Optional dedicated endpoints can still override
-// individual forms later without requiring Cloudflare Email Sending.
-export const contactFormEndpoint = value("PUBLIC_CONTACT_FORM_ENDPOINT");
-export const volunteerFormEndpoint = fallbackToContact("PUBLIC_VOLUNTEER_FORM_ENDPOINT");
-export const ambassadorFormEndpoint = fallbackToContact("PUBLIC_AMBASSADOR_FORM_ENDPOINT");
+// Website forms post to the same Cloudflare Worker that serves the site.
+// The Worker delivers the resulting notification through Brevo's transactional
+// email API, so no external Formspree endpoint or Cloudflare Email binding is needed.
+export const contactFormEndpoint = endpoint("PUBLIC_CONTACT_FORM_ENDPOINT", "/api/forms/contact");
+export const volunteerFormEndpoint = endpoint("PUBLIC_VOLUNTEER_FORM_ENDPOINT", "/api/forms/volunteer");
+export const ambassadorFormEndpoint = endpoint("PUBLIC_AMBASSADOR_FORM_ENDPOINT", "/api/forms/ambassador");
 
 export const contactTopicEndpoints = {
-  "Ticket question": contactFormEndpoint,
-  "Group discount": contactFormEndpoint,
-  "Partnership or ambassador": contactFormEndpoint,
-  "Media or photographer": contactFormEndpoint,
-  Volunteer: contactFormEndpoint,
+  "Ticket question": "/api/forms/tickets",
+  "Group discount": "/api/forms/groups",
+  "Partnership or ambassador": "/api/forms/partners",
+  "Media or photographer": "/api/forms/media",
+  Volunteer: volunteerFormEndpoint,
   "General question": contactFormEndpoint,
 } as const;
 
 // Jack & Jill includes a photo upload and remains separate until its dedicated
 // upload/storage flow is enabled.
 export const jjFormEndpoint = value("PUBLIC_JJ_FORM_ENDPOINT");
-export const newsletterFormEndpoint = fallbackToContact("PUBLIC_NEWSLETTER_FORM_ENDPOINT");
+export const newsletterFormEndpoint = endpoint("PUBLIC_NEWSLETTER_FORM_ENDPOINT", "/api/forms/newsletter");
