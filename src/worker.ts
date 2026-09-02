@@ -119,7 +119,11 @@ async function sendZohoSmtpMail(
 ) {
   const username = env.ZOHO_SMTP_USER?.trim();
   const password = env.ZOHO_SMTP_PASSWORD?.trim();
-  if (!username || !password) throw new Error("Zoho SMTP credentials are not configured");
+  const missing = [
+    !username ? "ZOHO_SMTP_USER" : null,
+    !password ? "ZOHO_SMTP_PASSWORD" : null,
+  ].filter(Boolean);
+  if (missing.length) throw new Error(`Missing runtime binding(s): ${missing.join(", ")}`);
 
   const host = env.ZOHO_SMTP_HOST?.trim() || "smtp.zoho.eu";
   const port = Number(env.ZOHO_SMTP_PORT || "465");
