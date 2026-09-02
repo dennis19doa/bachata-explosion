@@ -9,6 +9,7 @@ import "../styles/explosion-feedback-round2.css";
 import "../styles/explosion-feedback-round2-controls.css";
 import "../styles/explosion-feedback-screens.css";
 import "../styles/explosion-feedback-sept2.css";
+import "../styles/explosion-feedback-sept2-final.css";
 import { ticketUrl } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
@@ -152,6 +153,90 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
       document.addEventListener("keydown", (event) => { if (event.key !== "Escape") return; dropdowns.forEach((dropdown) => { dropdown.open = false; }); if (siteMenu) siteMenu.open = false; });
       const syncBackToTop = () => { if (!backToTop) return; backToTop.dataset.visible = window.scrollY > 720 ? "true" : "false"; };
       syncBackToTop(); window.addEventListener("scroll", syncBackToTop, { passive: true }); backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const bbf = document.querySelector<HTMLElement>(".bbf-premium");
+        if (bbf) {
+          const roomImages = Array.from(bbf.querySelectorAll<HTMLImageElement>(".bbf-room-media img"));
+          roomImages.forEach((image, index) => {
+            image.src = "/media/bbf/venue/location.png";
+            image.alt = `Hotel MOA Berlin room example for ${index === 0 ? "single" : index === 1 ? "double" : "3-person"} room booking`;
+          });
+          const faqTitle = bbf.querySelector<HTMLElement>("#faq .bbf-faq-intro h2");
+          if (faqTitle) faqTitle.innerHTML = "Questions?<br><em>We have answers.</em>";
+        }
+
+        const volunteerHero = document.querySelector<HTMLElement>("[data-volunteer-hero]");
+        const volunteerTrack = volunteerHero?.querySelector<HTMLElement>("[data-volunteer-track]");
+        if (volunteerHero && volunteerTrack) {
+          volunteerHero.querySelector(".volunteer-we-are")?.remove();
+          volunteerHero.querySelector(".volunteer-slider-ui")?.remove();
+          const groupPhotos = [
+            ["/media/atmosphere/explosion-community.jpg", "Bachata Explosion community group"],
+            ["/media/bbf/atmosphere/saturday-62.jpg", "Bachata Explosion festival group"],
+            ["/media/bbf/atmosphere/saturday-60.jpg", "Bachata Explosion dancers together"],
+            ["/media/atmosphere/party-crowd.webp", "Bachata Explosion social community"],
+            ["/media/bbf/atmosphere/party-141.jpg", "Bachata Explosion event crowd"],
+            ["/media/bbf/atmosphere/party-143.jpg", "Bachata Explosion party community"],
+          ];
+          volunteerTrack.innerHTML = groupPhotos.map(([src, alt], index) => `<figure class="volunteer-slide${index === 0 ? " is-active" : ""}" data-auto-volunteer-slide><img src="${src}" alt="${alt}" width="1600" height="1000" ${index === 0 ? "" : "loading=\"lazy\""}></figure>`).join("");
+          const slides = Array.from(volunteerTrack.querySelectorAll<HTMLElement>("[data-auto-volunteer-slide]"));
+          let active = 0;
+          if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            window.setInterval(() => {
+              slides[active]?.classList.remove("is-active");
+              active = (active + 1) % slides.length;
+              slides[active]?.classList.add("is-active");
+            }, 4300);
+          }
+        }
+
+        const historySidebar = document.querySelector<HTMLElement>('.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar');
+        if (historySidebar) {
+          const historySection = historySidebar.closest<HTMLElement>(".be-history") ?? historySidebar.parentElement;
+          historySidebar.style.setProperty("position", "static", "important");
+          historySidebar.style.setProperty("max-height", "none", "important");
+          historySidebar.style.setProperty("overflow", "visible", "important");
+
+          if (historySection) {
+            const floating = historySidebar.cloneNode(true) as HTMLElement;
+            floating.classList.add("history-floating-nav");
+            floating.removeAttribute("id");
+            document.body.appendChild(floating);
+
+            const syncHistoryNav = () => {
+              if (window.innerWidth <= 900) {
+                floating.style.display = "none";
+                return;
+              }
+              const sourceRect = historySidebar.getBoundingClientRect();
+              const sectionRect = historySection.getBoundingClientRect();
+              const top = 102;
+              floating.style.left = `${sourceRect.left}px`;
+              floating.style.width = `${sourceRect.width}px`;
+              const shouldFloat = sourceRect.top <= top && sectionRect.bottom > top + 220;
+              floating.style.display = shouldFloat ? "block" : "none";
+            };
+
+            const floatingLinks = Array.from(floating.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
+            const syncHistoryActive = () => {
+              const candidates = floatingLinks
+                .map((link) => ({ link, target: document.querySelector<HTMLElement>(link.getAttribute("href") || "") }))
+                .filter((item): item is { link: HTMLAnchorElement; target: HTMLElement } => Boolean(item.target));
+              let currentTarget: HTMLElement | undefined;
+              for (const { target } of candidates) {
+                if (target.getBoundingClientRect().top <= 180) currentTarget = target;
+              }
+              floatingLinks.forEach((link) => link.classList.toggle("is-active", Boolean(currentTarget && link.getAttribute("href") === `#${currentTarget.id}`)));
+            };
+
+            const syncHistory = () => { syncHistoryNav(); syncHistoryActive(); };
+            syncHistory();
+            window.addEventListener("scroll", syncHistory, { passive: true });
+            window.addEventListener("resize", syncHistory);
+          }
+        }
+      });
     </script>
   </body>
 </html>
