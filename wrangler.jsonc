@@ -3,6 +3,7 @@
   "name": "bachata-explosion",
   "main": "./src/worker.ts",
   "compatibility_date": "2026-08-29",
+  "keep_vars": true,
   "observability": {
     "enabled": true,
     "logs": {
