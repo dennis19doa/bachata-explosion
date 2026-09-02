@@ -1,11 +1,27 @@
 /* Final screenshot refinement pass — 2026-09-02 */
 
-/* Homepage: use a different, community-led closing image. */
-.ex-final::before {
-  background:
-    linear-gradient(90deg, rgba(12,3,8,.92), rgba(82,16,45,.78) 48%, rgba(17,5,11,.66)),
-    url('/media/atmosphere/explosion-community.jpg') center 48% / cover no-repeat !important;
+/* Homepage closing CTA: use the requested real Explosion party image. */
+.ex-final {
+  isolation: isolate;
+  background: #12070b !important;
+  color: #fff !important;
 }
+.ex-final::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  background:
+    linear-gradient(90deg, rgba(10,2,6,.93), rgba(83,16,45,.72) 48%, rgba(17,5,11,.58)),
+    url('https://bachataexplosion.com/wp-content/uploads/2025/08/Party-Friday-124-scaled-1.webp') center 42% / cover no-repeat !important;
+}
+.ex-final::after {
+  z-index: -1 !important;
+  color: rgba(255,255,255,.06) !important;
+}
+.ex-final h2,
+.ex-final p { color: #fff !important; }
+.ex-final .ex-kicker { color: #f2c76d !important; }
 
 /* BBF: keep Berlin visibly present rather than burying the Gate under opaque blocks. */
 .bbf-premium::before {
@@ -15,17 +31,15 @@
     linear-gradient(100deg, rgba(93,18,50,.22), rgba(8,2,5,.06) 52%, rgba(57,12,31,.18)),
     url('/media/brand/berlin-brandenburg-gold.png') center 30% / cover no-repeat fixed !important;
 }
-
 .bbf-venue,
 .bbf-passes,
 .bbf-faq,
 .bbf-travel,
 .bbf-schedule,
 .bbf-intro {
-  background: rgba(12,4,8,.64) !important;
+  background: rgba(12,4,8,.62) !important;
   backdrop-filter: blur(2px) !important;
 }
-
 .bbf-stay-compact,
 .bbf-overview-points,
 .bbf-travel-guide {
@@ -35,36 +49,143 @@
   backdrop-filter: blur(10px) !important;
 }
 
-/* Hotel: every option must sell the actual room, not an event hall or atrium. */
+/* BBF stats: perfectly centered and visually balanced. */
+.bbf-stats-grid > div {
+  display: flex !important;
+  min-height: 172px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.bbf-stats-grid strong {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 1.05em;
+  line-height: .88 !important;
+}
+
+/* Align the three value cards as one deliberate row. */
+.bbf-overview-compact { align-items: stretch !important; }
+.bbf-overview-points {
+  display: grid !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  align-items: stretch !important;
+}
+.bbf-overview-points article {
+  display: flex !important;
+  min-height: 300px !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  padding: 30px !important;
+}
+.bbf-overview-points article > span { margin-bottom: auto !important; }
+.bbf-overview-points h3 { min-height: 2.2em; display:flex; align-items:flex-end; }
+.bbf-overview-points p { min-height: 6.2em; margin-bottom: 0 !important; }
+
+/* Solo BBF headings do not reserve an empty right column. */
+.bbf-heading-solo {
+  display: block !important;
+  max-width: 930px !important;
+}
+.bbf-heading-solo > div { max-width: 930px !important; }
+
+/* Hotel: show the live-site room photography cleanly. */
 .bbf-room-card {
   background: linear-gradient(160deg, rgba(42,13,27,.82), rgba(12,4,8,.86)) !important;
 }
 .bbf-room-media {
   aspect-ratio: 16 / 10 !important;
+  min-height: 250px !important;
+  overflow: hidden !important;
   background: #0d0509 !important;
 }
 .bbf-room-media img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover !important;
   object-position: center 48% !important;
   filter: saturate(.98) contrast(1.02) !important;
+  transition: transform .4s ease !important;
 }
-.bbf-room-card:nth-child(2) .bbf-room-media img { object-position: 58% 48% !important; transform: scale(1.035); }
-.bbf-room-card:nth-child(3) .bbf-room-media img { object-position: 35% 48% !important; transform: scale(1.035); }
-.bbf-room-card:hover .bbf-room-media img { transform: scale(1.055) !important; }
+.bbf-room-card:hover .bbf-room-media img { transform: scale(1.035) !important; }
+
+/* Artist cards: keep the photography premium and let the lineup itself do the talking. */
+.bbf-artists .bbf-heading { margin-bottom: 40px !important; }
+.bbf-artist-card { box-shadow: 0 20px 50px rgba(0,0,0,.28) !important; }
+
+/* Schedule: stronger centered headline without explanatory filler. */
+.bbf-schedule .bbf-heading-solo { margin-bottom: 38px !important; }
+.bbf-schedule .bbf-heading-solo h2 { max-width: 930px !important; }
+
+/* Jack & Jill: make this a clear festival highlight, not another box. */
+.bbf-jj {
+  padding-block: clamp(78px,8vw,122px) !important;
+  background:
+    radial-gradient(circle at 76% 36%, rgba(221,52,113,.25), transparent 32%),
+    rgba(12,4,8,.62) !important;
+}
+.bbf-jj-live {
+  overflow: hidden !important;
+  border: 1px solid rgba(227,183,95,.60) !important;
+  background: linear-gradient(135deg, rgba(76,16,42,.82), rgba(15,5,10,.88)) !important;
+  box-shadow: 0 34px 100px rgba(0,0,0,.46), inset 0 1px rgba(255,255,255,.05) !important;
+}
+.bbf-jj-main {
+  position: relative;
+  padding: clamp(44px,5vw,72px) !important;
+}
+.bbf-jj-main::after {
+  content: "COMPETITION";
+  position: absolute;
+  right: -18px;
+  bottom: -18px;
+  color: rgba(247,221,176,.045);
+  font: 800 clamp(4rem,9vw,9rem)/.8 'Oswald',sans-serif;
+  letter-spacing: -.04em;
+  pointer-events: none;
+}
+.bbf-jj-side {
+  position: relative !important;
+  padding: 0 36px 40px !important;
+  background: rgba(9,3,7,.66) !important;
+}
+.bbf-jj-photo {
+  margin: 0 -36px 30px !important;
+  aspect-ratio: 16/8 !important;
+  overflow: hidden !important;
+}
+.bbf-jj-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 42% !important;
+  filter: saturate(.88) contrast(1.05) brightness(.78) !important;
+}
+.bbf-jj-badge {
+  display: inline-flex !important;
+  margin-bottom: 13px !important;
+  padding: 8px 11px !important;
+  background: #e3b75f !important;
+  color: #251018 !important;
+  font-size: .56rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+.bbf-jj-flow span { background: rgba(9,3,7,.36) !important; }
 
 /* Passes: richer hierarchy, static premium execution, no cheap floating animation. */
-.bbf-pass-grid {
-  align-items: stretch !important;
-  gap: 18px !important;
-}
+.bbf-pass-grid { align-items: stretch !important; gap: 18px !important; }
 .bbf-pass-grid article,
 .bbf-pass-grid .bbf-pass-featured {
   isolation: isolate;
   min-height: 430px !important;
   padding: 36px 32px !important;
   overflow: hidden !important;
-  background:
-    linear-gradient(150deg, rgba(49,16,31,.92), rgba(13,5,9,.94)) !important;
+  background: linear-gradient(150deg, rgba(49,16,31,.92), rgba(13,5,9,.94)) !important;
   border: 1px solid rgba(227,183,95,.42) !important;
   box-shadow: 0 24px 70px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.05) !important;
   transform: none !important;
@@ -86,9 +207,7 @@
 }
 .bbf-pass-grid .bbf-pass-featured {
   border-color: rgba(247,221,176,.94) !important;
-  background:
-    radial-gradient(circle at 82% 10%, rgba(227,183,95,.24), transparent 34%),
-    linear-gradient(145deg, rgba(108,27,58,.98), rgba(29,8,17,.96)) !important;
+  background: radial-gradient(circle at 82% 10%, rgba(227,183,95,.24), transparent 34%), linear-gradient(145deg, rgba(108,27,58,.98), rgba(29,8,17,.96)) !important;
   box-shadow: 0 32px 90px rgba(0,0,0,.46), inset 0 0 0 1px rgba(247,221,176,.16) !important;
 }
 .bbf-pass-grid .bbf-pass-featured::before {
@@ -113,11 +232,7 @@
 .bbf-pass-grid article h3 { color: #fff !important; }
 .bbf-pass-grid article p,
 .bbf-pass-grid article li { color: #d2c0c7 !important; }
-.bbf-pass-grid article a {
-  width: fit-content;
-  color: #f7ddb0 !important;
-  text-decoration-color: rgba(227,183,95,.62);
-}
+.bbf-pass-grid article a { width: fit-content; color: #f7ddb0 !important; text-decoration-color: rgba(227,183,95,.62); }
 
 /* FAQ: let Berlin remain visible through a premium glass panel. */
 .bbf-faq-list {
@@ -126,54 +241,61 @@
   box-shadow: 0 24px 70px rgba(0,0,0,.28) !important;
   backdrop-filter: blur(10px) !important;
 }
-.bbf-faq-list details {
-  background: transparent !important;
-  box-shadow: none !important;
-}
+.bbf-faq-list details { background: transparent !important; box-shadow: none !important; }
+
+/* Final BBF CTA: reveal the faces instead of cropping them out. */
+.bbf-final > img { object-position: center 34% !important; }
 
 /* Volunteer hero: slideshow is automatic and visual only. */
 .volunteer-we-are,
-.volunteer-slider-ui {
-  display: none !important;
-}
-.volunteer-slideshow {
-  min-height: 690px !important;
-}
-.volunteer-hero-copy {
-  min-height: 690px !important;
-  padding-block: 84px !important;
-}
-.volunteer-slide img {
-  object-position: center 46% !important;
-  filter: saturate(.98) contrast(1.035) !important;
-}
-.volunteer-slide {
-  transition: opacity 1.15s ease !important;
-}
+.volunteer-slider-ui { display: none !important; }
+.volunteer-slideshow { min-height: 690px !important; }
+.volunteer-hero-copy { min-height: 690px !important; padding-block: 84px !important; }
+.volunteer-slide img { object-position: center 46% !important; filter: saturate(.98) contrast(1.035) !important; }
+.volunteer-slide { transition: opacity 1.15s ease !important; }
 
-/* History: match the live crop and support the JS fixed-follow clone. */
+/* History: match the live image crop and make the progress state visually obvious. */
 .wp-preserved-page[data-wordpress-source="explosion-history"] .be-history .be-event:first-of-type img {
-  object-position: center 50% !important;
+  object-position: center 34% !important;
 }
 .history-floating-nav {
   z-index: 1150 !important;
   display: none;
   position: fixed !important;
-  top: 102px !important;
+  top: 126px !important;
   margin: 0 !important;
-  max-height: calc(100vh - 122px) !important;
+  max-height: calc(100vh - 148px) !important;
   overflow-y: auto !important;
   overscroll-behavior: contain;
   box-shadow: 0 24px 70px rgba(0,0,0,.38);
 }
+.history-floating-nav a.is-active,
+.wp-preserved-page[data-wordpress-source="explosion-history"] .be-history__sidebar a.is-active {
+  background: linear-gradient(135deg,#d7aa4e,#f7ddb0) !important;
+  border-color: #f7ddb0 !important;
+  color: #1c0b12 !important;
+}
+
+/* Ambassador: let the supplied photography feel editorial instead of generic. */
+.ambassador-community-photo img,
+.ambassador-award-photo img,
+.ambassador-role figure img { filter: saturate(.96) contrast(1.035) !important; }
+.ambassador-community-photo img { object-position: center 42% !important; }
+.ambassador-award-photo img { object-position: center 38% !important; }
+.ambassador-role figure img { object-position: center 42% !important; }
 
 @media (max-width: 900px) {
   .bbf-pass-grid .bbf-pass-featured { transform: none !important; }
   .history-floating-nav { display: none !important; }
+  .bbf-overview-points { grid-template-columns: 1fr !important; }
+  .bbf-overview-points article { min-height: 0 !important; }
+  .bbf-overview-points h3,
+  .bbf-overview-points p { min-height: 0 !important; }
 }
 
 @media (max-width: 760px) {
   .volunteer-slideshow,
   .volunteer-hero-copy { min-height: 610px !important; }
-  .bbf-room-media { aspect-ratio: 16 / 9 !important; }
+  .bbf-room-media { aspect-ratio: 16 / 9 !important; min-height: 0 !important; }
+  .bbf-jj-photo { aspect-ratio: 16/10 !important; }
 }
