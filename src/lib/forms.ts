@@ -10,22 +10,24 @@ type FormEndpointName =
   | "PUBLIC_NEWSLETTER_FORM_ENDPOINT";
 
 const value = (name: FormEndpointName) => (import.meta.env[name] ?? "").trim();
+const endpoint = (name: FormEndpointName, fallback: string) => value(name) || fallback;
 
-export const contactFormEndpoint = value("PUBLIC_CONTACT_FORM_ENDPOINT");
-export const volunteerFormEndpoint = value("PUBLIC_VOLUNTEER_FORM_ENDPOINT") || contactFormEndpoint;
-export const ambassadorFormEndpoint = value("PUBLIC_AMBASSADOR_FORM_ENDPOINT") || contactFormEndpoint;
+// Production uses the same Cloudflare Worker that serves the site. Public
+// endpoint variables can still override these paths for staging or migration.
+export const contactFormEndpoint = endpoint("PUBLIC_CONTACT_FORM_ENDPOINT", "/api/forms/contact");
+export const volunteerFormEndpoint = endpoint("PUBLIC_VOLUNTEER_FORM_ENDPOINT", "/api/forms/volunteer");
+export const ambassadorFormEndpoint = endpoint("PUBLIC_AMBASSADOR_FORM_ENDPOINT", "/api/forms/ambassador");
 
 export const contactTopicEndpoints = {
-  "Ticket question": value("PUBLIC_TICKETS_FORM_ENDPOINT") || contactFormEndpoint,
-  "Group discount": value("PUBLIC_GROUPS_FORM_ENDPOINT") || contactFormEndpoint,
-  "Partnership or ambassador": value("PUBLIC_PARTNERS_FORM_ENDPOINT") || contactFormEndpoint,
-  "Media or photographer": value("PUBLIC_MEDIA_FORM_ENDPOINT") || contactFormEndpoint,
+  "Ticket question": endpoint("PUBLIC_TICKETS_FORM_ENDPOINT", "/api/forms/tickets"),
+  "Group discount": endpoint("PUBLIC_GROUPS_FORM_ENDPOINT", "/api/forms/groups"),
+  "Partnership or ambassador": endpoint("PUBLIC_PARTNERS_FORM_ENDPOINT", "/api/forms/partners"),
+  "Media or photographer": endpoint("PUBLIC_MEDIA_FORM_ENDPOINT", "/api/forms/media"),
   Volunteer: volunteerFormEndpoint,
   "General question": contactFormEndpoint,
 } as const;
 
-// Jack & Jill includes a photo upload, so it must not fall back to a standard
-// URL-encoded Formspark endpoint. Keep it in preview mode until its dedicated
-// upload flow has been configured.
+// Jack & Jill includes a photo upload and remains separate until its dedicated
+// upload/storage flow is enabled.
 export const jjFormEndpoint = value("PUBLIC_JJ_FORM_ENDPOINT");
-export const newsletterFormEndpoint = value("PUBLIC_NEWSLETTER_FORM_ENDPOINT");
+export const newsletterFormEndpoint = endpoint("PUBLIC_NEWSLETTER_FORM_ENDPOINT", "/api/forms/newsletter");
