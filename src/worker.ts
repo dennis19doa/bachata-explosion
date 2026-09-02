@@ -1,83 +1,40 @@
 type AssetBinding = { fetch(request: Request): Promise<Response> };
-type EmailBinding = {
-  send(message: {
-    to: string;
-    from: string;
-    subject: string;
-    html?: string;
-    text?: string;
-    replyTo?: string;
-  }): Promise<unknown>;
-};
 
 type Env = {
   ASSETS: AssetBinding;
-  EMAIL?: EmailBinding;
   TURNSTILE_SECRET?: string;
-  FORM_FROM_ADDRESS?: string;
-  ZOHO_CLIENT_ID?: string;
-  ZOHO_CLIENT_SECRET?: string;
-  ZOHO_REFRESH_TOKEN?: string;
-  ZOHO_ACCOUNT_ID?: string;
-  ZOHO_FROM_ADDRESS?: string;
-  ZOHO_ACCOUNTS_BASE?: string;
-  ZOHO_MAIL_BASE?: string;
+  BREVO_API_KEY?: string;
+  BREVO_SENDER_EMAIL?: string;
+  BREVO_SENDER_NAME?: string;
   FORM_CONTACT_TO?: string;
-  FORM_TICKETS_TO?: string;
-  FORM_GROUPS_TO?: string;
-  FORM_PARTNERS_TO?: string;
-  FORM_MEDIA_TO?: string;
-  FORM_VOLUNTEER_TO?: string;
-  FORM_AMBASSADOR_TO?: string;
-  FORM_NEWSLETTER_TO?: string;
 };
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 const MAX_FORM_BYTES = 512_000;
+const BREVO_SEND_URL = "https://api.brevo.com/v3/smtp/email";
 
 const json = (payload: unknown, status = 200) =>
   new Response(JSON.stringify(payload), { status, headers: JSON_HEADERS });
 
 const escapeHtml = (value: string) =>
-  value.replace(/[&<>'"]/g, (char) => ({
+  value.replace(/[&<>'\"]/g, (char) => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     "'": "&#039;",
-    '"': "&quot;",
+    '\"': "&quot;",
   }[char] ?? char));
 
-const plainText = (html: string) =>
-  html
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/tr>/gi, "\n")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#039;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/[ \t]+/g, " ")
-    .replace(/\n\s+/g, "\n")
-    .trim();
-
-const destinationFor = (kind: string, env: Env) => {
-  // Until separate aliases are intentionally configured as Worker destinations,
-  // all forms safely land in the verified general inbox. The original requested
-  // destination is still included in the form payload for filtering/routing.
-  const fallback = env.FORM_CONTACT_TO || "info@bachataexplosion.com";
-  const destinations: Record<string, string | undefined> = {
-    contact: env.FORM_CONTACT_TO,
-    tickets: env.FORM_TICKETS_TO,
-    groups: env.FORM_GROUPS_TO,
-    partners: env.FORM_PARTNERS_TO,
-    media: env.FORM_MEDIA_TO,
-    volunteer: env.FORM_VOLUNTEER_TO,
-    ambassador: env.FORM_AMBASSADOR_TO,
-    newsletter: env.FORM_NEWSLETTER_TO,
-  };
-  return destinations[kind] || fallback;
-};
+const kindLabel = (kind: string) => ({
+  contact: "General contact",
+  tickets: "Ticket question",
+  groups: "Group discount",
+  partners: "Partnership / ambassador",
+  media: "Media request",
+  volunteer: "Volunteer application",
+  ambassador: "Ambassador application",
+  newsletter: "Newsletter signup",
+}[kind] || kind);
 
 async function verifyTurnstile(request: Request, form: FormData, env: Env) {
   if (!env.TURNSTILE_SECRET) return true;
@@ -99,30 +56,6 @@ async function verifyTurnstile(request: Request, form: FormData, env: Env) {
   return Boolean(result.success);
 }
 
-async function getZohoAccessToken(env: Env) {
-  if (!env.ZOHO_CLIENT_ID || !env.ZOHO_CLIENT_SECRET || !env.ZOHO_REFRESH_TOKEN) {
-    throw new Error("Zoho OAuth is not configured");
-  }
-
-  const base = env.ZOHO_ACCOUNTS_BASE || "https://accounts.zoho.eu";
-  const body = new URLSearchParams({
-    refresh_token: env.ZOHO_REFRESH_TOKEN,
-    client_id: env.ZOHO_CLIENT_ID,
-    client_secret: env.ZOHO_CLIENT_SECRET,
-    grant_type: "refresh_token",
-  });
-
-  const response = await fetch(`${base}/oauth/v2/token`, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body,
-  });
-  if (!response.ok) throw new Error("Could not refresh Zoho OAuth token");
-  const data = await response.json<{ access_token?: string }>();
-  if (!data.access_token) throw new Error("Zoho did not return an access token");
-  return data.access_token;
-}
-
 function serialiseForm(form: FormData) {
   const values = new Map<string, string[]>();
   for (const [key, raw] of form.entries()) {
@@ -137,58 +70,60 @@ function serialiseForm(form: FormData) {
   return values;
 }
 
+function applicantName(values: Map<string, string[]>) {
+  return [values.get("first_name")?.[0], values.get("last_name")?.[0]]
+    .filter(Boolean)
+    .join(" ") || values.get("name")?.[0] || values.get("full_name")?.[0] || "Website visitor";
+}
+
 function renderEmail(kind: string, values: Map<string, string[]>) {
-  const applicant = [values.get("first_name")?.[0], values.get("last_name")?.[0]].filter(Boolean).join(" ") || values.get("name")?.[0] || values.get("full_name")?.[0] || "Website visitor";
+  const label = kindLabel(kind);
+  const applicant = applicantName(values);
   const rows = Array.from(values.entries()).map(([key, entries]) => {
-    const label = key.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
-    return `<tr><th style="text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid #e6e6e6">${escapeHtml(label)}</th><td style="padding:9px 12px;border-bottom:1px solid #e6e6e6">${entries.map(escapeHtml).join("<br>")}</td></tr>`;
+    const fieldLabel = key.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    return `<tr><th style="text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid #e6e6e6">${escapeHtml(fieldLabel)}</th><td style="padding:9px 12px;border-bottom:1px solid #e6e6e6">${entries.map(escapeHtml).join("<br>")}</td></tr>`;
   }).join("");
 
   return {
-    subject: `[Bachata Explosion] ${kind} — ${applicant}`,
-    content: `<div style="font-family:Arial,sans-serif;max-width:760px"><h2>${escapeHtml(kind)}</h2><p>Submitted through bachataexplosion.com.</p><table style="border-collapse:collapse;width:100%">${rows}</table></div>`,
+    applicant,
+    subject: `[Bachata Explosion] ${label} — ${applicant}`,
+    content: `<div style="font-family:Arial,sans-serif;max-width:760px"><h2>${escapeHtml(label)}</h2><p>Submitted through bachataexplosion.com.</p><table style="border-collapse:collapse;width:100%">${rows}</table></div>`,
   };
 }
 
-async function sendZohoMail(toAddress: string, subject: string, content: string, env: Env) {
-  if (!env.ZOHO_ACCOUNT_ID || !env.ZOHO_FROM_ADDRESS) throw new Error("Zoho Mail account is not configured");
-  const accessToken = await getZohoAccessToken(env);
-  const mailBase = env.ZOHO_MAIL_BASE || "https://mail.zoho.eu";
+async function sendBrevoMail(
+  toAddress: string,
+  replyTo: string,
+  replyToName: string,
+  subject: string,
+  content: string,
+  env: Env,
+) {
+  if (!env.BREVO_API_KEY) throw new Error("BREVO_API_KEY is not configured");
 
-  const response = await fetch(`${mailBase}/api/accounts/${encodeURIComponent(env.ZOHO_ACCOUNT_ID)}/messages`, {
+  const senderEmail = env.BREVO_SENDER_EMAIL || "info@bachataexplosion.com";
+  const senderName = env.BREVO_SENDER_NAME || "Bachata Explosion Website";
+
+  const response = await fetch(BREVO_SEND_URL, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Zoho-oauthtoken ${accessToken}`,
+      "api-key": env.BREVO_API_KEY,
     },
     body: JSON.stringify({
-      fromAddress: env.ZOHO_FROM_ADDRESS,
-      toAddress,
+      sender: { email: senderEmail, name: senderName },
+      to: [{ email: toAddress, name: "Bachata Explosion" }],
+      replyTo: { email: replyTo, name: replyToName },
       subject,
-      content,
-      mailFormat: "html",
+      htmlContent: content,
     }),
   });
 
-  if (!response.ok) throw new Error(`Zoho Mail returned ${response.status}`);
-}
-
-async function sendFormMail(toAddress: string, subject: string, content: string, replyTo: string | undefined, env: Env) {
-  if (env.EMAIL) {
-    const from = env.FORM_FROM_ADDRESS || env.ZOHO_FROM_ADDRESS || "website@bachataexplosion.com";
-    await env.EMAIL.send({
-      to: toAddress,
-      from,
-      replyTo,
-      subject,
-      html: content,
-      text: plainText(content),
-    });
-    return;
+  if (!response.ok) {
+    const detail = (await response.text()).slice(0, 500);
+    throw new Error(`Brevo returned ${response.status}: ${detail}`);
   }
-
-  await sendZohoMail(toAddress, subject, content, env);
 }
 
 async function handleForm(request: Request, env: Env, kind: string) {
@@ -200,8 +135,7 @@ async function handleForm(request: Request, env: Env, kind: string) {
   const origin = request.headers.get("origin");
   if (origin) {
     const originUrl = new URL(origin);
-    const requestUrl = new URL(request.url);
-    if (originUrl.hostname !== requestUrl.hostname && !originUrl.hostname.endsWith(".bachataexplosion.com")) {
+    if (originUrl.hostname !== "bachataexplosion.com" && originUrl.hostname !== "www.bachataexplosion.com") {
       return json({ ok: false, error: "Origin not allowed" }, 403);
     }
   }
@@ -218,8 +152,9 @@ async function handleForm(request: Request, env: Env, kind: string) {
     return json({ ok: false, error: "A valid email address is required." }, 400);
   }
 
-  const { subject, content } = renderEmail(kind, values);
-  await sendFormMail(destinationFor(kind, env), subject, content, email, env);
+  const { applicant, subject, content } = renderEmail(kind, values);
+  const destination = env.FORM_CONTACT_TO || "info@bachataexplosion.com";
+  await sendBrevoMail(destination, email, applicant, subject, content, env);
   return json({ ok: true });
 }
 
