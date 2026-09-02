@@ -248,7 +248,10 @@ export default {
       try {
         return await handleForm(request, env, match[1]);
       } catch (error) {
-        console.error("Form delivery failed", error);
+        const detail = error instanceof Error
+          ? { name: error.name, message: error.message, stack: error.stack }
+          : { name: "UnknownError", message: String(error) };
+        console.error("Form delivery failed detail", JSON.stringify(detail));
         return json({ ok: false, error: "We could not deliver the form right now. Please try again shortly." }, 502);
       }
     }
