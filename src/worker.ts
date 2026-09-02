@@ -1,8 +1,20 @@
 type AssetBinding = { fetch(request: Request): Promise<Response> };
+type EmailBinding = {
+  send(message: {
+    to: string;
+    from: string;
+    subject: string;
+    html?: string;
+    text?: string;
+    replyTo?: string;
+  }): Promise<unknown>;
+};
 
 type Env = {
   ASSETS: AssetBinding;
+  EMAIL?: EmailBinding;
   TURNSTILE_SECRET?: string;
+  FORM_FROM_ADDRESS?: string;
   ZOHO_CLIENT_ID?: string;
   ZOHO_CLIENT_SECRET?: string;
   ZOHO_REFRESH_TOKEN?: string;
@@ -35,7 +47,24 @@ const escapeHtml = (value: string) =>
     '"': "&quot;",
   }[char] ?? char));
 
+const plainText = (html: string) =>
+  html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/tr>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#039;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n\s+/g, "\n")
+    .trim();
+
 const destinationFor = (kind: string, env: Env) => {
+  // Until separate aliases are intentionally configured as Worker destinations,
+  // all forms safely land in the verified general inbox. The original requested
+  // destination is still included in the form payload for filtering/routing.
   const fallback = env.FORM_CONTACT_TO || "info@bachataexplosion.com";
   const destinations: Record<string, string | undefined> = {
     contact: env.FORM_CONTACT_TO,
@@ -145,6 +174,23 @@ async function sendZohoMail(toAddress: string, subject: string, content: string,
   if (!response.ok) throw new Error(`Zoho Mail returned ${response.status}`);
 }
 
+async function sendFormMail(toAddress: string, subject: string, content: string, replyTo: string | undefined, env: Env) {
+  if (env.EMAIL) {
+    const from = env.FORM_FROM_ADDRESS || env.ZOHO_FROM_ADDRESS || "website@bachataexplosion.com";
+    await env.EMAIL.send({
+      to: toAddress,
+      from,
+      replyTo,
+      subject,
+      html: content,
+      text: plainText(content),
+    });
+    return;
+  }
+
+  await sendZohoMail(toAddress, subject, content, env);
+}
+
 async function handleForm(request: Request, env: Env, kind: string) {
   if (request.method !== "POST") return json({ ok: false, error: "Method not allowed" }, 405);
 
@@ -168,15 +214,12 @@ async function handleForm(request: Request, env: Env, kind: string) {
 
   const values = serialiseForm(form);
   const email = values.get("email")?.[0];
-  if (kind !== "newsletter" && (!email || !email.includes("@"))) {
-    return json({ ok: false, error: "A valid email address is required." }, 400);
-  }
-  if (kind === "newsletter" && (!email || !email.includes("@"))) {
+  if (!email || !email.includes("@")) {
     return json({ ok: false, error: "A valid email address is required." }, 400);
   }
 
   const { subject, content } = renderEmail(kind, values);
-  await sendZohoMail(destinationFor(kind, env), subject, content, env);
+  await sendFormMail(destinationFor(kind, env), subject, content, email, env);
   return json({ ok: true });
 }
 
