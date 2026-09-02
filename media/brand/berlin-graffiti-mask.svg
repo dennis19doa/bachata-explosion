@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="28" d="M54 152c88-85 206-112 310-61 77 38 142 35 218-23"/>
+    <path stroke-width="18" d="M65 190c112-41 218-34 320 16 73 35 142 43 250 5"/>
+    <path stroke-width="24" d="M110 365c87-89 185-118 293-77 73 28 141 22 219-20"/>
+    <path stroke-width="13" d="M128 405c122-47 225-42 338 4"/>
+    <path stroke-width="19" d="M650 84l74 37-54 14 34 50"/>
+    <path stroke-width="16" d="M554 396l86-63 9 45 64-31"/>
+    <path stroke-width="15" d="M76 72l36 28-43 10 28 37"/>
+  </g>
+  <g fill="#000">
+    <circle cx="505" cy="93" r="12"/><circle cx="535" cy="79" r="6"/><circle cx="571" cy="108" r="9"/>
+    <circle cx="192" cy="286" r="8"/><circle cx="165" cy="302" r="5"/><circle cx="222" cy="310" r="11"/>
+    <path d="M700 248l14 29 32 5-23 22 5 32-28-15-29 15 6-32-24-22 32-5z"/>
+    <path d="M334 238l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+    <path d="M100 438c10 0 18 8 18 18v32h-36v-32c0-10 8-18 18-18zm74-12c9 0 16 7 16 16v46h-32v-46c0-9 7-16 16-16zm410-1c11 0 19 8 19 19v44h-38v-44c0-11 8-19 19-19z"/>
+  </g>
+</svg>
