@@ -1,17 +1,21 @@
+import { connect } from "cloudflare:sockets";
+
 type AssetBinding = { fetch(request: Request): Promise<Response> };
 
 type Env = {
   ASSETS: AssetBinding;
   TURNSTILE_SECRET?: string;
-  BREVO_API_KEY?: string;
-  BREVO_SENDER_EMAIL?: string;
-  BREVO_SENDER_NAME?: string;
+  ZOHO_SMTP_HOST?: string;
+  ZOHO_SMTP_PORT?: string;
+  ZOHO_SMTP_USER?: string;
+  ZOHO_SMTP_PASSWORD?: string;
+  ZOHO_SMTP_FROM?: string;
+  ZOHO_SMTP_FROM_NAME?: string;
   FORM_CONTACT_TO?: string;
 };
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 const MAX_FORM_BYTES = 512_000;
-const BREVO_SEND_URL = "https://api.brevo.com/v3/smtp/email";
 
 const json = (payload: unknown, status = 200) =>
   new Response(JSON.stringify(payload), { status, headers: JSON_HEADERS });
@@ -91,38 +95,116 @@ function renderEmail(kind: string, values: Map<string, string[]>) {
   };
 }
 
-async function sendBrevoMail(
+function utf8Base64(value: string) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
+function wrapBase64(value: string) {
+  return value.match(/.{1,76}/g)?.join("\r\n") || "";
+}
+
+function mimeHeader(value: string) {
+  return `=?UTF-8?B?${utf8Base64(value)}?=`;
+}
+
+async function sendZohoSmtpMail(
   toAddress: string,
   replyTo: string,
-  replyToName: string,
   subject: string,
   content: string,
   env: Env,
 ) {
-  if (!env.BREVO_API_KEY) throw new Error("BREVO_API_KEY is not configured");
+  const username = env.ZOHO_SMTP_USER?.trim();
+  const password = env.ZOHO_SMTP_PASSWORD?.trim();
+  if (!username || !password) throw new Error("Zoho SMTP credentials are not configured");
 
-  const senderEmail = env.BREVO_SENDER_EMAIL || "info@bachataexplosion.com";
-  const senderName = env.BREVO_SENDER_NAME || "Bachata Explosion Website";
+  const host = env.ZOHO_SMTP_HOST?.trim() || "smtp.zoho.eu";
+  const port = Number(env.ZOHO_SMTP_PORT || "465");
+  const fromAddress = env.ZOHO_SMTP_FROM?.trim() || username;
+  const fromName = env.ZOHO_SMTP_FROM_NAME?.trim() || "Bachata Explosion Website";
 
-  const response = await fetch(BREVO_SEND_URL, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "api-key": env.BREVO_API_KEY,
-    },
-    body: JSON.stringify({
-      sender: { email: senderEmail, name: senderName },
-      to: [{ email: toAddress, name: "Bachata Explosion" }],
-      replyTo: { email: replyTo, name: replyToName },
-      subject,
-      htmlContent: content,
-    }),
-  });
+  const socket = connect({ hostname: host, port }, { secureTransport: "on" });
+  await socket.opened;
 
-  if (!response.ok) {
-    const detail = (await response.text()).slice(0, 500);
-    throw new Error(`Brevo returned ${response.status}: ${detail}`);
+  const reader = socket.readable.getReader();
+  const writer = socket.writable.getWriter();
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  const readReply = async () => {
+    const lines: string[] = [];
+    while (true) {
+      let separator = buffer.indexOf("\r\n");
+      while (separator >= 0) {
+        const line = buffer.slice(0, separator);
+        buffer = buffer.slice(separator + 2);
+        lines.push(line);
+        if (/^\d{3} /.test(line)) {
+          return { code: Number(line.slice(0, 3)), text: lines.join("\n") };
+        }
+        separator = buffer.indexOf("\r\n");
+      }
+
+      const { value, done } = await reader.read();
+      if (done) throw new Error("Zoho SMTP connection closed unexpectedly");
+      buffer += decoder.decode(value, { stream: true });
+    }
+  };
+
+  const writeLine = async (line: string) => {
+    await writer.write(encoder.encode(`${line}\r\n`));
+  };
+
+  const command = async (line: string, accepted: number[]) => {
+    await writeLine(line);
+    const reply = await readReply();
+    if (!accepted.includes(reply.code)) {
+      throw new Error(`Zoho SMTP returned ${reply.code}: ${reply.text.slice(0, 300)}`);
+    }
+    return reply;
+  };
+
+  try {
+    const greeting = await readReply();
+    if (greeting.code !== 220) throw new Error(`Zoho SMTP greeting failed: ${greeting.text.slice(0, 300)}`);
+
+    await command("EHLO bachataexplosion.com", [250]);
+    await command("AUTH LOGIN", [334]);
+    await command(btoa(username), [334]);
+    await command(btoa(password), [235]);
+    await command(`MAIL FROM:<${fromAddress}>`, [250]);
+    await command(`RCPT TO:<${toAddress}>`, [250, 251]);
+    await command("DATA", [354]);
+
+    const message = [
+      `From: ${mimeHeader(fromName)} <${fromAddress}>`,
+      `To: <${toAddress}>`,
+      `Reply-To: <${replyTo}>`,
+      `Subject: ${mimeHeader(subject)}`,
+      "MIME-Version: 1.0",
+      'Content-Type: text/html; charset="UTF-8"',
+      "Content-Transfer-Encoding: base64",
+      "",
+      wrapBase64(utf8Base64(content)),
+      "",
+    ].join("\r\n");
+
+    await writer.write(encoder.encode(`${message}.\r\n`));
+    const accepted = await readReply();
+    if (accepted.code !== 250) {
+      throw new Error(`Zoho SMTP rejected the message: ${accepted.text.slice(0, 300)}`);
+    }
+
+    await writeLine("QUIT");
+    await readReply().catch(() => undefined);
+  } finally {
+    reader.releaseLock();
+    writer.releaseLock();
+    await socket.close().catch(() => undefined);
   }
 }
 
@@ -152,9 +234,9 @@ async function handleForm(request: Request, env: Env, kind: string) {
     return json({ ok: false, error: "A valid email address is required." }, 400);
   }
 
-  const { applicant, subject, content } = renderEmail(kind, values);
+  const { subject, content } = renderEmail(kind, values);
   const destination = env.FORM_CONTACT_TO || "info@bachataexplosion.com";
-  await sendBrevoMail(destination, email, applicant, subject, content, env);
+  await sendZohoSmtpMail(destination, email, subject, content, env);
   return json({ ok: true });
 }
 
