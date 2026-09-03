@@ -17,6 +17,12 @@ type Env = {
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 const MAX_FORM_BYTES = 512_000;
 
+const LEGACY_ASSET_PATHS: Record<string, string> = {
+  "/wp-content/uploads/2025/12/Screenshot-2025-12-25-165417.png": "/media/bbf/venue/location.png",
+  "/wp-content/uploads/2025/12/Screenshot-2025-12-25-172057.png": "/media/bbf/venue/hero.png",
+  "/wp-content/uploads/2025/12/Screenshot-2025-12-25-171955.png": "/media/bbf/venue/lounge.png",
+};
+
 const json = (payload: unknown, status = 200) =>
   new Response(JSON.stringify(payload), { status, headers: JSON_HEADERS });
 
@@ -247,6 +253,13 @@ async function handleForm(request: Request, env: Env, kind: string) {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    const legacyAssetPath = LEGACY_ASSET_PATHS[url.pathname];
+    if (legacyAssetPath && (request.method === "GET" || request.method === "HEAD")) {
+      const assetUrl = new URL(legacyAssetPath, url.origin);
+      return env.ASSETS.fetch(new Request(assetUrl.toString(), request));
+    }
+
     const match = url.pathname.match(/^\/api\/forms\/(contact|tickets|groups|partners|media|volunteer|ambassador|newsletter)\/?$/);
     if (match) {
       try {
