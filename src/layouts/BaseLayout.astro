@@ -62,6 +62,10 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
       [data-insider-form]:not([data-submit-ready="true"]) [data-insider-submit] {
         display: none !important;
       }
+      .turnstile-guard {
+        width: 100%;
+        margin: 10px 0 4px;
+      }
     </style>
   </head>
   <body>
@@ -166,6 +170,51 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
           form.addEventListener("reset", () => window.setTimeout(sync, 0));
           sync();
         });
+
+        const turnstileSiteKey = "0x4AAAAAAEl59_pkwHdMqTWg";
+        const protectedForms = gatedForms.filter((form) => {
+          const endpoint = form.getAttribute("action")
+            || form.dataset.contactEndpoint
+            || form.dataset.volunteerEndpoint
+            || form.dataset.ambassadorEndpoint
+            || form.dataset.insiderEndpoint
+            || "";
+          return endpoint.startsWith("/api/forms/") || endpoint.startsWith(`${window.location.origin}/api/forms/`);
+        });
+
+        if (protectedForms.length) {
+          const turnstileScript = document.createElement("script");
+          turnstileScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+          turnstileScript.async = true;
+          turnstileScript.defer = true;
+          turnstileScript.addEventListener("load", () => {
+            type TurnstileApi = {
+              render: (container: HTMLElement, options: Record<string, unknown>) => string;
+              reset: (widgetId?: string) => void;
+            };
+            const api = (window as typeof window & { turnstile?: TurnstileApi }).turnstile;
+            if (!api) return;
+
+            protectedForms.forEach((form) => {
+              const guard = document.createElement("div");
+              guard.className = "turnstile-guard";
+              guard.setAttribute("aria-label", "Spam protection");
+              const statusElement = form.querySelector<HTMLElement>('[role="status"]');
+              if (statusElement) form.insertBefore(guard, statusElement);
+              else form.appendChild(guard);
+
+              const widgetId = api.render(guard, {
+                sitekey: turnstileSiteKey,
+                theme: "auto",
+                appearance: "interaction-only",
+              });
+
+              form.addEventListener("submit", () => window.setTimeout(() => api.reset(widgetId), 0));
+              form.addEventListener("reset", () => window.setTimeout(() => api.reset(widgetId), 0));
+            });
+          });
+          document.head.appendChild(turnstileScript);
+        }
 
         const volunteerHero = document.querySelector<HTMLElement>("[data-volunteer-hero]");
         const volunteerTrack = volunteerHero?.querySelector<HTMLElement>("[data-volunteer-track]");
