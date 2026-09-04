@@ -37,6 +37,7 @@ jobs:
 
       - name: Build GitHub Pages preview
         env:
+          PUBLIC_ARCHIVE_MEDIA_ORIGIN: https://media.bachataexplosion.com
           PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.PUBLIC_CONTACT_FORM_ENDPOINT }}
           PUBLIC_TICKETS_FORM_ENDPOINT: ${{ vars.PUBLIC_TICKETS_FORM_ENDPOINT }}
           PUBLIC_GROUPS_FORM_ENDPOINT: ${{ vars.PUBLIC_GROUPS_FORM_ENDPOINT }}
