@@ -16,15 +16,6 @@ interface Props {
 
 const { event } = Astro.props;
 const manifestUrl = getArchiveManifestUrl(event.slug);
-const isAlbumPreview = event.slug === "role-rotation-2026";
-const previewPhotos = [
-  { src: "/media/archive/role-rotation-2026.jpg", alt: "Role Rotation 2026 group photo", className: "album-wide", label: "The whole room", group: "Sunday social" },
-  { src: "/media/atmosphere/party-crowd.webp", alt: "Dancers at a Bachata Explosion party", className: "album-tall", label: "Party energy", group: "Saturday party" },
-  { src: "/media/events/role-rotation-2026.webp", alt: "Role Rotation 2026 edition artwork", className: "album-poster", label: "Edition poster", group: "Friday workshop" },
-  { src: "/media/archive/role-rotation-2025.jpg", alt: "Role Rotation community memory", className: "album-square", label: "Across editions", group: "Saturday workshop" },
-  { src: "/media/atmosphere/explosion-community.jpg", alt: "Bachata Explosion community together", className: "album-square", label: "We are Explosion", group: "Friday party" },
-  { src: "/media/archive/role-rotation-2024.jpg", alt: "Earlier Role Rotation event memory", className: "album-wide", label: "Where it grew", group: "Sunday social" },
-];
 ---
 
 <BaseLayout
@@ -66,21 +57,28 @@ const previewPhotos = [
         data-nas-gallery
         data-manifest-url={manifestUrl}
         data-media-origin={archiveMediaOrigin}
+        data-event-cover={event.cover}
         aria-live="polite"
       >
-        {event.albumGroups && <nav class="album-tabs" aria-label="Album sections">{event.albumGroups.map((group, index) => <button class:list={[index === 0 && "active"]} type="button" data-album-group={group}>{group}</button>)}</nav>}
-        {isAlbumPreview && (
-          <div class="album-preview" data-album-preview>
-            <div class="album-preview-note"><span>Event album</span><p>Browse selected memories from this edition. More high-resolution photographs will appear here as the complete collection is published.</p></div>
-            <div class="album-mosaic">
-              {previewPhotos.map((photo, index) => <figure class={photo.className} data-album-item-group={photo.group}><button type="button" aria-label={`Open image ${index + 1}: ${photo.label}`}><img src={photo.src} alt={photo.alt} loading="lazy" /></button><figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.label}</figcaption></figure>)}
-            </div>
+        <div class="archive-album-browser" data-album-browser hidden>
+          <div class="archive-album-intro">
+            <div><p class="section-label">Choose a collection</p><h3>The weekend,<br /><em>album by album.</em></h3></div>
+            <p>The original archive separated workshops and parties by day. Choose one collection below, or open every photograph together.</p>
           </div>
-        )}
-        <div class="gallery-message" data-gallery-message hidden={isAlbumPreview}>
+          <div class="archive-album-cards" data-album-cards role="group" aria-label="Photo album collections"></div>
+        </div>
+        <div class="archive-selected-album" data-selected-album hidden>
+          <div>
+            <p class="section-label">Now viewing</p>
+            <h3 data-selected-album-title></h3>
+          </div>
+          <p data-selected-album-meta></p>
+        </div>
+        <div class="gallery-message" data-gallery-message>
           {manifestUrl ? "Opening this collection…" : "This collection is being prepared. The original event page is still available below."}
         </div>
         <div class="nas-gallery-grid" data-gallery-grid></div>
+        <button class="archive-load-more" type="button" data-gallery-more hidden>Load more photos</button>
       </div>
 
       <div class="archive-fallback">
@@ -102,8 +100,11 @@ const previewPhotos = [
     .archive-gallery-section{background:#070707!important;color:#f5efe5!important}.archive-gallery-heading h2{color:#f5efe5!important}.archive-gallery-heading h2 em{color:#e4c36f!important}.archive-gallery-heading p{color:#aaa297!important}
     .gallery-source{border-color:rgba(208,168,74,.24)!important}.gallery-source span{background:#d0a84a!important}.gallery-source strong{color:#f5efe5!important}
     .album-tabs{border-color:rgba(208,168,74,.24)!important}.album-tabs button{border-color:rgba(208,168,74,.24)!important;background:transparent!important;color:#aaa297!important}.album-tabs button.active,.album-tabs button:hover{background:#d0a84a!important;color:#070707!important}
-    .album-preview-note,.gallery-message,.archive-fallback{border-color:rgba(208,168,74,.24)!important;background:#11110f!important;color:#aaa297!important}.album-preview-note span{color:#e4c36f!important}.archive-fallback h3{color:#f5efe5!important}.archive-fallback p{color:#aaa297!important}
+    .album-preview-note,.gallery-message,.archive-fallback{border-color:rgba(208,168,74,.24)!important;background:#11110f!important;color:#aaa297!important}.gallery-message[hidden]{display:none!important}.album-preview-note span{color:#e4c36f!important}.archive-fallback h3{color:#f5efe5!important}.archive-fallback p{color:#aaa297!important}
     .album-mosaic figure,.nas-gallery-grid figure{border:1px solid rgba(208,168,74,.22)!important;background:#0c0c0b!important}.album-mosaic img,.nas-gallery-grid img{width:100%!important;height:100%!important;object-fit:cover!important}.album-mosaic figcaption{color:#f5efe5!important;background:#0c0c0b!important}.album-mosaic figcaption span{color:#d0a84a!important}
+    .archive-album-browser{margin-bottom:54px}.archive-album-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,7vw,110px);align-items:end;margin-bottom:28px;padding-top:8px}.archive-album-intro h3{margin:0;color:#f5efe5;font-size:clamp(2rem,4vw,3.7rem);line-height:.98;text-transform:uppercase}.archive-album-intro h3 em{color:#e4c36f;font-style:normal}.archive-album-intro>p{max-width:620px;margin:0;color:#aaa297;line-height:1.7}.archive-album-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.archive-album-card{position:relative;display:grid;min-width:0;padding:0;overflow:hidden;border:1px solid rgba(208,168,74,.28);background:#11110f;color:#f5efe5;cursor:pointer;text-align:left}.archive-album-card img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:saturate(.78) contrast(1.04);transition:transform .4s ease,filter .4s ease}.archive-album-card:hover img,.archive-album-card[aria-pressed="true"] img{transform:scale(1.025);filter:saturate(1)}.archive-album-card-copy{display:grid;grid-template-columns:1fr auto;gap:8px 16px;align-items:end;padding:17px 18px}.archive-album-card-copy strong{font-family:"Oswald",sans-serif;font-size:1.15rem;line-height:1.1;text-transform:uppercase}.archive-album-card-copy span{color:#d0a84a;font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.archive-album-card-copy i{grid-column:2;grid-row:1/3;color:#d0a84a;font-style:normal;font-size:1.2rem}.archive-album-card[aria-pressed="true"]{border-color:#d0a84a;box-shadow:0 0 0 1px #d0a84a}.archive-selected-album{display:flex;justify-content:space-between;gap:28px;align-items:end;margin:10px 0 26px;padding:24px 0 18px;border-bottom:1px solid rgba(208,168,74,.28)}.archive-selected-album h3{margin:0;color:#f5efe5;font-size:clamp(2rem,5vw,4.5rem);line-height:.95;text-transform:uppercase}.archive-selected-album>p{margin:0;color:#d0a84a;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.archive-load-more{display:flex;margin:30px auto 0;padding:13px 22px;border:1px solid #d0a84a;background:transparent;color:#f5efe5;cursor:pointer;font:inherit;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.archive-load-more:hover{background:#d0a84a;color:#070707}.archive-load-more[hidden]{display:none}.archive-album-browser[hidden],.archive-selected-album[hidden]{display:none}
+    @media(max-width:760px){.archive-album-intro{grid-template-columns:1fr;gap:18px}.archive-album-cards{grid-template-columns:1fr 1fr}.archive-album-card-copy{padding:14px}.archive-selected-album{display:block}.archive-selected-album>p{margin-top:10px}}
+    @media(max-width:480px){.archive-album-cards{grid-template-columns:1fr}}
   </style>
 
   <script>
@@ -114,29 +115,60 @@ const previewPhotos = [
       height?: number;
       alt?: string;
       credit?: string;
+      album?: string;
       variants?: GalleryVariant[];
     };
-    type GalleryManifest = { photos?: GalleryPhoto[] };
+    type GalleryManifest = { albums?: string[]; photoCount?: number; photos?: GalleryPhoto[] };
 
     const gallery = document.querySelector<HTMLElement>("[data-nas-gallery]");
     const message = gallery?.querySelector<HTMLElement>("[data-gallery-message]");
     const grid = gallery?.querySelector<HTMLElement>("[data-gallery-grid]");
+    const albumBrowser = gallery?.querySelector<HTMLElement>("[data-album-browser]");
+    const albumCards = gallery?.querySelector<HTMLElement>("[data-album-cards]");
+    const selectedAlbum = gallery?.querySelector<HTMLElement>("[data-selected-album]");
+    const selectedAlbumTitle = gallery?.querySelector<HTMLElement>("[data-selected-album-title]");
+    const selectedAlbumMeta = gallery?.querySelector<HTMLElement>("[data-selected-album-meta]");
+    const moreButton = gallery?.querySelector<HTMLButtonElement>("[data-gallery-more]");
     const manifestUrl = gallery?.dataset.manifestUrl ?? "";
     const mediaOrigin = gallery?.dataset.mediaOrigin ?? "";
-
-    const albumButtons = document.querySelectorAll<HTMLButtonElement>("[data-album-group]");
-    const previewItems = document.querySelectorAll<HTMLElement>("[data-album-item-group]");
-    albumButtons.forEach((button) => button.addEventListener("click", () => {
-      const group = button.dataset.albumGroup ?? "All moments";
-      albumButtons.forEach((candidate) => candidate.classList.toggle("active", candidate === button));
-      previewItems.forEach((item) => { item.hidden = group !== "All moments" && item.dataset.albumItemGroup !== group; });
-    }));
+    const eventCover = gallery?.dataset.eventCover ?? "";
+    const pageSize = 60;
+    let allPhotos: GalleryPhoto[] = [];
+    let visiblePhotos: GalleryPhoto[] = [];
+    let renderedCount = 0;
 
     function mediaUrl(path: string) {
       if (!mediaOrigin) throw new Error("Archive media origin is not configured");
       const resolved = new URL(path.replace(/^\/+/, ""), `${mediaOrigin}/`);
       if (resolved.origin !== new URL(mediaOrigin).origin) throw new Error("Invalid media path");
       return resolved.href;
+    }
+
+    function albumLabel(album: string) {
+      const labels: Record<string, string> = {
+        "__all__": "All photos",
+        "00-event-assets": "Event artwork",
+        "all-moments": "All moments",
+        "friday": "Friday photos",
+        "friday-workshops": "Friday workshops",
+        "friday-party": "Friday party",
+        "saturday": "Saturday photos",
+        "saturday-workshops": "Saturday workshops",
+        "saturday-party": "Saturday party",
+        "sunday": "Sunday photos",
+        "sunday-workshops": "Sunday workshops",
+        "sunday-party": "Sunday party",
+        "sunday-social": "Sunday social",
+        "workshops": "Workshops",
+        "party": "Party",
+      };
+      return labels[album] || album.replace(/-/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function previewUrl(photo?: GalleryPhoto) {
+      if (!photo) return eventCover;
+      const variants = [...(photo.variants || [])].sort((a, b) => a.width - b.width);
+      return mediaUrl((variants.find((variant) => variant.width >= 480) || variants[0])?.path || photo.path);
     }
 
     function renderPhoto(photo: GalleryPhoto, index: number) {
@@ -161,6 +193,72 @@ const previewPhotos = [
       return figure;
     }
 
+    function renderNextPhotos() {
+      if (!grid || !moreButton) return;
+      const nextPhotos = visiblePhotos.slice(renderedCount, renderedCount + pageSize);
+      const fragment = document.createDocumentFragment();
+      nextPhotos.forEach((photo, index) => fragment.append(renderPhoto(photo, renderedCount + index)));
+      grid.append(fragment);
+      renderedCount += nextPhotos.length;
+      const remaining = visiblePhotos.length - renderedCount;
+      moreButton.hidden = remaining <= 0;
+      moreButton.textContent = remaining > 0 ? `Load more photos · ${remaining} remaining` : "Load more photos";
+    }
+
+    function selectAlbum(album: string, shouldScroll = true) {
+      if (!grid || !selectedAlbum || !selectedAlbumTitle || !selectedAlbumMeta) return;
+      visiblePhotos = album === "__all__" ? allPhotos : allPhotos.filter((photo) => photo.album === album);
+      renderedCount = 0;
+      grid.replaceChildren();
+      selectedAlbumTitle.textContent = albumLabel(album);
+      selectedAlbumMeta.textContent = `${visiblePhotos.length.toLocaleString()} photographs`;
+      selectedAlbum.hidden = false;
+      albumCards?.querySelectorAll<HTMLButtonElement>("button[data-album]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.album === album));
+      });
+      renderNextPhotos();
+      if (shouldScroll) selectedAlbum.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
+
+    function renderAlbumCards(albums: string[]) {
+      if (!albumCards || !albumBrowser) return;
+      const orderedAlbums = albums.filter((album) => album !== "00-event-assets");
+      if (albums.includes("00-event-assets")) orderedAlbums.push("00-event-assets");
+      const choices = ["__all__", ...orderedAlbums];
+      const fragment = document.createDocumentFragment();
+      choices.forEach((album) => {
+        const photos = album === "__all__" ? allPhotos : allPhotos.filter((photo) => photo.album === album);
+        if (!photos.length) return;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "archive-album-card";
+        button.dataset.album = album;
+        button.setAttribute("aria-pressed", "false");
+        const image = document.createElement("img");
+        const coverPhoto = album === "__all__" ? photos.find((photo) => photo.album !== "00-event-assets") || photos[0] : photos[0];
+        image.src = previewUrl(coverPhoto);
+        image.alt = "";
+        image.loading = "lazy";
+        const copy = document.createElement("span");
+        copy.className = "archive-album-card-copy";
+        const title = document.createElement("strong");
+        title.textContent = albumLabel(album);
+        const count = document.createElement("span");
+        count.textContent = `${photos.length.toLocaleString()} photos`;
+        const arrow = document.createElement("i");
+        arrow.textContent = "↘";
+        arrow.setAttribute("aria-hidden", "true");
+        copy.append(title, count, arrow);
+        button.append(image, copy);
+        button.addEventListener("click", () => selectAlbum(album));
+        fragment.append(button);
+      });
+      albumCards.append(fragment);
+      albumBrowser.hidden = false;
+      const contentAlbums = orderedAlbums.filter((album) => album !== "00-event-assets");
+      if (contentAlbums.length === 1) selectAlbum(contentAlbums[0], false);
+    }
+
     async function loadGallery() {
       if (!gallery || !message || !grid || !manifestUrl) return;
       try {
@@ -169,9 +267,12 @@ const previewPhotos = [
         const manifest = await response.json() as GalleryManifest;
         const photos = Array.isArray(manifest.photos) ? manifest.photos : [];
         if (!photos.length) throw new Error("This collection has no published photos yet");
-        const fragment = document.createDocumentFragment();
-        photos.forEach((photo, index) => fragment.append(renderPhoto(photo, index)));
-        grid.append(fragment);
+        // Elementor reused this decorative page background on every old child album.
+        // Keep the recovered file in storage, but do not present it as an event photograph.
+        allPhotos = photos.filter((photo) => !photo.path.includes("a4088d03190f-Explosion_LOGO_Revised_FrameBackground"));
+        const manifestAlbums = Array.isArray(manifest.albums) ? manifest.albums : [];
+        const discoveredAlbums = [...new Set(photos.map((photo) => photo.album).filter((album): album is string => Boolean(album)))];
+        renderAlbumCards(manifestAlbums.length ? manifestAlbums : discoveredAlbums);
         message.hidden = true;
       } catch {
         message.textContent = "This high-resolution collection is temporarily unavailable. The original event page below can still be opened.";
@@ -179,6 +280,7 @@ const previewPhotos = [
       }
     }
 
+    moreButton?.addEventListener("click", renderNextPhotos);
     loadGallery();
   </script>
 </BaseLayout>
