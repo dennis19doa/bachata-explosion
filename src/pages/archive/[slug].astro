@@ -58,6 +58,7 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
         data-manifest-url={manifestUrl}
         data-media-origin={archiveMediaOrigin}
         data-event-cover={event.cover}
+        data-album-cover-hints={JSON.stringify(event.albumCoverHints ?? {})}
         aria-live="polite"
       >
         <div class="archive-album-browser" data-album-browser hidden>
@@ -132,6 +133,7 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
     const manifestUrl = gallery?.dataset.manifestUrl ?? "";
     const mediaOrigin = gallery?.dataset.mediaOrigin ?? "";
     const eventCover = gallery?.dataset.eventCover ?? "";
+    const albumCoverHints = JSON.parse(gallery?.dataset.albumCoverHints || "{}") as Record<string, string>;
     const pageSize = 60;
     let allPhotos: GalleryPhoto[] = [];
     let visiblePhotos: GalleryPhoto[] = [];
@@ -235,7 +237,11 @@ const manifestUrl = getArchiveManifestUrl(event.slug);
         button.dataset.album = album;
         button.setAttribute("aria-pressed", "false");
         const image = document.createElement("img");
-        const coverPhoto = album === "__all__" ? photos.find((photo) => photo.album !== "00-event-assets") || photos[0] : photos[0];
+        const originalCoverHint = albumCoverHints[album];
+        const originalCover = originalCoverHint
+          ? allPhotos.find((photo) => photo.path.includes(originalCoverHint))
+          : undefined;
+        const coverPhoto = originalCover || (album === "__all__" ? photos.find((photo) => photo.album !== "00-event-assets") || photos[0] : photos[0]);
         image.src = previewUrl(coverPhoto);
         image.alt = "";
         image.loading = "lazy";

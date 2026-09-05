@@ -8,6 +8,8 @@ export type ArchiveEvent = {
   summary?: string;
   photographer?: string;
   albumGroups?: string[];
+  /** Original WordPress album-card image filename, keyed by recovered album slug. */
+  albumCoverHints?: Record<string, string>;
 };
 
 export const archiveEvents: ArchiveEvent[] = [
@@ -45,6 +47,14 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Festival",
     cover: "/media/archive/bbf-2025.jpg",
     legacyUrl: "https://bachataexplosion.com/berlin-bachata-festival/",
+    albumCoverHints: {
+      "friday-workshops": "Freitag-Workshops-296-1-1600.webp",
+      "friday-party": "Freitag-Party-241-1600.webp",
+      "saturday-workshops": "Samstag-Workshops-326-1600.webp",
+      "saturday-party": "Samstag-Party-60-1600.webp",
+      "sunday-workshops": "Sonntag-Workshops-56-1600.webp",
+      "sunday-party": "Sonntag-Workshops-278-1600.webp",
+    },
   },
   {
     slug: "elite-dance-1-2025",
@@ -61,6 +71,13 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Special Edition",
     cover: "/media/archive/summer-2025.jpg",
     legacyUrl: "https://bachataexplosion.com/explosion-summer-edition-2025/",
+    albumCoverHints: {
+      friday: "Freitag-Party-70-web-1600.webp",
+      "saturday-workshops": "64a3e4163005-web-1600.webp",
+      "saturday-party": "Saturday-Party-Web-2-1600.webp",
+      "sunday-workshops": "Freitag-Party-720-1600.webp",
+      "sunday-social": "Sonntag-Social-88-1600.webp",
+    },
   },
   {
     slug: "role-rotation-2025",
@@ -69,6 +86,11 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Role Rotation",
     cover: "/media/archive/role-rotation-2025.jpg",
     legacyUrl: "https://bachataexplosion.com/role-rotation-2025/",
+    albumCoverHints: {
+      friday: "admin-ajax-6-600.webp",
+      saturday: "admin-ajax-7-600.webp",
+      sunday: "admin-ajax-8-600.webp",
+    },
   },
   {
     slug: "berlin-bachata-festival-2024",
@@ -77,6 +99,14 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Festival",
     cover: "/media/archive/bbf-2024.jpg",
     legacyUrl: "https://bachataexplosion.com/berlin-bachata-festival-2024/",
+    albumCoverHints: {
+      "friday-party": "admin-ajax-600.webp",
+      "friday-workshops": "admin-ajax-1-600.webp",
+      "saturday-workshops": "admin-ajax-2-600.webp",
+      "saturday-party": "admin-ajax-3-600.webp",
+      "sunday-workshops": "admin-ajax-4-600.webp",
+      "sunday-party": "admin-ajax-5-600.webp",
+    },
   },
   {
     slug: "summer-edition-2024",
@@ -85,6 +115,13 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Special Edition",
     cover: "/media/archive/summer-2024.jpg",
     legacyUrl: "https://bachataexplosion.com/summer-edition-2024/",
+    albumCoverHints: {
+      friday: "Freitag-Party-5-1600.webp",
+      "saturday-workshops": "Samstag-Workshops-50-1600.webp",
+      "saturday-party": "Samstag-Party-113-1600.webp",
+      "sunday-workshops": "Sonntag-Workshops-74-1600.webp",
+      "sunday-party": "2024.07.28-18-10-IMG_-Rating_1-3-1600.webp",
+    },
   },
   {
     slug: "role-rotation-2024",
@@ -93,6 +130,12 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Role Rotation",
     cover: "/media/archive/role-rotation-2024.jpg",
     legacyUrl: "https://bachataexplosion.com/role-rotation-2024/",
+    albumCoverHints: {
+      friday: "DSC_0972-Verbessert-RR-1-1600.webp",
+      "saturday-workshops": "DSC_1735-1600.webp",
+      "saturday-party": "DSC_2785-1600.webp",
+      "sunday-workshops": "DSC_3202-1600.webp",
+    },
   },
   {
     slug: "berlin-bachata-festival-2023",
@@ -101,6 +144,14 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Festival",
     cover: "/media/archive/bbf-2023.jpg",
     legacyUrl: "https://bachataexplosion.com/berlin-bachata-festival-2023/",
+    albumCoverHints: {
+      "friday-party": "Party-Friday-119-1-1600.webp",
+      "friday-workshops": "Workshops-Friday-166-1-1600.webp",
+      "saturday-party": "2023.10.29-00-29-IMG_3829-Rating_1-1600.webp",
+      "saturday-workshops": "Workshops-Saturday-266-1600.webp",
+      "sunday-party": "Party-Sunday-24-1-1600.webp",
+      "sunday-workshops": "Workshops-Sunday-153-1600.webp",
+    },
   },
   {
     slug: "summer-edition-2023",
@@ -109,6 +160,11 @@ export const archiveEvents: ArchiveEvent[] = [
     category: "Special Edition",
     cover: "/media/archive/summer-2023.jpg",
     legacyUrl: "https://bachataexplosion.com/summer-edition-2023/",
+    albumCoverHints: {
+      friday: "2023.07.21-23-59-IMG_3035-Rating_1-scaled-2-1600.webp",
+      saturday: "Party-123-1600.webp",
+      workshops: "Workshops-205-1600.webp",
+    },
   },
   {
     slug: "hamburg-explosion-2023",
