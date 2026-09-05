@@ -18,6 +18,16 @@ export const wordpressPages = pageExport as WordPressPage[];
 
 const RECOVERED_IMAGE_BY_ALT: Record<string, string> = {
   "Bachata Explosion crowd dancing at a Berlin party": "/media/atmosphere/party-crowd.webp",
+  "Explosion beginnings": "https://media.bachataexplosion.com/events/2023/summer-edition-2023/friday/f2bcb3107bee-2023.07.22-00-07-IMG_3357-Rating_1-1600.webp",
+  "Explosion vision": "/media/archive/summer-2023.jpg",
+  "Our community motivates us": "/media/history/community-motivation.jpg",
+  "Leveling up Explosion": "https://media.bachataexplosion.com/events/2025/berlin-bachata-festival-2025/00-event-assets/ec211afc5731-2023.10.29-00-28-IMG_3822-Rating_1-1600.webp",
+  "Our spirit at Explosion": "/media/history/explosion-spirit.jpg",
+  "Community grows at Explosion": "/media/archive/bbf-2024.jpg",
+  "New concepts at Explosion": "/media/archive/role-rotation-2024.jpg",
+  "The future of Explosion": "https://media.bachataexplosion.com/events/2025/berlin-bachata-festival-2025/00-event-assets/9eafdce4d5c8-DSC_3286-Verbessert-NR-1600.webp",
+  "Join us at Explosion": "https://media.bachataexplosion.com/events/2025/berlin-bachata-festival-2025/00-event-assets/f7a652c0db6d-Party-Friday-119-1600.webp",
+  "We Are Explosion": "/media/history/we-are-explosion.jpg",
   "Dennis, Bachata Explosion founder": "/media/team/dennis.jpg",
   "Elena, Bachata Explosion founder": "/media/team/elena.jpg",
   "Laura, Bachata Explosion team member": "/media/team/laura.jpg",
