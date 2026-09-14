@@ -70,16 +70,57 @@ const hotelRooms = [
   },
 ] as const;
 
-const workshopSlots = {
-  friday: ["16:00–17:00", "17:00–18:00", "18:00–19:00", "19:00–20:00"],
-  saturday: ["11:00–12:00", "12:00–13:00", "13:00–14:00", "14:00–15:00", "15:00–16:00", "16:00–17:00", "17:00–18:00", "18:00–19:00", "19:00–20:00"],
-  sunday: ["12:00–13:00", "13:00–14:00", "14:00–15:00", "15:00–16:00", "16:00–17:00", "17:00–18:00", "18:00–19:00", "19:00–20:00"],
+const workshopSchedule = {
+  friday: [
+    { time: "15:00", room: "Festival", name: "Registration", topic: "Registration", level: "" },
+    { time: "16:30–17:30", room: "Room 1", name: "Victor & Alba", topic: "Bachata Moderna", level: "Open Level" },
+    { time: "16:30–17:30", room: "Room 2", name: "Mahir", topic: "Smooth Bachata", level: "Intermediate" },
+    { time: "17:40–18:40", room: "Room 1", name: "Felipe & Tiago", topic: "Styling for All", level: "Open Level" },
+    { time: "17:40–18:40", room: "Room 2", name: "Ofir & Ofri", topic: "The Art of Connection", level: "Masterclass" },
+    { time: "18:50–19:50", room: "Room 1", name: "Ofir & Ofri", topic: "From Combo to Convo", level: "Intermediate" },
+    { time: "18:50–19:50", room: "Room 2", name: "Paola & Sebastian", topic: "Frame Dynamics", level: "Open Level" },
+    { time: "20:30–21:30", room: "Room 1", name: "David & Laura", topic: "Signature Moves Bachata Social Style", level: "Pre-Party Workshop" },
+    { time: "00:00", room: "Festival", name: "Showtime", topic: "Showtime", level: "" },
+  ],
+  saturday: [
+    { time: "11:00–12:00", room: "Room 1", name: "Ofir & Ofri", topic: "Bachata Conversation – Creativity", level: "Open Level" },
+    { time: "12:10–13:10", room: "Room 1", name: "Masa & Polina", topic: "Bachazouk ADV Toahla Combo", level: "Advanced" },
+    { time: "12:10–13:10", room: "Room 2", name: "Lee", topic: "Styling for All", level: "Open Level" },
+    { time: "13:20–14:20", room: "Room 1", name: "Emilien & Tehina", topic: "Bachata Influence Connection", level: "Intermediate" },
+    { time: "13:20–14:20", room: "Room 2", name: "Jack & Jill", topic: "First Round", level: "" },
+    { time: "14:30–15:30", room: "Room 1", name: "Liza & Chicho", topic: "Musicality in Partnerwork", level: "Intermediate" },
+    { time: "14:30–15:30", room: "Room 2", name: "Daniel & Anastasia", topic: "Bachatango", level: "Open Level" },
+    { time: "15:40–16:40", room: "Room 1", name: "David & Laura", topic: "Creativity in Social Dancing (What If)", level: "Intermediate" },
+    { time: "15:40–16:40", room: "Room 2", name: "Diego & Ola", topic: "Master Your Hips in Bachata", level: "Intermediate" },
+    { time: "16:50–17:50", room: "Room 1", name: "Elena & Dennis", topic: "Counter Balance Fundamentals", level: "Open Level" },
+    { time: "16:50–17:50", room: "Room 2", name: "Victor & Alba", topic: "V&A Combos", level: "Advanced" },
+    { time: "18:00–19:00", room: "Room 1", name: "Felipe & Tiago", topic: "New Role Rotation Moves for Social", level: "Intermediate" },
+    { time: "18:00–19:00", room: "Room 2", name: "Jack & Jill", topic: "Semi Final", level: "" },
+    { time: "19:10–20:10", room: "Room 1", name: "Nick & Daniela", topic: "The Art of Head Connections", level: "Advanced" },
+    { time: "19:10–20:10", room: "Room 2", name: "Sebastian & Diego", topic: "Choose Your Style", level: "Intermediate" },
+    { time: "21:00–22:00", room: "Pre-Party Workshop", name: "Emilien & Tehina", topic: "Pre-Party Workshop", level: "Pre-Party Workshop" },
+    { time: "00:00", room: "Competition", name: "Jack & Jill", topic: "Final", level: "" },
+  ],
+  sunday: [
+    { time: "12:00–13:00", room: "Room 1", name: "Daniel & Anastasia", topic: "Your Dance. Your DNA", level: "Open Level" },
+    { time: "12:00–13:00", room: "Room 2", name: "Janina & Tiago", topic: "Smooth Transition Role Rotation", level: "Open Level" },
+    { time: "13:00–14:00", room: "Room 1", name: "Liza & Chicho", topic: "Bachata with Zouk Flavour", level: "Open Level" },
+    { time: "13:00–14:00", room: "Room 2", name: "Emilien & Tehina", topic: "Bachata Influence Signature Moves", level: "Advanced" },
+    { time: "14:10–15:10", room: "Room 1", name: "Nick & Daniela", topic: "Unexpected Exit", level: "Open Level" },
+    { time: "14:10–15:10", room: "Room 2", name: "Masa & Polina", topic: "Bachazouk Elasticity", level: "Masterclass" },
+    { time: "15:20–16:20", room: "Room 1", name: "Elena & Dennis", topic: "Counter Balance Combos", level: "Intermediate" },
+    { time: "15:20–16:20", room: "Room 2", name: "Felipe & Tiago", topic: "Role Rotation", level: "Masterclass" },
+    { time: "16:20–17:00", room: "Room 1", name: "Break", topic: "Space to Practice", level: "" },
+    { time: "17:00–18:00", room: "Room 1", name: "Masa & Polina", topic: "Intermediate Rotiseries", level: "Intermediate" },
+    { time: "18:10–19:10", room: "Room 1", name: "Felipe, Dennis, Elena & Tiago", topic: "Cuatrio Madness", level: "Open Level" },
+    { time: "20:30–21:30", room: "Special Workshop", name: "Diego & Ola", topic: "Reggaeton", level: "Open Level" },
+  ],
 } as const;
 
 const schedule = [
-  { key: "friday", day: "Friday", date: "16 October", promise: "Arrive. Connect. Begin.", items: [["16:00–20:00", "Friday workshops", "Opening sessions with the international lineup across the festival rooms."], ["20:00–05:00", "Welcome party & competition", "Social dancing, opening competition rounds and the first full night on the main floor."]] },
-  { key: "saturday", day: "Saturday", date: "17 October", promise: "Learn. Perform. Explode.", items: [["11:00–20:00", "Saturday workshops", "A full day of international artists, multiple levels and musical approaches."], ["20:00–05:00", "Shows, finals & main party", "The decisive competition rounds followed by the biggest social night of the weekend."]] },
-  { key: "sunday", day: "Sunday", date: "18 October", promise: "Deepen. Celebrate. Stay.", items: [["12:00–20:00", "Sunday workshops", "Take the weekend's final ideas, techniques and connections into your own dancing."], ["20:00–05:00", "Closing party", "One last night, one last song and the goodbye nobody wants to make."]] },
+  { key: "friday", day: "Friday", date: "16 October", promise: "Arrive. Connect. Begin.", items: [["15:00", "Registration", "Festival registration."], ["16:30–21:30", "Friday workshops", "Two rooms of workshops, including the pre-party session."], ["00:00", "Showtime", "Showtime at midnight."]] },
+  { key: "saturday", day: "Saturday", date: "17 October", promise: "Learn. Perform. Explode.", items: [["11:00–20:10", "Workshops + Jack & Jill", "Two rooms of workshops with the first round and semi final in Room 2."], ["21:00–22:00", "Pre-party workshop", "Emilien & Tehina."], ["00:00", "Jack & Jill Final", "Final round at midnight."]] },
+  { key: "sunday", day: "Sunday", date: "18 October", promise: "Deepen. Celebrate. Stay.", items: [["12:00–19:10", "Sunday workshops", "Workshops, masterclasses and dedicated practice time."], ["20:30–21:30", "Reggaeton", "Diego & Ola · Open Level."]] },
 ] as const;
 
 const expandedFaqs = [
@@ -215,12 +256,25 @@ const expandedFaqs = [
             <article class="bbf-schedule-panel" id={`schedule-${day.day.toLowerCase()}`} data-schedule-panel={day.day.toLowerCase()} hidden={index !== 0}>
               <header><span>{day.date}</span><h3>{day.promise}</h3></header>
               <ol>{day.items.map(([time, title, text]) => <li><span>{time}</span><div><h4>{title}</h4><p>{text}</p></div></li>)}</ol>
-              <details class="bbf-workshop-details">
-                <summary>Detailed workshop plan <span>+</span></summary>
+              <details class="bbf-workshop-details" open>
+                <summary>Full workshop schedule <span>+</span></summary>
                 <div class="bbf-workshop-timetable">
-                  <div class="bbf-workshop-title"><span>Workshop slots</span><strong>{day.day} · {day.items[0][0]}</strong></div>
+                  <div class="bbf-workshop-title"><span>Official workshop schedule</span><strong>{day.day} · {day.date}</strong></div>
+                  <div class="bbf-workshop-legend" aria-label="Workshop levels">
+                    <span class="bbf-level" data-level="Open Level">Open Level</span>
+                    <span class="bbf-level" data-level="Intermediate">Intermediate</span>
+                    <span class="bbf-level" data-level="Advanced">Advanced</span>
+                    <span class="bbf-level" data-level="Masterclass">Masterclass</span>
+                    <span class="bbf-level" data-level="Pre-Party Workshop">Pre-Party Workshop</span>
+                  </div>
                   <div class="bbf-workshop-table" role="table" aria-label={`${day.day} workshop timetable`}>
-                    {workshopSlots[day.key].map((time) => <div class="bbf-workshop-row" role="row"><strong role="cell">{time}</strong><span role="cell">Workshop announcement coming</span><small role="cell">Artist · level · room TBA</small></div>)}
+                    {workshopSchedule[day.key].map((slot) => (
+                      <div class="bbf-workshop-row" role="row">
+                        <strong class="bbf-workshop-time" role="cell">{slot.time}</strong>
+                        <span class="bbf-workshop-session" role="cell"><small>{slot.room}</small><b>{slot.name}</b><em>{slot.topic}</em></span>
+                        <small class:list={["bbf-level", !slot.level && "is-empty"]} data-level={slot.level} role="cell">{slot.level}</small>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </details>
@@ -296,8 +350,15 @@ const expandedFaqs = [
     .bbf-quicknav .shell{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}.bbf-quicknav .shell::-webkit-scrollbar{display:none}
     .bbf-quicknav a{flex:0 0 auto;padding:9px 12px;border:1px solid transparent;color:#aaa297;font:800 .68rem/1 'Manrope',system-ui,sans-serif;letter-spacing:.055em;text-transform:uppercase;white-space:nowrap;text-decoration:none}.bbf-quicknav a:hover,.bbf-quicknav a:focus-visible{border-color:rgba(208,168,74,.42);color:#e4c36f;background:rgba(208,168,74,.07)}
     .bbf-workshop-details{grid-column:1/-1;border-top:1px solid rgba(227,183,95,.22)}.bbf-workshop-details>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:18px clamp(24px,4vw,48px);color:#f7ddb0;text-transform:uppercase;letter-spacing:.09em;font-size:.62rem;font-weight:900}.bbf-workshop-details>summary::-webkit-details-marker{display:none}.bbf-workshop-details[open]>summary span{transform:rotate(45deg)}
+    .bbf-workshop-timetable{border-top:1px solid rgba(227,183,95,.12);background:rgba(10,3,7,.22)}
+    .bbf-workshop-title{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px clamp(24px,4vw,48px);border-bottom:1px solid rgba(227,183,95,.14)}
+    .bbf-workshop-title span{color:#e3b75f;font-size:.57rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.bbf-workshop-title strong{color:#fff5ee;font-size:.82rem}
+    .bbf-workshop-legend{display:flex;flex-wrap:wrap;gap:7px;padding:14px clamp(24px,4vw,48px);border-bottom:1px solid rgba(227,183,95,.14)}
+    .bbf-workshop-row{display:grid;grid-template-columns:minmax(108px,.45fr) minmax(0,1.6fr) minmax(135px,.62fr);gap:20px;align-items:center;padding:16px clamp(24px,4vw,48px);border-bottom:1px solid rgba(247,221,176,.08)}
+    .bbf-workshop-row:last-child{border-bottom:0}.bbf-workshop-time{color:#f7ddb0;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.78rem}.bbf-workshop-session{display:grid;gap:3px;min-width:0}.bbf-workshop-session>small{color:#e3b75f;font-size:.54rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.bbf-workshop-session>b{color:#fff;font-size:.9rem;line-height:1.1}.bbf-workshop-session>em{color:#c8b5bc;font-size:.72rem;line-height:1.35;font-style:normal}
+    .bbf-level{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;min-height:24px;padding:5px 9px;border-radius:4px;color:#fff;font-size:.52rem;font-weight:900;letter-spacing:.045em;text-transform:uppercase;white-space:nowrap}.bbf-level[data-level="Open Level"]{background:#2b86bd}.bbf-level[data-level="Intermediate"]{background:#b97c12}.bbf-level[data-level="Advanced"]{background:#bf2d49}.bbf-level[data-level="Masterclass"]{background:#447c49}.bbf-level[data-level="Pre-Party Workshop"]{background:#707681}.bbf-level.is-empty{visibility:hidden}
     #venue,#artists,#schedule,#jj,#passes,#travel,#faq{scroll-margin-top:105px}
-    @media(max-width:1280px){.bbf-quicknav{top:88px}}@media(max-width:640px){.bbf-quicknav{top:80px}.bbf-quicknav .shell{width:100%;padding-left:14px;padding-right:14px}}
+    @media(max-width:1280px){.bbf-quicknav{top:88px}}@media(max-width:640px){.bbf-quicknav{top:80px}.bbf-quicknav .shell{width:100%;padding-left:14px;padding-right:14px}.bbf-workshop-legend{padding:12px 20px}.bbf-level{font-size:.48rem}.bbf-workshop-session>b{font-size:.84rem}.bbf-workshop-session>em{font-size:.68rem}}
   </style>
 
   <script>
