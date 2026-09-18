@@ -289,8 +289,13 @@ async function handleForm(request: Request, env: Env, kind: string) {
   const form = await request.formData();
   if (String(form.get("_gotcha") || "").trim()) return json({ ok: true });
 
-  const turnstileValid = await verifyTurnstile(request, form, env);
-  if (!turnstileValid) return json({ ok: false, error: "Please confirm that you are human and try again." }, 400);
+  // J&J currently uses the same-origin check plus a honeypot because its
+  // upload form does not render a Turnstile widget/site key. Keep Turnstile
+  // protection enabled for the other website forms.
+  if (kind !== "jj") {
+    const turnstileValid = await verifyTurnstile(request, form, env);
+    if (!turnstileValid) return json({ ok: false, error: "Please confirm that you are human and try again." }, 400);
+  }
 
   const values = serialiseForm(form);
   const email = values.get("email")?.[0];
