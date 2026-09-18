@@ -168,7 +168,6 @@ const judging = [
     @media(max-width:620px){.jj26-pad{padding:72px 0}.jj26-hero-copy h1{font-size:clamp(4.5rem,20vw,6.5rem)}.jj26-hero-grid{gap:42px;padding-bottom:70px}.jj26-flow{grid-template-columns:1fr}.jj26-flow li{min-height:230px}.jj26-podium{gap:10px}.jj26-form{grid-template-columns:1fr;padding:24px 18px}.jj26-form label,.jj26-form-head,.jj26-photo,.jj26-consent,.jj26-form>button,.jj26-status{grid-column:1}.jj26-form-head{align-items:start;flex-direction:column}.jj26-page h2{font-size:clamp(3.3rem,15vw,5rem)}}
   </style>
 
-  <script is:inline src="https://cdn.tickettailor.com/js/TTWidget.js"></script>
   <script>
     const jjRules = Array.from(document.querySelectorAll<HTMLDetailsElement>(".jj26-rule-list details"));
     jjRules.forEach((rule) => rule.addEventListener("toggle", () => { if (!rule.open) return; jjRules.forEach((candidate) => { if (candidate !== rule) candidate.open = false; }); }));
@@ -179,31 +178,12 @@ const judging = [
     const jjPayment = document.querySelector<HTMLElement>("[data-jj-payment]");
     const jjPaymentButton = document.querySelector<HTMLButtonElement>("[data-jj-payment-button]");
 
-    const openJjCheckout = async () => {
-      if (!jjForm) return;
-      const boxOffice = jjForm.dataset.jjTicketTailorBoxOffice?.trim();
-      const eventId = Number(jjForm.dataset.jjTicketTailorEvent || "0");
-      const directUrl = jjForm.dataset.jjTicketTailorUrl?.trim();
-
-      for (let attempt = 0; attempt < 40; attempt += 1) {
-        const ticketTailor = (window as typeof window & {
-          TTWidget?: { loadEvent: (boxOffice: string, eventId: number, mode: string) => void };
-        }).TTWidget;
-
-        if (ticketTailor && boxOffice && eventId) {
-          ticketTailor.loadEvent(boxOffice, eventId, "widget");
-          return;
-        }
-
-        await new Promise((resolve) => window.setTimeout(resolve, 150));
-      }
-
-      if (directUrl) {
-        window.location.assign(directUrl);
-      }
+    const openJjCheckout = () => {
+      const directUrl = jjForm?.dataset.jjTicketTailorUrl?.trim();
+      if (directUrl) window.location.assign(directUrl);
     };
 
-    jjPaymentButton?.addEventListener("click", () => { void openJjCheckout(); });
+    jjPaymentButton?.addEventListener("click", openJjCheckout);
 
     jjForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -233,7 +213,7 @@ const judging = [
         if (jjSubmit) jjSubmit.textContent = "Step 1 complete ✓";
         if (jjPayment) jjPayment.hidden = false;
 
-        void openJjCheckout();
+        window.setTimeout(openJjCheckout, 250);
       } catch (error) {
         const message = error instanceof Error ? error.message : "Registration could not be delivered.";
         if (jjStatus) jjStatus.textContent = message + " Please try again or email info@bachataexplosion.com.";
