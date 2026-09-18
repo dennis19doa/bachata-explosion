@@ -14,8 +14,17 @@ type Env = {
   FORM_CONTACT_TO?: string;
 };
 
+type MailAttachment = {
+  filename: string;
+  contentType: string;
+  data: Uint8Array;
+};
+
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 const MAX_FORM_BYTES = 512_000;
+const MAX_JJ_FORM_BYTES = 6_000_000;
+const MAX_JJ_PHOTO_BYTES = 5_000_000;
+const JJ_PHOTO_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 const LEGACY_ASSET_PATHS: Record<string, string> = {
   "/wp-content/uploads/2025/12/Screenshot-2025-12-25-165417.png": "/media/bbf/venue/location.png",
@@ -32,7 +41,7 @@ const escapeHtml = (value: string) =>
     "<": "&lt;",
     ">": "&gt;",
     "'": "&#039;",
-    '\"': "&quot;",
+    '"': "&quot;",
   }[char] ?? char));
 
 const kindLabel = (kind: string) => ({
@@ -43,6 +52,7 @@ const kindLabel = (kind: string) => ({
   media: "Media request",
   volunteer: "Volunteer application",
   ambassador: "Ambassador application",
+  jj: "J&J competition registration",
   newsletter: "Newsletter signup",
 }[kind] || kind);
 
@@ -103,8 +113,15 @@ function renderEmail(kind: string, values: Map<string, string[]>) {
 
 function utf8Base64(value: string) {
   const bytes = new TextEncoder().encode(value);
+  return bytesBase64(bytes);
+}
+
+function bytesBase64(bytes: Uint8Array) {
+  const chunkSize = 0x8000;
   let binary = "";
-  for (const byte of bytes) binary += String.fromCharCode(byte);
+  for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+  }
   return btoa(binary);
 }
 
@@ -116,12 +133,18 @@ function mimeHeader(value: string) {
   return `=?UTF-8?B?${utf8Base64(value)}?=`;
 }
 
+function safeAttachmentName(value: string) {
+  const cleaned = value.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "");
+  return cleaned || "competition-photo";
+}
+
 async function sendZohoSmtpMail(
   toAddress: string,
   replyTo: string,
   subject: string,
   content: string,
   env: Env,
+  attachment?: MailAttachment,
 ) {
   const username = env.ZOHO_SMTP_USER?.trim();
   const password = env.ZOHO_SMTP_PASSWORD?.trim();
@@ -190,18 +213,48 @@ async function sendZohoSmtpMail(
     await command(`RCPT TO:<${toAddress}>`, [250, 251]);
     await command("DATA", [354]);
 
-    const message = [
+    const headers = [
       `From: ${mimeHeader(fromName)} <${fromAddress}>`,
       `To: <${toAddress}>`,
       `Reply-To: <${replyTo}>`,
       `Subject: ${mimeHeader(subject)}`,
       "MIME-Version: 1.0",
-      'Content-Type: text/html; charset="UTF-8"',
-      "Content-Transfer-Encoding: base64",
-      "",
-      wrapBase64(utf8Base64(content)),
-      "",
-    ].join("\r\n");
+    ];
+
+    let message: string;
+    if (attachment) {
+      const boundary = `----BachataExplosion-${crypto.randomUUID().replaceAll("-", "")}`;
+      const filename = safeAttachmentName(attachment.filename);
+      message = [
+        ...headers,
+        `Content-Type: multipart/mixed; boundary="${boundary}"`,
+        "",
+        `--${boundary}`,
+        'Content-Type: text/html; charset="UTF-8"',
+        "Content-Transfer-Encoding: base64",
+        "",
+        wrapBase64(utf8Base64(content)),
+        "",
+        `--${boundary}`,
+        `Content-Type: ${attachment.contentType}; name="${filename}"`,
+        "Content-Transfer-Encoding: base64",
+        `Content-Disposition: attachment; filename="${filename}"`,
+        "",
+        wrapBase64(bytesBase64(attachment.data)),
+        "",
+        `--${boundary}--`,
+        "",
+      ].join("\r\n");
+    } else {
+      message = [
+        ...headers,
+        'Content-Type: text/html; charset="UTF-8"',
+        "Content-Transfer-Encoding: base64",
+        "",
+        wrapBase64(utf8Base64(content)),
+        "",
+      ].join("\r\n");
+    }
 
     await writer.write(encoder.encode(`${message}.\r\n`));
     const accepted = await readReply();
@@ -222,7 +275,8 @@ async function handleForm(request: Request, env: Env, kind: string) {
   if (request.method !== "POST") return json({ ok: false, error: "Method not allowed" }, 405);
 
   const contentLength = Number(request.headers.get("content-length") || "0");
-  if (contentLength > MAX_FORM_BYTES) return json({ ok: false, error: "Submission is too large" }, 413);
+  const maxBytes = kind === "jj" ? MAX_JJ_FORM_BYTES : MAX_FORM_BYTES;
+  if (contentLength > maxBytes) return json({ ok: false, error: "Submission is too large" }, 413);
 
   const origin = request.headers.get("origin");
   if (origin) {
@@ -244,9 +298,29 @@ async function handleForm(request: Request, env: Env, kind: string) {
     return json({ ok: false, error: "A valid email address is required." }, 400);
   }
 
+  let attachment: MailAttachment | undefined;
+  if (kind === "jj") {
+    const photo = form.get("competition_photo");
+    if (!(photo instanceof File) || photo.size === 0) {
+      return json({ ok: false, error: "Please upload your competition photo." }, 400);
+    }
+    if (!JJ_PHOTO_TYPES.has(photo.type)) {
+      return json({ ok: false, error: "Competition photo must be JPG, PNG or WebP." }, 400);
+    }
+    if (photo.size > MAX_JJ_PHOTO_BYTES) {
+      return json({ ok: false, error: "Competition photo must be 5 MB or smaller." }, 413);
+    }
+    values.set("competition_photo", [photo.name]);
+    attachment = {
+      filename: photo.name,
+      contentType: photo.type,
+      data: new Uint8Array(await photo.arrayBuffer()),
+    };
+  }
+
   const { subject, content } = renderEmail(kind, values);
   const destination = env.FORM_CONTACT_TO || "info@bachataexplosion.com";
-  await sendZohoSmtpMail(destination, email, subject, content, env);
+  await sendZohoSmtpMail(destination, email, subject, content, env, attachment);
   return json({ ok: true });
 }
 
@@ -260,7 +334,7 @@ export default {
       return env.ASSETS.fetch(new Request(assetUrl.toString(), request));
     }
 
-    const match = url.pathname.match(/^\/api\/forms\/(contact|tickets|groups|partners|media|volunteer|ambassador|newsletter)\/?$/);
+    const match = url.pathname.match(/^\/api\/forms\/(contact|tickets|groups|partners|media|volunteer|ambassador|jj|newsletter)\/?$/);
     if (match) {
       try {
         return await handleForm(request, env, match[1]);

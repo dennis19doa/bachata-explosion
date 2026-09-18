@@ -24,7 +24,7 @@ export const contactTopicEndpoints = {
   "General question": contactFormEndpoint,
 } as const;
 
-// Jack & Jill includes a photo upload and remains separate until its dedicated
-// upload/storage flow is enabled.
-export const jjFormEndpoint = value("PUBLIC_JJ_FORM_ENDPOINT");
+// Jack & Jill posts to the dedicated Worker route because it includes
+// a competition-photo attachment in addition to the normal form fields.
+export const jjFormEndpoint = endpoint("PUBLIC_JJ_FORM_ENDPOINT", "/api/forms/jj");
 export const newsletterFormEndpoint = endpoint("PUBLIC_NEWSLETTER_FORM_ENDPOINT", "/api/forms/newsletter");
