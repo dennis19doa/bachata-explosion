@@ -179,19 +179,31 @@ const judging = [
     const jjPayment = document.querySelector<HTMLElement>("[data-jj-payment]");
     const jjPaymentButton = document.querySelector<HTMLButtonElement>("[data-jj-payment-button]");
 
-    const openJjCheckout = () => {
+    const openJjCheckout = async () => {
       if (!jjForm) return;
       const boxOffice = jjForm.dataset.jjTicketTailorBoxOffice?.trim();
       const eventId = Number(jjForm.dataset.jjTicketTailorEvent || "0");
-      const ticketTailor = (window as typeof window & {
-        TTWidget?: { loadEvent: (boxOffice: string, eventId: number, mode: string) => void };
-      }).TTWidget;
-      if (ticketTailor && boxOffice && eventId) {
-        ticketTailor.loadEvent(boxOffice, eventId, "widget");
+      const directUrl = jjForm.dataset.jjTicketTailorUrl?.trim();
+
+      for (let attempt = 0; attempt < 40; attempt += 1) {
+        const ticketTailor = (window as typeof window & {
+          TTWidget?: { loadEvent: (boxOffice: string, eventId: number, mode: string) => void };
+        }).TTWidget;
+
+        if (ticketTailor && boxOffice && eventId) {
+          ticketTailor.loadEvent(boxOffice, eventId, "widget");
+          return;
+        }
+
+        await new Promise((resolve) => window.setTimeout(resolve, 150));
+      }
+
+      if (directUrl) {
+        window.location.assign(directUrl);
       }
     };
 
-    jjPaymentButton?.addEventListener("click", openJjCheckout);
+    jjPaymentButton?.addEventListener("click", () => { void openJjCheckout(); });
 
     jjForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -221,7 +233,7 @@ const judging = [
         if (jjSubmit) jjSubmit.textContent = "Step 1 complete ✓";
         if (jjPayment) jjPayment.hidden = false;
 
-        window.setTimeout(openJjCheckout, 150);
+        void openJjCheckout();
       } catch (error) {
         const message = error instanceof Error ? error.message : "Registration could not be delivered.";
         if (jjStatus) jjStatus.textContent = message + " Please try again or email info@bachataexplosion.com.";
