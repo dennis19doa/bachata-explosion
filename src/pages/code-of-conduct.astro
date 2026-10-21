@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const reportingEmail = "info@bachataexplosion.com";
+const whatsappUrl = "https://wa.me/4916253864495";
+const mailtoUrl = `mailto:${reportingEmail}?subject=${encodeURIComponent("Safety concern - Bachata Explosion")}`;
+const standards = [
+  {number:"01", title:"Unwanted physical contact", detail:"Non-consensual touching, grabbing, groping, kissing, forced closeness or any unwanted sexual contact."},
+  {number:"02", title:"Sexual harassment", detail:"Unwanted sexual advances, persistent flirting after a refusal, sexual remarks, pressure for intimate contact or invasive questions."},
+  {number:"03", title:"Discrimination & intimidation", detail:"Bullying, stalking, threats, racist, sexist, homophobic or transphobic behavior, and harassment relating to disability or background."},
+  {number:"04", title:"Coercion & retaliation", detail:"Abusing a position of trust to pressure someone, or retaliating against anyone who sets a boundary or reports a concern."}
+];
+---
+
+<BaseLayout title="Code of Conduct & Safer Spaces — Bachata Explosion" description="Everyone deserves to feel safe at Bachata Explosion. Read our zero-tolerance harassment policy and learn how to report concerns to our team." headerStyle="solid">
+  <article class="conduct">
+    <section class="conduct-hero" aria-labelledby="conduct-title">
+      <div class="shell">
+        <p class="conduct-kicker">Our community · Our responsibility</p>
+        <h1 id="conduct-title">Every dancer deserves<br />to feel <em>safe.</em></h1>
+        <p class="conduct-lead">At Bachata Explosion, we want everyone to feel welcome, respected and free to enjoy dancing without fear of harassment, discrimination or intimidation.</p>
+        <p class="conduct-sub">A great dance experience begins with mutual respect. Safety is part of the community we choose to build together.</p>
+        <div class="conduct-actions">
+          <a class="button button-gold" href="#report">Report a concern ↗</a>
+          <a href="#standards" class="conduct-text-link">Read our standards ↓</a>
+        </div>
+        <div class="conduct-values"><span>Consent</span><span>Respect</span><span>Accountability</span><span>Belonging</span></div>
+      </div>
+    </section>
+
+    <section class="conduct-section conduct-commitment" aria-labelledby="conduct-commitment">
+      <div class="shell conduct-intro-grid">
+        <p class="conduct-kicker">Our promise / 01</p>
+        <div>
+          <h2 id="conduct-commitment">Zero tolerance.<br /><em>No exceptions.</em></h2>
+          <p><strong>We have a zero-tolerance policy for sexual harassment and all forms of harassment.</strong> It applies regardless of gender, gender identity, sexual orientation, ethnicity, race, religion, age, disability or background.</p>
+          <p>It applies to <strong>everyone</strong> — participants, artists, teachers, DJs, team members, volunteers, guests, partners and organizers. No reputation, status or role creates an exception.</p>
+          <p>We take concerns seriously and will assess incidents promptly, consider the safety of those involved and take appropriate action.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="conduct-section" id="standards" aria-labelledby="standards-heading">
+      <div class="shell">
+        <p class="conduct-kicker">Our standards / 02</p>
+        <h2 id="standards-heading">Respect is part of<br /><em>every dance.</em></h2>
+        <p class="conduct-intro">The following behaviors are not acceptable at any Explosion event, workshop, social or event-related online space.</p>
+        <div class="conduct-rules">
+          {standards.map((item) => (
+            <section class="conduct-rule">
+              <span>{item.number} / Not acceptable</span>
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </section>
+          ))}
+        </div>
+        <div class="conduct-consent">
+          <div><span class="conduct-kicker">Consent always matters</span><h3>Dance is an invitation, never an obligation.</h3></div>
+          <p>Respect a “no”, a change of mind or a request for more space immediately, without argument. Anyone can decline or end a dance at any time without explaining why. Dancing together does not imply consent to intimate touching or sexual attention. Check in with your partner and respect their boundaries.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="conduct-section conduct-report" id="report" aria-labelledby="report-heading">
+      <div class="shell">
+        <p class="conduct-kicker">Speak up / 03</p>
+        <h2 id="report-heading">If something happens,<br /><em>please tell us.</em></h2>
+        <p class="conduct-intro">If you have experienced or witnessed harassment, or if a situation simply made you feel unsafe, we want to hear from you. You do not need to decide whether it is “serious enough” before reaching out.</p>
+        <div class="conduct-report-grid">
+          <div class="conduct-report-panel">
+            <h3>Contact the Explosion team</h3>
+            <p>You can approach an organizer or staff member at the event, or message us directly using the options below. Share only what you feel comfortable sharing.</p>
+            <div class="conduct-channels">
+              <a href={mailtoUrl} class="conduct-channel"><span class="conduct-channel-icon" aria-hidden="true">✉</span><span><small>Email our team</small><strong>{reportingEmail}</strong><em>Send a safety concern ↗</em></span></a>
+              <a href={whatsappUrl} class="conduct-channel" target="_blank" rel="noopener noreferrer"><span class="conduct-channel-icon" aria-hidden="true">↗</span><span><small>Direct WhatsApp message</small><strong>+49 162 538 64495</strong><em>Start a private chat ↗</em></span></a>
+            </div>
+            <p class="conduct-highlight">We will listen respectfully, take your concern seriously and discuss possible next steps with you.</p>
+          </div>
+          <aside class="conduct-steps">
+            <h3>What to do if you need help</h3>
+            <ol>
+              <li><strong>Put your safety first.</strong> Move somewhere you feel comfortable and ask our team for immediate support.</li>
+              <li><strong>Let us know.</strong> Talk to us in person or send a message. You may also report on someone else's behalf.</li>
+              <li><strong>We will respond.</strong> We will consider your wishes, your safety and the circumstances when deciding the next steps.</li>
+            </ol>
+            <p><strong>In immediate danger in Germany?</strong> Contact the police on <a href="tel:110">110</a> or emergency services on <a href="tel:112">112</a>. Our team is not an emergency service.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="conduct-section conduct-response" aria-labelledby="response-heading">
+      <div class="shell conduct-intro-grid">
+        <div><p class="conduct-kicker">Accountability / 04</p><h2 id="response-heading">We take concerns<br /><em>seriously.</em></h2></div>
+        <div>
+          <p>Our team will review reports as promptly and fairly as possible. Depending on the situation, we may intervene immediately, separate people, issue a warning, remove a person from an event, ban future participation or involve the relevant authorities where appropriate.</p>
+          <p><strong>Retaliation is unacceptable.</strong> Nobody should be punished, threatened or excluded for reporting a concern in good faith or helping someone else seek support.</p>
+          <p>We handle reports with care and discretion, sharing information only where needed to respond, protect people or meet legal obligations. Complete confidentiality cannot be guaranteed in every situation.</p>
+          <p>We cannot promise that an incident will never occur. We can promise to listen, respond and keep working toward a safer environment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="conduct-outro" aria-labelledby="outro-heading">
+      <div class="shell">
+        <p class="conduct-kicker">By dancers · For dancers</p>
+        <h2 id="outro-heading">A community where<br />everyone <em>belongs.</em></h2>
+        <p>We want every Explosion to be remembered for its music, its connection and the people who make it special. Thank you for helping us create a space built on care, consent and respect.</p>
+        <a class="button button-gold" href="#report">Reach out to us ↗</a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .conduct{background:#0b080a;color:#f3ece6}.conduct .shell{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+  .conduct h1,.conduct h2,.conduct h3{letter-spacing:-.045em}.conduct h1 em,.conduct h2 em{color:#f0c15d;font-style:normal}
+  .conduct p{line-height:1.7}.conduct-kicker{color:#f0c15d!important;font-size:.73rem;font-weight:850;letter-spacing:.19em;text-transform:uppercase}
+  .conduct-hero{position:relative;overflow:hidden;padding:clamp(88px,10vw,145px) 0 55px;background:radial-gradient(ellipse at 85% 22%,#4e1c324c,transparent 50%),linear-gradient(120deg,#1a0c14,#0b090b 75%);border-bottom:1px solid #f0c15d35}
+  .conduct-hero:before{content:"";position:absolute;pointer-events:none;right:-70px;top:10%;width:440px;height:440px;background:url('/media/brand/explosion-mark.svg') center/contain no-repeat;opacity:.09}
+  .conduct-hero .shell{position:relative}.conduct h1{font-size:clamp(3rem,7.5vw,7rem);line-height:1.02;margin:23px 0 29px}
+  .conduct-lead{font-size:clamp(1.2rem,2.4vw,1.75rem);font-weight:650;line-height:1.5!important;max-width:790px;margin-bottom:15px}
+  .conduct-sub{color:#d3c6ca;max-width:650px}.conduct-actions{display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:30px}
+  .conduct-text-link{color:#f3ece6;text-decoration:underline;text-decoration-color:#f0c15d;text-underline-offset:7px;font-weight:700}
+  .conduct-values{border-top:1px solid #f0c15d35;padding-top:23px;margin-top:75px;display:flex;flex-wrap:wrap;gap:15px 36px}
+  .conduct-values span{font-size:.73rem;letter-spacing:.16em;font-weight:850;text-transform:uppercase;color:#decfcb}
+  .conduct-section{padding:clamp(70px,8vw,116px) 0}.conduct-commitment{background:#151015}
+  .conduct-intro-grid{display:grid;grid-template-columns:1fr 2.2fr;gap:clamp(35px,7vw,100px)}
+  .conduct h2{font-size:clamp(2.5rem,5.5vw,5rem);line-height:1.08;margin:16px 0 25px}.conduct h3{font-size:clamp(1.5rem,2.5vw,2.2rem)}
+  .conduct-intro-grid p:not(.conduct-kicker){max-width:790px;color:#d9cdce;font-size:1.07rem}
+  .conduct-intro-grid strong{color:#fff4e7}.conduct-intro{color:#d9cdce;font-size:1.08rem;max-width:760px}
+  .conduct-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:40px 0 48px}
+  .conduct-rule{padding:clamp(22px,3.5vw,38px);background:#1a1418;border:1px solid #f0c15d33}
+  .conduct-rule span{color:#f0c15d;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+  .conduct-rule h3{margin:20px 0 10px}.conduct-rule p{margin:0;color:#d6c8cc}
+  .conduct-consent{border-top:1px solid #f0c15d55;padding-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .conduct-consent h3{margin:15px 0 0}.conduct-consent p{margin:0;color:#d8cdcf}
+  .conduct-report{background:linear-gradient(140deg,#2b1320,#110c11 80%)}
+  .conduct-report-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:35px}
+  .conduct-report-panel,.conduct-steps{padding:clamp(22px,3.5vw,38px);background:#100c10;border:1px solid #f0c15d50}
+  .conduct-report-panel h3,.conduct-steps h3{margin:0 0 15px}.conduct-report-panel>p,.conduct-steps li{color:#ded0d0}
+  .conduct-channels{display:grid;gap:12px;margin:26px 0}.conduct-channel{display:flex;align-items:center;gap:17px;padding:17px;border:1px solid #f0c15d50;color:#fff!important;text-decoration:none!important;background:#ffffff08}
+  .conduct-channel:hover,.conduct-channel:focus-visible{background:#f0c15d20;border-color:#f0c15d}
+  .conduct-channel-icon{flex:0 0 44px;height:44px;display:grid;place-items:center;background:#f0c15d;color:#130d10;font-size:1.3rem;font-weight:900}
+  .conduct-channel>span:last-child{min-width:0;display:grid;gap:3px}.conduct-channel small{font-weight:650;color:#d0c0bd}
+  .conduct-channel strong{font-size:clamp(.98rem,1.7vw,1.2rem);overflow-wrap:anywhere}.conduct-channel em{color:#f0c15d;font-style:normal;font-size:.82rem}
+  .conduct-highlight{border-left:3px solid #f0c15d;padding-left:16px}.conduct-steps ol{display:grid;gap:17px;padding-left:23px;margin:24px 0}
+  .conduct-steps li::marker{color:#f0c15d;font-weight:900}.conduct-steps p{border-top:1px solid #f0c15d30;padding-top:22px;color:#d9cdcc}
+  .conduct-steps a{color:#f0c15d;font-weight:850}.conduct-response{background:#130e12}
+  .conduct-response .conduct-intro-grid{grid-template-columns:1fr 1.1fr}
+  .conduct-outro{text-align:center;padding:clamp(90px,12vw,150px) 0;background:radial-gradient(ellipse at center top,#5e17353b,transparent 70%)}
+  .conduct-outro p:not(.conduct-kicker){max-width:670px;color:#d9cece;margin:0 auto 30px}
+  @media(max-width:750px){.conduct .shell{width:calc(100% - 34px)}.conduct-hero{padding:90px 0 37px}.conduct-hero:before{width:250px;height:250px;right:-110px}
+  .conduct-values{margin-top:50px;gap:14px 20px}.conduct-intro-grid,.conduct-rules,.conduct-consent,.conduct-report-grid,.conduct-response .conduct-intro-grid{grid-template-columns:1fr;gap:19px}
+  .conduct-rule{padding:25px}.conduct-report-panel,.conduct-steps{padding:23px 17px}.conduct-channel{padding:13px;gap:12px}.conduct-channel-icon{flex-basis:38px;height:38px}}
+</style>
