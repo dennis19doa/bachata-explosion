@@ -50,6 +50,14 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
             </button>
           ))}
         </div>
+        <aside class="conduct-contact-banner" aria-label="Our commitment to safety">
+          <div>
+            <small>Your safety matters</small>
+            <strong>Everyone deserves to feel safe at Explosion.</strong>
+            <p>We have zero tolerance for sexual harassment or any other kind of harassment. Please read our policy and contact us if something happened.</p>
+          </div>
+          <a href="/code-of-conduct/">Code of Conduct ↗</a>
+        </aside>
       </div>
     </section>
 
@@ -228,3 +236,13 @@ const formConnected = Object.values(contactTopicEndpoints).some(Boolean);
     });
   </script>
 </BaseLayout>
+
+<style>
+  .conduct-contact-banner{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:24px 28px;margin:30px 0 0;border:1px solid rgba(240,193,93,.4);border-left:4px solid #f0c15d;background:#23141c}
+  .conduct-contact-banner small{display:block;color:#f0c15d;font-size:.72rem;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+  .conduct-contact-banner strong{display:block;margin:8px 0;font-size:clamp(1.2rem,2.2vw,1.65rem);color:#fff}
+  .conduct-contact-banner p{margin:0;color:#dfd0d0;max-width:800px;line-height:1.5}
+  .conduct-contact-banner a{padding:13px 18px;background:#f0c15d;color:#1a0c0f;font-weight:900;text-decoration:none;text-align:center;flex-shrink:0}
+  .conduct-contact-banner a:hover{background:#ffe0a0}
+  @media(max-width:760px){.conduct-contact-banner{flex-direction:column;align-items:stretch;padding:20px;gap:18px}}
+</style>
