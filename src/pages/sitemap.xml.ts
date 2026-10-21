@@ -14,6 +14,7 @@ const pages = [
   "archive/",
   ...archiveEvents.map((event) => `archive/${event.slug}/`),
   "contact/",
+  "code-of-conduct/",
   "imprint/",
   "privacy-policy/",
   ...wordpressPages.filter((page) => page.slug !== "home").map((page) => `${page.slug}/`),
