@@ -5,6 +5,7 @@ import { wordpressPages } from "../lib/wordpressContent";
 const pages = [
   "",
   "festival/",
+  "bbf-2026/friday-workshops-2026/",
   "jack-and-jill/",
   "role-rotation/",
   "elite-dance-3/",
