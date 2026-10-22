@@ -1,3 +1,6 @@
+// Official 2027 early-bird event page. Keep the 2026 ticket URL below for archived edition content.
+export const earlyBird2027Url = "https://www.tickettailor.com/events/bachataexplosionbyelenadennis/2418099?date=2027-10-22";
+
 export const ticketBoxOffice = "bachataexplosionbyelenadennis";
 export const ticketEventPublicId = 1902213;
 
