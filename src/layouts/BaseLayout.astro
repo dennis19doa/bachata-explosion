@@ -11,7 +11,7 @@ import "../styles/explosion-feedback-screens.css";
 import "../styles/explosion-feedback-sept2.css";
 import "../styles/explosion-feedback-sept2-final.css";
 import "../styles/explosion-feedback-sept2-followup.css";
-import { ticketUrl } from "../data/festival";
+import { earlyBird2027Url } from "../data/festival";
 
 const whatsappUrl = "https://chat.whatsapp.com/D6Qo0TvbwfMLenL9ajiaHK";
 
@@ -49,7 +49,7 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="Bachata Explosion — Berlin Bachata Festival, October 16–18, 2026" />
+    <meta property="og:image:alt" content="Bachata Explosion — Berlin Bachata Festival 2027" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -78,16 +78,10 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
         <details class:list={["nav-group", { "is-current": festivalActive }]}>
           <summary>Festival</summary>
           <div class="nav-popover">
-            <span>Berlin Bachata Festival 2026</span>
-            <a href="/bbf-2026/"><b>Festival overview</b><small>16–18 October · MOA Berlin</small></a>
-            <a href="/bbf-2026/#venue"><b>Venue & hotel</b><small>MOA Berlin and official room deal</small></a>
-            <a href="/bbf-2026/#artists"><b>Artists</b><small>International lineup and DJs</small></a>
-            <a href="/bbf-2026/#schedule"><b>Schedule</b><small>Friday to Sunday</small></a>
-            <a href="/jj/"><b>Jack & Jill overview</b><small>Competition, bracket and registration</small></a>
-            <a href="/jj/rules/"><b>J&J rules & guide</b><small>Eligibility, judging, music and prizes</small></a>
-            <a href="/bbf-2026/#passes"><b>Passes</b><small>Full, Gold and Party</small></a>
-            <a href="/bbf-2026/#travel"><b>Berlin & travel</b><small>Airport, train and local arrival</small></a>
-            <a href="/bbf-2026/#faq"><b>FAQ</b><small>Practical festival answers</small></a>
+            <span>Berlin Bachata Festival · 2027</span>
+            <a href={earlyBird2027Url} target="_blank" rel="noopener noreferrer"><b>Get your 2027 Early Bird</b><small>First 50 Full Passes €99 · 22–24 October</small></a>
+            <a href="/#early-bird-2027"><b>What's coming next</b><small>2027 festival &amp; upcoming announcements</small></a>
+            <a href="/bbf-2026/"><b>Look back at BBF 2026</b><small>Previous edition</small></a>
           </div>
         </details>
 
@@ -112,7 +106,9 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
             <details class="mobile-nav-group">
               <summary><span>Festival</span><i aria-hidden="true"></i></summary>
               <div>
-                <a href="/bbf-2026/">Festival overview</a><a href="/bbf-2026/#venue">Venue & hotel</a><a href="/bbf-2026/#artists">Artists</a><a href="/bbf-2026/#schedule">Schedule</a><a href="/jj/">Jack & Jill overview</a><a href="/jj/rules/">J&amp;J rules & guide</a><a href="/bbf-2026/#passes">Passes</a><a href="/bbf-2026/#travel">Berlin & travel</a><a href="/bbf-2026/#faq">FAQ</a>
+                <a href={earlyBird2027Url} target="_blank" rel="noopener noreferrer">2027 Early Bird · €99</a>
+                <a href="/#early-bird-2027">Festival 2027 updates</a>
+                <a href="/bbf-2026/">Previous festival · 2026</a>
               </div>
             </details>
             <a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><details class="mobile-nav-group"><summary><span>Contact</span><i aria-hidden="true"></i></summary><div><a href="/contact/">Contact the team</a><a href="/code-of-conduct/">Code of Conduct</a></div></details>
@@ -121,7 +117,7 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
         </div>
       </details>
 
-      <a class="button button-small button-gold" href={ticketUrl}>Get tickets</a>
+      <a class="button button-small button-gold" href={earlyBird2027Url} target="_blank" rel="noopener noreferrer">2027 Early Bird</a>
     </header>
 
     <main id="main"><slot /></main>
@@ -129,12 +125,12 @@ const archiveActive = current("/archive/") || current("/role-rotation") || curre
     <footer class="site-footer">
       <div class="shell footer-grid">
         <div class="footer-brand-block"><a class="footer-brand" href="/"><img src="/media/brand/explosion-logo.webp" alt="Bachata Explosion" width="184" height="64" /></a><p>Berlin dance experiences built by dancers, for dancers.</p></div>
-        <nav aria-label="Footer navigation"><a href="/bbf-2026/">Festival</a><a href="/bbf-2026/#travel">Berlin & travel</a><a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><a href="/contact/">Contact</a><a href="/code-of-conduct/">Code of Conduct</a><a href="/imprint/">Imprint</a><a href="/privacy/">Privacy</a><a href="/terms-conditions/">Terms</a></nav>
+        <nav aria-label="Footer navigation"><a href="/#early-bird-2027">Festival 2027</a><a href="/bbf-2026/">BBF 2026</a><a href="/explosion-history/">Our Story</a><a href="/ambassadors/">Ambassadors</a><a href="/volunteers/">Volunteers</a><a href="/archive/">Past Events</a><a href="/contact/">Contact</a><a href="/code-of-conduct/">Code of Conduct</a><a href="/imprint/">Imprint</a><a href="/privacy/">Privacy</a><a href="/terms-conditions/">Terms</a></nav>
         <address><strong>Elena &amp; Dennis Events UG</strong><br />Berlin, Germany<br /><a href="mailto:info@bachataexplosion.com">info@bachataexplosion.com</a><br /><a href={whatsappUrl}>Festival WhatsApp ↗</a></address>
       </div>
     </footer>
 
-    <a class="mobile-ticket-dock" href={ticketUrl}><span>BBF 2026</span><strong>Get tickets →</strong></a>
+    <a class="mobile-ticket-dock" href={earlyBird2027Url} target="_blank" rel="noopener noreferrer"><span>BBF 2027 · €99</span><strong>Get Early Bird →</strong></a>
     <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
 
     <script>
