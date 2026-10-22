@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { ticketUrl } from "../data/festival";
+import { earlyBird2027Url } from "../data/festival";
 import "../styles/home-modern.css";
+import "../styles/home-2027.css";
 
 const founders = [
   {
@@ -42,65 +43,63 @@ const historyImages = [
   ["/media/archive/role-rotation-2026.jpg", "Role Rotation 2026"],
 ] as const;
 
-const memoryStrip = [
-  ["/media/archive/gold-2022.jpg", "2022 · where it started"],
-  ["/media/archive/bbf-2023.jpg", "2023 · Berlin Bachata Festival"],
-  ["/media/archive/role-rotation-2024.jpg", "2024 · new ideas"],
-  ["/media/archive/bbf-2025.jpg", "2025 · growing together"],
-  ["/media/archive/role-rotation-2026.jpg", "2026 · the story continues"],
-] as const;
 ---
 
 <BaseLayout
-  title="Bachata Explosion — Berlin Bachata events by dancers, for dancers"
-  description="Discover Bachata Explosion in Berlin: Berlin Bachata Festival, Role Rotation, Elite Dance and the community behind every edition."
+  title="Berlin Bachata Festival 2027 — Early Bird Tickets | Bachata Explosion"
+  description="Berlin Bachata Festival is back 22–24 October 2027 at MOA Berlin. First 50 Full Passes for €99. Stay close for the next Bachata Explosion announcements."
 >
-  <div class="ex-home" data-wordpress-source="home">
-    <section class="ex-hero" aria-labelledby="ex-home-title">
+  <div class="ex-home ex-home-2027" data-wordpress-source="home">
+    <section class="ex-hero" id="early-bird-2027" aria-labelledby="ex-home-title">
       <div class="ex-shell ex-hero-grid">
         <div class="ex-hero-copy">
-          <span class="ex-edition">Next Explosion · 4th edition</span>
-          <p class="ex-kicker">Berlin · by dancers, for dancers</p>
-          <h1 id="ex-home-title">Berlin Bachata <em>Festival</em></h1>
-          <div class="ex-hero-meta"><strong>16–18 October 2026</strong><span>MOA Berlin · Stephanstraße 41</span></div>
-          <p class="ex-hero-lead">Our biggest Explosion of the year: international artists, high-quality workshops, competition energy and three nights of social dancing in Berlin.</p>
-          <div class="ex-actions">
-            <a class="ex-btn" href={ticketUrl}>Get festival tickets →</a>
-            <a class="ex-btn ex-btn-secondary" href="/bbf-2026/">Festival information</a>
+          <span class="ex-edition">Berlin Bachata Festival · 2027</span>
+          <p class="ex-kicker">A new chapter is coming</p>
+          <h1 id="ex-home-title">2027 starts <em>right here.</em></h1>
+          <div class="ex-hero-meta">
+            <strong>22–24 October 2027</strong>
+            <span>MOA Bogen · Mercure Hotel, Berlin</span>
           </div>
+          <p class="ex-hero-lead">Our next Explosion is already taking shape. We're working on fresh ideas, new experiences and a few surprises — and we can't wait to share them with you.</p>
+          <p class="ex-hero-offer">The first <strong>50 Full Passes are just €99</strong> — our lowest price for 2027.</p>
+          <div class="ex-actions">
+            <a class="ex-btn" href={earlyBird2027Url} target="_blank" rel="noopener noreferrer">Get your €99 Early Bird →</a>
+            <a class="ex-btn ex-btn-secondary" href="/insider/">Stay up to date →</a>
+          </div>
+          <p class="ex-hero-small">Artist reveals, next editions and more exciting news are on the way.</p>
         </div>
         <div class="ex-hero-media">
-          <video autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" aria-label="Bachata Explosion festival atmosphere">
+          <video autoplay muted loop playsinline preload="metadata" poster="/media/bbf/atmosphere/party-141.jpg" aria-label="Bachata Explosion dance floor atmosphere">
             <source src="https://media.bachataexplosion.com/bbf-2026-hero.mp4" type="video/mp4" />
           </video>
-          <span class="ex-hero-mark">Berlin · 2026</span>
-          <figure class="ex-hero-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 official poster" width="1080" height="1350" /></figure>
+          <span class="ex-hero-mark">Berlin · 22–24 October 2027</span>
+          <div class="ex-2027-ticket-card">
+            <span class="ex-2027-card-overline">Exclusive early bird · First 50 Full Passes</span>
+            <span class="ex-2027-card-price">99<span>€</span></span>
+            <span class="ex-2027-card-caption">Your place at Berlin Bachata Festival 2027</span>
+            <a href={earlyBird2027Url} target="_blank" rel="noopener noreferrer">Secure your Full Pass <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="ex-events ex-section" aria-labelledby="ex-events-title">
-      <div class="ex-shell">
-        <div class="ex-events-head">
-          <div><p class="ex-kicker">Explosion · 2026 editions</p><h2 class="ex-display" id="ex-events-title">Three chapters.<br /><em>One year of Explosion.</em></h2></div>
-          <p class="ex-copy">The events change from year to year. In 2026, Role Rotation, Elite Dance and Berlin Bachata Festival each bring a different kind of weekend to the same dancer-built community.</p>
+    <section class="ex-next ex-section" aria-labelledby="ex-next-title">
+      <div class="ex-shell ex-next-layout">
+        <div class="ex-next-copy">
+          <p class="ex-kicker">What comes next</p>
+          <h2 class="ex-display" id="ex-next-title">We're just <em>getting started.</em></h2>
+          <p class="ex-copy">After an incredible 2026 season, we're looking ahead. There are new things in the works, and we want you to be part of the journey from the very beginning.</p>
+          <p class="ex-copy">We're keeping the next announcements under wraps for now. New posters and details are coming soon — until then, stay connected so you don't miss a thing.</p>
+          <div class="ex-actions">
+            <a class="ex-btn" href="/insider/">Get the latest news →</a>
+            <a class="ex-btn ex-btn-secondary" href="https://www.instagram.com/bachataexplosion_official/" target="_blank" rel="noopener noreferrer">Follow on Instagram ↗</a>
+          </div>
+          <a class="ex-next-archive-link" href="/archive/">Want to relive past editions? Explore the archive →</a>
         </div>
-        <div class="ex-event-grid">
-          <a class="ex-event-card" href="/archive/role-rotation-2026/">
-            <figure class="ex-event-poster"><img src="/media/events/role-rotation-2026.webp" alt="Role Rotation 2026 poster" width="900" height="1100" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>01 · 2026 chapter</small><h3>Role Rotation.</h3><p>Lead, follow and switch roles. A focused Explosion weekend built around connection, technique, musicality and freedom.</p><span class="ex-event-link">See the edition →</span></div>
-          </a>
-          <a class="ex-event-card" href="/archive/elite-dance-3/">
-            <figure class="ex-event-poster"><img src="/media/events/elite-dance-3.webp" alt="Elite Dance third edition poster" width="900" height="1100" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>02 · 2026 chapter</small><h3>Elite Dance.</h3><p>A smaller, intimate edition with selected artists, concentrated learning and a close community atmosphere.</p><span class="ex-event-link">See the edition →</span></div>
-          </a>
-          <a class="ex-event-card" href="/bbf-2026/">
-            <figure class="ex-event-poster"><img src="/media/events/bbf-2026-poster.jpg" alt="Berlin Bachata Festival 2026 poster" width="1080" height="1350" loading="lazy" /></figure>
-            <div class="ex-event-card-body"><small>03 · 2026 chapter</small><h3>Berlin Bachata Festival.</h3><p>The full Explosion experience with international artists, workshops, parties, competition and the whole community under one roof.</p><span class="ex-event-link">Explore BBF 2026 →</span></div>
-          </a>
-        </div>
-        <div class="ex-event-memory-strip" aria-label="Previous Bachata Explosion editions">
-          {memoryStrip.map(([src, caption]) => <figure><img src={src} alt={caption} loading="lazy" /><figcaption>{caption}</figcaption></figure>)}
+        <div class="ex-next-art" aria-hidden="true">
+          <span class="ex-next-art-top">By dancers, for dancers</span>
+          <strong>THE NEXT<br />CHAPTER<span>.</span></strong>
+          <div class="ex-next-art-bottom"><span>BERLIN</span><span>2027 &amp; BEYOND</span></div>
         </div>
       </div>
     </section>
@@ -183,8 +182,8 @@ const memoryStrip = [
 
     <section class="ex-final">
       <div class="ex-shell ex-final-inner">
-        <div><p class="ex-kicker">Your next Explosion</p><h2>Are you ready to be part of it?</h2><p>Berlin Bachata Festival · 16–18 October 2026 · MOA Berlin</p></div>
-        <a class="ex-btn" href={ticketUrl}>Get tickets →</a>
+        <div><p class="ex-kicker">Your next Explosion · 2027</p><h2>Be part of what comes next.</h2><p>22–24 October 2027 · MOA Berlin · First 50 Full Passes €99</p></div>
+        <a class="ex-btn" href={earlyBird2027Url} target="_blank" rel="noopener noreferrer">Get your Early Bird →</a>
       </div>
     </section>
   </div>
