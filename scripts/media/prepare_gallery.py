@@ -38,7 +38,7 @@ def discover_images(source: Path) -> list[Path]:
     )
 
     def natural_key(path: Path) -> list[tuple[int, int | str]]:
-        parts = re.split(r"(\\d+)", path.as_posix().casefold())
+        parts = re.split(r"(\d+)", path.as_posix().casefold())
         return [(0, int(part)) if part.isdigit() else (1, part) for part in parts]
 
     return sorted(images, key=natural_key)
