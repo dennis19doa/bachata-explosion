@@ -31,11 +31,17 @@ def digest_file(path: Path) -> str:
 
 
 def discover_images(source: Path) -> list[Path]:
-    return sorted(
+    images = (
         path
         for path in source.rglob("*")
         if path.is_file() and path.suffix.lower() in SUPPORTED_EXTENSIONS
     )
+
+    def natural_key(path: Path) -> list[tuple[int, int | str]]:
+        parts = re.split(r"(\\d+)", path.as_posix().casefold())
+        return [(0, int(part)) if part.isdigit() else (1, part) for part in parts]
+
+    return sorted(images, key=natural_key)
 
 
 def prepare_photo(
