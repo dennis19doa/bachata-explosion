@@ -151,6 +151,66 @@ const manifestUrl = mediaOrigin + "/manifests/berlin-bachata-festival-2026-frida
   });
   dialog?.addEventListener("close", () => { document.body.style.overflow = previousOverflow; });
 
+  /**
+   * The R2 bucket has no public list API. The uploaded Friday Party images are
+   * numbered starting at 201 (e.g. "Friday - Party-201.webp"). When there is
+   * no manifest, probe the small thumbnails in numbered order and construct
+   * the same gallery objects directly from the files that actually exist.
+   * This avoids maintaining a separately uploaded JSON file.
+   */
+  async function discoverNumberedPartyPhotos(): Promise<boolean> {
+    if (!count || !more) return false;
+    const prefix = "events/berlin-bachata-festival-2026-friday-party/";
+    const chunkSize = 12;
+    const startNumber = 201;
+    const maxNumber = 500;
+
+    function probeThumbnail(path: string): Promise<{ width: number; height: number } | null> {
+      return new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve({ width: probe.naturalWidth, height: probe.naturalHeight });
+        probe.onerror = () => resolve(null);
+        probe.src = mediaUrl(path);
+      });
+    }
+
+    for (let start = startNumber; start <= maxNumber; start += chunkSize) {
+      const numbers = Array.from(
+        { length: Math.min(chunkSize, maxNumber - start + 1) },
+        (_, index) => start + index,
+      );
+      const candidates = await Promise.all(numbers.map(async (number): Promise<GalleryPhoto | null> => {
+        const filename = `Friday - Party-${number}.webp`;
+        const thumbPath = `${prefix}480/${filename}`;
+        const dimensions = await probeThumbnail(thumbPath);
+        if (!dimensions) return null;
+        return {
+          path: `${prefix}1600/${filename}`,
+          width: dimensions.width,
+          height: dimensions.height,
+          alt: `Friday Party 2026 — photo ${number}`,
+          variants: [
+            { path: thumbPath, width: 480 },
+            { path: `${prefix}960/${filename}`, width: 960 },
+            { path: `${prefix}1600/${filename}`, width: 1600 },
+          ],
+        };
+      }));
+
+      const found = candidates.filter((photo): photo is GalleryPhoto => photo !== null);
+      if (!found.length) break;
+      photos.push(...found);
+      count.textContent = `Loading Friday party photographs… ${photos.length} found`;
+      if (rendered < batchSize) renderNext();
+    }
+
+    if (!photos.length) return false;
+    count.textContent = photos.length.toLocaleString() + " photographs · Select a photo to see it in full";
+    more.hidden = rendered >= photos.length;
+    more.textContent = "Load more photos · " + (photos.length - rendered) + " remaining";
+    return true;
+  }
+
   async function loadPartyPhotos() {
     if (!root || !grid || !count || !error) return;
     try {
@@ -167,6 +227,13 @@ const manifestUrl = mediaOrigin + "/manifests/berlin-bachata-festival-2026-frida
       count.textContent = photos.length.toLocaleString() + " photographs · Select a photo to see it in full";
       renderNext();
     } catch (reason) {
+      // Existing installations can use a manifest. When it has not been
+      // uploaded, discover this event's published numbered WEBP images.
+      try {
+        if (await discoverNumberedPartyPhotos()) return;
+      } catch (discoveryError) {
+        console.warn("Friday party photo discovery failed", discoveryError);
+      }
       count.textContent = "Friday Party 2026 photos";
       error.hidden = false;
       console.warn("Friday party gallery could not load", reason);
