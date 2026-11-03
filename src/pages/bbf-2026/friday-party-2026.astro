@@ -152,63 +152,23 @@ const manifestUrl = mediaOrigin + "/manifests/berlin-bachata-festival-2026-frida
   dialog?.addEventListener("close", () => { document.body.style.overflow = previousOverflow; });
 
   /**
-   * The R2 bucket has no public list API. The uploaded Friday Party images are
-   * numbered starting at 201 (e.g. "Friday - Party-201.webp"). When there is
-   * no manifest, probe the small thumbnails in numbered order and construct
-   * the same gallery objects directly from the files that actually exist.
-   * This avoids maintaining a separately uploaded JSON file.
+   * Friday Party's four R2 folders are upload BATCHES, not responsive sizes.
+   * The uploader placed images 1–100 under 480, 101–200 under 960,
+   * 201–300 under 1600, and 301–338 under 3200. All four locations
+   * and the final photo were confirmed against the public R2 hostname.
+   * Use the files directly, without a JSON manifest or mistaken size variants.
    */
-  async function discoverNumberedPartyPhotos(): Promise<boolean> {
-    if (!count || !more) return false;
-    const prefix = "events/berlin-bachata-festival-2026-friday-party/";
-    const chunkSize = 12;
-    const startNumber = 201;
-    const maxNumber = 500;
-
-    function probeThumbnail(path: string): Promise<{ width: number; height: number } | null> {
-      return new Promise((resolve) => {
-        const probe = new Image();
-        probe.onload = () => resolve({ width: probe.naturalWidth, height: probe.naturalHeight });
-        probe.onerror = () => resolve(null);
-        probe.src = mediaUrl(path);
+  function discoverNumberedPartyPhotos(): boolean {
+    const base = "events/berlin-bachata-festival-2026-friday-party/";
+    const lastPhoto = 338;
+    for (let number = 1; number <= lastPhoto; number++) {
+      const folder = number <= 100 ? "480" : number <= 200 ? "960" : number <= 300 ? "1600" : "3200";
+      photos.push({
+        path: `${base}${folder}/Friday - Party-${number}.webp`,
+        alt: `Friday Party 2026 — photo ${number}`,
       });
     }
-
-    for (let start = startNumber; start <= maxNumber; start += chunkSize) {
-      const numbers = Array.from(
-        { length: Math.min(chunkSize, maxNumber - start + 1) },
-        (_, index) => start + index,
-      );
-      const candidates = await Promise.all(numbers.map(async (number): Promise<GalleryPhoto | null> => {
-        const filename = `Friday - Party-${number}.webp`;
-        const thumbPath = `${prefix}480/${filename}`;
-        const dimensions = await probeThumbnail(thumbPath);
-        if (!dimensions) return null;
-        return {
-          path: `${prefix}1600/${filename}`,
-          width: dimensions.width,
-          height: dimensions.height,
-          alt: `Friday Party 2026 — photo ${number}`,
-          variants: [
-            { path: thumbPath, width: 480 },
-            { path: `${prefix}960/${filename}`, width: 960 },
-            { path: `${prefix}1600/${filename}`, width: 1600 },
-          ],
-        };
-      }));
-
-      const found = candidates.filter((photo): photo is GalleryPhoto => photo !== null);
-      if (!found.length) break;
-      photos.push(...found);
-      count.textContent = `Loading Friday party photographs… ${photos.length} found`;
-      if (rendered < batchSize) renderNext();
-    }
-
-    if (!photos.length) return false;
-    count.textContent = photos.length.toLocaleString() + " photographs · Select a photo to see it in full";
-    more.hidden = rendered >= photos.length;
-    more.textContent = "Load more photos · " + (photos.length - rendered) + " remaining";
-    return true;
+    return photos.length > 0;
   }
 
   async function loadPartyPhotos() {
@@ -230,7 +190,11 @@ const manifestUrl = mediaOrigin + "/manifests/berlin-bachata-festival-2026-frida
       // Existing installations can use a manifest. When it has not been
       // uploaded, discover this event's published numbered WEBP images.
       try {
-        if (await discoverNumberedPartyPhotos()) return;
+        if (discoverNumberedPartyPhotos()) {
+          count.textContent = photos.length.toLocaleString() + " photographs · Select a photo to see it in full";
+          renderNext();
+          return;
+        }
       } catch (discoveryError) {
         console.warn("Friday party photo discovery failed", discoveryError);
       }
