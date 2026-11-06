@@ -16,6 +16,12 @@
       "head_sampling_rate": 1
     }
   },
+  "r2_buckets": [
+    {
+      "binding": "FESTIVAL_MEDIA",
+      "bucket_name": "bachata-explosion-media"
+    }
+  ],
   "assets": {
     "directory": "./dist/client/",
     "binding": "ASSETS",
