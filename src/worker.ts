@@ -339,11 +339,11 @@ async function handleForm(request: Request, env: Env, kind: string) {
 
 /**
  * Read-only, bounded photo index for the Saturday album. The R2 dashboard
- * screenshot names the upload prefix "saturday-workshops", although the album
- * was requested as Saturday Party; no object keys are guessed or hardcoded.
+ * screenshot shows the Saturday Workshops upload prefix; no object keys
+ * are guessed or hardcoded.
  * If the album is moved, update this prefix and the gallery page's path guard.
  */
-async function saturdayPartyGallery(env: Env): Promise<Response> {
+async function saturdayWorkshopsGallery(env: Env): Promise<Response> {
   if (!env.FESTIVAL_MEDIA) return json({ photos: [], error: "R2 media binding is not configured" }, 503);
 
   const base = "events/berlin-bachata-festival-2026-saturday-workshops/";
@@ -379,11 +379,11 @@ async function saturdayPartyGallery(env: Env): Promise<Response> {
     const full = variants[variants.length - 1];
     return {
       path: full.path,
-      alt: "Saturday Party at Berlin Bachata Festival 2026 — photo " + (index + 1),
+      alt: "Saturday workshops at Berlin Bachata Festival 2026 — photo " + (index + 1),
       variants,
     };
   });
-  return new Response(JSON.stringify({ version: 1, title: "Saturday Party 2026", photos }), {
+  return new Response(JSON.stringify({ version: 1, title: "Saturday Workshops 2026", photos }), {
     headers: { ...JSON_HEADERS, "cache-control": "public, max-age=300" },
   });
 }
@@ -392,10 +392,10 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === "/api/galleries/saturday-party-2026" || url.pathname === "/api/galleries/saturday-party-2026/") {
+    if (["/api/galleries/saturday-workshops-2026", "/api/galleries/saturday-workshops-2026/", "/api/galleries/saturday-party-2026", "/api/galleries/saturday-party-2026/"].includes(url.pathname)) {
       if (request.method !== "GET") return json({ error: "Method not allowed" }, 405);
       try {
-        return await saturdayPartyGallery(env);
+        return await saturdayWorkshopsGallery(env);
       } catch (error) {
         console.error("Saturday gallery index failed", error);
         return json({ error: "Gallery temporarily unavailable" }, 502);
