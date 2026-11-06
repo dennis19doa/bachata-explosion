@@ -4,6 +4,13 @@ type AssetBinding = { fetch(request: Request): Promise<Response> };
 
 type Env = {
   ASSETS: AssetBinding;
+  FESTIVAL_MEDIA?: {
+    list(options: { prefix: string; limit: number; cursor?: string }): Promise<{
+      objects: { key: string }[];
+      truncated: boolean;
+      cursor?: string;
+    }>;
+  };
   TURNSTILE_SECRET?: string;
   ZOHO_SMTP_HOST?: string;
   ZOHO_SMTP_PORT?: string;
@@ -329,9 +336,71 @@ async function handleForm(request: Request, env: Env, kind: string) {
   return json({ ok: true });
 }
 
+
+/**
+ * Read-only, bounded photo index for the Saturday album. The R2 dashboard
+ * screenshot names the upload prefix "saturday-workshops", although the album
+ * was requested as Saturday Party; no object keys are guessed or hardcoded.
+ * If the album is moved, update this prefix and the gallery page's path guard.
+ */
+async function saturdayPartyGallery(env: Env): Promise<Response> {
+  if (!env.FESTIVAL_MEDIA) return json({ photos: [], error: "R2 media binding is not configured" }, 503);
+
+  const base = "events/berlin-bachata-festival-2026-saturday-workshops/";
+  const sizes = new Set(["460", "960", "1920", "3840"]);
+  const groups = new Map<string, { path: string; width: number }[]>();
+  let cursor: string | undefined;
+  let scanned = 0;
+  do {
+    const result = await env.FESTIVAL_MEDIA.list({ prefix: base, limit: 1000, ...(cursor ? { cursor } : {}) });
+    scanned += result.objects.length;
+    if (scanned > 20000) return json({ error: "Gallery exceeds safe listing limit" }, 413);
+
+    for (const object of result.objects) {
+      const relative = object.key.slice(base.length);
+      const firstSlash = relative.indexOf("/");
+      if (firstSlash < 1) continue;
+      const folder = relative.slice(0, firstSlash);
+      const filename = relative.slice(firstSlash + 1);
+      if (!sizes.has(folder) || !filename || filename.includes("/") || !/\.(webp|jpe?g|png)$/i.test(filename)) continue;
+      const versions = groups.get(filename) || [];
+      versions.push({ path: object.key, width: Number(folder) });
+      groups.set(filename, versions);
+    }
+
+    if (!result.truncated) break;
+    if (!result.cursor || result.cursor === cursor) return json({ error: "Incomplete gallery index" }, 502);
+    cursor = result.cursor;
+  } while (true);
+
+  const filenames = Array.from(groups.keys()).sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
+  const photos = filenames.map((filename, index) => {
+    const variants = groups.get(filename)!.sort((a, b) => a.width - b.width);
+    const full = variants[variants.length - 1];
+    return {
+      path: full.path,
+      alt: "Saturday Party at Berlin Bachata Festival 2026 — photo " + (index + 1),
+      variants,
+    };
+  });
+  return new Response(JSON.stringify({ version: 1, title: "Saturday Party 2026", photos }), {
+    headers: { ...JSON_HEADERS, "cache-control": "public, max-age=300" },
+  });
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.pathname === "/api/galleries/saturday-party-2026" || url.pathname === "/api/galleries/saturday-party-2026/") {
+      if (request.method !== "GET") return json({ error: "Method not allowed" }, 405);
+      try {
+        return await saturdayPartyGallery(env);
+      } catch (error) {
+        console.error("Saturday gallery index failed", error);
+        return json({ error: "Gallery temporarily unavailable" }, 502);
+      }
+    }
 
     const legacyAssetPath = LEGACY_ASSET_PATHS[url.pathname];
     if (legacyAssetPath && (request.method === "GET" || request.method === "HEAD")) {
